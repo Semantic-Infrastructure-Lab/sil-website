@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Documentation - Semantic Infrastructure Lab{% endblock %}
+
+{% block content %}
+<header class="page-header">
+    <div class="subtitle">Essential Reading</div>
+    <h1>Documentation</h1>
+    <p class="intro">The foundational documents that define SIL's vision, principles, and technical approach.</p>
+</header>
+
+<section>
+    <h2>Canonical Documents</h2>
+
+    {% for doc in canonical %}
+    <div class="doc-preview">
+        <h3><a href="/docs/{{ doc.slug }}">{{ doc.title }}</a></h3>
+        {% if doc.description %}
+        <p>{{ doc.description }}</p>
+        {% endif %}
+        <p class="meta">{{ doc.word_count }} words</p>
+    </div>
+    {% endfor %}
+</section>
+{% endblock %}

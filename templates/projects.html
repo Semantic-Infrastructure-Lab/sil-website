@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Projects - Semantic Infrastructure Lab{% endblock %}
+
+{% block content %}
+<header class="page-header">
+    <div class="subtitle">Production Systems</div>
+    <h1>SIL Projects</h1>
+    <p class="intro">Five production-ready systems demonstrating the Semantic Infrastructure vision. Each project solves real problems while contributing to the larger Semantic Operating System architecture.</p>
+</header>
+
+<section>
+    <h2>The Semantic OS</h2>
+    <p>SIL's work centers on a 6-layer architecture, where each project addresses specific gaps in how intelligent systems represent, transform, and verify meaning:</p>
+
+    {{ architecture | safe }}
+</section>
+
+<section>
+    <h2>Production Systems</h2>
+    <p>These five projects are complete, tested, and ready for use:</p>
+
+    {% for project_html in projects %}
+        {{ project_html | safe }}
+    {% endfor %}
+</section>
+{% endblock %}
