@@ -36,6 +36,10 @@ RUN pip install --no-cache-dir /tmp/*.whl && \
 COPY --chown=appuser:appuser static/ static/
 COPY --chown=appuser:appuser templates/ templates/
 
+# Copy SIL docs (baked into container - no volume mounts needed)
+# These are the canonical SIL founding documents
+COPY --chown=appuser:appuser ../SIL/docs/ docs/
+
 # Create logs directory
 RUN mkdir -p /app/logs && chown appuser:appuser /app/logs
 

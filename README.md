@@ -174,35 +174,49 @@ pytest tests/test_domain.py
 
 ## Deployment
 
-### Option 1: Traditional Hosting
+**Primary Method:** Container-based deployment using TIA infrastructure.
+
+### Quick Deploy
 
 ```bash
-# Build for production
-uv pip install build
-python -m build
+# Deploy to staging
+./deploy/deploy-container.sh staging
 
-# Run with gunicorn
-uv pip install gunicorn
-gunicorn sil_web.app:app -w 4 -k uvicorn.workers.UvicornWorker
+# Deploy to production
+./deploy/deploy-container.sh production
 ```
 
-### Option 2: Docker
+**What this does:**
+1. Builds container image with SIL docs baked in
+2. Pushes to `registry.mytia.net`
+3. Deploys to target server (tia-staging or tia-apps)
+4. Runs health checks
+5. Verifies deployment
 
-```dockerfile
-FROM python:3.9-slim
-WORKDIR /app
-COPY . .
-RUN pip install -e .
-CMD ["uvicorn", "sil_web.app:app", "--host", "0.0.0.0", "--port", "8000"]
-```
+### Infrastructure
 
-### Option 3: Static Build
+| Environment | Server | URL |
+|-------------|--------|-----|
+| **Staging** | tia-staging | https://staging.semanticinfrastructurelab.org |
+| **Production** | tia-apps | https://semanticinfrastructurelab.org |
 
-For static hosting (GitHub Pages, Netlify):
+**Container Registry:** `registry.mytia.net/sil-website`
+
+### Full Documentation
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for:
+- Step-by-step deployment guide
+- Container architecture
+- Rollback procedures
+- Troubleshooting
+- Monitoring
+
+### Alternative: Local Development Container
 
 ```bash
-# TODO: Add static site generator script
-# Would pre-render all pages to static HTML
+# Build and run locally
+podman build -t sil-website:dev .
+podman run -p 8000:8000 sil-website:dev
 ```
 
 ## Development Principles
