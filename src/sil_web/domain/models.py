@@ -17,6 +17,7 @@ class ProjectStatus(Enum):
     RESEARCH = "research"
     ALPHA = "alpha"
     SPECIFICATION = "specification"
+    PLANNED = "planned"
 
 
 class Layer(Enum):
@@ -47,6 +48,8 @@ class Project:
     pypi_url: Optional[str] = None
     innovations: list[str] = None
     use_cases: list[str] = None
+    is_private: bool = False
+    maturity_note: Optional[str] = None
 
     def __post_init__(self) -> None:
         """Validate project data."""

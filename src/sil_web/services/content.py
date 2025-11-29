@@ -105,13 +105,14 @@ class ProjectService:
         """Initialize project service."""
         self.log = log.bind(service="projects")
 
-    def get_production_projects(self) -> list[Project]:
-        """Get all production-ready SIL projects.
+    def get_all_projects(self) -> list[Project]:
+        """Get ALL SIL projects across all maturity levels.
 
         Returns:
-            List of production Project instances
+            List of all Project instances
         """
         projects = [
+            # ===== PRODUCTION PROJECTS =====
             Project(
                 name="Morphogen",
                 slug="morphogen",
@@ -219,10 +220,158 @@ class ProjectService:
                 ],
                 use_cases=["Research foundation", "Architectural guidance"],
             ),
+            # ===== RESEARCH / ALPHA PROJECTS =====
+            Project(
+                name="Pantheon",
+                slug="pantheon",
+                description="Universal semantic IR enabling cross-domain composition. Adapters translate domain languages (audio, CAD, UI) into common semantic graph for interoperability.",
+                status=ProjectStatus.RESEARCH,
+                layer=Layer.LAYER_1,
+                github_url="https://github.com/scottsen/pantheon",
+                is_private=True,
+                maturity_note="Working prototype, API evolving",
+                innovations=[
+                    "Universal graph representation",
+                    "Domain adapters (audio, CAD, UI, geometry)",
+                    "Semantic type system",
+                    "Cross-domain operators",
+                ],
+                use_cases=["Cross-domain composition", "Semantic transformation", "Universal representation layer"],
+            ),
+            Project(
+                name="RiffStack",
+                slug="riffstack",
+                description="Stack-based live looping and audio synthesis with YAML-driven patch configuration. Real-time performance environment for musical expression.",
+                status=ProjectStatus.ALPHA,
+                layer=Layer.LAYER_4,
+                github_url="https://github.com/scottsen/riffstack",
+                maturity_note="MVP - basic features working, needs stability",
+                innovations=[
+                    "Stack-based composition",
+                    "Live looping",
+                    "MLIR compilation for performance",
+                    "YAML patch description",
+                ],
+                use_cases=["Live musical performance", "Audio patching", "Real-time synthesis"],
+            ),
+            Project(
+                name="SUP",
+                slug="sup",
+                description="Semantic UI platform translating intent into reactive UI components. Declarative UI description with multiple backend targets (React, Vue, native).",
+                status=ProjectStatus.ALPHA,
+                layer=Layer.LAYER_2,
+                github_url="https://github.com/scottsen/sup",
+                is_private=True,
+                maturity_note="Early development, API unstable",
+                innovations=[
+                    "Intent → UI compilation",
+                    "Backend-agnostic (React, Vue, native)",
+                    "Semantic layout constraints",
+                    "Accessibility-first",
+                ],
+                use_cases=["Declarative UI construction", "Multi-platform UI", "Accessibility automation"],
+            ),
+            Project(
+                name="BrowserBridge",
+                slug="browserbridge",
+                description="Event-driven browser automation for human-AI collaboration. Standards-based (CloudEvents, AsyncAPI, WebSocket), protocol-agnostic.",
+                status=ProjectStatus.ALPHA,
+                layer=Layer.LAYER_5,
+                github_url="https://github.com/scottsen/browserbridge",
+                maturity_note="Alpha - core features working",
+                innovations=[
+                    "Event-driven architecture",
+                    "Standards-based protocols",
+                    "Semantic DOM extraction",
+                    "Human-AI collaboration primitives",
+                ],
+                use_cases=["Browser automation", "Web scraping", "UI testing", "Human-AI collaboration"],
+            ),
+            # ===== SPECIFICATION PHASE =====
+            Project(
+                name="Prism",
+                slug="prism",
+                description="Formally verified microkernel query engine. Minimal trusted core with provable correctness guarantees.",
+                status=ProjectStatus.SPECIFICATION,
+                layer=Layer.CROSS_CUTTING,
+                github_url="https://github.com/scottsen/prism",
+                is_private=True,
+                maturity_note="Design phase - specification in progress",
+                innovations=[
+                    "Microkernel architecture (mechanism, not policy)",
+                    "Formal verification",
+                    "Minimal TCB (Trusted Computing Base)",
+                    "Composable query primitives",
+                ],
+                use_cases=["Verified query execution", "Microkernel research", "Formal correctness"],
+            ),
+            Project(
+                name="Agent Ether",
+                slug="agent-ether",
+                description="Deterministic protocols for multi-agent coordination. Message passing, state synchronization, and coordination primitives for intelligent agent systems.",
+                status=ProjectStatus.SPECIFICATION,
+                layer=Layer.LAYER_3,
+                github_url="https://github.com/scottsen/agent-ether",
+                is_private=True,
+                maturity_note="Planning phase - protocol specification underway",
+                innovations=[
+                    "Deterministic coordination",
+                    "Message-passing primitives",
+                    "State synchronization",
+                    "Provenance-complete interactions",
+                ],
+                use_cases=["Multi-agent systems", "Agent coordination", "Distributed AI"],
+            ),
+            # ===== PLANNED =====
+            Project(
+                name="Semantic Memory",
+                slug="semantic-memory",
+                description="Durable, queryable knowledge graphs with versioning. Persistent semantic continuity across tasks and time.",
+                status=ProjectStatus.PLANNED,
+                layer=Layer.LAYER_0,
+                github_url="https://github.com/scottsen/semantic-memory",
+                maturity_note="Concept stage - architecture design in progress",
+                innovations=[
+                    "Versioned semantic graphs",
+                    "Provenance-complete transformations",
+                    "Efficient incremental updates",
+                    "Cross-session continuity",
+                ],
+                use_cases=["Persistent knowledge", "Semantic versioning", "Long-term memory"],
+            ),
         ]
 
-        self.log.info("production_projects_loaded", count=len(projects))
+        self.log.info("all_projects_loaded", count=len(projects))
         return projects
+
+    def get_production_projects(self) -> list[Project]:
+        """Get all production-ready SIL projects.
+
+        Returns:
+            List of production Project instances
+        """
+        all_projects = self.get_all_projects()
+        return [p for p in all_projects if p.status == ProjectStatus.PRODUCTION]
+
+    def get_projects_by_layer(self) -> dict[Layer, list[Project]]:
+        """Group all projects by their Semantic OS layer.
+
+        Returns:
+            Dict mapping Layer to list of Projects
+        """
+        all_projects = self.get_all_projects()
+        by_layer = {}
+
+        # Initialize all layers with empty lists
+        for layer in Layer:
+            by_layer[layer] = []
+
+        # Group projects by layer
+        for project in all_projects:
+            by_layer[project.layer].append(project)
+
+        self.log.info("projects_grouped_by_layer")
+        return by_layer
 
     def get_project(self, slug: str) -> Optional[Project]:
         """Get a specific project by slug.
@@ -233,8 +382,8 @@ class ProjectService:
         Returns:
             Project instance or None if not found
         """
-        projects = self.get_production_projects()
-        for project in projects:
+        all_projects = self.get_all_projects()
+        for project in all_projects:
             if project.slug == slug:
                 return project
 

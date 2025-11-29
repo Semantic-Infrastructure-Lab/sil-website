@@ -9,8 +9,16 @@
 <body>
     {{ nav | safe }}
 
-    <div class="container">
-        {% block content %}{% endblock %}
+    <div class="layout">
+        {% if sidebar %}
+        {{ sidebar | safe }}
+        {% endif %}
+
+        <main class="{% if sidebar %}with-sidebar{% else %}full-width{% endif %}">
+            <div class="container">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
     </div>
 
     <footer>

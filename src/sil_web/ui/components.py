@@ -9,7 +9,7 @@ from sil_web.domain.models import Document, Project, ProjectStatus
 
 
 def project_card(project: Project) -> str:
-    """Render a project card.
+    """Render a project card with maturity indicators.
 
     Args:
         project: Project to render
@@ -17,11 +17,29 @@ def project_card(project: Project) -> str:
     Returns:
         HTML string for project card
     """
-    # Status badge
-    status_class = "production" if project.is_production else "research"
-    status_text = f"✅ {project.status.value.title()}"
+    # Status badge with emoji indicators
+    status_emoji = {
+        "production": "✅",
+        "research": "🔬",
+        "alpha": "🚧",
+        "specification": "📋",
+        "planned": "💭",
+    }
+    emoji = status_emoji.get(project.status.value, "")
+    status_class = project.status.value
+    status_text = f"{emoji} {project.status.value.title()}"
     if project.version:
         status_text += f" v{project.version}"
+
+    # Private indicator
+    privacy_html = ""
+    if project.is_private:
+        privacy_html = '<span class="meta-badge private">🔒 Private</span>'
+
+    # Maturity note
+    maturity_html = ""
+    if project.maturity_note:
+        maturity_html = f'<span class="maturity-note">{project.maturity_note}</span>'
 
     # Stats badges
     stats_html = ""
@@ -32,10 +50,9 @@ def project_card(project: Project) -> str:
         """
 
     # PyPI badge
-    pypi_html = ""
     if project.pypi_url:
         stats_html += f"""
-                <span class="meta-badge">PyPI</span>
+                <span class="meta-badge pypi">PyPI</span>
         """
 
     # Innovations list
@@ -68,12 +85,13 @@ def project_card(project: Project) -> str:
 
     return f"""
         <div class="project">
-            <h3><a href="{project.github_url}" target="_blank">{project.name}</a> — {project.description.split('.')[0]}</h3>
+            <h3><a href="{project.github_url}" target="_blank">{project.name}</a></h3>
             <div class="meta">
                 <span class="meta-badge {status_class}">{status_text}</span>
+                {privacy_html}
                 {stats_html}
             </div>
-            <p><strong>Layer:</strong> {project.layer.value}</p>
+            {maturity_html}
             <p>{project.description}</p>
             {innovations_html}
             {use_cases_html}
@@ -152,4 +170,86 @@ def nav_bar(current_page: str = "") -> str:
             {links_html}
             <a href="https://github.com/scottsen/sil" target="_blank">GitHub</a>
         </nav>
+    """
+
+
+def founding_docs_sidebar(documents: list[Document], current_slug: str = "", current_page: str = "") -> str:
+    """Render left sidebar navigation for founding documents and main pages.
+
+    Args:
+        documents: List of canonical documents
+        current_slug: Currently active document slug
+        current_page: Currently active page (e.g., 'projects')
+
+    Returns:
+        HTML string for sidebar navigation
+    """
+    # Projects link
+    projects_active = "active" if current_page == "projects" else ""
+    projects_link = f'<a href="/projects" class="{projects_active}">All Projects</a>'
+
+    # Document links
+    doc_links = []
+    for doc in documents:
+        active = "active" if doc.slug == current_slug else ""
+        doc_links.append(
+            f'<a href="/docs/{doc.slug}" class="{active}">{doc.title}</a>'
+        )
+
+    doc_links_html = "\n".join(doc_links)
+
+    return f"""
+        <aside class="sidebar">
+            <h3>Navigation</h3>
+            <nav class="sidebar-nav">
+                {projects_link}
+            </nav>
+
+            <h3 style="margin-top: 32px;">Founding Documents</h3>
+            <nav class="sidebar-nav">
+                {doc_links_html}
+            </nav>
+        </aside>
+    """
+
+
+def layer_section(layer, projects: list[Project]) -> str:
+    """Render a layer section with all its projects.
+
+    Args:
+        layer: The Layer enum value
+        projects: List of projects in this layer
+
+    Returns:
+        HTML string for layer section
+    """
+    if not projects:
+        return ""
+
+    # Layer number and name
+    layer_map = {
+        "Semantic Memory": ("Layer 0", "semantic-memory"),
+        "Universal Semantic IR": ("Layer 1", "usir"),
+        "Domain Modules": ("Layer 2", "domain-modules"),
+        "Multi-Agent Orchestration": ("Layer 3", "multi-agent"),
+        "Deterministic Engines": ("Layer 4", "engines"),
+        "Human Interfaces / SIM": ("Layer 5", "interfaces"),
+        "Cross-Cutting Infrastructure": ("Cross-Cutting", "cross-cutting"),
+    }
+
+    layer_num, layer_id = layer_map.get(layer.value, ("", ""))
+
+    # Render project cards
+    project_cards = "\n".join(project_card(p) for p in projects)
+
+    return f"""
+        <section class="layer-section" id="{layer_id}">
+            <div class="layer-header">
+                <span class="layer-number">{layer_num}</span>
+                <h2>{layer.value}</h2>
+            </div>
+            <div class="layer-projects">
+                {project_cards}
+            </div>
+        </section>
     """

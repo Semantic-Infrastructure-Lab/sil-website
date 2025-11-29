@@ -4,24 +4,26 @@
 
 {% block content %}
 <header class="page-header">
-    <div class="subtitle">Production Systems</div>
-    <h1>SIL Projects</h1>
-    <p class="intro">Five production-ready systems demonstrating the Semantic Infrastructure vision. Each project solves real problems while contributing to the larger Semantic Operating System architecture.</p>
+    <div class="subtitle">The SIL Ecosystem</div>
+    <h1>All Projects</h1>
+    <p class="intro">
+        12 projects spanning the full Semantic OS architecture—from production systems to active research to exploratory prototypes.
+        Some are polished and ready for use. Others are rough experiments, proofs-of-concept, throwing code at the wall to see what sticks.
+        <strong>Maturity varies widely.</strong> We mark what's production-ready (✅), what's research-grade (🔬), what's alpha/experimental (🚧),
+        what's still just a spec (📋), and what's purely conceptual (💭).
+    </p>
 </header>
 
 <section>
-    <h2>The Semantic OS</h2>
-    <p>SIL's work centers on a 6-layer architecture, where each project addresses specific gaps in how intelligent systems represent, transform, and verify meaning:</p>
+    <h2>The 6-Layer Semantic OS</h2>
+    <p>Projects are organized by their layer in the Semantic Operating System architecture—from human interfaces down to persistent semantic memory:</p>
 
     {{ architecture | safe }}
 </section>
 
-<section>
-    <h2>Production Systems</h2>
-    <p>These five projects are complete, tested, and ready for use:</p>
-
-    {% for project_html in projects %}
-        {{ project_html | safe }}
+<section class="projects-by-layer">
+    {% for layer_html in layer_sections %}
+        {{ layer_html | safe }}
     {% endfor %}
 </section>
 {% endblock %}
