@@ -1,3 +1,60 @@
+---
+title: "SIL Website - Container Deployment Guide"
+id: "sil-website-container-deployment-guide"
+uri: "doc://projects/sil-website/DEPLOYMENT.md"
+type: "deployment-guide"
+status: "production-ready"
+version: "1.0"
+created: "2025-11-28"
+updated: "2025-11-28"
+authors:
+  - "user:scottsen"
+  - "agent:claude"
+project: "sil-website"
+implements:
+  - "doc://infrastructure/CANONICAL_DEPLOYMENT_GUIDE_2025.md"
+  - "doc://infrastructure/HYBRID_DEPLOYMENT_ARCHITECTURE_2025.md"
+references:
+  - "doc://guides/CONTAINERIZATION_USER_GUIDE.md"
+  - "doc://infrastructure/STATUS_CURRENT.md"
+relates_to:
+  - "project://sil-website"
+  - "project://SIL"
+beth_topics:
+  - "sil-website"
+  - "container-deployment"
+  - "deployment-guide"
+  - "registry-workflow"
+  - "tia-infrastructure"
+  - "staging-production"
+  - "podman"
+tags:
+  - "deployment"
+  - "containers"
+  - "sil-website"
+  - "registry"
+  - "staging"
+  - "production"
+  - "podman"
+  - "nginx"
+  - "tia-infrastructure"
+category: "deployment-documentation"
+subcategory: "container-deployment"
+priority: "high"
+business_impact: "website-deployment"
+technical_scope: "sil-website-infrastructure"
+infrastructure:
+  registry: "registry.mytia.net"
+  staging_server: "tia-staging"
+  production_server: "tia-apps"
+  staging_url: "https://staging.semanticinfrastructurelab.org"
+  production_url: "https://semanticinfrastructurelab.org"
+tier: 1
+audience: "all"
+estimated_read_time: "15 min"
+summary: "Complete container-based deployment guide for SIL website following TIA canonical deployment pattern. Covers build, registry push, staging/production deployment, monitoring, and troubleshooting."
+---
+
 # SIL Website - Container Deployment Guide
 
 **Last Updated:** 2025-11-28
