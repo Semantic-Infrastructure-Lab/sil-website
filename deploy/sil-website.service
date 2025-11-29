@@ -1,0 +1,56 @@
+[Unit]
+Description=SIL Website - Semantic Infrastructure Lab Public Site
+Documentation=https://github.com/semantic-infrastructure-lab/sil-website
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=scottsen
+Group=scottsen
+WorkingDirectory=/home/scottsen/src/projects/sil-website
+
+# Pull latest image before starting
+ExecStartPre=-/usr/bin/podman pull localhost/sil-website:latest
+
+# Run container
+ExecStart=/usr/bin/podman run \
+  --rm \
+  --name sil-website \
+  -p 127.0.0.1:8000:8000 \
+  -v /home/scottsen/src/projects/SIL/docs:/app/docs:ro \
+  -v sil-website-logs:/app/logs \
+  --health-cmd="curl -f http://localhost:8000/health || exit 1" \
+  --health-interval=30s \
+  --health-timeout=5s \
+  --health-retries=3 \
+  localhost/sil-website:latest
+
+# Stop container gracefully
+ExecStop=/usr/bin/podman stop -t 10 sil-website
+
+# Clean up container
+ExecStopPost=-/usr/bin/podman rm -f sil-website
+
+# Restart policy
+Restart=on-failure
+RestartSec=10s
+StartLimitBurst=3
+StartLimitIntervalSec=60s
+
+# Resource limits
+MemoryMax=512M
+MemoryHigh=384M
+CPUQuota=50%
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=sil-website
+
+[Install]
+WantedBy=multi-user.target

@@ -9,6 +9,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
 from sil_web.config.settings import DOCS_PATH
+from sil_web.routes.health import router as health_router
 from sil_web.routes.pages import create_routes
 from sil_web.services.content import ContentService, ProjectService
 from sil_web.services.github import GitHubService
@@ -45,7 +46,10 @@ def create_app() -> FastAPI:
     project_service = ProjectService()
     github_service = GitHubService()
 
-    # Create and mount routes
+    # Mount health check (no dependencies)
+    app.include_router(health_router)
+
+    # Create and mount page routes
     routes = create_routes(content_service, project_service)
     app.include_router(routes)
 
