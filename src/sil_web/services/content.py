@@ -56,10 +56,10 @@ class ContentService:
         "canonical": {
             "manifesto": "SIL_MANIFESTO.md",
             "principles": "SIL_PRINCIPLES.md",
-            "charter": "SIL_TECHNICAL_CHARTER.md",
+            # Removed "charter" override - auto-discovers as "technical-charter" (clearer)
             "glossary": "SIL_GLOSSARY.md",
             "research-agenda": "SIL_RESEARCH_AGENDA_YEAR1.md",
-            # These auto-discover correctly: founders-letter, founder-profile, tia-profile
+            # These auto-discover correctly: founders-letter, founder-profile, tia-profile, technical-charter
         },
         "architecture": {
             # All auto-discover correctly
