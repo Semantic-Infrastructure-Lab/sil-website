@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you reference the SIL research published on this site, please cite it as below."
+type: dataset
+title: "Semantic Infrastructure Lab - Research Documentation and Publications"
+authors:
+  - family-names: "Senkeresty"
+    given-names: "Scott"
+  - name: "Semantic Infrastructure Lab Contributors"
+repository-code: "https://github.com/scottsen/sil-website"
+abstract: "Official research documentation, publications, and technical resources for the Semantic Infrastructure Lab (SIL). Includes research on semantic intermediate representations, cognitive architecture, and multi-level IR patterns."
+keywords:
+  - semantic-infrastructure
+  - research-documentation
+  - cognitive-architecture
+  - intermediate-representation
+license: Apache-2.0
+license-url: "https://www.apache.org/licenses/LICENSE-2.0"
