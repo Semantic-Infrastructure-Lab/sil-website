@@ -69,6 +69,10 @@ class ContentService:
                 "dedication": "DEDICATION.md",
                 "founder-background": "FOUNDER_BACKGROUND.md",
             },
+            "semantic-os": {
+                "overview": "README.md",
+                "layer-2-domain-modules": "layer-2-domain-modules.md",
+            },
         }
 
         if category not in slug_mappings:
@@ -103,6 +107,29 @@ class ContentService:
 
         self.log.info("document_loaded", category=category, slug=slug, word_count=doc.word_count)
         return doc
+
+    def load_document_by_slug(self, slug: str) -> Optional[Document]:
+        """Load a document by slug, searching across all categories.
+
+        This is a convenience method for backward compatibility with routes
+        that only provide a slug.
+
+        Args:
+            slug: Document slug (e.g., 'manifesto', 'rag-manifold-transport')
+
+        Returns:
+            Document instance or None if not found
+        """
+        # Try each category until we find the slug
+        categories = ["canonical", "architecture", "guides", "vision", "research", "meta", "semantic-os"]
+
+        for category in categories:
+            doc = self.load_document(category, slug)
+            if doc:
+                return doc
+
+        self.log.warning("document_not_found_any_category", slug=slug)
+        return None
 
     def list_documents(self, category: Optional[str] = None) -> list[Document]:
         """List all available documents, optionally filtered by category.
@@ -141,6 +168,10 @@ class ContentService:
                 "consolidation",
                 "dedication",
                 "founder-background",
+            ],
+            "semantic-os": [
+                "overview",
+                "layer-2-domain-modules",
             ],
         }
 

@@ -92,6 +92,14 @@ rsync -av --delete \
     "$WEBSITE_DOCS/meta/"
 echo -e "${GREEN}✓${NC} Meta docs synced"
 
+# Sync semantic-os docs
+echo "Syncing docs/semantic-os/..."
+rsync -av --delete \
+    --exclude='.git' \
+    "$SIL_REPO/docs/semantic-os/" \
+    "$WEBSITE_DOCS/semantic-os/"
+echo -e "${GREEN}✓${NC} Semantic OS docs synced"
+
 # Sync READING_GUIDE
 echo "Syncing READING_GUIDE.md..."
 cp "$SIL_REPO/docs/READING_GUIDE.md" "$WEBSITE_DOCS/"
@@ -121,6 +129,7 @@ GUIDES_COUNT=$(find "$WEBSITE_DOCS/guides" -name "*.md" 2>/dev/null | wc -l)
 VISION_COUNT=$(find "$WEBSITE_DOCS/vision" -name "*.md" 2>/dev/null | wc -l)
 RESEARCH_COUNT=$(find "$WEBSITE_DOCS/research" -name "*.md" 2>/dev/null | wc -l)
 META_COUNT=$(find "$WEBSITE_DOCS/meta" -name "*.md" 2>/dev/null | wc -l)
+SEMANTIC_OS_COUNT=$(find "$WEBSITE_DOCS/semantic-os" -name "*.md" 2>/dev/null | wc -l)
 
 echo "Synced files by category:"
 echo "  Canonical:    $CANONICAL_COUNT documents"
@@ -129,9 +138,10 @@ echo "  Guides:       $GUIDES_COUNT documents"
 echo "  Vision:       $VISION_COUNT documents"
 echo "  Research:     $RESEARCH_COUNT documents"
 echo "  Meta:         $META_COUNT documents"
+echo "  Semantic OS:  $SEMANTIC_OS_COUNT documents"
 echo ""
 
-TOTAL_COUNT=$((CANONICAL_COUNT + ARCHITECTURE_COUNT + GUIDES_COUNT + VISION_COUNT + RESEARCH_COUNT + META_COUNT))
+TOTAL_COUNT=$((CANONICAL_COUNT + ARCHITECTURE_COUNT + GUIDES_COUNT + VISION_COUNT + RESEARCH_COUNT + META_COUNT + SEMANTIC_OS_COUNT))
 echo "Total: $TOTAL_COUNT markdown files"
 echo ""
 

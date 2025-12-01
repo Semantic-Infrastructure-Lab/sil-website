@@ -46,7 +46,7 @@ def create_routes(content_service: ContentService, project_service: ProjectServi
     async def index(request: Request):
         """Home page - Founder's Letter."""
         # Load founder's letter
-        doc = content_service.load_document("founders-letter")
+        doc = content_service.load_document_by_slug("founders-letter")
         if not doc:
             raise HTTPException(status_code=404, detail="Founder's letter not found")
 
@@ -127,7 +127,7 @@ def create_routes(content_service: ContentService, project_service: ProjectServi
     @router.get("/docs/{slug}", response_class=HTMLResponse)
     async def doc_page(request: Request, slug: str):
         """Individual document page."""
-        doc = content_service.load_document(slug)
+        doc = content_service.load_document_by_slug(slug)
         if not doc:
             raise HTTPException(status_code=404, detail=f"Document '{slug}' not found")
 
