@@ -4,6 +4,7 @@ Content service - loads SIL documents and project data.
 This service handles I/O: reading files, parsing markdown, loading YAML.
 """
 
+import re
 from pathlib import Path
 from typing import Optional
 
@@ -15,8 +16,71 @@ from sil_web.domain.models import Document, Layer, Project, ProjectStatus
 log = structlog.get_logger()
 
 
+def filename_to_slug(filename: str) -> str:
+    """Convert filename to URL-friendly slug.
+
+    Examples:
+        RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md -> rag-manifold-transport
+        UNIFIED_ARCHITECTURE_GUIDE.md -> unified-architecture-guide
+        layer-0-semantic-memory.md -> layer-0-semantic-memory
+        README.md -> overview (special case for semantic-os)
+
+    Args:
+        filename: The markdown filename to convert
+
+    Returns:
+        URL-friendly slug
+    """
+    # Remove .md extension
+    name = filename.replace('.md', '')
+
+    # Special case: README becomes 'overview'
+    if name == 'README':
+        return 'overview'
+
+    # Remove common prefixes
+    name = re.sub(r'^SIL_', '', name)
+
+    # Convert to lowercase and replace underscores with hyphens
+    slug = name.lower().replace('_', '-')
+
+    return slug
+
+
 class ContentService:
     """Service for loading SIL content (docs, projects)."""
+
+    # Slug overrides for special cases (slug -> filename)
+    # Only needed when auto-discovery would produce wrong slug
+    SLUG_OVERRIDES = {
+        "canonical": {
+            "manifesto": "SIL_MANIFESTO.md",
+            "principles": "SIL_PRINCIPLES.md",
+            "charter": "SIL_TECHNICAL_CHARTER.md",
+            "glossary": "SIL_GLOSSARY.md",
+            "research-agenda": "SIL_RESEARCH_AGENDA_YEAR1.md",
+            # These auto-discover correctly: founders-letter, founder-profile, tia-profile
+        },
+        "architecture": {
+            # All auto-discover correctly
+        },
+        "guides": {
+            "optimization": "OPTIMIZATION_IN_SIL.md",
+            "ecosystem-layout": "SIL_ECOSYSTEM_PROJECT_LAYOUT.md",
+        },
+        "vision": {
+            # All auto-discover correctly
+        },
+        "research": {
+            # All auto-discover correctly
+        },
+        "meta": {
+            # All auto-discover correctly
+        },
+        "semantic-os": {
+            # All auto-discover correctly (README -> overview handled by filename_to_slug)
+        },
+    }
 
     def __init__(self, docs_path: Path) -> None:
         """Initialize content service.
@@ -26,6 +90,49 @@ class ContentService:
         """
         self.docs_path = docs_path
         self.log = log.bind(service="content")
+        self._slug_cache: dict[str, dict[str, str]] = {}  # category -> {slug: filename}
+
+    def _discover_slugs(self, category: str) -> dict[str, str]:
+        """Auto-discover all markdown files in a category and map slugs to filenames.
+
+        Uses SLUG_OVERRIDES for special cases, then auto-discovers remaining files.
+
+        Args:
+            category: Document category (canonical, architecture, etc.)
+
+        Returns:
+            Dict mapping slug -> filename
+        """
+        # Return cached result if available
+        if category in self._slug_cache:
+            return self._slug_cache[category]
+
+        category_path = self.docs_path / category
+
+        if not category_path.exists():
+            self.log.warning("category_path_not_found", category=category, path=str(category_path))
+            return {}
+
+        slug_map = {}
+
+        # Start with overrides for this category
+        if category in self.SLUG_OVERRIDES:
+            slug_map.update(self.SLUG_OVERRIDES[category])
+
+        # Auto-discover all markdown files
+        for md_file in sorted(category_path.glob('*.md')):
+            filename = md_file.name
+            slug = filename_to_slug(filename)
+
+            # Only add if not already in overrides
+            if slug not in slug_map:
+                slug_map[slug] = filename
+
+        # Cache the result
+        self._slug_cache[category] = slug_map
+
+        self.log.debug("slugs_discovered", category=category, count=len(slug_map))
+        return slug_map
 
     def load_document(self, category: str, slug: str) -> Optional[Document]:
         """Load a document from any category by slug.
@@ -37,53 +144,18 @@ class ContentService:
         Returns:
             Document instance or None if not found
         """
-        # Map slugs to actual file paths per category
-        slug_mappings = {
-            "canonical": {
-                "manifesto": "SIL_MANIFESTO.md",
-                "principles": "SIL_PRINCIPLES.md",
-                "charter": "SIL_TECHNICAL_CHARTER.md",
-                "glossary": "SIL_GLOSSARY.md",
-                "research-agenda": "SIL_RESEARCH_AGENDA_YEAR1.md",
-                "founders-letter": "FOUNDERS_LETTER.md",
-                "founder-profile": "FOUNDER_PROFILE.md",
-                "tia-profile": "TIA_PROFILE.md",
-            },
-            "architecture": {
-                "unified-architecture-guide": "UNIFIED_ARCHITECTURE_GUIDE.md",
-                "design-principles": "DESIGN_PRINCIPLES.md",
-            },
-            "guides": {
-                "optimization": "OPTIMIZATION_IN_SIL.md",
-                "ecosystem-layout": "SIL_ECOSYSTEM_PROJECT_LAYOUT.md",
-            },
-            "vision": {
-                "vision-complete": "SIL_VISION_COMPLETE.md",
-                "reveal-integration": "REVEAL_SIL_INTEGRATION.md",
-            },
-            "research": {
-                "rag-manifold-transport": "RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md",
-            },
-            "meta": {
-                "consolidation": "CONSOLIDATION_SUMMARY.md",
-                "dedication": "DEDICATION.md",
-                "founder-background": "FOUNDER_BACKGROUND.md",
-            },
-            "semantic-os": {
-                "overview": "README.md",
-                "layer-2-domain-modules": "layer-2-domain-modules.md",
-            },
-        }
+        # Auto-discover slugs for this category
+        slug_map = self._discover_slugs(category)
 
-        if category not in slug_mappings:
-            self.log.warning("invalid_category", category=category)
+        if not slug_map:
+            self.log.warning("invalid_category_or_empty", category=category)
             return None
 
-        if slug not in slug_mappings[category]:
+        if slug not in slug_map:
             self.log.warning("document_not_found", category=category, slug=slug)
             return None
 
-        filename = slug_mappings[category][slug]
+        filename = slug_map[slug]
         doc_path = self.docs_path / category / filename
 
         if not doc_path.exists():
@@ -140,50 +212,20 @@ class ContentService:
         Returns:
             List of Document instances
         """
-        all_slugs = {
-            "canonical": [
-                "founders-letter",
-                "manifesto",
-                "principles",
-                "charter",
-                "glossary",
-                "research-agenda",
-            ],
-            "architecture": [
-                "unified-architecture-guide",
-                "design-principles",
-            ],
-            "guides": [
-                "optimization",
-                "ecosystem-layout",
-            ],
-            "vision": [
-                "vision-complete",
-                "reveal-integration",
-            ],
-            "research": [
-                "rag-manifold-transport",
-            ],
-            "meta": [
-                "consolidation",
-                "dedication",
-                "founder-background",
-            ],
-            "semantic-os": [
-                "overview",
-                "layer-2-domain-modules",
-            ],
-        }
-
-        categories_to_list = [category] if category else all_slugs.keys()
+        # Auto-discover all categories or just the requested one
+        all_categories = ["canonical", "architecture", "guides", "vision", "research", "meta", "semantic-os"]
+        categories_to_list = [category] if category else all_categories
 
         docs = []
         for cat in categories_to_list:
-            if cat in all_slugs:
-                for slug in all_slugs[cat]:
-                    doc = self.load_document(cat, slug)
-                    if doc:
-                        docs.append(doc)
+            # Discover all slugs in this category
+            slug_map = self._discover_slugs(cat)
+
+            # Load each document
+            for slug in slug_map.keys():
+                doc = self.load_document(cat, slug)
+                if doc:
+                    docs.append(doc)
 
         self.log.info("documents_listed", category=category, count=len(docs))
         return docs
