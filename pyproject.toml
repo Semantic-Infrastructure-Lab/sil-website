@@ -7,7 +7,7 @@ requires-python = ">=3.9"
 authors = [
     {name = "Scott", email = "scott@semanticinfrastructurelab.org"}
 ]
-license = {text = "MIT"}
+license = {text = "Apache-2.0"}
 dependencies = [
     "fastapi>=0.104.0",
     "uvicorn[standard]>=0.24.0",
