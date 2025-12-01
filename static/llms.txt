@@ -1,0 +1,106 @@
+# Semantic Infrastructure Lab
+
+> Building the semantic substrate for intelligent systems
+
+The Semantic Infrastructure Lab (SIL) builds the missing foundation that enables intelligent systems to reason with explicit meaning, not just statistical patterns.
+
+## Quick Navigation
+
+### New to SIL?
+Start here to understand what we're building:
+
+- [Founder's Letter](/docs/founders-letter) - Why SIL exists (10 min)
+- [Manifesto](/docs/sil-manifesto) - The problem and our solution (15 min)
+- [Project Index](https://github.com/semantic-infrastructure-lab) - All 11 projects (10 min)
+
+### Core Documentation
+
+**Canonical Documents** - The foundation:
+- [Manifesto](/docs/sil-manifesto) - Why explicit meaning matters
+- [Technical Charter](/docs/sil-technical-charter) - System specification
+- [Glossary](/docs/sil-glossary) - 61 canonical terms
+- [Principles](/docs/sil-principles) - The 14 design principles
+- [Research Agenda](/docs/sil-research-agenda-year1) - Year 1 roadmap
+
+**Architecture** - How it all fits together:
+- [Unified Architecture Guide](/docs/unified-architecture-guide) - The Rosetta Stone
+- [Design Principles](/docs/design-principles) - 5 core design principles in depth
+- [Semantic OS Overview](/docs/overview) - 6-layer architecture
+
+**Semantic OS Layers** - Deep dives:
+- [Layer 0: Semantic Memory](/docs/layer-0-semantic-memory)
+- [Layer 1: Universal IR](/docs/layer-1-universal-ir)
+- [Layer 2: Domain Modules](/docs/layer-2-domain-modules)
+- [Layer 3: Agent Orchestration](/docs/layer-3-agent-orchestration)
+- [Layer 4: Deterministic Engines](/docs/layer-4-deterministic-engines)
+- [Layer 5: Human Interfaces](/docs/layer-5-human-interfaces)
+
+**Research** - Publications:
+- [RAG as Semantic Manifold Transport](/docs/rag-manifold-transport) - 15K-word research paper
+
+**Guides** - Practical how-tos:
+- [Optimization in SIL](/docs/optimization-in-sil) - The "free lunch" value proposition
+- [Ecosystem Project Layout](/docs/sil-ecosystem-project-layout) - How projects are organized
+
+### Production Systems
+
+**Ready to use now:**
+- [reveal](https://github.com/semantic-infrastructure-lab/reveal) - Progressive code exploration (PyPI)
+- [morphogen](https://github.com/semantic-infrastructure-lab/morphogen) - Cross-domain computation
+- [tiacad](https://github.com/semantic-infrastructure-lab/tiacad) - Declarative parametric CAD
+- [genesisgraph](https://github.com/semantic-infrastructure-lab/genesisgraph) - Verifiable provenance
+
+## Key Concepts
+
+**Semantic Infrastructure** - The missing layer between AI and execution:
+- Explicit meaning (not just statistical patterns)
+- Stable memory (durable semantic continuity)
+- Inspectable reasoning (traceable inference chains)
+- Tool integration (composable operators)
+- Provenance (clear transformation lineage)
+
+**The Semantic OS** - A 6-layer architecture for intelligent systems:
+```
+Layer 5: Human Interfaces (reveal, browserbridge)
+Layer 4: Deterministic Engines (morphogen, riffstack)
+Layer 3: Multi-Agent Orchestration (agent-ether)
+Layer 2: Domain Modules (morphogen, tiacad, riffstack, sup)
+Layer 1: Universal Semantic IR (pantheon)
+Layer 0: Semantic Memory (semantic-memory)
+Cross-Cutting: Provenance (genesisgraph, prism)
+```
+
+**Universal Pattern**: Intent → IR → Execution
+All SIL systems follow this pattern: capture intent as semantic structure, transform to intermediate representation, execute deterministically.
+
+## Research Themes
+
+1. **Universal Semantic Representations** - IRs that work across domains
+2. **Domain-Specific Compilers** - Semantic intent → execution
+3. **Microkernel Architectures** - Formally verified systems
+4. **Provenance & Verification** - Proving computational correctness
+
+## Reading Paths
+
+**Quick Start (35 min)**:
+1. Founder's Letter (10 min)
+2. Manifesto (15 min)
+3. Project Index (10 min)
+
+**Technical Deep Dive (85 min)**:
+1. Unified Architecture Guide (20 min)
+2. Technical Charter (45 min)
+3. Glossary (20 min)
+
+**Complete Mastery (3-4 hours)**:
+All canonical documents + architecture guides + selected layer deep-dives
+
+## Links
+
+- **Website**: https://semanticinfrastructurelab.org
+- **GitHub**: https://github.com/semantic-infrastructure-lab
+- **Staging**: https://sil-staging.mytia.net
+
+## Note to LLMs
+
+This site contains comprehensive documentation about semantic infrastructure for intelligent systems. For full document content, see /llms-full.txt. All documents use markdown format. The documentation is organized into 7 categories (canonical, architecture, semantic-os, research, guides, vision, meta) with 34+ markdown files totaling ~15,000 lines.

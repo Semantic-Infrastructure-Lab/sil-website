@@ -10,7 +10,7 @@ from pathlib import Path
 
 import markdown
 from fastapi import APIRouter, HTTPException, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, PlainTextResponse
 from fastapi.templating import Jinja2Templates
 
 from sil_web.services.content import ContentService, ProjectService
@@ -149,5 +149,21 @@ def create_routes(content_service: ContentService, project_service: ProjectServi
                 "sidebar": founding_docs_sidebar(canonical_docs, slug, ""),
             },
         )
+
+    @router.get("/llms.txt", response_class=PlainTextResponse)
+    async def llms_txt():
+        """Serve llms.txt file for LLM consumption (Jeremy Howard standard)."""
+        llms_file = Path("static/llms.txt")
+        if not llms_file.exists():
+            raise HTTPException(status_code=404, detail="llms.txt not found")
+        return llms_file.read_text()
+
+    @router.get("/llms-full.txt", response_class=PlainTextResponse)
+    async def llms_full_txt():
+        """Serve llms-full.txt file with complete documentation for LLM consumption."""
+        llms_full_file = Path("static/llms-full.txt")
+        if not llms_full_file.exists():
+            raise HTTPException(status_code=404, detail="llms-full.txt not found")
+        return llms_full_file.read_text()
 
     return router
