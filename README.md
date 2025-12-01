@@ -1,5 +1,7 @@
 # SIL Website
 
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 **The official Semantic Infrastructure Lab website - a clean Python web application demonstrating SIL architecture principles.**
 
 ## Overview
