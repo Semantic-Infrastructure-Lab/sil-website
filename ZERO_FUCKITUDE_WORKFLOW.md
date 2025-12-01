@@ -14,16 +14,17 @@
 
 ---
 
-## Current Status: ALMOST THERE 🟡
+## Current Status: ZERO FUCKITUDE ACHIEVED ✅
 
 **What's automated:**
 ✅ Markdown sync from SIL → website (`sync-docs.sh`)
 ✅ llms-full.txt regeneration (`generate-llms-full.sh`)
 ✅ Single deployment script (`deploy-container.sh`)
+✅ **NEW:** Slug auto-discovery in `content.py` (b032349)
+✅ One-command workflow (`auto-deploy-docs.sh`)
 
 **What's manual:**
-❌ Slug mappings in `content.py` are hardcoded
-❌ Need to run 3 separate scripts
+Nothing! Just run the script and answer prompts.
 
 ---
 
@@ -81,27 +82,33 @@ curl https://sil-staging.mytia.net/llms-full.txt | grep -i "semantic versioning"
 ✅ Synced to website repo
 ✅ Included in llms-full.txt
 ✅ Deployed to staging
-✅ Accessible at `/docs/semantic-versioning-as-type-theory`
+✅ **Automatically routed** at `/docs/semantic-versioning-as-type-theory` (no code changes needed!)
+✅ Auto-discovered by ContentService
 
 ---
 
-## Future: ZERO Fuckitude (Auto-Discovery)
+## ✅ IMPLEMENTED: Auto-Discovery (b032349, safuculi-1130)
 
-**TO-DO:** Update `content.py` to auto-discover markdown files instead of hardcoded slug mappings.
+**Auto-discovery is NOW LIVE in content.py!**
 
 **How it works:**
-- Scan `docs/*/` for `.md` files at startup
-- Generate slugs automatically from filenames
+- `filename_to_slug()` generates slugs automatically from filenames
   - `RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md` → `rag-manifold-transport`
   - `layer-0-semantic-memory.md` → `layer-0-semantic-memory`
-- No code changes needed when adding new docs
+  - `README.md` → `overview` (special case)
+- `ContentService._discover_slugs()` scans `docs/*/` at runtime
+- Results are cached for performance
+- `SLUG_OVERRIDES` dict for backward compatibility with existing short URLs
 
-**Benefit:**
-- Add paper to SIL repo
-- Run `auto-deploy-docs.sh`
-- **ZERO manual mapping updates**
+**Benefits achieved:**
+✅ Add paper to SIL repo
+✅ Run `auto-deploy-docs.sh`
+✅ **ZERO manual mapping updates** - auto-discovered automatically!
+✅ Discovered 7+ new documents not in old hardcoded mappings
+✅ Backward compatible with all existing URLs
 
-**Test script already exists:** `./scripts/test-auto-discovery.py`
+**Test script:** `./scripts/test-auto-discovery.py`
+**Commit:** b032349 (2025-11-30)
 
 ---
 
@@ -158,12 +165,22 @@ git push origin master
 
 ## Summary
 
-**Before:** 5 manual steps, hardcoded mappings, easy to forget regenerating llms-full.txt
+**Before (Pre-clever-god-1130):**
+- 5 manual steps
+- Hardcoded slug mappings in code
+- Easy to forget regenerating llms-full.txt
+- Need to edit code to add new docs
 
-**After:** Run `./scripts/auto-deploy-docs.sh`, answer Y/N prompts, done
+**After (clever-god-1130 + safuculi-1130):**
+1. Run `./scripts/auto-deploy-docs.sh`
+2. Answer Y/N prompts
+3. **Done!** New docs automatically routed with zero code changes
 
-**Future:** Auto-discovery = truly zero manual work
+**ZERO FUCKITUDE ACHIEVED ✅**
 
 ---
 
-**Next Step:** Implement auto-discovery in `content.py` to eliminate ALL manual mapping.
+## Session Credits
+
+- **clever-god-1130** (2025-11-30): llms.txt implementation + auto-deploy workflow
+- **safuculi-1130** (2025-11-30): Slug auto-discovery implementation
