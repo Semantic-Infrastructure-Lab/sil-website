@@ -197,7 +197,7 @@ pytest tests/test_domain.py
 
 | Environment | Server | URL |
 |-------------|--------|-----|
-| **Staging** | tia-staging | https://staging.semanticinfrastructurelab.org |
+| **Staging** | tia-staging | https://sil-staging.mytia.net |
 | **Production** | tia-apps | https://semanticinfrastructurelab.org |
 
 **Container Registry:** `registry.mytia.net/sil-website`

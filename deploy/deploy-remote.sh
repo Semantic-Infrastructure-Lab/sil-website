@@ -30,7 +30,7 @@ if [ "$ENVIRONMENT" == "staging" ]; then
   CONTAINER_NAME="${PROJECT_NAME}-staging"
   CONTAINER_TAG="staging"
   SERVICE_PORT="8080"
-  HEALTH_URL="https://staging.semanticinfrastructurelab.org/health"
+  HEALTH_URL="https://sil-staging.mytia.net/health"
 else
   HOST="tia-apps"
   DEPLOY_PATH="/var/www/$PROJECT_NAME"

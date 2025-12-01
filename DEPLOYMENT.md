@@ -47,7 +47,7 @@ infrastructure:
   registry: "registry.mytia.net"
   staging_server: "tia-staging"
   production_server: "tia-apps"
-  staging_url: "https://staging.semanticinfrastructurelab.org"
+  staging_url: "https://sil-staging.mytia.net"
   production_url: "https://semanticinfrastructurelab.org"
 tier: 1
 audience: "all"
@@ -66,7 +66,7 @@ This guide follows the **TIA Canonical Deployment Pattern** using container regi
 
 **Infrastructure:**
 - **Registry:** `registry.mytia.net/sil-website`
-- **Staging:** `tia-staging` → Port 8080 → https://staging.semanticinfrastructurelab.org
+- **Staging:** `tia-staging` → Port 8080 → https://sil-staging.mytia.net
 - **Production:** `tia-apps` → Port 8000 → https://semanticinfrastructurelab.org
 
 ---
@@ -212,8 +212,8 @@ podman logs -f sil-website-staging
 
 ```bash
 # From local machine
-curl -f https://staging.semanticinfrastructurelab.org/health
-curl -f https://staging.semanticinfrastructurelab.org/ | head -20
+curl -f https://sil-staging.mytia.net/health
+curl -f https://sil-staging.mytia.net/ | head -20
 
 # Check nginx is proxying correctly
 ssh tia-staging 'curl -f http://localhost:8080/health'
@@ -326,7 +326,7 @@ Nginx proxies HTTPS → container port:
 
 **Staging (tia-staging):**
 ```
-https://staging.semanticinfrastructurelab.org → 127.0.0.1:8080 → container:8000
+https://sil-staging.mytia.net → 127.0.0.1:8080 → container:8000
 ```
 
 **Production (tia-apps):**
@@ -336,7 +336,7 @@ https://semanticinfrastructurelab.org → 127.0.0.1:8000 → container:8000
 
 Nginx config located at:
 - `/etc/nginx/sites-available/semanticinfrastructurelab.org`
-- `/etc/nginx/sites-available/staging.semanticinfrastructurelab.org`
+- `/etc/nginx/sites-available/sil-staging.mytia.net`
 
 ---
 
@@ -498,7 +498,7 @@ podman stats sil-website
 
 ```bash
 # Health endpoint (staging)
-curl -f https://staging.semanticinfrastructurelab.org/health
+curl -f https://sil-staging.mytia.net/health
 
 # Health endpoint (production)
 curl -f https://semanticinfrastructurelab.org/health
