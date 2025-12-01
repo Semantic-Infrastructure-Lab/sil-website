@@ -245,7 +245,11 @@ See [TIA Python Development Guide](../tia/docs/guides/TIA_PYTHON_DEVELOPMENT_GUI
 
 ## License
 
-MIT
+Apache 2.0 - see [LICENSE](LICENSE) for details
+
+Copyright 2025 Semantic Infrastructure Lab Contributors
+
+**Content License**: Documentation and written content are licensed under CC BY 4.0 - see [CONTENT_LICENSE.md](CONTENT_LICENSE.md)
 
 ## Links
 
