@@ -2,6 +2,23 @@
 
 ## [Unreleased]
 
+### Added - 2025-12-01
+
+#### License & Citation Metadata (blessed-sea-1201)
+- **LICENSE** - Apache 2.0 license file (was previously missing!)
+- **CONTENT_LICENSE.md** - Dual licensing guide (code vs documentation)
+- **CITATION.cff** - Academic citation metadata for research use
+- **pyproject.toml** - Updated license field from MIT to Apache-2.0
+- **README.md** - Updated license badge and section
+
+**Critical Fix:**
+- Production website was operating without a license file
+- Now properly licensed: Code (Apache 2.0) + Content (CC BY 4.0)
+
+**SIL Ecosystem Integration:**
+- Unified licensing with all SIL ecosystem projects
+- Copyright: Semantic Infrastructure Lab Contributors
+
 ### Added - 2025-11-30
 
 #### Slug Auto-Discovery (b032349)
