@@ -37,8 +37,11 @@ COPY --chown=appuser:appuser static/ static/
 COPY --chown=appuser:appuser templates/ templates/
 
 # Copy SIL docs (baked into container - no volume mounts needed)
-# These are the canonical SIL founding documents
-COPY --chown=appuser:appuser ../SIL/docs/ docs/
+# These are the canonical SIL founding documents (via symlink to ../SIL/docs)
+COPY --chown=appuser:appuser docs/ docs/
+
+# Set docs path environment variable
+ENV SIL_DOCS_PATH=/app/docs
 
 # Create logs directory
 RUN mkdir -p /app/logs && chown appuser:appuser /app/logs

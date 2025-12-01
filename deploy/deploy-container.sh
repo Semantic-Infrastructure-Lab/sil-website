@@ -154,7 +154,7 @@ podman rm $CONTAINER_NAME 2>/dev/null || true
 echo "→ Starting new container..."
 podman run -d \
   --name $CONTAINER_NAME \
-  -p 127.0.0.1:$SERVICE_PORT:8000 \
+  -p 0.0.0.0:$SERVICE_PORT:8000 \
   --health-cmd="curl -f http://localhost:8000/health || exit 1" \
   --health-interval=30s \
   --health-timeout=5s \

@@ -36,6 +36,8 @@ def create_app() -> FastAPI:
         title="Semantic Infrastructure Lab",
         description="Building the semantic substrate for intelligent systems",
         version="0.1.0",
+        docs_url=None,  # Disable Swagger UI (not needed for public website)
+        redoc_url=None,  # Disable ReDoc (not needed for public website)
     )
 
     # Mount static files

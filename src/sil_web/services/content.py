@@ -27,32 +27,63 @@ class ContentService:
         self.docs_path = docs_path
         self.log = log.bind(service="content")
 
-    def load_document(self, slug: str) -> Optional[Document]:
-        """Load a canonical document by slug.
+    def load_document(self, category: str, slug: str) -> Optional[Document]:
+        """Load a document from any category by slug.
 
         Args:
-            slug: Document slug (e.g., 'manifesto', 'principles')
+            category: Document category (canonical, architecture, guides, vision, research, meta)
+            slug: Document slug (e.g., 'manifesto', 'unified-architecture-guide')
 
         Returns:
             Document instance or None if not found
         """
-        # Map slugs to actual file paths
-        doc_files = {
-            "manifesto": "SIL_MANIFESTO.md",
-            "principles": "SIL_PRINCIPLES.md",
-            "charter": "SIL_TECHNICAL_CHARTER.md",
-            "glossary": "SIL_GLOSSARY.md",
-            "research": "SIL_RESEARCH_AGENDA_YEAR1.md",
-            "founders-letter": "FOUNDERS_LETTER.md",
+        # Map slugs to actual file paths per category
+        slug_mappings = {
+            "canonical": {
+                "manifesto": "SIL_MANIFESTO.md",
+                "principles": "SIL_PRINCIPLES.md",
+                "charter": "SIL_TECHNICAL_CHARTER.md",
+                "glossary": "SIL_GLOSSARY.md",
+                "research-agenda": "SIL_RESEARCH_AGENDA_YEAR1.md",
+                "founders-letter": "FOUNDERS_LETTER.md",
+                "founder-profile": "FOUNDER_PROFILE.md",
+                "tia-profile": "TIA_PROFILE.md",
+            },
+            "architecture": {
+                "unified-architecture-guide": "UNIFIED_ARCHITECTURE_GUIDE.md",
+                "design-principles": "DESIGN_PRINCIPLES.md",
+            },
+            "guides": {
+                "optimization": "OPTIMIZATION_IN_SIL.md",
+                "ecosystem-layout": "SIL_ECOSYSTEM_PROJECT_LAYOUT.md",
+            },
+            "vision": {
+                "vision-complete": "SIL_VISION_COMPLETE.md",
+                "reveal-integration": "REVEAL_SIL_INTEGRATION.md",
+            },
+            "research": {
+                "rag-manifold-transport": "RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md",
+            },
+            "meta": {
+                "consolidation": "CONSOLIDATION_SUMMARY.md",
+                "dedication": "DEDICATION.md",
+                "founder-background": "FOUNDER_BACKGROUND.md",
+            },
         }
 
-        if slug not in doc_files:
-            self.log.warning("document_not_found", slug=slug)
+        if category not in slug_mappings:
+            self.log.warning("invalid_category", category=category)
             return None
 
-        doc_path = self.docs_path / "canonical" / doc_files[slug]
+        if slug not in slug_mappings[category]:
+            self.log.warning("document_not_found", category=category, slug=slug)
+            return None
+
+        filename = slug_mappings[category][slug]
+        doc_path = self.docs_path / category / filename
+
         if not doc_path.exists():
-            self.log.error("document_file_missing", slug=slug, path=str(doc_path))
+            self.log.error("document_file_missing", category=category, slug=slug, path=str(doc_path))
             return None
 
         # Parse frontmatter and content
@@ -66,35 +97,64 @@ class ContentService:
             title=title,
             slug=slug,
             content=post.content,
-            category="canonical",
+            category=category,
             description=description,
         )
 
-        self.log.info("document_loaded", slug=slug, word_count=doc.word_count)
+        self.log.info("document_loaded", category=category, slug=slug, word_count=doc.word_count)
         return doc
 
-    def list_documents(self) -> list[Document]:
-        """List all available canonical documents.
+    def list_documents(self, category: Optional[str] = None) -> list[Document]:
+        """List all available documents, optionally filtered by category.
+
+        Args:
+            category: Optional category to filter by (canonical, architecture, etc.)
 
         Returns:
             List of Document instances
         """
-        slugs = [
-            "founders-letter",
-            "manifesto",
-            "principles",
-            "charter",
-            "glossary",
-            "research",
-        ]
+        all_slugs = {
+            "canonical": [
+                "founders-letter",
+                "manifesto",
+                "principles",
+                "charter",
+                "glossary",
+                "research-agenda",
+            ],
+            "architecture": [
+                "unified-architecture-guide",
+                "design-principles",
+            ],
+            "guides": [
+                "optimization",
+                "ecosystem-layout",
+            ],
+            "vision": [
+                "vision-complete",
+                "reveal-integration",
+            ],
+            "research": [
+                "rag-manifold-transport",
+            ],
+            "meta": [
+                "consolidation",
+                "dedication",
+                "founder-background",
+            ],
+        }
+
+        categories_to_list = [category] if category else all_slugs.keys()
 
         docs = []
-        for slug in slugs:
-            doc = self.load_document(slug)
-            if doc:
-                docs.append(doc)
+        for cat in categories_to_list:
+            if cat in all_slugs:
+                for slug in all_slugs[cat]:
+                    doc = self.load_document(cat, slug)
+                    if doc:
+                        docs.append(doc)
 
-        self.log.info("documents_listed", count=len(docs))
+        self.log.info("documents_listed", category=category, count=len(docs))
         return docs
 
 

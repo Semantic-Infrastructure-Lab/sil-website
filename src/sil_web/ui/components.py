@@ -128,9 +128,8 @@ def architecture_diagram() -> str:
         HTML string for architecture diagram
     """
     return """
-        <div class="architecture">
-            <div class="architecture-title">The Semantic OS</div>
-Layer 5: Human Interfaces / SIM       (reveal, browserbridge)
+        <div class="architecture"><div class="architecture-title">The Semantic OS</div>
+Layer 5: Human Interfaces / SIM        (reveal, browserbridge)
 Layer 4: Deterministic Engines         (morphogen, riffstack)
 Layer 3: Multi-Agent Orchestration     (agent-ether)
 Layer 2: Domain Modules                (morphogen, tiacad, riffstack, sup)
@@ -200,15 +199,15 @@ def founding_docs_sidebar(documents: list[Document], current_slug: str = "", cur
 
     return f"""
         <aside class="sidebar">
-            <h3>Navigation</h3>
-            <nav class="sidebar-nav">
-                {projects_link}
-            </nav>
-
-            <h3 style="margin-top: 32px;">Founding Documents</h3>
+            <h3>Founding Documents</h3>
             <nav class="sidebar-nav">
                 {doc_links_html}
             </nav>
+
+            <div class="sidebar-links">
+                {projects_link}
+                <a href="https://github.com/scottsen/sil" target="_blank" class="">GitHub →</a>
+            </div>
         </aside>
     """
 
