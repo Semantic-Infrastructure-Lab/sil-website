@@ -53,4 +53,6 @@ dmypy.json
 # OS
 .DS_Store
 Thumbs.db
-docs/
+
+# Documentation (synced from SIL repo via symlink)
+docs
