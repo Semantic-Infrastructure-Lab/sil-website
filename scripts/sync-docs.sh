@@ -92,6 +92,14 @@ rsync -av --delete \
     "$WEBSITE_DOCS/meta/"
 echo -e "${GREEN}✓${NC} Meta docs synced"
 
+# Sync innovations docs
+echo "Syncing docs/innovations/..."
+rsync -av --delete \
+    --exclude='.git' \
+    "$SIL_REPO/docs/innovations/" \
+    "$WEBSITE_DOCS/innovations/"
+echo -e "${GREEN}✓${NC} Innovations docs synced"
+
 # Sync semantic-os docs
 echo "Syncing docs/semantic-os/..."
 rsync -av --delete \
@@ -100,10 +108,25 @@ rsync -av --delete \
     "$WEBSITE_DOCS/semantic-os/"
 echo -e "${GREEN}✓${NC} Semantic OS docs synced"
 
-# Sync READING_GUIDE
-echo "Syncing READING_GUIDE.md..."
-cp "$SIL_REPO/docs/READING_GUIDE.md" "$WEBSITE_DOCS/"
-echo -e "${GREEN}✓${NC} Reading guide synced"
+# Sync tools docs
+echo "Syncing docs/tools/..."
+rsync -av --delete \
+    --exclude='.git' \
+    "$SIL_REPO/docs/tools/" \
+    "$WEBSITE_DOCS/tools/"
+echo -e "${GREEN}✓${NC} Tools docs synced"
+
+# Sync top-level docs (delete old ones first, then sync)
+echo "Syncing top-level docs..."
+# Remove old files that might have been deleted from source
+rm -f "$WEBSITE_DOCS/READING_GUIDE.md" 2>/dev/null || true
+rm -f "$WEBSITE_DOCS/QUICKSTART.md" 2>/dev/null || true
+# Sync remaining top-level docs
+cp "$SIL_REPO/docs/FAQ.md" "$WEBSITE_DOCS/" 2>/dev/null || true
+cp "$SIL_REPO/docs/PROGRESSIVE_DISCLOSURE.md" "$WEBSITE_DOCS/" 2>/dev/null || true
+cp "$SIL_REPO/docs/SIL_DESIGN_PRINCIPLES.md" "$WEBSITE_DOCS/" 2>/dev/null || true
+cp "$SIL_REPO/docs/SIL_SAFETY_THRESHOLDS.md" "$WEBSITE_DOCS/" 2>/dev/null || true
+echo -e "${GREEN}✓${NC} Top-level docs synced"
 
 # Sync projects index
 echo "Syncing PROJECT_INDEX.md..."
@@ -130,6 +153,7 @@ VISION_COUNT=$(find "$WEBSITE_DOCS/vision" -name "*.md" 2>/dev/null | wc -l)
 RESEARCH_COUNT=$(find "$WEBSITE_DOCS/research" -name "*.md" 2>/dev/null | wc -l)
 META_COUNT=$(find "$WEBSITE_DOCS/meta" -name "*.md" 2>/dev/null | wc -l)
 SEMANTIC_OS_COUNT=$(find "$WEBSITE_DOCS/semantic-os" -name "*.md" 2>/dev/null | wc -l)
+TOOLS_COUNT=$(find "$WEBSITE_DOCS/tools" -name "*.md" 2>/dev/null | wc -l)
 
 echo "Synced files by category:"
 echo "  Canonical:    $CANONICAL_COUNT documents"
@@ -139,9 +163,10 @@ echo "  Vision:       $VISION_COUNT documents"
 echo "  Research:     $RESEARCH_COUNT documents"
 echo "  Meta:         $META_COUNT documents"
 echo "  Semantic OS:  $SEMANTIC_OS_COUNT documents"
+echo "  Tools:        $TOOLS_COUNT documents"
 echo ""
 
-TOTAL_COUNT=$((CANONICAL_COUNT + ARCHITECTURE_COUNT + GUIDES_COUNT + VISION_COUNT + RESEARCH_COUNT + META_COUNT + SEMANTIC_OS_COUNT))
+TOTAL_COUNT=$((CANONICAL_COUNT + ARCHITECTURE_COUNT + GUIDES_COUNT + VISION_COUNT + RESEARCH_COUNT + META_COUNT + SEMANTIC_OS_COUNT + TOOLS_COUNT))
 echo "Total: $TOTAL_COUNT markdown files"
 echo ""
 
@@ -153,7 +178,7 @@ REQUIRED_FILES=(
     "canonical/FOUNDERS_LETTER.md"
     "architecture/UNIFIED_ARCHITECTURE_GUIDE.md"
     "research/RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md"
-    "READING_GUIDE.md"
+    "meta/FAQ.md"
     "README.md"
 )
 

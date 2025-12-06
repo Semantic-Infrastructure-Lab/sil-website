@@ -186,9 +186,9 @@ def founding_docs_sidebar(documents: list[Document], current_slug: str = "", cur
     # Define document groups with priority ordering
     doc_groups = {
         'core': {'title': 'Core', 'slugs': ['manifesto', 'principles', 'glossary']},
-        'intro': {'title': 'Getting Started', 'slugs': ['founders-letter', 'quickstart', 'faq']},
+        'intro': {'title': 'Getting Started', 'slugs': ['founders-letter', 'faq']},
         'architecture': {'title': 'Architecture', 'slugs': ['semantic-os-architecture', 'unified-architecture-guide', 'technical-charter']},
-        'tools': {'title': 'Tools', 'slugs': ['tools-overview', 'reveal']},
+        'tools': {'title': 'Tools', 'slugs': ['reveal']},
         'innovations': {'title': 'Innovations', 'slugs': ['innovations', 'morphogen', 'genesisgraph', 'pantheon', 'agent-ether', 'progressive-disclosure']},
         'research': {'title': 'Research', 'slugs': ['rag-as-semantic-manifold-transport', 'agent-help-standard']},
         'governance': {'title': 'Governance', 'slugs': ['stewardship-manifesto']},
