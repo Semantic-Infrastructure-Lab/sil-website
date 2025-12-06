@@ -173,36 +173,65 @@ def nav_bar(current_page: str = "") -> str:
 
 
 def founding_docs_sidebar(documents: list[Document], current_slug: str = "", current_page: str = "") -> str:
-    """Render left sidebar navigation for founding documents and main pages.
+    """Render left sidebar navigation with organized document groups.
 
     Args:
-        documents: List of canonical documents
+        documents: List of all documents (will be grouped by category)
         current_slug: Currently active document slug
         current_page: Currently active page (e.g., 'projects')
 
     Returns:
-        HTML string for sidebar navigation
+        HTML string for sidebar navigation with visual hierarchy
     """
+    # Define document groups with priority ordering
+    doc_groups = {
+        'core': {'title': 'Core', 'slugs': ['manifesto', 'principles', 'glossary']},
+        'intro': {'title': 'Getting Started', 'slugs': ['founders-letter', 'quickstart', 'faq']},
+        'architecture': {'title': 'Architecture', 'slugs': ['semantic-os-architecture', 'unified-architecture-guide', 'technical-charter']},
+        'tools': {'title': 'Tools', 'slugs': ['tools-overview', 'reveal']},
+        'innovations': {'title': 'Innovations', 'slugs': ['innovations', 'morphogen', 'genesisgraph', 'pantheon', 'agent-ether', 'progressive-disclosure']},
+        'research': {'title': 'Research', 'slugs': ['rag-as-semantic-manifold-transport', 'agent-help-standard']},
+        'governance': {'title': 'Governance', 'slugs': ['stewardship-manifesto']},
+    }
+
+    # Build slug->document lookup
+    doc_map = {doc.slug: doc for doc in documents}
+
+    # Build grouped sections HTML
+    sections_html = []
+
+    for group_key, group_info in doc_groups.items():
+        group_links = []
+
+        for slug in group_info['slugs']:
+            if slug in doc_map:
+                doc = doc_map[slug]
+                active = "active" if doc.slug == current_slug else ""
+                group_links.append(
+                    f'<a href="/docs/{doc.slug}" class="{active}">{doc.title}</a>'
+                )
+
+        if group_links:
+            is_first = len(sections_html) == 0
+            header_class = "" if is_first else "sidebar-section-header"
+            links_html = "\n                    ".join(group_links)
+
+            sections_html.append(f"""
+                <h3 class="{header_class}">{group_info['title']}</h3>
+                <nav class="sidebar-nav">
+                    {links_html}
+                </nav>
+            """)
+
+    sections = "\n".join(sections_html)
+
     # Projects link
     projects_active = "active" if current_page == "projects" else ""
     projects_link = f'<a href="/projects" class="{projects_active}">All Projects</a>'
 
-    # Document links
-    doc_links = []
-    for doc in documents:
-        active = "active" if doc.slug == current_slug else ""
-        doc_links.append(
-            f'<a href="/docs/{doc.slug}" class="{active}">{doc.title}</a>'
-        )
-
-    doc_links_html = "\n".join(doc_links)
-
     return f"""
         <aside class="sidebar">
-            <h3>Founding Documents</h3>
-            <nav class="sidebar-nav">
-                {doc_links_html}
-            </nav>
+            {sections}
 
             <div class="sidebar-links">
                 {projects_link}

@@ -42,7 +42,7 @@ We're not building another LLM or agent framework. We're building the **semantic
 
 **Yes - 5 projects are in production:**
 
-1. **[reveal](https://pypi.org/project/reveal-cli/)** (v0.13.1 on PyPI) - Code exploration, 86% token reduction
+1. **[reveal](https://pypi.org/project/reveal-cli/)** (v0.16.0 on PyPI) - Code exploration, 86% token reduction
 2. **morphogen** - Cross-domain computation (audio + physics + circuits)
 3. **tiacad** - Declarative parametric CAD in YAML
 4. **genesisgraph** (v0.3.0) - Verifiable process provenance
@@ -127,15 +127,15 @@ reveal your_code.py
 **It depends on what you're asking about:**
 
 **Production-Ready (Mature):**
-- reveal (v0.13.1) - 2+ months in production, PyPI published
+- reveal (v0.16.0) - 2+ months in production, PyPI published
 - morphogen (v0.11) - Used daily in cross-domain workflows
 - tiacad (v3.1.1) - Declarative CAD, stable API
 - genesisgraph (v0.3.0) - Provenance tracking
 
 **Research/Alpha (Early):**
-- Pantheon IR - Intermediate representation (research prototype)
-- Agent Ether - Multi-agent protocols (research stage)
-- Semantic Memory - Knowledge persistence (alpha)
+- Pantheon IR (Universal Semantic Intermediate Representation) - "Assembly language for meaning" enabling cross-domain transformations ([Glossary](canonical/SIL_GLOSSARY.md#pantheon-ir))
+- Agent Ether - Multi-agent coordination protocols (research stage)
+- Semantic Memory - Persistent knowledge substrate (alpha)
 
 **Documentation (Comprehensive):**
 - Technical Charter - Formal specification complete
