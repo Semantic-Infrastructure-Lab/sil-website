@@ -5,10 +5,9 @@ No business logic, no formatting, no DB access.
 Just: parse input → call service → render response.
 """
 
-import re
 from pathlib import Path
+from typing import TYPE_CHECKING
 
-import markdown
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse, PlainTextResponse
 from fastapi.templating import Jinja2Templates
@@ -22,24 +21,20 @@ from sil_web.ui.components import (
     project_card,
 )
 
+if TYPE_CHECKING:
+    from sil_web.services.markdown import MarkdownRenderer
+
 router = APIRouter()
 
 # Templates
 templates = Jinja2Templates(directory="templates")
 
 
-def strip_first_h1(markdown_text: str) -> str:
-    """Remove first h1 heading from markdown to avoid duplicate h1 tags.
-
-    Templates provide page headers with h1, so strip any h1 from
-    markdown content to maintain semantic HTML structure.
-    """
-    # Match first h1 (# Title) and any following blank lines
-    pattern = r'^#\s+.*?\n(\n)*'
-    return re.sub(pattern, '', markdown_text, count=1, flags=re.MULTILINE)
-
-
-def create_routes(content_service: ContentService, project_service: ProjectService):
+def create_routes(
+    content_service: ContentService,
+    project_service: ProjectService,
+    markdown_renderer: "MarkdownRenderer",
+):
     """Create routes with injected services."""
 
     @router.get("/", response_class=HTMLResponse)
@@ -50,13 +45,11 @@ def create_routes(content_service: ContentService, project_service: ProjectServi
         if not doc:
             raise HTTPException(status_code=404, detail="Founder's letter not found")
 
-        # Get all canonical documents for sidebar
+        # Get all documents for sidebar
         all_docs = content_service.list_documents()
-        canonical_docs = [d for d in all_docs if d.category == "canonical"]
 
-        # Strip first h1 (template provides page header) and convert to HTML
-        content_without_h1 = strip_first_h1(doc.content)
-        html_content = markdown.markdown(content_without_h1)
+        # Render markdown to HTML (elegant single-line!)
+        html_content = markdown_renderer.render(doc.content)
 
         return templates.TemplateResponse(
             "index.html",
@@ -64,7 +57,7 @@ def create_routes(content_service: ContentService, project_service: ProjectServi
                 "request": request,
                 "content": html_content,
                 "nav": nav_bar(""),
-                "sidebar": founding_docs_sidebar(canonical_docs, "founders-letter", ""),
+                "sidebar": founding_docs_sidebar(all_docs, "founders-letter", ""),
             },
         )
 
@@ -74,9 +67,8 @@ def create_routes(content_service: ContentService, project_service: ProjectServi
         # Get projects grouped by layer
         by_layer = project_service.get_projects_by_layer()
 
-        # Get all canonical documents for sidebar
+        # Get all documents for sidebar
         all_docs = content_service.list_documents()
-        canonical_docs = [d for d in all_docs if d.category == "canonical"]
 
         # Render layer sections in order (5 → 0 + cross-cutting)
         from sil_web.domain.models import Layer
@@ -102,7 +94,7 @@ def create_routes(content_service: ContentService, project_service: ProjectServi
                 "layer_sections": layer_sections,
                 "architecture": architecture_diagram(),
                 "nav": nav_bar("projects"),
-                "sidebar": founding_docs_sidebar(canonical_docs, "", "projects"),
+                "sidebar": founding_docs_sidebar(all_docs, "", "projects"),
             },
         )
 
@@ -131,13 +123,11 @@ def create_routes(content_service: ContentService, project_service: ProjectServi
         if not doc:
             raise HTTPException(status_code=404, detail=f"Document '{slug}' not found")
 
-        # Get all canonical documents for sidebar
+        # Get all documents for sidebar
         all_docs = content_service.list_documents()
-        canonical_docs = [d for d in all_docs if d.category == "canonical"]
 
-        # Strip first h1 (template provides page header) and convert to HTML
-        content_without_h1 = strip_first_h1(doc.content)
-        html_content = markdown.markdown(content_without_h1)
+        # Render markdown to HTML (elegant single-line!)
+        html_content = markdown_renderer.render(doc.content)
 
         return templates.TemplateResponse(
             "document.html",
@@ -146,7 +136,7 @@ def create_routes(content_service: ContentService, project_service: ProjectServi
                 "doc": doc,
                 "content": html_content,
                 "nav": nav_bar("docs"),
-                "sidebar": founding_docs_sidebar(canonical_docs, slug, ""),
+                "sidebar": founding_docs_sidebar(all_docs, slug, ""),
             },
         )
 

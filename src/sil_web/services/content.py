@@ -80,6 +80,11 @@ class ContentService:
         "semantic-os": {
             # All auto-discover correctly (README -> overview handled by filename_to_slug)
         },
+        "tools": {
+            # Override README to avoid conflict with semantic-os/README.md
+            "tools-overview": "README.md",
+            # REVEAL auto-discovers correctly as 'reveal'
+        },
     }
 
     def __init__(self, docs_path: Path) -> None:
@@ -193,7 +198,7 @@ class ContentService:
             Document instance or None if not found
         """
         # Try each category until we find the slug
-        categories = ["canonical", "architecture", "guides", "vision", "research", "meta", "semantic-os"]
+        categories = ["canonical", "architecture", "guides", "vision", "research", "meta", "semantic-os", "tools", "about", "principles", "innovations"]
 
         for category in categories:
             doc = self.load_document(category, slug)
@@ -213,7 +218,7 @@ class ContentService:
             List of Document instances
         """
         # Auto-discover all categories or just the requested one
-        all_categories = ["canonical", "architecture", "guides", "vision", "research", "meta", "semantic-os"]
+        all_categories = ["canonical", "architecture", "guides", "vision", "research", "meta", "semantic-os", "tools", "innovations"]
         categories_to_list = [category] if category else all_categories
 
         docs = []

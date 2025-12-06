@@ -13,6 +13,7 @@ from sil_web.routes.health import router as health_router
 from sil_web.routes.pages import create_routes
 from sil_web.services.content import ContentService, ProjectService
 from sil_web.services.github import GitHubService
+from sil_web.services.markdown import MarkdownRenderer
 
 # Configure structured logging
 structlog.configure(
@@ -47,12 +48,13 @@ def create_app() -> FastAPI:
     content_service = ContentService(docs_path=DOCS_PATH)
     project_service = ProjectService()
     github_service = GitHubService()
+    markdown_renderer = MarkdownRenderer(content_service)
 
     # Mount health check (no dependencies)
     app.include_router(health_router)
 
     # Create and mount page routes
-    routes = create_routes(content_service, project_service)
+    routes = create_routes(content_service, project_service, markdown_renderer)
     app.include_router(routes)
 
     log.info("app_created", docs_path=str(DOCS_PATH))

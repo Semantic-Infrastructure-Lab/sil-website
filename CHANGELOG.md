@@ -2,6 +2,38 @@
 
 ## [Unreleased]
 
+### Deployed - 2025-12-05
+
+#### Staging Deployment with Launch-Ready Documentation (shimmering-palette-1205)
+- **40 files synced from official SIL repo** (commit 1929d8d)
+  - 15 canonical documents (including all hakami-1205 and infernal-flame-1205 fixes)
+  - 2 architecture documents
+  - 7 research documents
+  - 5 meta documents
+  - 3 tools documents
+  - 6 root-level guides
+  - llms-full.txt regenerated (11,311 lines, 368KB)
+
+**Critical Fixes Deployed:**
+- **$470K economic correction** - Fixed 10x error in MANIFESTO, FAQ, QUICKSTART (was incorrectly $47K per 1000 agents)
+- **v0.16.0 version updates** - Updated from v0.13.x across 5 locations (MANIFESTO, PRINCIPLES, FAQ)
+- **Pantheon IR definition** - Added to GLOSSARY with complete description
+- **Accessibility improvements** - Fixed 26 alphabetical headings + 9 section headings for screen readers
+- **Timestamp additions** - Added "as of Dec 2025" to download statistics
+
+**Scout P1 High-Impact Fixes:**
+- Expanded acronyms on first use (USIR, SIM, Pantheon IR)
+- Fixed heading structure for accessibility compliance
+- Updated credibility markers (current versions, dated statistics)
+
+**Deployment Architecture:**
+- Container: sil-website-staging (registry.mytia.net/sil-website:staging)
+- Deployed to: tia-staging
+- Health: ✅ Healthy (16/17 validation tests passing)
+- Live: https://sil-staging.mytia.net
+
+**Status:** ✅ Production-ready - All P0 blockers resolved, staging validated
+
 ### Added - 2025-12-01
 
 #### License & Citation Metadata (blessed-sea-1201)
