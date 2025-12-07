@@ -116,16 +116,16 @@ rsync -av --delete \
     "$WEBSITE_DOCS/tools/"
 echo -e "${GREEN}✓${NC} Tools docs synced"
 
-# Sync top-level docs (delete old ones first, then sync)
+# Sync top-level docs
 echo "Syncing top-level docs..."
-# Remove old files that might have been deleted from source
-rm -f "$WEBSITE_DOCS/READING_GUIDE.md" 2>/dev/null || true
-rm -f "$WEBSITE_DOCS/QUICKSTART.md" 2>/dev/null || true
-# Sync remaining top-level docs
+# Sync all top-level docs from SIL repo
 cp "$SIL_REPO/docs/FAQ.md" "$WEBSITE_DOCS/" 2>/dev/null || true
 cp "$SIL_REPO/docs/PROGRESSIVE_DISCLOSURE.md" "$WEBSITE_DOCS/" 2>/dev/null || true
 cp "$SIL_REPO/docs/SIL_DESIGN_PRINCIPLES.md" "$WEBSITE_DOCS/" 2>/dev/null || true
 cp "$SIL_REPO/docs/SIL_SAFETY_THRESHOLDS.md" "$WEBSITE_DOCS/" 2>/dev/null || true
+cp "$SIL_REPO/docs/QUICKSTART.md" "$WEBSITE_DOCS/" 2>/dev/null || true
+cp "$SIL_REPO/docs/READING_GUIDE.md" "$WEBSITE_DOCS/" 2>/dev/null || true
+cp "$SIL_REPO/docs/README.md" "$WEBSITE_DOCS/" 2>/dev/null || true
 echo -e "${GREEN}✓${NC} Top-level docs synced"
 
 # Sync projects index
