@@ -16,7 +16,7 @@ This is the public-facing website for the Semantic Infrastructure Lab, built as 
 
 ## Architecture
 
-Following the [TIA Python Development Guide](../tia/docs/guides/TIA_PYTHON_DEVELOPMENT_GUIDE.md), this project uses a clean layered architecture:
+This project uses a clean layered architecture following SIL's development principles:
 
 ```
 src/sil_web/
@@ -233,7 +233,7 @@ This project demonstrates SIL's architectural principles in practice:
 6. **Structured logging**: All services use structlog
 7. **Testability**: Pure functions are easy to test
 
-See [TIA Python Development Guide](../tia/docs/guides/TIA_PYTHON_DEVELOPMENT_GUIDE.md) for full methodology.
+See [SIL Principles](docs/canonical/SIL_PRINCIPLES.md) for the full development methodology.
 
 ## Contributing
 
