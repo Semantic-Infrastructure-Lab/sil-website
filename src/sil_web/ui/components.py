@@ -183,15 +183,73 @@ def founding_docs_sidebar(documents: list[Document], current_slug: str = "", cur
     Returns:
         HTML string for sidebar navigation with visual hierarchy
     """
-    # Define document groups with priority ordering
+    # Navigation structure emphasizing research lab identity
+    # Phase 4: Full lab reorganization (2025-12-06)
     doc_groups = {
-        'core': {'title': 'Core', 'slugs': ['manifesto', 'principles', 'glossary']},
-        'intro': {'title': 'Getting Started', 'slugs': ['founders-letter', 'faq']},
-        'architecture': {'title': 'Architecture', 'slugs': ['semantic-os-architecture', 'unified-architecture-guide', 'technical-charter']},
-        'tools': {'title': 'Tools', 'slugs': ['reveal']},
-        'innovations': {'title': 'Innovations', 'slugs': ['innovations', 'morphogen', 'genesisgraph', 'pantheon', 'agent-ether', 'progressive-disclosure']},
-        'research': {'title': 'Research', 'slugs': ['rag-as-semantic-manifold-transport', 'agent-help-standard']},
-        'governance': {'title': 'Governance', 'slugs': ['stewardship-manifesto']},
+        'start': {
+            'title': 'Start Here',
+            'slugs': ['start-here', 'founders-letter', 'faq']
+        },
+        'lab': {
+            'title': 'The Lab',
+            'slugs': [
+                'research-agenda',         # SIL_RESEARCH_AGENDA_YEAR1.md - CRITICAL for lab identity
+                'founder-background',      # FOUNDER_BACKGROUND.md
+                'stewardship-manifesto',   # SIL_STEWARDSHIP_MANIFESTO.md
+            ]
+        },
+        'research': {
+            'title': 'Research Output',
+            'slugs': [
+                'hierarchical-agency-framework',       # HIERARCHICAL_AGENCY_FRAMEWORK.md
+                'multi-agent-protocol-principles',     # MULTI_AGENT_PROTOCOL_PRINCIPLES.md
+                'semantic-observability',              # SEMANTIC_OBSERVABILITY.md
+                'semantic-feedback-loops',             # SEMANTIC_FEEDBACK_LOOPS.md
+                'progressive-disclosure-guide',        # PROGRESSIVE_DISCLOSURE_GUIDE.md
+                'rag-as-semantic-manifold-transport',  # RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md
+                'agent-help-standard',                 # AGENT_HELP_STANDARD.md
+            ]
+        },
+        'tools': {
+            'title': 'Production Systems',
+            'slugs': [
+                'innovations',             # INNOVATIONS.md - overview page
+                'reveal',                  # REVEAL.md
+                'tia',                     # TIA.md
+                'beth',                    # BETH.md
+                'morphogen',               # MORPHOGEN.md
+                'genesisgraph',            # GENESISGRAPH.md
+                'pantheon',                # PANTHEON.md
+                'agent-ether',             # AGENT_ETHER.md
+                'progressive-disclosure',  # PROGRESSIVE_DISCLOSURE.md - innovation showcase
+            ]
+        },
+        'architecture': {
+            'title': 'Architecture',
+            'slugs': [
+                'semantic-os-architecture',     # SIL_SEMANTIC_OS_ARCHITECTURE.md
+                'unified-architecture-guide',   # UNIFIED_ARCHITECTURE_GUIDE.md
+                'technical-charter'             # SIL_TECHNICAL_CHARTER.md
+            ]
+        },
+        'principles': {
+            'title': 'Design Philosophy',
+            'slugs': [
+                'manifesto',                # SIL_MANIFESTO.md
+                'principles',               # SIL_PRINCIPLES.md
+                'design-principles',        # SIL_DESIGN_PRINCIPLES.md
+                'safety-thresholds',        # SIL_SAFETY_THRESHOLDS.md
+                'tool-quality-monitoring'   # SIL_TOOL_QUALITY_MONITORING.md
+            ]
+        },
+        'about': {
+            'title': 'Acknowledgments',
+            'slugs': [
+                'influences-and-acknowledgments',  # INFLUENCES_AND_ACKNOWLEDGMENTS.md
+                'appreciation-jeremy-howard',       # APPRECIATION_JEREMY_HOWARD.md
+                'glossary'                          # SIL_GLOSSARY.md
+            ]
+        },
     }
 
     # Build slug->document lookup
