@@ -41,7 +41,7 @@ class Project:
     description: str
     status: ProjectStatus
     layer: Layer
-    github_url: str
+    github_url: Optional[str] = None
     version: Optional[str] = None
     tests: Optional[int] = None
     coverage: Optional[int] = None
@@ -57,7 +57,7 @@ class Project:
             raise ValueError("Project name is required")
         if not self.slug:
             raise ValueError("Project slug is required")
-        if not self.github_url.startswith("https://github.com/"):
+        if self.github_url and not self.github_url.startswith("https://github.com/"):
             raise ValueError("GitHub URL must start with https://github.com/")
         if self.innovations is None:
             self.innovations = []
