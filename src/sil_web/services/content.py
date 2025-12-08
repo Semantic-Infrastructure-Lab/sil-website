@@ -167,15 +167,23 @@ class ContentService:
         slug_map = {}
 
         # Start with overrides for this category
-        if category in self.SLUG_OVERRIDES:
-            slug_map.update(self.SLUG_OVERRIDES[category])
+        overrides = self.SLUG_OVERRIDES.get(category, {})
+        slug_map.update(overrides)
+
+        # Track filenames already mapped by overrides (to avoid duplicate mappings)
+        override_filenames = set(overrides.values())
 
         # Auto-discover all markdown files
         for md_file in sorted(category_path.glob('*.md')):
             filename = md_file.name
+
+            # Skip files already mapped via override (prevents duplicate slug→filename mappings)
+            if filename in override_filenames:
+                continue
+
             slug = filename_to_slug(filename)
 
-            # Only add if not already in overrides
+            # Only add if slug not already taken
             if slug not in slug_map:
                 slug_map[slug] = filename
 
