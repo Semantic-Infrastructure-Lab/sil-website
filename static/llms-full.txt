@@ -273,7 +273,7 @@ Build structures that last.**
 
 **If you want to get started:**
 - [Quickstart](../QUICKSTART.md) - 30-minute guided tour with hands-on example
-- [FAQ](../FAQ.md) - Common questions answered
+- [FAQ](../meta/FAQ.md) - Common questions answered
 
 ---
 
@@ -1591,8 +1591,8 @@ if phase == "execution" and agents_created > EXECUTION_PHASE_AGENT_BUDGET:
 **Quality**: Forces explicit planning phase with clear deliverables
 
 **Related SIL Principles**:
-- [SIL Core Principles #9: Examples as Multi-Shot Reasoning Anchors](../SIL_CORE_PRINCIPLES.md) - Using examples in prompts improves agent planning quality
-- [Progressive Disclosure](../PROGRESSIVE_DISCLOSURE.md) - Planning explores broadly (L1), execution focuses narrowly (L3)
+- [SIL Principles](./SIL_PRINCIPLES.md) - Using examples in prompts improves agent planning quality
+- [Progressive Disclosure Guide](./PROGRESSIVE_DISCLOSURE_GUIDE.md) - Planning explores broadly (L1), execution focuses narrowly (L3)
 
 ---
 
@@ -2672,7 +2672,7 @@ def run_research(topic: str, config_path: str = "scout_config.yaml") -> Research
 2. **Workflow example** - Multi-step showing typical patterns
 3. **Complete example** - Full context with edge cases
 
-See: [SIL Core Principles #9: Examples as Multi-Shot Reasoning Anchors](SIL_CORE_PRINCIPLES.md#9-examples-as-multi-shot-reasoning-anchors)
+See: [SIL Principles](./SIL_PRINCIPLES.md) - Examples as Multi-Shot Reasoning Anchors
 
 ---
 
@@ -3110,8 +3110,8 @@ If yes, add Progressive Disclosure.
 
 ## Related Documentation
 
-- [SIL Core Principles](SIL_CORE_PRINCIPLES.md) - Full principle hierarchy
-- [Knowledge Mesh Quality Imperative](KNOWLEDGE_MESH_QUALITY_IMPERATIVE.md) - Context management
+- [SIL Principles](./SIL_PRINCIPLES.md) - Full principle hierarchy
+- [SIL Design Principles](./SIL_DESIGN_PRINCIPLES.md) - Detailed design guidance
 - reveal: `reveal --agent-help-full` - See Progressive Disclosure in action
 
 ---
@@ -5984,8 +5984,8 @@ The `--agent-help` flag exists specifically to provide example-rich prompts:
 **Quick Check**: Does your prompt include at least one concrete example of desired output format?
 
 **Related SIL Documentation**:
-- [Hierarchical Agency Framework](canonical/HIERARCHICAL_AGENCY_FRAMEWORK.md) - Section 10.1 applies this principle to multi-agent orchestration
-- [Progressive Disclosure](PROGRESSIVE_DISCLOSURE.md) - Examples demonstrate layered information reveal
+- [Hierarchical Agency Framework](./HIERARCHICAL_AGENCY_FRAMEWORK.md) - Section 10.1 applies this principle to multi-agent orchestration
+- [Progressive Disclosure Guide](./PROGRESSIVE_DISCLOSURE_GUIDE.md) - Examples demonstrate layered information reveal
 
 ---
 
@@ -6097,11 +6097,11 @@ The `--agent-help` flag exists specifically to provide example-rich prompts:
 ## Related Documentation
 
 **Core Architecture**:
-- [SIL Ecosystem Project Layout](../SIL_ECOSYSTEM_PROJECT_LAYOUT.md)
-- [TIA Unified AI Workspace Vision](TIA_UNIFIED_AI_WORKSPACE_VISION.md)
+- [Project Index](../../projects/PROJECT_INDEX.md) - All 12 projects mapped
+- [Unified Architecture Guide](../architecture/UNIFIED_ARCHITECTURE_GUIDE.md) - Semantic OS architecture
 
 **Quality & Safety**:
-- [Knowledge Mesh Quality Imperative](KNOWLEDGE_MESH_QUALITY_IMPERATIVE.md)
+- [Safety Thresholds](./SIL_SAFETY_THRESHOLDS.md) - Risk classification and thresholds
 
 **Tool Documentation**:
 - reveal: `reveal --agent-help-full`
@@ -7317,9 +7317,9 @@ The lab has developed **12 projects** spanning the six layers of the Semantic OS
 **Research & Specification:**
 - Pantheon (universal IR), Agent Ether (multi-agent protocols), Prism (query microkernel)
 
-This is not a roadmap. These are working systems with real users, measured efficiency (10x token reduction - [see details](../meta/FAQ.md#11-how-does-progressive-disclosure-reduce-token-usage)), and test coverage that proves maturity.
+This is not a roadmap. These are working systems with real users, measured efficiency (10x token reduction - [see FAQ](../meta/FAQ.md)), and test coverage that proves maturity.
 
-**[See the full Project Index →](../projects/PROJECT_INDEX.md)**
+**[See the full Project Index →](../../projects/PROJECT_INDEX.md)**
 
 ## 12. Founder Stance (Explicitly, Simply)
 
@@ -7424,7 +7424,7 @@ No domain is allowed to form an isolated island.
 
 ### **7. Operators Are the Only Way to Change State**
 
-All mutations of semantic objects, [USIR](./SIL_GLOSSARY.md#usir-universal-semantic-intermediate-representation) graphs, and workflows must occur through declared operators.
+All mutations of semantic objects, [USIR](./SIL_GLOSSARY.md) graphs, and workflows must occur through declared operators.
 No direct writes, no bypasses, no implicit edits.
 
 ### **8. Version Everything**
@@ -9033,9 +9033,9 @@ Proceed with campaign? [y/N]
 
 ## Related Documentation
 
-- [SIL Core Principles](SIL_CORE_PRINCIPLES.md) - HITL as Core Principle #8
-- templates/CLAUDE.md - Git workflow HITL implementation
-- Scout documentation - Cost tracking patterns
+- [SIL Principles](./SIL_PRINCIPLES.md) - HITL as a core principle
+- [Technical Charter](./SIL_TECHNICAL_CHARTER.md) - Formal invariants and guarantees
+- [Stewardship Manifesto](./SIL_STEWARDSHIP_MANIFESTO.md) - Values and governance
 
 ---
 
@@ -12199,7 +12199,7 @@ SIL builds infrastructure meant to last decades, not chase quarterly trends.
 
 ### For Collaborators
 **[FAQ](../meta/FAQ.md)** — Common questions answered
-**[Contributing](../../CONTRIBUTING.md)** — How to join us
+**[GitHub](https://github.com/Semantic-Infrastructure-Lab)** — How to join us
 
 ## The Bell Labs of AI
 
@@ -12755,8 +12755,8 @@ prism --parser=setlang --scheduler=mesh query.sql
 ## 📚 Part 12: Related Documentation
 
 **Core SIL:**
-- [SIL Design Principles](SIL_DESIGN_PRINCIPLES.md) - The 5 principles
-- [SIL Ecosystem Project Layout](SIL_ECOSYSTEM_PROJECT_LAYOUT.md) - All projects mapped
+- [SIL Design Principles](../canonical/SIL_DESIGN_PRINCIPLES.md) - The 5 principles
+- [Project Index](../../projects/PROJECT_INDEX.md) - All projects mapped
 
 **Concrete Implementations:**
 - Pantheon - Adapter architecture (USIR implementation)
@@ -12815,11 +12815,6 @@ B) Microkernel:  Services (policy) → Kernel API → Primitives (mechanism)
 **Maintained By:** SIL Core Team
 
 ---
-
-
-# ========================================
-# CATEGORY: SEMANTIC-OS
-# ========================================
 
 
 # ========================================
@@ -14969,16 +14964,6 @@ This framework emerged from collaborative research between Scott Senkeresty (Chi
 
 
 # ========================================
-# CATEGORY: GUIDES
-# ========================================
-
-
-# ========================================
-# CATEGORY: VISION
-# ========================================
-
-
-# ========================================
 # CATEGORY: META
 # ========================================
 
@@ -15709,18 +15694,18 @@ reveal your_code.py
 - **genesisgraph:** Verifiable provenance ([quickstart](https://github.com/semantic-infrastructure-lab/genesisgraph/docs/getting-started/quickstart.md))
 
 **Explore the Ecosystem:**
-- [Project Index](../projects/PROJECT_INDEX.md) - All 12 projects
-- [Tools Documentation](tools/README.md) - Production systems explained
+- [Project Index](../../projects/PROJECT_INDEX.md) - All 12 projects
+- [Tools Documentation](../tools/README.md) - Production systems explained
 
 **Learn the Architecture:**
-- [Quickstart](QUICKSTART.md) - 30-minute guided tour
-- [Reading Guide](READING_GUIDE.md) - Choose your depth
+- [Quickstart](../QUICKSTART.md) - 30-minute guided tour
+- [Reading Guide](../READING_GUIDE.md) - Choose your depth
 
 ---
 
 ### 6. What's the license?
 
-**Code:** [MIT License](../LICENSE)
+**Code:** [Apache 2.0 License](../../LICENSE)
 **Documentation:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 **In practice:**
@@ -15744,7 +15729,7 @@ reveal your_code.py
 - genesisgraph (v0.3.0) - Provenance tracking
 
 **Research/Alpha (Early):**
-- Pantheon IR (Universal Semantic Intermediate Representation) - "Assembly language for meaning" enabling cross-domain transformations ([Glossary](canonical/SIL_GLOSSARY.md#pantheon-ir))
+- Pantheon IR (Universal Semantic Intermediate Representation) - "Assembly language for meaning" enabling cross-domain transformations ([Glossary](../canonical/SIL_GLOSSARY.md))
 - Agent Ether - Multi-agent coordination protocols (research stage)
 - Semantic Memory - Persistent knowledge substrate (alpha)
 
@@ -15764,7 +15749,7 @@ reveal your_code.py
 
 **Step 1: Understand SIL's Principles**
 
-Read [SIL Principles](canonical/SIL_PRINCIPLES.md) (10 minutes). All contributions must follow these 5 design constraints:
+Read [SIL Principles](../canonical/SIL_PRINCIPLES.md) (10 minutes). All contributions must follow these 5 design constraints:
 1. Clarity - Explicit over implicit
 2. Simplicity - Essential complexity only
 3. Composability - Modules that combine predictably
@@ -15773,7 +15758,7 @@ Read [SIL Principles](canonical/SIL_PRINCIPLES.md) (10 minutes). All contributio
 
 **Step 2: Pick a Project**
 
-Browse [Project Index](../projects/PROJECT_INDEX.md) and choose based on your interests:
+Browse [Project Index](../../projects/PROJECT_INDEX.md) and choose based on your interests:
 - **Code exploration:** reveal
 - **Cross-domain computation:** morphogen
 - **Provenance:** genesisgraph
@@ -15849,7 +15834,7 @@ Layer 0: Semantic Memory         ← Persistent knowledge graphs
    - Every layer visible and inspectable
    - Progressive disclosure of complexity
 
-**Read more:** [Semantic OS Architecture](canonical/SIL_SEMANTIC_OS_ARCHITECTURE.md)
+**Read more:** [Semantic OS Architecture](../canonical/SIL_SEMANTIC_OS_ARCHITECTURE.md)
 
 ---
 
@@ -15892,7 +15877,7 @@ WaterCycle(
 
 **Status:** Research prototype, not yet production-ready.
 
-**Read more:** [Technical Charter](canonical/SIL_TECHNICAL_CHARTER.md), Section on USIR
+**Read more:** [Technical Charter](../canonical/SIL_TECHNICAL_CHARTER.md), Section on USIR
 
 ---
 
@@ -15926,7 +15911,7 @@ WaterCycle(
 - Faster responses (fewer tokens to process)
 - Better results (agents see structure, not walls of text)
 
-**Read more:** [Tools Documentation](tools/README.md), Economics section
+**Read more:** [Tools Documentation](../tools/README.md), Economics section
 
 ---
 
@@ -15949,7 +15934,7 @@ WaterCycle(
 - **Cross-domain composition** - Tools that work together via shared semantics
 - **Civilization-scale infrastructure** - The "steel" to AI's "wood"
 
-**Read more:** [Research Agenda Year 1](canonical/SIL_RESEARCH_AGENDA_YEAR1.md)
+**Read more:** [Research Agenda Year 1](../canonical/SIL_RESEARCH_AGENDA_YEAR1.md)
 
 ---
 
@@ -15977,7 +15962,7 @@ reveal morphogen/src/core.py Operator
 - [5-minute quickstart](https://github.com/semantic-infrastructure-lab/genesisgraph/docs/getting-started/quickstart.md)
 - [Compliance examples](https://github.com/semantic-infrastructure-lab/genesisgraph/examples/compliance)
 
-**All project links:** [Project Index](../projects/PROJECT_INDEX.md)
+**All project links:** [Project Index](../../projects/PROJECT_INDEX.md)
 
 ---
 
@@ -16009,7 +15994,7 @@ reveal morphogen/src/core.py Operator
 - **Determinism in the core** (semantic computation)
 - **Provenance everywhere** (track when and why randomness was involved)
 
-**Read more:** [Principles](canonical/SIL_PRINCIPLES.md) - Reproducibility principle
+**Read more:** [Principles](../canonical/SIL_PRINCIPLES.md) - Reproducibility principle
 
 ---
 
@@ -16018,26 +16003,26 @@ reveal morphogen/src/core.py Operator
 **Quick Paths:**
 
 **30-Minute Overview:**
-→ [Quickstart](QUICKSTART.md) - Guided tour with hands-on example
+→ [Quickstart](../QUICKSTART.md) - Guided tour with hands-on example
 
 **Deep Architecture:**
-→ [Unified Architecture Guide](architecture/UNIFIED_ARCHITECTURE_GUIDE.md) (20 min)
-→ [Technical Charter](canonical/SIL_TECHNICAL_CHARTER.md) (45 min)
+→ [Unified Architecture Guide](../architecture/UNIFIED_ARCHITECTURE_GUIDE.md) (20 min)
+→ [Technical Charter](../canonical/SIL_TECHNICAL_CHARTER.md) (45 min)
 
 **Philosophy & Vision:**
-→ [Founder's Letter](canonical/FOUNDERS_LETTER.md) (10 min)
-→ [Manifesto](canonical/SIL_MANIFESTO.md) (15 min)
+→ [Founder's Letter](../canonical/FOUNDERS_LETTER.md) (10 min)
+→ [Manifesto](../canonical/SIL_MANIFESTO.md) (15 min)
 
 **Choose Your Path:**
-→ [Reading Guide](READING_GUIDE.md) - 4 curated reading paths
+→ [Reading Guide](../READING_GUIDE.md) - 4 curated reading paths
 
 **Try Production Tools:**
-→ [Tools Documentation](tools/README.md)
-→ [Project Index](../projects/PROJECT_INDEX.md)
+→ [Tools Documentation](../tools/README.md)
+→ [Project Index](../../projects/PROJECT_INDEX.md)
 
 **Research Papers:**
-→ [RAG as Semantic Manifold Transport](research/RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md)
-→ [Agent-Help Standard](research/AGENT_HELP_STANDARD.md)
+→ [RAG as Semantic Manifold Transport](../research/RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md)
+→ [Agent-Help Standard](../research/AGENT_HELP_STANDARD.md)
 
 **Community:**
 → [GitHub Organization](https://github.com/semantic-infrastructure-lab)
@@ -16055,13 +16040,13 @@ reveal morphogen/src/core.py Operator
 - Email: *(contact information coming soon)*
 
 **For contribution questions:**
-- Read [Contributing Guidelines](../README.md#-contributing)
+- Visit [GitHub](https://github.com/Semantic-Infrastructure-Lab)
 - Check project-specific CONTRIBUTING.md files
 
 ---
 
 *Created: 2025-12-01*
-*Part of: [SIL Documentation](README.md)*
+*Part of: [SIL Documentation](../README.md)*
 *License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)*
 
 ---

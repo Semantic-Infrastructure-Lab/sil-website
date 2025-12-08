@@ -60,21 +60,7 @@ rsync -av --delete \
     "$WEBSITE_DOCS/architecture/"
 echo -e "${GREEN}✓${NC} Architecture docs synced"
 
-# Sync guides
-echo "Syncing docs/guides/..."
-rsync -av --delete \
-    --exclude='.git' \
-    "$SIL_REPO/docs/guides/" \
-    "$WEBSITE_DOCS/guides/"
-echo -e "${GREEN}✓${NC} Guides synced"
-
-# Sync vision docs
-echo "Syncing docs/vision/..."
-rsync -av --delete \
-    --exclude='.git' \
-    "$SIL_REPO/docs/vision/" \
-    "$WEBSITE_DOCS/vision/"
-echo -e "${GREEN}✓${NC} Vision docs synced"
+# NOTE: guides/ and vision/ directories removed from SIL repo (empty placeholders)
 
 # Sync research docs
 echo "Syncing docs/research/..."
@@ -100,13 +86,7 @@ rsync -av --delete \
     "$WEBSITE_DOCS/innovations/"
 echo -e "${GREEN}✓${NC} Innovations docs synced"
 
-# Sync semantic-os docs
-echo "Syncing docs/semantic-os/..."
-rsync -av --delete \
-    --exclude='.git' \
-    "$SIL_REPO/docs/semantic-os/" \
-    "$WEBSITE_DOCS/semantic-os/"
-echo -e "${GREEN}✓${NC} Semantic OS docs synced"
+# NOTE: semantic-os/ directory removed from SIL repo (empty placeholder)
 
 # Sync tools docs
 echo "Syncing docs/tools/..."
@@ -148,25 +128,21 @@ echo ""
 # Count synced files
 CANONICAL_COUNT=$(find "$WEBSITE_DOCS/canonical" -name "*.md" 2>/dev/null | wc -l)
 ARCHITECTURE_COUNT=$(find "$WEBSITE_DOCS/architecture" -name "*.md" 2>/dev/null | wc -l)
-GUIDES_COUNT=$(find "$WEBSITE_DOCS/guides" -name "*.md" 2>/dev/null | wc -l)
-VISION_COUNT=$(find "$WEBSITE_DOCS/vision" -name "*.md" 2>/dev/null | wc -l)
 RESEARCH_COUNT=$(find "$WEBSITE_DOCS/research" -name "*.md" 2>/dev/null | wc -l)
 META_COUNT=$(find "$WEBSITE_DOCS/meta" -name "*.md" 2>/dev/null | wc -l)
-SEMANTIC_OS_COUNT=$(find "$WEBSITE_DOCS/semantic-os" -name "*.md" 2>/dev/null | wc -l)
+INNOVATIONS_COUNT=$(find "$WEBSITE_DOCS/innovations" -name "*.md" 2>/dev/null | wc -l)
 TOOLS_COUNT=$(find "$WEBSITE_DOCS/tools" -name "*.md" 2>/dev/null | wc -l)
 
 echo "Synced files by category:"
 echo "  Canonical:    $CANONICAL_COUNT documents"
 echo "  Architecture: $ARCHITECTURE_COUNT documents"
-echo "  Guides:       $GUIDES_COUNT documents"
-echo "  Vision:       $VISION_COUNT documents"
 echo "  Research:     $RESEARCH_COUNT documents"
 echo "  Meta:         $META_COUNT documents"
-echo "  Semantic OS:  $SEMANTIC_OS_COUNT documents"
+echo "  Innovations:  $INNOVATIONS_COUNT documents"
 echo "  Tools:        $TOOLS_COUNT documents"
 echo ""
 
-TOTAL_COUNT=$((CANONICAL_COUNT + ARCHITECTURE_COUNT + GUIDES_COUNT + VISION_COUNT + RESEARCH_COUNT + META_COUNT + SEMANTIC_OS_COUNT + TOOLS_COUNT))
+TOTAL_COUNT=$((CANONICAL_COUNT + ARCHITECTURE_COUNT + RESEARCH_COUNT + META_COUNT + INNOVATIONS_COUNT + TOOLS_COUNT))
 echo "Total: $TOTAL_COUNT markdown files"
 echo ""
 
