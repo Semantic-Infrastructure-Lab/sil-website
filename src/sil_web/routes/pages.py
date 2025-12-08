@@ -18,7 +18,6 @@ from sil_web.ui.components import (
     founding_docs_sidebar,
     layer_section,
     nav_bar,
-    project_card,
 )
 
 if TYPE_CHECKING:

@@ -92,13 +92,13 @@ class ContentService:
     # Tier 2 = System Architecture (what SIL builds)
     # Tier 3 = Research Output (what SIL publishes)
     DOCUMENT_TIERS = {
-        # Tier 1: Lab Founding Documents (6 docs)
+        # Tier 1: Lab Founding Documents (5 docs)
+        # Note: Founder background is in docs/meta/FOUNDER_BACKGROUND.md, not canonical
         "start-here": (1, 1),
         "founders-letter": (1, 2),
         "manifesto": (1, 3),
         "principles": (1, 4),
         "stewardship-manifesto": (1, 5),
-        "founder-profile": (1, 6),
 
         # Tier 2: System Architecture (4 docs)
         "semantic-os-architecture": (2, 1),
@@ -437,7 +437,6 @@ class ProjectService:
                 description="Universal semantic IR enabling cross-domain composition. Adapters translate domain languages (audio, CAD, UI) into common semantic graph for interoperability.",
                 status=ProjectStatus.RESEARCH,
                 layer=Layer.LAYER_1,
-                github_url="https://github.com/scottsen/pantheon",
                 is_private=True,
                 maturity_note="Working prototype, API evolving",
                 innovations=[
@@ -470,7 +469,6 @@ class ProjectService:
                 description="Semantic UI platform translating intent into reactive UI components. Declarative UI description with multiple backend targets (React, Vue, native).",
                 status=ProjectStatus.ALPHA,
                 layer=Layer.LAYER_2,
-                github_url="https://github.com/scottsen/sup",
                 is_private=True,
                 maturity_note="Early development, API unstable",
                 innovations=[
@@ -504,7 +502,6 @@ class ProjectService:
                 description="Formally verified microkernel query engine. Minimal trusted core with provable correctness guarantees.",
                 status=ProjectStatus.SPECIFICATION,
                 layer=Layer.CROSS_CUTTING,
-                github_url="https://github.com/scottsen/prism",
                 is_private=True,
                 maturity_note="Design phase - specification in progress",
                 innovations=[
@@ -521,7 +518,6 @@ class ProjectService:
                 description="Deterministic protocols for multi-agent coordination. Message passing, state synchronization, and coordination primitives for intelligent agent systems.",
                 status=ProjectStatus.SPECIFICATION,
                 layer=Layer.LAYER_3,
-                github_url="https://github.com/scottsen/agent-ether",
                 is_private=True,
                 maturity_note="Planning phase - protocol specification underway",
                 innovations=[

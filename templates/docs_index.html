@@ -131,11 +131,13 @@
         </div>
 
         <!-- Any other Tier 3 docs not categorized above -->
-        {% for doc in tier3 %}
-            {% if doc.slug not in ['hierarchical-agency-framework', 'multi-agent-protocol-principles', 'founders-note-multishot-agent-learning', 'semantic-observability', 'semantic-feedback-loops', 'safety-thresholds', 'tool-quality-monitoring', 'progressive-disclosure-guide', 'research-agenda'] %}
+        {% set categorized_slugs = ['hierarchical-agency-framework', 'multi-agent-protocol-principles', 'founders-note-multishot-agent-learning', 'semantic-observability', 'semantic-feedback-loops', 'safety-thresholds', 'tool-quality-monitoring', 'progressive-disclosure-guide', 'research-agenda'] %}
+        {% set uncategorized_docs = tier3 | rejectattr('slug', 'in', categorized_slugs) | list %}
+        {% if uncategorized_docs %}
         <div class="research-group">
             <h3 class="research-group-title">Additional Research</h3>
             <div class="doc-list">
+                {% for doc in uncategorized_docs %}
                 <div class="doc-item">
                     <h4><a href="/docs/{{ doc.slug }}">{{ doc.title }}</a></h4>
                     {% if doc.description %}
@@ -143,10 +145,10 @@
                     {% endif %}
                     <p class="doc-meta">{{ doc.word_count }} words</p>
                 </div>
+                {% endfor %}
             </div>
         </div>
-            {% endif %}
-        {% endfor %}
+        {% endif %}
     </div>
 </section>
 {% endblock %}
