@@ -59,6 +59,8 @@ class ContentService:
             # Removed "charter" override - auto-discovers as "technical-charter" (clearer)
             "glossary": "SIL_GLOSSARY.md",
             "research-agenda": "SIL_RESEARCH_AGENDA_YEAR1.md",
+            # Alias: prevents auto-discovery of duplicate (tier 0 = hidden from index)
+            "research-agenda-year1": "SIL_RESEARCH_AGENDA_YEAR1.md",
             # These auto-discover correctly: founders-letter, founder-profile, tia-profile, technical-charter
         },
         "architecture": {
@@ -123,6 +125,9 @@ class ContentService:
 
         # Research Roadmap
         "research-agenda": (3, 9),
+
+        # Hidden aliases (tier 0 = not displayed in index, but URLs work)
+        "research-agenda-year1": (0, 0),
 
         # Default tier for any unlisted docs (e.g., README.md)
         # Will be handled in load_document
