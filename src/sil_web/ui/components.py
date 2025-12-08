@@ -75,7 +75,9 @@ def project_card(project: Project) -> str:
         """
 
     # Links
-    links_html = f"""
+    links_html = ""
+    if project.github_url:
+        links_html += f"""
         <a href="{project.github_url}" target="_blank">Repository →</a>
     """
     if project.pypi_url:
@@ -83,9 +85,15 @@ def project_card(project: Project) -> str:
         <a href="{project.pypi_url}" target="_blank">PyPI Package →</a>
     """
 
+    # Title - link to repo if available, otherwise just text
+    if project.github_url:
+        title_html = f'<h3><a href="{project.github_url}" target="_blank">{project.name}</a></h3>'
+    else:
+        title_html = f'<h3>{project.name}</h3>'
+
     return f"""
         <div class="project">
-            <h3><a href="{project.github_url}" target="_blank">{project.name}</a></h3>
+            {title_html}
             <div class="meta">
                 <span class="meta-badge {status_class}">{status_text}</span>
                 {privacy_html}

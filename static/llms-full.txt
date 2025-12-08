@@ -62,7 +62,7 @@ Build structures that last.**
 - [Design Principles](./SIL_PRINCIPLES.md) - The 14 constraints that guide all work
 
 **If you want to get started:**
-- [Quickstart](../QUICKSTART.md) - 30-minute guided tour with hands-on example
+- [Start Here](./START_HERE.md) - 30-minute guided tour with hands-on example
 - [FAQ](../meta/FAQ.md) - Common questions answered
 
 ---
@@ -656,7 +656,7 @@ In 2025, with 200K+ context windows and native tool support, **dynamic documenta
 
 **Author:** Scott Senkeresty
 **Organization:** Semantic Infrastructure Lab
-**Contact:** [TBD]
+**Contact:** scott@semanticinfrastructurelab.org
 **License:** CC BY 4.0
 
 **Related Work:**
@@ -7143,7 +7143,7 @@ That is the work.
 **If you want to see it in action:**
 - [Project Index](../../projects/PROJECT_INDEX.md) - All 12 projects explained
 - [Tools Documentation](../tools/README.md) - Production systems with economic impact data
-- [Quickstart](../QUICKSTART.md) - Try reveal in 10 minutes
+- [Start Here](./START_HERE.md) - Try reveal in 10 minutes
 
 **If you want deeper principles:**
 - [Design Principles](./SIL_PRINCIPLES.md) - The 14 constraints that guide all work
@@ -13839,7 +13839,7 @@ reveal map://contacts/scott@tinylizard.com --to slack --format json
 **Internal:**
 - [SIL Manifesto](../canonical/SIL_MANIFESTO.md) - Why explicit semantics matter
 - [Unified Architecture Guide](../architecture/UNIFIED_ARCHITECTURE_GUIDE.md) - Layer structure
-- [Pantheon docs](/home/scottsen/src/projects/pantheon/docs/) - Universal Semantic IR
+- [Pantheon](../innovations/PANTHEON.md) - Universal Semantic IR
 
 **External:**
 - Berners-Lee, T. "Linked Data" (2006)
@@ -15479,23 +15479,23 @@ reveal your_code.py
 
 **Try Production Projects:**
 - **reveal:** Progressive code exploration
-- **morphogen:** Cross-domain computation ([examples](https://github.com/semantic-infrastructure-lab/morphogen/examples))
-- **tiacad:** Declarative CAD ([tutorial](https://github.com/semantic-infrastructure-lab/tiacad/TUTORIAL.md))
-- **genesisgraph:** Verifiable provenance ([quickstart](https://github.com/semantic-infrastructure-lab/genesisgraph/docs/getting-started/quickstart.md))
+- **morphogen:** Cross-domain computation ([examples](https://github.com/Semantic-Infrastructure-Lab/morphogen/tree/main/examples))
+- **tiacad:** Declarative CAD ([tutorial](https://github.com/Semantic-Infrastructure-Lab/tiacad/blob/main/docs/user/TUTORIAL.md))
+- **genesisgraph:** Verifiable provenance ([quickstart](https://github.com/Semantic-Infrastructure-Lab/genesisgraph/blob/main/docs/getting-started/quickstart.md))
 
 **Explore the Ecosystem:**
-- [Project Index](../../projects/PROJECT_INDEX.md) - All 12 projects
+- [Project Index](../innovations/INNOVATIONS.md) - All 12 projects
 - [Tools Documentation](../tools/README.md) - Production systems explained
 
 **Learn the Architecture:**
-- [Quickstart](../QUICKSTART.md) - 30-minute guided tour
-- [Reading Guide](../READING_GUIDE.md) - Choose your depth
+- [Start Here](../canonical/START_HERE.md) - 30-minute guided tour
+- [FAQ](./FAQ.md) - Common questions answered
 
 ---
 
 ### 6. What's the license?
 
-**Code:** [Apache 2.0 License](../../LICENSE)
+**Code:** [Apache 2.0 License](https://github.com/Semantic-Infrastructure-Lab/SIL/blob/main/LICENSE)
 **Documentation:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 **In practice:**
@@ -15548,7 +15548,7 @@ Read [SIL Principles](../canonical/SIL_PRINCIPLES.md) (10 minutes). All contribu
 
 **Step 2: Pick a Project**
 
-Browse [Project Index](../../projects/PROJECT_INDEX.md) and choose based on your interests:
+Browse [Project Index](../innovations/INNOVATIONS.md) and choose based on your interests:
 - **Code exploration:** reveal
 - **Cross-domain computation:** morphogen
 - **Provenance:** genesisgraph
@@ -15558,8 +15558,8 @@ Browse [Project Index](../../projects/PROJECT_INDEX.md) and choose based on your
 **Step 3: Check Project Guidelines**
 
 Each project has a CONTRIBUTING.md in its repository:
-- [reveal/CONTRIBUTING.md](https://github.com/semantic-infrastructure-lab/reveal/CONTRIBUTING.md)
-- [morphogen/CONTRIBUTING.md](https://github.com/semantic-infrastructure-lab/morphogen/CONTRIBUTING.md)
+- [reveal/CONTRIBUTING.md](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/master/CONTRIBUTING.md)
+- [morphogen/CONTRIBUTING.md](https://github.com/Semantic-Infrastructure-Lab/morphogen/blob/main/CONTRIBUTING.md)
 - *(Check individual repos for others)*
 
 **Step 4: Start Small**
@@ -15740,19 +15740,19 @@ reveal morphogen/src/core.py Operator
 ```
 
 **morphogen (Cross-Domain Computation):**
-- [Audio synthesis examples](https://github.com/semantic-infrastructure-lab/morphogen/examples/audio)
-- [Physics simulation examples](https://github.com/semantic-infrastructure-lab/morphogen/examples/physics)
-- [Circuit design examples](https://github.com/semantic-infrastructure-lab/morphogen/examples/circuits)
+- [Audio synthesis examples](https://github.com/Semantic-Infrastructure-Lab/morphogen/tree/main/examples/audio)
+- [Physics simulation examples](https://github.com/Semantic-Infrastructure-Lab/morphogen/tree/main/examples/rigidbody_physics)
+- [Circuit design examples](https://github.com/Semantic-Infrastructure-Lab/morphogen/tree/main/examples/circuit)
 
 **tiacad (Declarative CAD):**
-- [Full tutorial](https://github.com/semantic-infrastructure-lab/tiacad/TUTORIAL.md)
-- [Example models](https://github.com/semantic-infrastructure-lab/tiacad/examples)
+- [Full tutorial](https://github.com/Semantic-Infrastructure-Lab/tiacad/blob/main/docs/user/TUTORIAL.md)
+- [Example models](https://github.com/Semantic-Infrastructure-Lab/tiacad/tree/main/examples)
 
 **genesisgraph (Provenance):**
-- [5-minute quickstart](https://github.com/semantic-infrastructure-lab/genesisgraph/docs/getting-started/quickstart.md)
-- [Compliance examples](https://github.com/semantic-infrastructure-lab/genesisgraph/examples/compliance)
+- [5-minute quickstart](https://github.com/Semantic-Infrastructure-Lab/genesisgraph/blob/main/docs/getting-started/quickstart.md)
+- [Example workflows](https://github.com/Semantic-Infrastructure-Lab/genesisgraph/tree/main/examples)
 
-**All project links:** [Project Index](../../projects/PROJECT_INDEX.md)
+**All project links:** [Project Index](../innovations/INNOVATIONS.md)
 
 ---
 
@@ -15793,7 +15793,7 @@ reveal morphogen/src/core.py Operator
 **Quick Paths:**
 
 **30-Minute Overview:**
-→ [Quickstart](../QUICKSTART.md) - Guided tour with hands-on example
+→ [Start Here](../canonical/START_HERE.md) - Guided tour with hands-on example
 
 **Deep Architecture:**
 → [Unified Architecture Guide](../architecture/UNIFIED_ARCHITECTURE_GUIDE.md) (20 min)
@@ -15804,18 +15804,18 @@ reveal morphogen/src/core.py Operator
 → [Manifesto](../canonical/SIL_MANIFESTO.md) (15 min)
 
 **Choose Your Path:**
-→ [Reading Guide](../READING_GUIDE.md) - 4 curated reading paths
+→ [Reading Guide](https://github.com/Semantic-Infrastructure-Lab/SIL/blob/main/docs/READING_GUIDE.md) - 4 curated reading paths
 
 **Try Production Tools:**
 → [Tools Documentation](../tools/README.md)
-→ [Project Index](../../projects/PROJECT_INDEX.md)
+→ [Project Index](../innovations/INNOVATIONS.md)
 
 **Research Papers:**
 → [RAG as Semantic Manifold Transport](../research/RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md)
 → [Agent-Help Standard](../research/AGENT_HELP_STANDARD.md)
 
 **Community:**
-→ [GitHub Organization](https://github.com/semantic-infrastructure-lab)
+→ [GitHub Organization](https://github.com/Semantic-Infrastructure-Lab)
 → GitHub Issues on individual project repos
 
 ---
