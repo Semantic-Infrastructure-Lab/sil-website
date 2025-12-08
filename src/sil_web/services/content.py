@@ -490,7 +490,7 @@ class ProjectService:
                 description="Event-driven browser automation for human-AI collaboration. Standards-based (CloudEvents, AsyncAPI, WebSocket), protocol-agnostic.",
                 status=ProjectStatus.ALPHA,
                 layer=Layer.LAYER_5,
-                github_url="https://github.com/scottsen/browserbridge",
+                is_private=True,
                 maturity_note="Alpha - core features working",
                 innovations=[
                     "Event-driven architecture",
@@ -540,7 +540,7 @@ class ProjectService:
                 description="Durable, queryable knowledge graphs with versioning. Persistent semantic continuity across tasks and time.",
                 status=ProjectStatus.PLANNED,
                 layer=Layer.LAYER_0,
-                github_url="https://github.com/scottsen/semantic-memory",
+                is_private=True,
                 maturity_note="Concept stage - architecture design in progress",
                 innovations=[
                     "Versioned semantic graphs",
