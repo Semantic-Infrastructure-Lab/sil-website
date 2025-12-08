@@ -103,8 +103,7 @@ cp "$SIL_REPO/docs/FAQ.md" "$WEBSITE_DOCS/" 2>/dev/null || true
 cp "$SIL_REPO/docs/PROGRESSIVE_DISCLOSURE.md" "$WEBSITE_DOCS/" 2>/dev/null || true
 cp "$SIL_REPO/docs/SIL_DESIGN_PRINCIPLES.md" "$WEBSITE_DOCS/" 2>/dev/null || true
 cp "$SIL_REPO/docs/SIL_SAFETY_THRESHOLDS.md" "$WEBSITE_DOCS/" 2>/dev/null || true
-cp "$SIL_REPO/docs/QUICKSTART.md" "$WEBSITE_DOCS/" 2>/dev/null || true
-cp "$SIL_REPO/docs/READING_GUIDE.md" "$WEBSITE_DOCS/" 2>/dev/null || true
+# NOTE: QUICKSTART.md and READING_GUIDE.md removed - consolidated into canonical/START_HERE.md
 cp "$SIL_REPO/docs/README.md" "$WEBSITE_DOCS/" 2>/dev/null || true
 echo -e "${GREEN}✓${NC} Top-level docs synced"
 
