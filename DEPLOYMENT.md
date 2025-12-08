@@ -427,6 +427,60 @@ ssh tia-apps 'sudo tail -f /var/log/nginx/sil-website-error.log'
 ssh tia-apps 'curl http://localhost:8000/health'
 ```
 
+### Docs not updating after sync (IMPORTANT)
+
+**Symptom:** You ran `sync-docs.sh` and `generate-llms-full.sh`, deployed, but the site shows old content.
+
+**Cause:** Podman caches the `COPY docs/ docs/` layer. If file timestamps don't change enough, it reuses the cached layer.
+
+**Fix:** Force a no-cache build:
+
+```bash
+# Option 1: Build with --no-cache
+podman build --no-cache -t registry.mytia.net/sil-website:v1.0.x .
+
+# Option 2: Touch docs to bust cache (less reliable)
+touch docs/.cache-bust
+```
+
+**Verification:**
+```bash
+# Check build output - should NOT say "Using cache" for docs step
+# Look for: [2/2] STEP 9/15: COPY --chown=appuser:appuser docs/ docs/
+# Should show: --> abc123def (new hash, not "Using cache")
+```
+
+### 502 Bad Gateway on staging
+
+**Symptom:** Container is running, `curl localhost:8080` works on tia-staging, but https://sil-staging.mytia.net returns 502.
+
+**Cause:** Container bound to `127.0.0.1:8080` but nginx proxy on tia-proxy reaches `10.108.0.8:8080` (private IP).
+
+**Architecture:**
+```
+tia-proxy (nginx) → 10.108.0.8:8080 → tia-staging container
+```
+
+**Fix:** Bind to private IP, not localhost:
+
+```bash
+# Wrong (localhost only):
+podman run -d -p 127.0.0.1:8080:8000 ...
+
+# Correct (accessible from proxy):
+podman run -d -p 10.108.0.8:8080:8000 ...
+```
+
+**Verification:**
+```bash
+# Check binding
+ssh tia-staging 'podman port sil-website-staging'
+# Should show: 8000/tcp -> 10.108.0.8:8080
+
+# Test from proxy
+ssh tia-proxy 'curl http://10.108.0.8:8080/health'
+```
+
 ---
 
 ## Best Practices

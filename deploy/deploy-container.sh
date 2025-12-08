@@ -1,10 +1,24 @@
 #!/bin/bash
 # SIL Website - Container Registry Deployment Script
 # Follows TIA Canonical Deployment Pattern
+#
+# Usage:
+#   ./deploy-container.sh staging           # Normal deploy
+#   ./deploy-container.sh staging --fresh   # Force rebuild (use after docs sync)
+#   ./deploy-container.sh production
+#
+# IMPORTANT: Use --fresh flag after running sync-docs.sh to ensure
+# docs changes are included (podman caches the COPY docs/ layer)
 
 set -e
 
+# Parse arguments
 ENVIRONMENT="${1:-staging}"
+FRESH_BUILD=false
+if [[ "$2" == "--fresh" ]] || [[ "$2" == "--no-cache" ]]; then
+  FRESH_BUILD=true
+fi
+
 PROJECT_NAME="sil-website"
 REGISTRY="registry.mytia.net"
 IMAGE_NAME="${REGISTRY}/${PROJECT_NAME}"
@@ -43,12 +57,16 @@ if [ "$ENVIRONMENT" == "staging" ]; then
   CONTAINER_NAME="${PROJECT_NAME}-staging"
   CONTAINER_TAG="staging"
   SERVICE_PORT="8080"
+  # Bind to private IP for tia-proxy access (not 127.0.0.1 or 0.0.0.0)
+  BIND_IP="10.108.0.8"
   HEALTH_URL="https://sil-staging.mytia.net/health"
 else
   HOST="tia-apps"
   CONTAINER_NAME="$PROJECT_NAME"
   CONTAINER_TAG="latest"
   SERVICE_PORT="8000"
+  # Production binds to localhost (nginx on same machine)
+  BIND_IP="127.0.0.1"
   HEALTH_URL="https://semanticinfrastructurelab.org/health"
 fi
 
@@ -62,13 +80,20 @@ echo ""
 echo "🔨 Step 1: Building container image..."
 echo "   Building: ${IMAGE_NAME}:${VERSION}"
 
-podman build \
-  --label "git.sha=${GIT_SHA}" \
-  --label "git.branch=${GIT_BRANCH}" \
-  --label "build.timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
-  --label "version=${VERSION}" \
-  -t "${IMAGE_NAME}:${VERSION}" \
-  .
+BUILD_ARGS=(
+  --label "git.sha=${GIT_SHA}"
+  --label "git.branch=${GIT_BRANCH}"
+  --label "build.timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  --label "version=${VERSION}"
+  -t "${IMAGE_NAME}:${VERSION}"
+)
+
+if [ "$FRESH_BUILD" = true ]; then
+  echo "   🔄 Fresh build requested (--no-cache)"
+  BUILD_ARGS+=(--no-cache)
+fi
+
+podman build "${BUILD_ARGS[@]}" .
 
 echo "✅ Image built successfully"
 echo ""
@@ -154,7 +179,7 @@ podman rm $CONTAINER_NAME 2>/dev/null || true
 echo "→ Starting new container..."
 podman run -d \
   --name $CONTAINER_NAME \
-  -p 0.0.0.0:$SERVICE_PORT:8000 \
+  -p ${BIND_IP}:$SERVICE_PORT:8000 \
   --health-cmd="curl -f http://localhost:8000/health || exit 1" \
   --health-interval=30s \
   --health-timeout=5s \
