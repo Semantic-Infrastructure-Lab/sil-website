@@ -85,6 +85,7 @@ class Document:
     category: str
     description: Optional[str] = None
     order: int = 0
+    tier: int = 3  # 1=Founding, 2=Architecture, 3=Research
 
     def __post_init__(self) -> None:
         """Validate document data."""

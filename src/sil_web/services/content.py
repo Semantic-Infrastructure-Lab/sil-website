@@ -87,6 +87,47 @@ class ContentService:
         },
     }
 
+    # Document tier classification (slug -> (tier, order))
+    # Tier 1 = Lab Founding Documents (what SIL is)
+    # Tier 2 = System Architecture (what SIL builds)
+    # Tier 3 = Research Output (what SIL publishes)
+    DOCUMENT_TIERS = {
+        # Tier 1: Lab Founding Documents (6 docs)
+        "start-here": (1, 1),
+        "founders-letter": (1, 2),
+        "manifesto": (1, 3),
+        "principles": (1, 4),
+        "stewardship-manifesto": (1, 5),
+        "founder-profile": (1, 6),
+
+        # Tier 2: System Architecture (4 docs)
+        "semantic-os-architecture": (2, 1),
+        "technical-charter": (2, 2),
+        "design-principles": (2, 3),
+        "glossary": (2, 4),
+
+        # Tier 3: Research Output (10 docs)
+        # Multi-Agent Systems
+        "hierarchical-agency-framework": (3, 1),
+        "multi-agent-protocol-principles": (3, 2),
+        "founders-note-multishot-agent-learning": (3, 3),
+
+        # Observability & Safety
+        "semantic-observability": (3, 4),
+        "semantic-feedback-loops": (3, 5),
+        "safety-thresholds": (3, 6),
+        "tool-quality-monitoring": (3, 7),
+
+        # Interface Design
+        "progressive-disclosure-guide": (3, 8),
+
+        # Research Roadmap
+        "research-agenda": (3, 9),
+
+        # Default tier for any unlisted docs (e.g., README.md)
+        # Will be handled in load_document
+    }
+
     def __init__(self, docs_path: Path) -> None:
         """Initialize content service.
 

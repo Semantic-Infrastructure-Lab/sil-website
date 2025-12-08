@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from fastapi import APIRouter, HTTPException, Request
-from fastapi.responses import HTMLResponse, PlainTextResponse
+from fastapi.responses import HTMLResponse, PlainTextResponse, Response
 from fastapi.templating import Jinja2Templates
 
 from sil_web.services.content import ContentService, ProjectService
@@ -140,7 +140,7 @@ def create_routes(
             },
         )
 
-    @router.get("/llms.txt", response_class=PlainTextResponse)
+    @router.api_route("/llms.txt", methods=["GET", "HEAD"], response_class=PlainTextResponse)
     async def llms_txt():
         """Serve llms.txt file for LLM consumption (Jeremy Howard standard)."""
         llms_file = Path("static/llms.txt")
@@ -148,12 +148,59 @@ def create_routes(
             raise HTTPException(status_code=404, detail="llms.txt not found")
         return llms_file.read_text()
 
-    @router.get("/llms-full.txt", response_class=PlainTextResponse)
+    @router.api_route("/llms-full.txt", methods=["GET", "HEAD"], response_class=PlainTextResponse)
     async def llms_full_txt():
         """Serve llms-full.txt file with complete documentation for LLM consumption."""
         llms_full_file = Path("static/llms-full.txt")
         if not llms_full_file.exists():
             raise HTTPException(status_code=404, detail="llms-full.txt not found")
         return llms_full_file.read_text()
+
+    @router.get("/robots.txt", response_class=PlainTextResponse)
+    async def robots_txt():
+        """Serve robots.txt to guide search engine crawlers."""
+        return """User-agent: *
+Allow: /
+Sitemap: https://semanticinfrastructurelab.org/sitemap.xml
+
+# Allow all ethical AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+"""
+
+    @router.get("/sitemap.xml", response_class=Response)
+    async def sitemap_xml():
+        """Generate dynamic sitemap for search engines."""
+        # Get all documents for sitemap
+        all_docs = content_service.list_documents()
+
+        # Build sitemap
+        urls = []
+
+        # Homepage
+        urls.append('<url><loc>https://semanticinfrastructurelab.org/</loc><priority>1.0</priority></url>')
+
+        # Projects page
+        urls.append('<url><loc>https://semanticinfrastructurelab.org/projects</loc><priority>0.9</priority></url>')
+
+        # Docs index
+        urls.append('<url><loc>https://semanticinfrastructurelab.org/docs</loc><priority>0.9</priority></url>')
+
+        # Individual documents
+        for doc in all_docs:
+            urls.append(f'<url><loc>https://semanticinfrastructurelab.org/docs/{doc.slug}</loc><priority>0.8</priority></url>')
+
+        sitemap = f'''<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{"".join(urls)}
+</urlset>'''
+
+        return Response(content=sitemap, media_type="application/xml")
 
     return router

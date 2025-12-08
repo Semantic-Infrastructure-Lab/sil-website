@@ -4,23 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Semantic Infrastructure Lab{% endblock %}</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{% block description %}Building the semantic substrate for intelligent systems. The Semantic Infrastructure Lab develops the missing foundation for transparent, traceable, and composable AI.{% endblock %}">
+    <meta name="keywords" content="semantic infrastructure, AI transparency, semantic operating system, intelligent systems, machine reasoning, provenance">
+    <meta name="author" content="Semantic Infrastructure Lab">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://semanticinfrastructurelab.org{{ request.url.path }}">
+    <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ self.description() }}{% endblock %}">
+    <meta property="og:site_name" content="Semantic Infrastructure Lab">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://semanticinfrastructurelab.org{{ request.url.path }}">
+    <meta name="twitter:title" content="{% block twitter_title %}{{ self.title() }}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{{ self.description() }}{% endblock %}">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://semanticinfrastructurelab.org{{ request.url.path }}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+
     <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Semantic Infrastructure Lab",
+      "url": "https://semanticinfrastructurelab.org",
+      "description": "Building the semantic substrate for intelligent systems",
+      "foundingDate": "2025",
+      "founder": {
+        "@type": "Person",
+        "name": "Scott Senkeresty"
+      },
+      "sameAs": [
+        "https://github.com/scottsen/sil"
+      ]
+    }
+    </script>
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
     <div class="layout">
         {% if sidebar %}
+        <nav class="sidebar" role="navigation" aria-label="Documentation navigation">
         {{ sidebar | safe }}
+        </nav>
         {% endif %}
 
-        <main class="{% if sidebar %}with-sidebar{% else %}full-width{% endif %}">
+        <main class="{% if sidebar %}with-sidebar{% else %}full-width{% endif %}" role="main" id="main-content">
             <div class="container">
                 {% block content %}{% endblock %}
             </div>
         </main>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Semantic Infrastructure Lab. Building the semantic substrate for intelligent systems.</p>
+    <footer role="contentinfo">
+        <p>&copy; 2025 Semantic Infrastructure Lab. Building the semantic substrate for intelligent systems.</p>
     </footer>
 
     <!-- Mermaid.js for interactive diagram rendering -->

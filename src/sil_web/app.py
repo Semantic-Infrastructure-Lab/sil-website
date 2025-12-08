@@ -5,8 +5,9 @@ Wires together all layers: services, routes, configuration.
 """
 
 import structlog
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.base import BaseHTTPMiddleware
 
 from sil_web.config.settings import DOCS_PATH
 from sil_web.routes.health import router as health_router
@@ -27,6 +28,38 @@ structlog.configure(
 log = structlog.get_logger()
 
 
+class SecurityHeadersMiddleware(BaseHTTPMiddleware):
+    """Add security headers to all responses."""
+
+    async def dispatch(self, request: Request, call_next):
+        response = await call_next(request)
+
+        # Security headers
+        response.headers["X-Frame-Options"] = "SAMEORIGIN"
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["X-XSS-Protection"] = "1; mode=block"
+        response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+
+        # Content Security Policy
+        response.headers["Content-Security-Policy"] = (
+            "default-src 'self'; "
+            "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+            "style-src 'self' 'unsafe-inline'; "
+            "img-src 'self' data:; "
+            "font-src 'self'; "
+            "connect-src 'self'; "
+            "frame-ancestors 'self';"
+        )
+
+        # HSTS (only in production - nginx should handle this)
+        # Uncommented for defense in depth
+        response.headers["Strict-Transport-Security"] = (
+            "max-age=31536000; includeSubDomains"
+        )
+
+        return response
+
+
 def create_app() -> FastAPI:
     """Create and configure FastAPI application.
 
@@ -40,6 +73,9 @@ def create_app() -> FastAPI:
         docs_url=None,  # Disable Swagger UI (not needed for public website)
         redoc_url=None,  # Disable ReDoc (not needed for public website)
     )
+
+    # Add security headers middleware
+    app.add_middleware(SecurityHeadersMiddleware)
 
     # Mount static files
     app.mount("/static", StaticFiles(directory="static"), name="static")

@@ -49,6 +49,7 @@ ignore = []
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
+pythonpath = ["src"]
 
 [tool.mypy]
 python_version = "3.9"

@@ -208,16 +208,17 @@ def founding_docs_sidebar(documents: list[Document], current_slug: str = "", cur
                 'progressive-disclosure-guide',        # PROGRESSIVE_DISCLOSURE_GUIDE.md
                 'rag-as-semantic-manifold-transport',  # RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md
                 'agent-help-standard',                 # AGENT_HELP_STANDARD.md
+                'morphogen',                           # MORPHOGEN.md - Cross-domain research
             ]
         },
         'tools': {
             'title': 'Production Systems',
             'slugs': [
                 'innovations',             # INNOVATIONS.md - overview page
+                'morphogen',               # MORPHOGEN.md - Flagship: 40+ domains unified
                 'reveal',                  # REVEAL.md
                 'tia',                     # TIA.md
                 'beth',                    # BETH.md
-                'morphogen',               # MORPHOGEN.md
                 'genesisgraph',            # GENESISGRAPH.md
                 'pantheon',                # PANTHEON.md
                 'agent-ether',             # AGENT_ETHER.md
