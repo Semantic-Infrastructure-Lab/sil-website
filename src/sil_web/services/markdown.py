@@ -155,7 +155,7 @@ class MarkdownRenderer:
         link_map = {}
 
         # Get all categories we know about
-        categories = ['canonical', 'architecture', 'research', 'meta', 'tools']
+        categories = ['canonical', 'architecture', 'research', 'meta', 'tools', 'innovations']
 
         for category in categories:
             # Use ContentService to discover slugs in this category
@@ -165,8 +165,8 @@ class MarkdownRenderer:
                 # Map filename → web route
                 link_map[filename] = f'/docs/{slug}'
 
-        # Special cases
-        link_map['README.md'] = '/projects'  # Tools README → projects page
+        # Special cases - only PROJECT_INDEX needs override
+        # (README.md files handled by content service with proper slugs per category)
         link_map['PROJECT_INDEX.md'] = '/projects'
 
         self.log.debug("link_map_built", count=len(link_map))
