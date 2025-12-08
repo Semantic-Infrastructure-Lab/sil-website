@@ -173,114 +173,65 @@ def nav_bar(current_page: str = "") -> str:
 
 
 def founding_docs_sidebar(documents: list[Document], current_slug: str = "", current_page: str = "") -> str:
-    """Render left sidebar navigation with organized document groups.
+    """Render left sidebar navigation with tiered document organization.
 
     Args:
-        documents: List of all documents (will be grouped by category)
+        documents: List of all documents (will be grouped by tier)
         current_slug: Currently active document slug
         current_page: Currently active page (e.g., 'projects')
 
     Returns:
-        HTML string for sidebar navigation with visual hierarchy
+        HTML string for sidebar navigation with 3-tier hierarchy
     """
-    # Navigation structure emphasizing research lab identity
-    # Phase 4: Full lab reorganization (2025-12-06)
-    doc_groups = {
-        'start': {
-            'title': 'Start Here',
-            'slugs': ['start-here', 'founders-letter', 'faq']
-        },
-        'lab': {
-            'title': 'The Lab',
-            'slugs': [
-                'research-agenda',         # SIL_RESEARCH_AGENDA_YEAR1.md - CRITICAL for lab identity
-                'founder-background',      # FOUNDER_BACKGROUND.md
-                'stewardship-manifesto',   # SIL_STEWARDSHIP_MANIFESTO.md
-            ]
-        },
-        'research': {
-            'title': 'Research Output',
-            'slugs': [
-                'hierarchical-agency-framework',       # HIERARCHICAL_AGENCY_FRAMEWORK.md
-                'multi-agent-protocol-principles',     # MULTI_AGENT_PROTOCOL_PRINCIPLES.md
-                'semantic-observability',              # SEMANTIC_OBSERVABILITY.md
-                'semantic-feedback-loops',             # SEMANTIC_FEEDBACK_LOOPS.md
-                'progressive-disclosure-guide',        # PROGRESSIVE_DISCLOSURE_GUIDE.md
-                'rag-as-semantic-manifold-transport',  # RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md
-                'agent-help-standard',                 # AGENT_HELP_STANDARD.md
-                'morphogen',                           # MORPHOGEN.md - Cross-domain research
-            ]
-        },
-        'tools': {
-            'title': 'Production Systems',
-            'slugs': [
-                'innovations',             # INNOVATIONS.md - overview page
-                'morphogen',               # MORPHOGEN.md - Flagship: 40+ domains unified
-                'reveal',                  # REVEAL.md
-                'tia',                     # TIA.md
-                'beth',                    # BETH.md
-                'genesisgraph',            # GENESISGRAPH.md
-                'pantheon',                # PANTHEON.md
-                'agent-ether',             # AGENT_ETHER.md
-                'progressive-disclosure',  # PROGRESSIVE_DISCLOSURE.md - innovation showcase
-            ]
-        },
-        'architecture': {
-            'title': 'Architecture',
-            'slugs': [
-                'semantic-os-architecture',     # SIL_SEMANTIC_OS_ARCHITECTURE.md
-                'unified-architecture-guide',   # UNIFIED_ARCHITECTURE_GUIDE.md
-                'technical-charter'             # SIL_TECHNICAL_CHARTER.md
-            ]
-        },
-        'principles': {
-            'title': 'Design Philosophy',
-            'slugs': [
-                'manifesto',                # SIL_MANIFESTO.md
-                'principles',               # SIL_PRINCIPLES.md
-                'design-principles',        # SIL_DESIGN_PRINCIPLES.md
-                'safety-thresholds',        # SIL_SAFETY_THRESHOLDS.md
-                'tool-quality-monitoring'   # SIL_TOOL_QUALITY_MONITORING.md
-            ]
-        },
-        'about': {
-            'title': 'Acknowledgments',
-            'slugs': [
-                'influences-and-acknowledgments',  # INFLUENCES_AND_ACKNOWLEDGMENTS.md
-                'appreciation-jeremy-howard',       # APPRECIATION_JEREMY_HOWARD.md
-                'glossary'                          # SIL_GLOSSARY.md
-            ]
-        },
-    }
+    # Organize by tier: 1=Founding, 2=Architecture, 3=Research
+    # Sort documents by tier and order
+    sorted_docs = sorted(documents, key=lambda d: (d.tier, d.order))
 
-    # Build slug->document lookup
-    doc_map = {doc.slug: doc for doc in documents}
+    # Group by tier
+    tier1_docs = [d for d in sorted_docs if d.tier == 1]
+    tier2_docs = [d for d in sorted_docs if d.tier == 2]
+    tier3_docs = [d for d in sorted_docs if d.tier == 3]
 
-    # Build grouped sections HTML
+    def render_doc_links(docs: list[Document]) -> str:
+        """Render list of document links."""
+        links = []
+        for doc in docs:
+            active = "active" if doc.slug == current_slug else ""
+            links.append(f'<a href="/docs/{doc.slug}" class="{active}">{doc.title}</a>')
+        return "\n                    ".join(links)
+
+    # Build sections
     sections_html = []
 
-    for group_key, group_info in doc_groups.items():
-        group_links = []
+    # Tier 1: Founding Documents
+    if tier1_docs:
+        sections_html.append(f"""
+            <h3>Founding Documents</h3>
+            <nav class="sidebar-nav">
+                {render_doc_links(tier1_docs)}
+            </nav>
+        """)
 
-        for slug in group_info['slugs']:
-            if slug in doc_map:
-                doc = doc_map[slug]
-                active = "active" if doc.slug == current_slug else ""
-                group_links.append(
-                    f'<a href="/docs/{doc.slug}" class="{active}">{doc.title}</a>'
-                )
+    # Tier 2: Architecture
+    if tier2_docs:
+        sections_html.append(f"""
+            <h3 class="sidebar-section-header">Architecture</h3>
+            <nav class="sidebar-nav">
+                {render_doc_links(tier2_docs)}
+            </nav>
+        """)
 
-        if group_links:
-            is_first = len(sections_html) == 0
-            header_class = "" if is_first else "sidebar-section-header"
-            links_html = "\n                    ".join(group_links)
-
-            sections_html.append(f"""
-                <h3 class="{header_class}">{group_info['title']}</h3>
-                <nav class="sidebar-nav">
-                    {links_html}
-                </nav>
-            """)
+    # Tier 3: Research (show only key papers to keep sidebar clean)
+    if tier3_docs:
+        # Show top 5 research papers
+        key_research = tier3_docs[:5]
+        sections_html.append(f"""
+            <h3 class="sidebar-section-header">Key Research</h3>
+            <nav class="sidebar-nav">
+                {render_doc_links(key_research)}
+                <a href="/docs" class="">All Research →</a>
+            </nav>
+        """)
 
     sections = "\n".join(sections_html)
 

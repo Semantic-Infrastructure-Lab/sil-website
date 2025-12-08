@@ -215,15 +215,20 @@ class ContentService:
         title = post.get("title", slug.replace("-", " ").title())
         description = post.get("description")
 
+        # Get tier and order from DOCUMENT_TIERS mapping
+        tier, order = self.DOCUMENT_TIERS.get(slug, (3, 999))  # Default: Tier 3, order 999
+
         doc = Document(
             title=title,
             slug=slug,
             content=post.content,
             category=category,
             description=description,
+            tier=tier,
+            order=order,
         )
 
-        self.log.info("document_loaded", category=category, slug=slug, word_count=doc.word_count)
+        self.log.info("document_loaded", category=category, slug=slug, tier=tier, order=order, word_count=doc.word_count)
         return doc
 
     def load_document_by_slug(self, slug: str) -> Optional[Document]:
@@ -275,6 +280,32 @@ class ContentService:
 
         self.log.info("documents_listed", category=category, count=len(docs))
         return docs
+
+    def get_documents_by_tier(self, category: str = "canonical") -> dict[int, list[Document]]:
+        """Group documents by tier with proper ordering.
+
+        Args:
+            category: Document category to filter (default: canonical)
+
+        Returns:
+            Dict mapping tier number -> sorted list of documents
+        """
+        docs = self.list_documents(category=category)
+
+        # Group by tier
+        tiers: dict[int, list[Document]] = {1: [], 2: [], 3: []}
+        for doc in docs:
+            tier = doc.tier
+            if tier not in tiers:
+                tiers[tier] = []
+            tiers[tier].append(doc)
+
+        # Sort each tier by order
+        for tier in tiers:
+            tiers[tier].sort(key=lambda d: d.order)
+
+        self.log.info("documents_grouped_by_tier", category=category, tier_counts={t: len(docs) for t, docs in tiers.items()})
+        return tiers
 
 
 class ProjectService:

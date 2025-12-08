@@ -100,18 +100,17 @@ def create_routes(
 
     @router.get("/docs", response_class=HTMLResponse)
     async def docs_index(request: Request):
-        """Documentation index page."""
-        # List all canonical documents
-        documents = content_service.list_documents()
-
-        # Group by category
-        canonical = [d for d in documents if d.category == "canonical"]
+        """Documentation index page with tiered organization."""
+        # Get documents grouped by tier
+        tiers = content_service.get_documents_by_tier(category="canonical")
 
         return templates.TemplateResponse(
             "docs_index.html",
             {
                 "request": request,
-                "canonical": canonical,
+                "tier1": tiers.get(1, []),
+                "tier2": tiers.get(2, []),
+                "tier3": tiers.get(3, []),
                 "nav": nav_bar("docs"),
             },
         )

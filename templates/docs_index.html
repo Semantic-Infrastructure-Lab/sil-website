@@ -9,17 +9,144 @@
     <p class="intro">The foundational documents that define SIL's vision, principles, and technical approach.</p>
 </header>
 
-<section>
-    <h2>Canonical Documents</h2>
-
-    {% for doc in canonical %}
-    <div class="doc-preview">
-        <h3><a href="/docs/{{ doc.slug }}">{{ doc.title }}</a></h3>
-        {% if doc.description %}
-        <p>{{ doc.description }}</p>
-        {% endif %}
-        <p class="meta">{{ doc.word_count }} words</p>
+<!-- Tier 1: Lab Founding Documents -->
+<section class="tier-section tier-1">
+    <div class="tier-header">
+        <h2>Lab Founding Documents</h2>
+        <p class="tier-description">The core vision and principles that define what SIL is and why it exists.</p>
     </div>
-    {% endfor %}
+
+    <div class="doc-grid tier-1-grid">
+        {% for doc in tier1 %}
+        <div class="doc-card tier-1-card">
+            <div class="doc-number">{{ loop.index }}</div>
+            <h3><a href="/docs/{{ doc.slug }}">{{ doc.title }}</a></h3>
+            {% if doc.description %}
+            <p class="doc-description">{{ doc.description }}</p>
+            {% endif %}
+            <p class="doc-meta">{{ doc.word_count }} words</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Tier 2: System Architecture -->
+<section class="tier-section tier-2">
+    <div class="tier-header">
+        <h2>System Architecture</h2>
+        <p class="tier-description">Technical specifications and design principles for the Semantic OS.</p>
+    </div>
+
+    <div class="doc-grid tier-2-grid">
+        {% for doc in tier2 %}
+        <div class="doc-card tier-2-card">
+            <h3><a href="/docs/{{ doc.slug }}">{{ doc.title }}</a></h3>
+            {% if doc.description %}
+            <p class="doc-description">{{ doc.description }}</p>
+            {% endif %}
+            <p class="doc-meta">{{ doc.word_count }} words</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Tier 3: Research Output -->
+<section class="tier-section tier-3">
+    <div class="tier-header">
+        <h2>Research Output & Technical Papers</h2>
+        <p class="tier-description">In-depth research on multi-agent systems, observability, and interface design.</p>
+    </div>
+
+    <div class="tier-3-container">
+        <!-- Multi-Agent Systems -->
+        <div class="research-group">
+            <h3 class="research-group-title">Multi-Agent Systems</h3>
+            <div class="doc-list">
+                {% for doc in tier3 %}
+                    {% if doc.slug in ['hierarchical-agency-framework', 'multi-agent-protocol-principles', 'founders-note-multishot-agent-learning'] %}
+                <div class="doc-item">
+                    <h4><a href="/docs/{{ doc.slug }}">{{ doc.title }}</a></h4>
+                    {% if doc.description %}
+                    <p class="doc-description">{{ doc.description }}</p>
+                    {% endif %}
+                    <p class="doc-meta">{{ doc.word_count }} words</p>
+                </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Observability & Safety -->
+        <div class="research-group">
+            <h3 class="research-group-title">Observability & Safety</h3>
+            <div class="doc-list">
+                {% for doc in tier3 %}
+                    {% if doc.slug in ['semantic-observability', 'semantic-feedback-loops', 'safety-thresholds', 'tool-quality-monitoring'] %}
+                <div class="doc-item">
+                    <h4><a href="/docs/{{ doc.slug }}">{{ doc.title }}</a></h4>
+                    {% if doc.description %}
+                    <p class="doc-description">{{ doc.description }}</p>
+                    {% endif %}
+                    <p class="doc-meta">{{ doc.word_count }} words</p>
+                </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Interface Design -->
+        <div class="research-group">
+            <h3 class="research-group-title">Interface Design</h3>
+            <div class="doc-list">
+                {% for doc in tier3 %}
+                    {% if doc.slug in ['progressive-disclosure-guide'] %}
+                <div class="doc-item">
+                    <h4><a href="/docs/{{ doc.slug }}">{{ doc.title }}</a></h4>
+                    {% if doc.description %}
+                    <p class="doc-description">{{ doc.description }}</p>
+                    {% endif %}
+                    <p class="doc-meta">{{ doc.word_count }} words</p>
+                </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Research Roadmap -->
+        <div class="research-group">
+            <h3 class="research-group-title">Research Roadmap</h3>
+            <div class="doc-list">
+                {% for doc in tier3 %}
+                    {% if doc.slug in ['research-agenda'] %}
+                <div class="doc-item">
+                    <h4><a href="/docs/{{ doc.slug }}">{{ doc.title }}</a></h4>
+                    {% if doc.description %}
+                    <p class="doc-description">{{ doc.description }}</p>
+                    {% endif %}
+                    <p class="doc-meta">{{ doc.word_count }} words</p>
+                </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Any other Tier 3 docs not categorized above -->
+        {% for doc in tier3 %}
+            {% if doc.slug not in ['hierarchical-agency-framework', 'multi-agent-protocol-principles', 'founders-note-multishot-agent-learning', 'semantic-observability', 'semantic-feedback-loops', 'safety-thresholds', 'tool-quality-monitoring', 'progressive-disclosure-guide', 'research-agenda'] %}
+        <div class="research-group">
+            <h3 class="research-group-title">Additional Research</h3>
+            <div class="doc-list">
+                <div class="doc-item">
+                    <h4><a href="/docs/{{ doc.slug }}">{{ doc.title }}</a></h4>
+                    {% if doc.description %}
+                    <p class="doc-description">{{ doc.description }}</p>
+                    {% endif %}
+                    <p class="doc-meta">{{ doc.word_count }} words</p>
+                </div>
+            </div>
+        </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 </section>
 {% endblock %}

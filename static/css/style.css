@@ -447,6 +447,196 @@ footer {
     font-size: 14px;
 }
 
+/* Tiered Document Organization */
+.tier-section {
+    margin-bottom: 60px;
+}
+
+.tier-header {
+    margin-bottom: 30px;
+}
+
+.tier-header h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+}
+
+.tier-description {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+}
+
+/* Tier 1: Founding Documents - Large prominent cards */
+.tier-1-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.tier-1-card {
+    background: #fff;
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    padding: 24px;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.tier-1-card:hover {
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.15);
+    transform: translateY(-2px);
+}
+
+.tier-1-card .doc-number {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    background: #28a745;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.tier-1-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    padding-right: 50px;
+}
+
+.tier-1-card h3 a {
+    color: #1a1a1a;
+    text-decoration: none;
+}
+
+.tier-1-card h3 a:hover {
+    color: #28a745;
+}
+
+.tier-1-card .doc-description {
+    color: #444;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.tier-1-card .doc-meta {
+    color: #888;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Tier 2: Architecture - Medium cards */
+.tier-2-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.tier-2-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 20px;
+    transition: all 0.2s ease;
+}
+
+.tier-2-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-color: #0066cc;
+}
+
+.tier-2-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.tier-2-card h3 a {
+    color: #1a1a1a;
+    text-decoration: none;
+}
+
+.tier-2-card h3 a:hover {
+    color: #0066cc;
+}
+
+.tier-2-card .doc-description {
+    color: #555;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.tier-2-card .doc-meta {
+    color: #888;
+    font-size: 13px;
+    margin: 0;
+}
+
+/* Tier 3: Research - Compact grouped list */
+.tier-3-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.research-group {
+    background: #fafafa;
+    border-left: 3px solid #666;
+    padding: 20px 24px;
+    border-radius: 4px;
+}
+
+.research-group-title {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.doc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.doc-item h4 {
+    font-size: 16px;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.doc-item h4 a {
+    color: #1a1a1a;
+    text-decoration: none;
+}
+
+.doc-item h4 a:hover {
+    color: #0066cc;
+    text-decoration: underline;
+}
+
+.doc-item .doc-description {
+    color: #666;
+    margin-bottom: 6px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.doc-item .doc-meta {
+    color: #999;
+    font-size: 12px;
+    margin: 0;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .layout {
