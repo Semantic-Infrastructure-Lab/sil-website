@@ -62,9 +62,12 @@ class ContentService:
             # Alias: prevents auto-discovery of duplicate (tier 0 = hidden from index)
             "research-agenda-year1": "SIL_RESEARCH_AGENDA_YEAR1.md",
             # These auto-discover correctly: founders-letter, founder-profile, tia-profile, technical-charter
+            # Override README to have unique slug (avoids collision with other READMEs)
+            "canonical-overview": "README.md",
         },
         "architecture": {
-            # All auto-discover correctly
+            # Override README to have unique slug (avoids collision with other READMEs)
+            "architecture-overview": "README.md",
         },
         "guides": {
             "optimization": "OPTIMIZATION_IN_SIL.md",
@@ -74,7 +77,8 @@ class ContentService:
             # All auto-discover correctly
         },
         "research": {
-            # All auto-discover correctly
+            # Override README to have unique slug (avoids collision with other READMEs)
+            "research-overview": "README.md",
         },
         "meta": {
             # All auto-discover correctly
@@ -256,6 +260,23 @@ class ContentService:
         Returns:
             Document instance or None if not found
         """
+        # Special case: 'overview' maps to root docs/README.md
+        if slug == 'overview':
+            root_readme = self.docs_path / 'README.md'
+            if root_readme.exists():
+                with open(root_readme, encoding="utf-8") as f:
+                    post = frontmatter.load(f)
+                title = post.get("title", "Overview")
+                return Document(
+                    title=title,
+                    slug=slug,
+                    content=post.content,
+                    category='root',
+                    description=post.get("description"),
+                    tier=1,  # Top-level overview is tier 1
+                    order=0,
+                )
+
         # Try each category until we find the slug
         categories = ["canonical", "architecture", "guides", "vision", "research", "meta", "semantic-os", "tools", "about", "principles", "innovations"]
 

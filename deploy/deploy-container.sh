@@ -64,9 +64,10 @@ else
   HOST="tia-apps"
   CONTAINER_NAME="$PROJECT_NAME"
   CONTAINER_TAG="latest"
-  SERVICE_PORT="8000"
-  # Production binds to localhost (nginx on same machine)
-  BIND_IP="127.0.0.1"
+  SERVICE_PORT="8010"
+  # Production binds to all interfaces (nginx is on tia-proxy, not same machine)
+  # Port 8010 avoids conflict with SDMS on port 8000
+  BIND_IP="0.0.0.0"
   HEALTH_URL="https://semanticinfrastructurelab.org/health"
 fi
 

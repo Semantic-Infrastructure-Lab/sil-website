@@ -57,7 +57,7 @@ summary: "Complete container-based deployment guide for SIL website following TI
 
 # SIL Website - Container Deployment Guide
 
-**Last Updated:** 2025-11-28
+**Last Updated:** 2025-12-08
 **Status:** Production Ready ✅
 
 ## Overview
@@ -67,7 +67,7 @@ This guide follows the **TIA Canonical Deployment Pattern** using container regi
 **Infrastructure:**
 - **Registry:** `registry.mytia.net/sil-website`
 - **Staging:** `tia-staging` → Port 8080 → https://sil-staging.mytia.net
-- **Production:** `tia-apps` → Port 8000 → https://semanticinfrastructurelab.org
+- **Production:** `tia-apps` → Port 8010 → https://semanticinfrastructurelab.org
 
 ---
 
@@ -103,17 +103,33 @@ This guide follows the **TIA Canonical Deployment Pattern** using container regi
 │  registry.mytia.net/sil-website:staging                     │
 │  registry.mytia.net/sil-website:latest                      │
 └─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│              tia-proxy (CENTRAL REVERSE PROXY)               │
+├─────────────────────────────────────────────────────────────┤
+│  nginx (443) routes to backend containers:                   │
+│  - sil-staging.mytia.net      → 10.108.0.8:8080 (staging)   │
+│  - semanticinfrastructurelab.org → 165.227.98.17:8010 (prod)│
+│  Upstreams: /etc/nginx/conf.d/tia-upstreams.conf            │
+│  Site config: /etc/nginx/sites-available/                    │
+└─────────────────────────────────────────────────────────────┘
                 │                           │
                 ▼                           ▼
 ┌──────────────────────────┐  ┌──────────────────────────────┐
 │   STAGING (tia-staging)  │  │  PRODUCTION (tia-apps)       │
 ├──────────────────────────┤  ├──────────────────────────────┤
-│  Pull: :staging tag      │  │  Pull: :latest tag           │
-│  Port: 8080              │  │  Port: 8000                  │
-│  nginx → Port 443        │  │  nginx → Port 443            │
+│  IP: 10.108.0.8          │  │  IP: 165.227.98.17           │
+│  Container: 8080→8000    │  │  Container: 8010→8000        │
+│  Bind: 10.108.0.8:8080   │  │  Bind: 0.0.0.0:8010          │
 │  Health: /health         │  │  Health: /health             │
 └──────────────────────────┘  └──────────────────────────────┘
 ```
+
+**Key Architecture Points:**
+- **tia-proxy** handles ALL nginx/SSL termination (not tia-apps or tia-staging)
+- Containers bind to IPs accessible from tia-proxy
+- Staging uses private IP (10.108.0.8), production uses public (0.0.0.0)
 
 ---
 
@@ -235,7 +251,7 @@ podman rm sil-website || true
 # Run new container
 podman run -d \
   --name sil-website \
-  -p 127.0.0.1:8000:8000 \
+  -p 0.0.0.0:8010:8000 \
   --health-cmd="curl -f http://localhost:8000/health || exit 1" \
   --health-interval=30s \
   --health-timeout=5s \
@@ -322,21 +338,44 @@ sudo journalctl -u sil-website -f
 
 ## Nginx Configuration
 
-Nginx proxies HTTPS → container port:
+**All nginx configuration is on tia-proxy** (not on tia-apps or tia-staging).
 
-**Staging (tia-staging):**
+**Traffic Flow:**
 ```
-https://sil-staging.mytia.net → 127.0.0.1:8080 → container:8000
-```
-
-**Production (tia-apps):**
-```
-https://semanticinfrastructurelab.org → 127.0.0.1:8000 → container:8000
+User → tia-proxy (nginx/SSL) → backend container
 ```
 
-Nginx config located at:
-- `/etc/nginx/sites-available/semanticinfrastructurelab.org`
-- `/etc/nginx/sites-available/sil-staging.mytia.net`
+**Staging:**
+```
+https://sil-staging.mytia.net
+  → tia-proxy nginx (443)
+  → upstream sil_website_staging (10.108.0.8:8080)
+  → container:8000
+```
+
+**Production:**
+```
+https://semanticinfrastructurelab.org
+  → tia-proxy nginx (443)
+  → upstream sil_website_production (165.227.98.17:8010)
+  → container:8000
+```
+
+**Configuration files (on tia-proxy):**
+- Upstreams: `/etc/nginx/conf.d/tia-upstreams.conf`
+- Site config: `/etc/nginx/sites-available/semanticinfrastructurelab.org`
+
+**Useful commands (on tia-proxy):**
+```bash
+# View upstreams
+cat /etc/nginx/conf.d/tia-upstreams.conf | grep sil
+
+# Test config
+sudo nginx -t
+
+# Reload after changes
+sudo systemctl reload nginx
+```
 
 ---
 
@@ -353,7 +392,7 @@ podman pull registry.mytia.net/sil-website:v0.9.0
 
 # Run previous version
 podman run -d --name sil-website \
-  -p 127.0.0.1:8000:8000 \
+  -p 0.0.0.0:8010:8000 \
   registry.mytia.net/sil-website:v0.9.0
 ```
 
@@ -424,7 +463,7 @@ ssh tia-apps 'sudo nginx -t'
 ssh tia-apps 'sudo tail -f /var/log/nginx/sil-website-error.log'
 
 # Verify container is listening
-ssh tia-apps 'curl http://localhost:8000/health'
+ssh tia-apps 'curl http://localhost:8010/health'
 ```
 
 ### Docs not updating after sync (IMPORTANT)

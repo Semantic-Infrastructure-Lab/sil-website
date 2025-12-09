@@ -34,7 +34,17 @@
     <!-- Syntax Highlighting (Highlight.js) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
+    <script>
+        // Configure highlight.js to ignore mermaid blocks (let mermaid.js handle them)
+        hljs.configure({
+            ignoreUnescapedHTML: true
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('pre code:not(.language-mermaid)').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        });
+    </script>
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">

@@ -45,8 +45,12 @@ class LinkRewriterTreeprocessor(Treeprocessor):
         for link in root.iter('a'):
             href = link.get('href', '')
 
-            # Only rewrite .md links (internal documentation)
-            if '.md' in href.lower():
+            # Skip external links and anchors
+            if href.startswith(('http://', 'https://', 'mailto:', '#')):
+                continue
+
+            # Rewrite .md links and relative directory links
+            if '.md' in href.lower() or self._is_relative_dir_link(href):
                 new_href = self._rewrite_link(href)
                 if new_href != href:
                     self.log.debug(
@@ -58,16 +62,55 @@ class LinkRewriterTreeprocessor(Treeprocessor):
 
         return root
 
+    def _is_relative_dir_link(self, href: str) -> bool:
+        """Check if href is a relative directory link (e.g., ../tools/, docs/innovations/).
+
+        Detects:
+        - Explicit relative: ./foo/, ../foo/
+        - Implicit relative: docs/, docs/foo/ (no leading slash, no protocol)
+        """
+        # Skip absolute paths, anchors, and external links
+        if href.startswith(('/', '#', 'http://', 'https://', 'mailto:')):
+            return False
+
+        # Skip file extensions
+        if any(href.endswith(ext) for ext in ('.md', '.html', '.css', '.js', '.png', '.svg', '.jpg', '.gif')):
+            return False
+
+        # It's a directory link if it ends with / or looks like a directory path
+        # (contains / but doesn't end with a file extension)
+        return href.endswith('/') or (href.count('/') > 0 and '.' not in href.split('/')[-1])
+
     def _rewrite_link(self, href: str) -> str:
         """Convert markdown path to web route.
 
         Args:
-            href: Original href (e.g., './SIL_PRINCIPLES.md')
+            href: Original href (e.g., './SIL_PRINCIPLES.md' or '../tools/')
 
         Returns:
-            Web route (e.g., '/docs/principles')
+            Web route (e.g., '/docs/principles' or '/docs/tools-overview')
         """
-        # Extract filename from path (handle relative paths like ../foo/BAR.md)
+        # Handle directory-style links (e.g., ../tools/, docs/innovations/)
+        if self._is_relative_dir_link(href):
+            # Extract directory name from path
+            # ../tools/ -> tools, docs/innovations/ -> innovations, docs/ -> docs
+            clean_path = href.rstrip('/')
+            dir_name = clean_path.split('/')[-1]
+
+            # Special case: 'docs' alone -> /docs (the index)
+            if dir_name == 'docs' or clean_path == 'docs':
+                return '/docs'
+
+            # Look up directory in link map
+            dir_key = f'{dir_name}/'
+            if dir_key in self.link_map:
+                return self.link_map[dir_key]
+
+            # Fallback: log and return original
+            self.log.warning("dir_link_not_mapped", href=href, dir_name=dir_name)
+            return href
+
+        # Handle .md file links
         path_parts = href.split('/')
         filename = path_parts[-1]
 
@@ -149,8 +192,8 @@ class MarkdownRenderer:
         """Build filename → web route mapping using ContentService.
 
         Returns:
-            Dict mapping markdown filenames to web routes
-            Example: {'SIL_MANIFESTO.md': '/docs/manifesto'}
+            Dict mapping markdown filenames and directories to web routes
+            Example: {'SIL_MANIFESTO.md': '/docs/manifesto', 'tools/': '/docs/tools-overview'}
         """
         link_map = {}
 
@@ -165,9 +208,22 @@ class MarkdownRenderer:
                 # Map filename → web route
                 link_map[filename] = f'/docs/{slug}'
 
-        # Special cases - only PROJECT_INDEX needs override
-        # (README.md files handled by content service with proper slugs per category)
+            # Add directory mapping (category/ → appropriate overview page)
+            # Priority: {category}-overview > {category} (from INNOVATIONS.md etc.) > overview
+            overview_slug = f'{category}-overview'
+            if overview_slug in slug_map:
+                link_map[f'{category}/'] = f'/docs/{overview_slug}'
+            elif category in slug_map:
+                # Category has a main doc (e.g., innovations/ → INNOVATIONS.md → /docs/innovations)
+                link_map[f'{category}/'] = f'/docs/{category}'
+            elif 'overview' in slug_map:
+                # Fallback for categories without prefixed overview
+                link_map[f'{category}/'] = '/docs/overview'
+
+        # Special cases for top-level directories
         link_map['PROJECT_INDEX.md'] = '/projects'
+        link_map['projects/'] = '/projects'
+        link_map['docs/'] = '/docs'
 
         self.log.debug("link_map_built", count=len(link_map))
         return link_map
