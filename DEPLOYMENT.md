@@ -12,7 +12,7 @@ authors:
   - "agent:claude"
 project: "sil-website"
 implements:
-  - "doc://infrastructure/CANONICAL_DEPLOYMENT_GUIDE_2025.md"
+  - "doc://infrastructure/DEPLOYMENT_STRATEGY_2025.md"
   - "doc://infrastructure/HYBRID_DEPLOYMENT_ARCHITECTURE_2025.md"
 references:
   - "doc://guides/CONTAINERIZATION_USER_GUIDE.md"
@@ -616,7 +616,7 @@ time curl -f https://semanticinfrastructurelab.org/
 
 ## Related Documentation
 
-- **TIA Canonical Deployment Guide:** `~/src/tia/docs/infrastructure/CANONICAL_DEPLOYMENT_GUIDE_2025.md`
+- **TIA Deployment Strategy:** `~/src/tia/docs/infrastructure/DEPLOYMENT_STRATEGY_2025.md`
 - **TIA Container Guide:** `~/src/tia/docs/guides/CONTAINERIZATION_USER_GUIDE.md`
 - **TIA Infrastructure Status:** `~/src/tia/docs/infrastructure/STATUS_CURRENT.md`
 - **Hybrid Deployment Architecture:** `~/src/tia/docs/infrastructure/HYBRID_DEPLOYMENT_ARCHITECTURE_2025.md`

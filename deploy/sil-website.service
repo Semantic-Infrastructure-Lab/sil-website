@@ -11,20 +11,18 @@ Group=scottsen
 WorkingDirectory=/home/scottsen/src/projects/sil-website
 
 # Pull latest image before starting
-ExecStartPre=-/usr/bin/podman pull localhost/sil-website:latest
+ExecStartPre=-/usr/bin/podman pull registry.mytia.net/sil-website:latest
 
 # Run container
 ExecStart=/usr/bin/podman run \
   --rm \
   --name sil-website \
-  -p 127.0.0.1:8000:8000 \
-  -v /home/scottsen/src/projects/SIL/docs:/app/docs:ro \
-  -v sil-website-logs:/app/logs \
+  -p 0.0.0.0:8010:8000 \
   --health-cmd="curl -f http://localhost:8000/health || exit 1" \
   --health-interval=30s \
   --health-timeout=5s \
   --health-retries=3 \
-  localhost/sil-website:latest
+  registry.mytia.net/sil-website:latest
 
 # Stop container gracefully
 ExecStop=/usr/bin/podman stop -t 10 sil-website
