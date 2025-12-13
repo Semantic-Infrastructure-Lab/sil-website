@@ -38,13 +38,16 @@ build-backend = "hatchling.build"
 packages = ["src/sif_web"]
 
 [tool.ruff]
-line-length = 88
+line-length = 150
 target-version = "py39"
-extend-select = ["I"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "W"]
-ignore = []
+extend-select = ["I"]
+ignore = [
+    "E501",  # Line too long (handled by formatter, many are in long description strings)
+    "N802",  # Function name should be lowercase (extendMarkdown required by python-markdown API)
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

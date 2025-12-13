@@ -5,7 +5,7 @@ No business logic, no I/O, no state mutation.
 Just pure functions that transform data into HTML strings.
 """
 
-from sif_web.domain.models import Document, Project, ProjectStatus
+from sif_web.domain.models import Document, Project
 
 
 def project_card(project: Project) -> str:
@@ -51,7 +51,7 @@ def project_card(project: Project) -> str:
 
     # PyPI badge
     if project.pypi_url:
-        stats_html += f"""
+        stats_html += """
                 <span class="meta-badge pypi">PyPI</span>
         """
 

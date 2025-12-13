@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Test auto-discovery of markdown files for content service"""
 
-from pathlib import Path
 import re
+from pathlib import Path
 
 
 def filename_to_slug(filename: str) -> str:

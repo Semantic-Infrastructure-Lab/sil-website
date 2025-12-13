@@ -7,7 +7,6 @@ This service transforms markdown content into HTML with:
 """
 
 import re
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 import markdown
