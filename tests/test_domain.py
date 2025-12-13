@@ -5,6 +5,7 @@ These tests verify pure domain logic - fast, no I/O.
 """
 
 import pytest
+
 from sif_web.domain.models import (
     Document,
     Layer,
