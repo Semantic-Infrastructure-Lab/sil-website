@@ -7,7 +7,8 @@ Wires together all layers: services, routes, configuration.
 import structlog
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
-from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
+from starlette.responses import Response
 
 from sif_web.config.settings import DOCS_PATH
 from sif_web.routes.health import router as health_router
@@ -30,7 +31,7 @@ log = structlog.get_logger()
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
     """Add security headers to all responses."""
 
-    async def dispatch(self, request: Request, call_next):
+    async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         response = await call_next(request)
 
         # Security headers

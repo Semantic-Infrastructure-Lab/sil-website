@@ -5,7 +5,7 @@ Pure Python - no I/O, no database, no network calls.
 These models represent the core concepts of the SIL ecosystem.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 from typing import Optional
 
@@ -46,8 +46,8 @@ class Project:
     tests: Optional[int] = None
     coverage: Optional[int] = None
     pypi_url: Optional[str] = None
-    innovations: list[str] = None
-    use_cases: list[str] = None
+    innovations: list[str] = field(default_factory=list)
+    use_cases: list[str] = field(default_factory=list)
     is_private: bool = False
     maturity_note: Optional[str] = None
 
@@ -59,10 +59,6 @@ class Project:
             raise ValueError("Project slug is required")
         if self.github_url and not self.github_url.startswith("https://github.com/"):
             raise ValueError("GitHub URL must start with https://github.com/")
-        if self.innovations is None:
-            self.innovations = []
-        if self.use_cases is None:
-            self.use_cases = []
 
     @property
     def is_production(self) -> bool:

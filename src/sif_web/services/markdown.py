@@ -7,10 +7,12 @@ This service transforms markdown content into HTML with:
 """
 
 import re
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
+from xml.etree.ElementTree import Element
 
 import markdown
 import structlog
+from markdown.core import Markdown
 from markdown.extensions import Extension
 from markdown.treeprocessors import Treeprocessor
 
@@ -28,7 +30,7 @@ class LinkRewriterTreeprocessor(Treeprocessor):
         ../../projects/PROJECT_INDEX.md → /projects
     """
 
-    def __init__(self, md, link_map: dict[str, str]):
+    def __init__(self, md: Markdown, link_map: dict[str, str]):
         """Initialize with link mapping.
 
         Args:
@@ -39,7 +41,7 @@ class LinkRewriterTreeprocessor(Treeprocessor):
         self.link_map = link_map
         self.log = structlog.get_logger()
 
-    def run(self, root):
+    def run(self, root: Element) -> Element:
         """Walk the element tree and rewrite <a> hrefs."""
         for link in root.iter('a'):
             href = link.get('href', '')
@@ -133,7 +135,7 @@ class LinkRewriterTreeprocessor(Treeprocessor):
 class LinkRewriterExtension(Extension):
     """Markdown extension that enables intelligent link rewriting."""
 
-    def __init__(self, link_map: dict[str, str], **kwargs):
+    def __init__(self, link_map: dict[str, str], **kwargs: Any):
         """Initialize with link mapping.
 
         Args:
@@ -143,7 +145,7 @@ class LinkRewriterExtension(Extension):
         self.link_map = link_map
         super().__init__(**kwargs)
 
-    def extendMarkdown(self, md):
+    def extendMarkdown(self, md: Markdown) -> None:
         """Register the link rewriter tree processor."""
         processor = LinkRewriterTreeprocessor(md, self.link_map)
         md.treeprocessors.register(

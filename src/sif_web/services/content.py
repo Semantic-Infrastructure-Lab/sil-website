@@ -6,7 +6,7 @@ This service handles I/O: reading files, parsing markdown, loading YAML.
 
 import re
 from pathlib import Path
-from typing import Optional
+from typing import Optional, cast
 
 import frontmatter
 import structlog
@@ -168,10 +168,10 @@ class ContentService:
             self.log.warning("category_path_not_found", category=category, path=str(category_path))
             return {}
 
-        slug_map = {}
+        slug_map: dict[str, str] = {}
 
         # Start with overrides for this category
-        overrides = self.SLUG_OVERRIDES.get(category, {})
+        overrides = cast(dict[str, str], self.SLUG_OVERRIDES.get(category, {}))
         slug_map.update(overrides)
 
         # Track filenames already mapped by overrides (to avoid duplicate mappings)
@@ -600,7 +600,7 @@ class ProjectService:
             Dict mapping Layer to list of Projects
         """
         all_projects = self.get_all_projects()
-        by_layer = {}
+        by_layer: dict[Layer, list[Project]] = {}
 
         # Initialize all layers with empty lists
         for layer in Layer:

@@ -5,7 +5,7 @@ No business logic, no I/O, no state mutation.
 Just pure functions that transform data into HTML strings.
 """
 
-from sif_web.domain.models import Document, Project
+from sif_web.domain.models import Document, Layer, Project
 
 
 def project_card(project: Project) -> str:
@@ -259,7 +259,7 @@ def founding_docs_sidebar(documents: list[Document], current_slug: str = "", cur
     """
 
 
-def layer_section(layer, projects: list[Project]) -> str:
+def layer_section(layer: Layer, projects: list[Project]) -> str:
     """Render a layer section with all its projects.
 
     Args:

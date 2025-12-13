@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from starlette.responses import Response
 
 from sif_web.services.content import ContentService
 
@@ -24,7 +25,7 @@ def create_routes(
     content_service: ContentService,
     project_service: None,  # Not used for SIF
     markdown_renderer: "MarkdownRenderer",
-):
+) -> APIRouter:
     """Create routes with injected services."""
 
     # Navigation items
@@ -38,7 +39,7 @@ def create_routes(
     ]
 
     @router.get("/", response_class=HTMLResponse)
-    async def index(request: Request):
+    async def index(request: Request) -> Response:
         """Homepage - Timeline A vs B narrative."""
         page_path = Path("docs/pages/index.md")
         if not page_path.exists():
@@ -59,7 +60,7 @@ def create_routes(
         )
 
     @router.get("/about", response_class=HTMLResponse)
-    async def about(request: Request):
+    async def about(request: Request) -> Response:
         """About page - Vision and current status."""
         page_path = Path("docs/pages/about.md")
         if not page_path.exists():
@@ -80,7 +81,7 @@ def create_routes(
         )
 
     @router.get("/research", response_class=HTMLResponse)
-    async def research(request: Request):
+    async def research(request: Request) -> Response:
         """Research page - Production systems and architecture."""
         page_path = Path("docs/pages/research.md")
         if not page_path.exists():
@@ -101,7 +102,7 @@ def create_routes(
         )
 
     @router.get("/funding", response_class=HTMLResponse)
-    async def funding(request: Request):
+    async def funding(request: Request) -> Response:
         """Funding page - Hybrid funding model."""
         page_path = Path("docs/pages/funding.md")
         if not page_path.exists():
@@ -122,7 +123,7 @@ def create_routes(
         )
 
     @router.get("/contact", response_class=HTMLResponse)
-    async def contact(request: Request):
+    async def contact(request: Request) -> Response:
         """Contact page - Get involved."""
         page_path = Path("docs/pages/contact.md")
         if not page_path.exists():
@@ -143,7 +144,7 @@ def create_routes(
         )
 
     @router.get("/foundation", response_class=HTMLResponse)
-    async def foundation(request: Request):
+    async def foundation(request: Request) -> Response:
         """Foundation governance page - Building institutions that last."""
         page_path = Path("docs/pages/foundation/index.md")
         if not page_path.exists():
@@ -164,7 +165,7 @@ def create_routes(
         )
 
     @router.get("/foundation/chief-steward", response_class=HTMLResponse)
-    async def chief_steward(request: Request):
+    async def chief_steward(request: Request) -> Response:
         """Chief Steward role page."""
         page_path = Path("docs/pages/foundation/chief-steward.md")
         if not page_path.exists():
@@ -185,7 +186,7 @@ def create_routes(
         )
 
     @router.get("/foundation/executive-director", response_class=HTMLResponse)
-    async def executive_director(request: Request):
+    async def executive_director(request: Request) -> Response:
         """Executive Director role page."""
         page_path = Path("docs/pages/foundation/executive-director.md")
         if not page_path.exists():

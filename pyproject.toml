@@ -28,6 +28,7 @@ dev = [
     "mypy>=1.5.0",
     "reveal-cli>=0.11.0",
     "pytest-httpx>=0.21.0",
+    "types-Markdown>=3.5.0",
 ]
 
 [build-system]
