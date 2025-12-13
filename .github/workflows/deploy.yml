@@ -90,7 +90,7 @@ jobs:
       - name: Push to GitHub Container Registry
         if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/sil-website
+          IMAGE_NAME=ghcr.io/$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')/sil-website
 
           # Tag and push latest
           podman tag sil-website:latest $IMAGE_NAME:latest
