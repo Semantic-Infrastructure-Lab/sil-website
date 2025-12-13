@@ -16,6 +16,6 @@ async def health_check():
     """
     return {
         "status": "healthy",
-        "service": "sil-website",
+        "service": "sif-website",
         "version": "0.1.0",
     }

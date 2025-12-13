@@ -1,0 +1,63 @@
+name: "Semantic Infrastructure Foundation"
+id: SIF
+type: research
+status: active
+created: 2025-12-10
+owner: scott
+risk_level: medium
+
+description: |
+  Parent nonprofit organization for the Semantic Infrastructure Lab (SIL).
+  Building the semantic substrate for trustworthy AI through:
+  - Semantic memory systems (provenance, verification)
+  - Universal semantic representations (USIR)
+  - Deterministic computation engines
+  - Progressive disclosure tools
+  - Open standards for AI transparency
+
+tags:
+  - semantic
+  - nonprofit
+  - foundation
+  - transparency
+  - ai-infrastructure
+
+progress_notes:
+  - date: 2025-12-10
+    note: |
+      Website deployed to production (staging + production containers).
+      Staging: https://sif-staging.mytia.net (tia-staging:8082)
+      Production: Port 8011 on tia-apps (needs DNS + SSL for semanticinfrastructurefoundation.org)
+      Content: 4 Foundation pages (Timeline A vs B narrative)
+      Branding: Clean fork from SIL, all Lab→Foundation updates complete
+
+strategy: |
+  SIF (Foundation) is the parent nonprofit that funds and supports SIL (Lab).
+  SIF focuses on building foundational semantic infrastructure for trustworthy AI.
+  Timeline A (Grey Fog) vs Timeline B (Glass Box) positioning.
+  
+  Current stage: Early formation, no 501(c)(3) yet, building proof systems.
+  Production systems: Reveal, Morphogen, TiaCAD, GenesisGraph.
+
+infrastructure:
+  website:
+    production: "https://semanticinfrastructurefoundation.org"  # Needs DNS
+    staging: "https://sif-staging.mytia.net"
+    container_image: "registry.mytia.net/sif-website"
+    ports:
+      production: 8011
+      staging: 8082
+
+related_projects:
+  - SIL  # Research lab division
+  - Reveal  # Progressive code exploration
+  - Morphogen  # Deterministic computation
+  - TiaCAD  # Declarative parametric CAD
+  - GenesisGraph  # Cryptographic provenance
+
+next_steps:
+  - Configure DNS for semanticinfrastructurefoundation.org → 165.227.98.17
+  - Obtain SSL certificate for production domain
+  - Expand content (about, research pages)
+  - File 501(c)(3) nonprofit paperwork
+  - Develop funding transparency page

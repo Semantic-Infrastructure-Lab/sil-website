@@ -9,11 +9,11 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from sil_web.config.settings import DOCS_PATH
-from sil_web.routes.health import router as health_router
-from sil_web.routes.pages import create_routes
-from sil_web.services.content import ContentService, ProjectService
-from sil_web.services.markdown import MarkdownRenderer
+from sif_web.config.settings import DOCS_PATH
+from sif_web.routes.health import router as health_router
+from sif_web.routes.pages import create_routes
+from sif_web.services.content import ContentService
+from sif_web.services.markdown import MarkdownRenderer
 
 # Configure structured logging
 structlog.configure(
@@ -66,8 +66,8 @@ def create_app() -> FastAPI:
         Configured FastAPI app
     """
     app = FastAPI(
-        title="Semantic Infrastructure Lab",
-        description="Building the semantic substrate for intelligent systems",
+        title="Semantic Infrastructure Foundation",
+        description="Building the semantic substrate for trustworthy AI",
         version="0.1.0",
         docs_url=None,  # Disable Swagger UI (not needed for public website)
         redoc_url=None,  # Disable ReDoc (not needed for public website)
@@ -81,14 +81,13 @@ def create_app() -> FastAPI:
 
     # Initialize services
     content_service = ContentService(docs_path=DOCS_PATH)
-    project_service = ProjectService()
     markdown_renderer = MarkdownRenderer(content_service)
 
     # Mount health check (no dependencies)
     app.include_router(health_router)
 
-    # Create and mount page routes
-    routes = create_routes(content_service, project_service, markdown_renderer)
+    # Create and mount page routes (SIF doesn't use project_service)
+    routes = create_routes(content_service, None, markdown_renderer)
     app.include_router(routes)
 
     log.info("app_created", docs_path=str(DOCS_PATH))
@@ -103,10 +102,10 @@ app = create_app()
 if __name__ == "__main__":
     import uvicorn
 
-    from sil_web.config.settings import DEBUG, HOST, PORT
+    from sif_web.config.settings import DEBUG, HOST, PORT
 
     uvicorn.run(
-        "sil_web.app:app",
+        "sif_web.app:app",
         host=HOST,
         port=PORT,
         reload=DEBUG,

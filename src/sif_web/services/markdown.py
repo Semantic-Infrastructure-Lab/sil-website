@@ -16,7 +16,7 @@ from markdown.extensions import Extension
 from markdown.treeprocessors import Treeprocessor
 
 if TYPE_CHECKING:
-    from sil_web.services.content import ContentService
+    from sif_web.services.content import ContentService
 
 
 class LinkRewriterTreeprocessor(Treeprocessor):
@@ -284,6 +284,7 @@ class MarkdownRenderer:
         """Preprocess markdown before rendering.
 
         Current operations:
+        - Strip YAML frontmatter (metadata handled separately)
         - Strip first H1 (template provides page header)
         - Normalize line endings
 
@@ -293,11 +294,35 @@ class MarkdownRenderer:
         Returns:
             Preprocessed markdown
         """
+        # Strip YAML frontmatter (between --- delimiters)
+        content = self._strip_frontmatter(content)
+
         # Strip first H1 to avoid duplicate h1 tags
         # (HTML semantic structure: one h1 per page)
         content = self._strip_first_h1(content)
 
         return content
+
+    def _strip_frontmatter(self, text: str) -> str:
+        """Remove YAML frontmatter from markdown.
+
+        Frontmatter is metadata between --- delimiters at the start of file.
+        Example:
+            ---
+            title: "Page Title"
+            description: "Page description"
+            ---
+
+        Args:
+            text: Markdown content
+
+        Returns:
+            Content with frontmatter removed
+        """
+        # Match YAML frontmatter: starts with ---, ends with ---
+        # Must be at very beginning of file
+        pattern = r"^---\s*\n.*?\n---\s*\n"
+        return re.sub(pattern, "", text, count=1, flags=re.DOTALL)
 
     def _strip_first_h1(self, text: str) -> str:
         """Remove first h1 heading to avoid duplicate h1 tags.

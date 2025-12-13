@@ -19,7 +19,7 @@ if [[ "$2" == "--fresh" ]] || [[ "$2" == "--no-cache" ]]; then
   FRESH_BUILD=true
 fi
 
-PROJECT_NAME="sil-website"
+PROJECT_NAME="sif-website"
 REGISTRY="registry.mytia.net"
 IMAGE_NAME="${REGISTRY}/${PROJECT_NAME}"
 
@@ -30,7 +30,7 @@ GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
 # Semantic version (update this for releases)
 VERSION="${VERSION:-v1.0.0}"
 
-echo "🚀 SIL Website Container Deployment"
+echo "🚀 SIF Website Container Deployment"
 echo "===================================="
 echo "Environment: $ENVIRONMENT"
 echo "Registry: $REGISTRY"
@@ -56,19 +56,19 @@ if [ "$ENVIRONMENT" == "staging" ]; then
   HOST="tia-staging"
   CONTAINER_NAME="${PROJECT_NAME}-staging"
   CONTAINER_TAG="staging"
-  SERVICE_PORT="8080"
+  SERVICE_PORT="8082"
   # Bind to private IP for tia-proxy access (not 127.0.0.1 or 0.0.0.0)
   BIND_IP="10.108.0.8"
-  HEALTH_URL="https://sil-staging.mytia.net/health"
+  HEALTH_URL="https://sif-staging.mytia.net/health"
 else
   HOST="tia-apps"
   CONTAINER_NAME="$PROJECT_NAME"
   CONTAINER_TAG="latest"
-  SERVICE_PORT="8010"
+  SERVICE_PORT="8011"
   # Production binds to all interfaces (nginx is on tia-proxy, not same machine)
-  # Port 8010 avoids conflict with SDMS on port 8000
+  # Port 8011 for SIF Foundation (8010 is SIL Lab)
   BIND_IP="0.0.0.0"
-  HEALTH_URL="https://semanticinfrastructurelab.org/health"
+  HEALTH_URL="https://semanticinfrastructurefoundation.org/health"
 fi
 
 echo "📡 Target server: $HOST"

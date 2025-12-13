@@ -15868,15 +15868,15 @@ This work continues a consistent focus on infrastructure that enables others.
 
 Scott is a systems architect and infrastructure builder with four decades of experience across distributed systems, business intelligence, and semantic infrastructure. Before founding SIL, he worked across domains—distributed systems research, audio engineering, CAD/CAM, geometric constraints, manufacturing—developing an understanding of how different computational domains compose.
 
-**Education:** Computer Science, University of Colorado Boulder (1998-2001)
+**Education:** Bachelor's and Master's degrees in Computer Science, California Polytechnic State University, San Luis Obispo
 
 **SIL Founded:** 2023
 
 ---
 
-## Microsoft Research & Engineering (1994-2010)
+## Microsoft Research Microsoft Research & Engineering (1994-2010) Engineering (1997-2010)
 
-Scott spent 16 years at Microsoft as part of teams working on distributed systems and high-stakes engineering.
+Scott spent 13 years at Microsoft as part of teams working on distributed systems and high-stakes engineering.
 
 **Distributed Systems Research (2001-2003):**
 Part of a team exploring peer-to-peer infrastructure with cryptographic identity (before Bitcoin). We worked on problems of distributed routing, stable naming, and decentralized trust—foundational questions that inform Knowledge Mesh and the trust layer in the Semantic OS today.

@@ -1,5 +1,5 @@
-# Multi-stage Dockerfile for SIL Website
-# Following SIL Deployment Standards v1.0
+# Multi-stage Dockerfile for SIF Website
+# Following SIF Deployment Standards v1.0
 
 # Stage 1: Builder
 FROM python:3.11-slim AS builder
@@ -36,8 +36,8 @@ RUN pip install --no-cache-dir /tmp/*.whl && \
 COPY --chown=appuser:appuser static/ static/
 COPY --chown=appuser:appuser templates/ templates/
 
-# Copy SIL docs (baked into container - no volume mounts needed)
-# These are the canonical SIL founding documents (via symlink to ../SIL/docs)
+# Copy SIF docs (baked into container - no volume mounts needed)
+# These are the SIF Foundation content pages (about, research, contact)
 COPY --chown=appuser:appuser docs/ docs/
 
 # Set docs path environment variable
@@ -57,4 +57,4 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
   CMD curl -f http://localhost:8000/health || exit 1
 
 # Run application
-CMD ["uvicorn", "sil_web.app:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info"]
+CMD ["uvicorn", "sif_web.app:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info"]

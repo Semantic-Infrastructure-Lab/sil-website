@@ -5,7 +5,7 @@ No business logic, no I/O, no state mutation.
 Just pure functions that transform data into HTML strings.
 """
 
-from sil_web.domain.models import Document, Project, ProjectStatus
+from sif_web.domain.models import Document, Project, ProjectStatus
 
 
 def project_card(project: Project) -> str:

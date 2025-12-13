@@ -1,12 +1,12 @@
-# SIL Website
+# SIF Website
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-**The official Semantic Infrastructure Lab website - a clean Python web application demonstrating SIL architecture principles.**
+**The official Semantic Infrastructure Foundation website - a clean Python web application demonstrating SIF architecture principles.**
 
 ## Overview
 
-This is the public-facing website for the Semantic Infrastructure Lab, built as a production-quality reference implementation of SIL's architectural principles:
+This is the public-facing website for the Semantic Infrastructure Foundation, built as a production-quality reference implementation of SIF's architectural principles:
 
 - **Clarity**: Clean layered architecture
 - **Simplicity**: Minimal dependencies, standard tools
@@ -47,9 +47,9 @@ src/sil_web/
 - mypy - Type checking
 - reveal - Code exploration
 
-**SIL Integration:**
-- Loads canonical docs from `../SIL/docs/canonical/`
-- Displays production projects from SIL ecosystem
+**Content Integration:**
+- Loads canonical docs from SIF/SIL documentation
+- Displays research and foundation information
 - Can fetch live GitHub stats (optional)
 
 ## Quick Start
@@ -139,10 +139,14 @@ sil-website/
 
 ## Pages
 
-- **/** - Founder's Letter (from `SIL/docs/canonical/FOUNDERS_LETTER.md`)
-- **/projects** - All 5 production SIL projects with stats
-- **/docs** - Documentation index (canonical documents)
-- **/docs/{slug}** - Individual documents (manifesto, principles, etc.)
+- **/** - Home page
+- **/about** - About the Semantic Infrastructure Foundation
+- **/research** - Research and production systems
+- **/funding** - Funding model and approach
+- **/foundation** - Foundation governance and structure
+- **/foundation/chief-steward** - Chief Steward role description
+- **/foundation/executive-director** - Executive Director role description
+- **/contact** - Contact information
 
 ## Configuration
 
@@ -189,7 +193,7 @@ pytest tests/test_domain.py
 ```
 
 **What this does:**
-1. Builds container image with SIL docs baked in
+1. Builds container image with SIF content baked in
 2. Pushes to `registry.mytia.net`
 3. Deploys to target server (tia-staging or tia-apps)
 4. Runs health checks
@@ -199,10 +203,10 @@ pytest tests/test_domain.py
 
 | Environment | Server | URL |
 |-------------|--------|-----|
-| **Staging** | tia-staging | https://sil-staging.mytia.net |
-| **Production** | tia-apps | https://semanticinfrastructurelab.org |
+| **Staging** | tia-staging | https://sif-staging.mytia.net |
+| **Production** | tia-apps | https://semanticinfrastructurefoundation.org |
 
-**Container Registry:** `registry.mytia.net/sil-website`
+**Container Registry:** `registry.mytia.net/sif-website`
 
 ### Full Documentation
 
@@ -223,7 +227,7 @@ podman run -p 8000:8000 sil-website:dev
 
 ## Development Principles
 
-This project demonstrates SIL's architectural principles in practice:
+This project demonstrates clean architectural principles in practice:
 
 1. **Layer separation**: Domain → Services → UI → Routes
 2. **Pure functions**: Domain and UI are pure (no side effects)
@@ -232,8 +236,6 @@ This project demonstrates SIL's architectural principles in practice:
 5. **Type safety**: Full mypy coverage
 6. **Structured logging**: All services use structlog
 7. **Testability**: Pure functions are easy to test
-
-See [SIL Principles](docs/canonical/SIL_PRINCIPLES.md) for the full development methodology.
 
 ## Contributing
 
@@ -247,14 +249,15 @@ See [SIL Principles](docs/canonical/SIL_PRINCIPLES.md) for the full development 
 
 Apache 2.0 - see [LICENSE](LICENSE) for details
 
-Copyright 2025 Semantic Infrastructure Lab Contributors
+Copyright 2025 Semantic Infrastructure Foundation Contributors
 
 **Content License**: Documentation and written content are licensed under CC BY 4.0 - see [CONTENT_LICENSE.md](CONTENT_LICENSE.md)
 
 ## Links
 
+- **Live Website**: https://semanticinfrastructurefoundation.org
+- **Staging Website**: https://sif-staging.mytia.net
 - **SIL Repository**: https://github.com/scottsen/sil
-- **Live Website**: https://semanticinfrastructurelab.org
 - **TIA System**: https://github.com/scottsen/tia
 
 ---
