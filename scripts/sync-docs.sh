@@ -96,6 +96,20 @@ rsync -av --delete \
     "$WEBSITE_DOCS/tools/"
 echo -e "${GREEN}✓${NC} Tools docs synced"
 
+# Sync essays (from TIA SIL lab - different location than main SIL repo)
+TIA_SIL_LAB="/home/scottsen/src/tia/projects/SIL/lab/products/essays"
+echo "Syncing essays from TIA SIL lab..."
+mkdir -p "$WEBSITE_DOCS/essays"
+if [ -d "$TIA_SIL_LAB" ]; then
+    rsync -av --delete \
+        --exclude='.git' \
+        "$TIA_SIL_LAB/" \
+        "$WEBSITE_DOCS/essays/"
+    echo -e "${GREEN}✓${NC} Essays synced"
+else
+    echo -e "${YELLOW}⚠${NC} TIA SIL essays directory not found, skipping"
+fi
+
 # Sync top-level docs
 echo "Syncing top-level docs..."
 # Sync all top-level docs from SIL repo
@@ -131,6 +145,7 @@ RESEARCH_COUNT=$(find "$WEBSITE_DOCS/research" -name "*.md" 2>/dev/null | wc -l)
 META_COUNT=$(find "$WEBSITE_DOCS/meta" -name "*.md" 2>/dev/null | wc -l)
 INNOVATIONS_COUNT=$(find "$WEBSITE_DOCS/innovations" -name "*.md" 2>/dev/null | wc -l)
 TOOLS_COUNT=$(find "$WEBSITE_DOCS/tools" -name "*.md" 2>/dev/null | wc -l)
+ESSAYS_COUNT=$(find "$WEBSITE_DOCS/essays" -name "*.md" 2>/dev/null | wc -l)
 
 echo "Synced files by category:"
 echo "  Canonical:    $CANONICAL_COUNT documents"
@@ -139,9 +154,10 @@ echo "  Research:     $RESEARCH_COUNT documents"
 echo "  Meta:         $META_COUNT documents"
 echo "  Innovations:  $INNOVATIONS_COUNT documents"
 echo "  Tools:        $TOOLS_COUNT documents"
+echo "  Essays:       $ESSAYS_COUNT documents"
 echo ""
 
-TOTAL_COUNT=$((CANONICAL_COUNT + ARCHITECTURE_COUNT + RESEARCH_COUNT + META_COUNT + INNOVATIONS_COUNT + TOOLS_COUNT))
+TOTAL_COUNT=$((CANONICAL_COUNT + ARCHITECTURE_COUNT + RESEARCH_COUNT + META_COUNT + INNOVATIONS_COUNT + TOOLS_COUNT + ESSAYS_COUNT))
 echo "Total: $TOTAL_COUNT markdown files"
 echo ""
 

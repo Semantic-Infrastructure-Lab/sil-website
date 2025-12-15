@@ -522,6 +522,51 @@ ssh tia-proxy 'curl http://10.108.0.8:8080/health'
 
 ---
 
+## Deploying Essays
+
+Essays are published content pieces served from `/essays/{slug}`. The source lives in TIA SIL project (`/home/scottsen/src/tia/projects/SIL/lab/products/essays/`).
+
+### Quick Deploy
+
+```bash
+cd /home/scottsen/src/projects/sil-website
+
+# 1. Sync essays from TIA SIL
+./scripts/sync-docs.sh
+
+# 2. Deploy with fresh build (required for content changes)
+./deploy/deploy-container.sh staging --fresh
+
+# 3. Verify
+curl https://sif-staging.mytia.net/essays/progressive-disclosure-for-ai-agents
+```
+
+### URL Mapping
+
+Essay filenames map to URLs:
+
+| Source File | URL |
+|------------|-----|
+| `PROGRESSIVE_DISCLOSURE_FOR_AI_AGENTS.md` | `/essays/progressive-disclosure-for-ai-agents` |
+| `NEW_ESSAY_TITLE.md` | `/essays/new-essay-title` |
+
+**Pattern:** `UPPER_SNAKE_CASE.md` → `/essays/lower-kebab-case`
+
+### Adding New Essays
+
+1. Create essay in TIA SIL: `/home/scottsen/src/tia/projects/SIL/lab/products/essays/NEW_ESSAY.md`
+2. Run `./scripts/sync-docs.sh` to sync to website
+3. Deploy with `--fresh` flag to include new content
+4. Access at `https://sif-staging.mytia.net/essays/new-essay`
+
+### Important Notes
+
+- **Always use `--fresh` flag** when deploying content changes (podman caches the COPY layer)
+- Essays are synced from TIA SIL lab, not the main SIL repo
+- The essay route extracts the title from the first `# H1` in the markdown
+
+---
+
 ## Best Practices
 
 ### Version Tagging
