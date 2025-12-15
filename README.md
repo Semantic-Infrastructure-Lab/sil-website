@@ -1,12 +1,12 @@
-# SIF Website
+# SIL Website
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-**The official Semantic Infrastructure Foundation website - a clean Python web application demonstrating SIF architecture principles.**
+**The official Semantic Infrastructure Lab website - a clean Python web application demonstrating SIL architecture principles.**
 
 ## Overview
 
-This is the public-facing website for the Semantic Infrastructure Foundation, built as a production-quality reference implementation of SIF's architectural principles:
+This is the public-facing website for the Semantic Infrastructure Lab, built as a production-quality reference implementation of SIL's architectural principles:
 
 - **Clarity**: Clean layered architecture
 - **Simplicity**: Minimal dependencies, standard tools

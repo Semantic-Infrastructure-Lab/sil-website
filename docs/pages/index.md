@@ -32,7 +32,7 @@ This is the [Semantic Operating System](/canonical/architecture): persistent mem
 These aren't demos. They're working infrastructure proving the architecture:
 
 ### [Reveal](/tools/reveal) — Progressive Code Exploration
-`pip install reveal-cli` · v0.23.0 · 2K+ downloads/month
+`pip install reveal-cli` · v0.23.1 · 2K+ downloads/month
 
 Structure-first code exploration with 10-150x token reduction. See file structure before reading content. Extract specific functions without loading entire files.
 

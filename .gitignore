@@ -65,6 +65,7 @@ Thumbs.db
 #   - docs/research/
 #   - docs/innovations/
 #   - docs/tools/
+#   - docs/essays/
 #   - docs/meta/ (from SIL)
 #   - docs/README.md
 #   - docs/projects/
@@ -80,6 +81,7 @@ docs/architecture/
 docs/research/
 docs/innovations/
 docs/tools/
+docs/essays/
 docs/meta/
 docs/projects/
 

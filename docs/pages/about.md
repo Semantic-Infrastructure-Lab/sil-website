@@ -70,7 +70,7 @@ SIL isn't vaporware. These systems are in production:
 
 | System | Version | Proof |
 |--------|---------|-------|
-| **Reveal** | v0.23.0 | 2K downloads/month on PyPI |
+| **Reveal** | v0.23.1 | 2K downloads/month on PyPI |
 | **Morphogen** | v0.11 | 1,600+ tests, 85% coverage |
 | **TiaCAD** | v3.1.2 | 1,027 tests, 92% coverage |
 | **GenesisGraph** | v0.3.0 | Cryptographic provenance |

@@ -10,6 +10,7 @@
 - `research/` ← SYNCED from /projects/SIL/docs/research/
 - `innovations/` ← SYNCED from /projects/SIL/docs/innovations/
 - `tools/` ← SYNCED from /projects/SIL/docs/tools/
+- `essays/` ← SYNCED from /projects/SIL/docs/essays/
 - `meta/` ← SYNCED from /projects/SIL/docs/meta/
 - `projects/` ← SYNCED from /projects/SIL/projects/
 - `README.md` ← SYNCED from /projects/SIL/docs/README.md
@@ -70,4 +71,5 @@ git commit -m "docs: add new article"
 
 ## Last Updated
 
+2025-12-15 (celestial-champion-1215) - Added essays to synced content (from public SIL repo)
 2025-12-13 (ethereal-helm-1213) - Fixed gitignore strategy

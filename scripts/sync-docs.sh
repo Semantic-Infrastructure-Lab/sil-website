@@ -96,19 +96,13 @@ rsync -av --delete \
     "$WEBSITE_DOCS/tools/"
 echo -e "${GREEN}✓${NC} Tools docs synced"
 
-# Sync essays (from TIA SIL lab - different location than main SIL repo)
-TIA_SIL_LAB="/home/scottsen/src/tia/projects/SIL/lab/products/essays"
-echo "Syncing essays from TIA SIL lab..."
-mkdir -p "$WEBSITE_DOCS/essays"
-if [ -d "$TIA_SIL_LAB" ]; then
-    rsync -av --delete \
-        --exclude='.git' \
-        "$TIA_SIL_LAB/" \
-        "$WEBSITE_DOCS/essays/"
-    echo -e "${GREEN}✓${NC} Essays synced"
-else
-    echo -e "${YELLOW}⚠${NC} TIA SIL essays directory not found, skipping"
-fi
+# Sync essays (now in public SIL repo alongside other docs)
+echo "Syncing docs/essays/..."
+rsync -av --delete \
+    --exclude='.git' \
+    "$SIL_REPO/docs/essays/" \
+    "$WEBSITE_DOCS/essays/"
+echo -e "${GREEN}✓${NC} Essays synced"
 
 # Sync top-level docs
 echo "Syncing top-level docs..."
