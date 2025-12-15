@@ -60,8 +60,8 @@ Parametric CAD in YAML. Semantic constraints, not just geometry. Proof that sema
 ## Current Research
 
 - **[Progressive Disclosure for AI Agents](/essays/progressive-disclosure-for-ai-agents)** — Why structure-first exploration reduces tokens 25x
-- **[RAG as Semantic Manifold Transport](/research/rag-manifold)** — Rethinking retrieval as geometric transport
-- **[Agent Help Standard](/research/agent-help)** — Strategic guidance for AI agents using CLI tools
+- **[RAG as Semantic Manifold Transport](/research/rag-as-semantic-manifold-transport)** — Rethinking retrieval as geometric transport
+- **[Agent Help Standard](/research/agent-help-standard)** — Strategic guidance for AI agents using CLI tools
 
 ## The Lab
 
