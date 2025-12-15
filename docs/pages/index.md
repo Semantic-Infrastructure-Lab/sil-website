@@ -52,7 +52,7 @@ v0.3.0 · Cryptographic audit trails
 
 Every transformation produces a provenance record. Selective disclosure lets you verify without revealing everything.
 
-### [TiaCAD](/tools/tiacad) — Declarative Parametric CAD
+### [TiaCAD](https://github.com/Semantic-Infrastructure-Lab/tiacad) — Declarative Parametric CAD
 v3.1.2 · 1,027 tests · 92% coverage
 
 Parametric CAD in YAML. Semantic constraints, not just geometry. Proof that semantic infrastructure works for physical design.
