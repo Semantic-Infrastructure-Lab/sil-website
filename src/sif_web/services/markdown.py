@@ -194,37 +194,36 @@ class MarkdownRenderer:
 
         Returns:
             Dict mapping markdown filenames and directories to web routes
-            Example: {'SIL_MANIFESTO.md': '/docs/manifesto', 'tools/': '/docs/tools-overview'}
+            Example: {'SIL_MANIFESTO.md': '/canonical/manifesto', 'tools/': '/tools'}
         """
         link_map = {}
 
-        # Get all categories we know about
-        categories = ['canonical', 'architecture', 'research', 'meta', 'tools', 'innovations']
+        # Map categories to their URL prefixes (actual routes, not /docs/)
+        category_routes = {
+            'canonical': '/canonical',
+            'architecture': '/canonical',  # Architecture docs live under /canonical
+            'research': '/research',
+            'meta': '/meta',
+            'tools': '/tools',
+            'innovations': '/innovations',
+            'essays': '/essays',
+        }
 
-        for category in categories:
+        for category, route_prefix in category_routes.items():
             # Use ContentService to discover slugs in this category
             slug_map = self.content_service._discover_slugs(category)
 
             for slug, filename in slug_map.items():
-                # Map filename → web route
-                link_map[filename] = f'/docs/{slug}'
+                # Map filename → web route using correct category prefix
+                link_map[filename] = f'{route_prefix}/{slug}'
 
-            # Add directory mapping (category/ → appropriate overview page)
-            # Priority: {category}-overview > {category} (from INNOVATIONS.md etc.) > overview
-            overview_slug = f'{category}-overview'
-            if overview_slug in slug_map:
-                link_map[f'{category}/'] = f'/docs/{overview_slug}'
-            elif category in slug_map:
-                # Category has a main doc (e.g., innovations/ → INNOVATIONS.md → /docs/innovations)
-                link_map[f'{category}/'] = f'/docs/{category}'
-            elif 'overview' in slug_map:
-                # Fallback for categories without prefixed overview
-                link_map[f'{category}/'] = '/docs/overview'
+            # Add directory mapping (category/ → section index)
+            link_map[f'{category}/'] = route_prefix
 
         # Special cases for top-level directories
         link_map['PROJECT_INDEX.md'] = '/projects'
         link_map['projects/'] = '/projects'
-        link_map['docs/'] = '/docs'
+        link_map['docs/'] = '/canonical'  # /docs/ → /canonical (main docs index)
 
         self.log.debug("link_map_built", count=len(link_map))
         return link_map
@@ -239,6 +238,7 @@ class MarkdownRenderer:
             extensions=[
                 'fenced_code',    # GitHub-style ```python code blocks
                 'tables',         # GitHub-style tables
+                'md_in_html',     # Parse markdown inside HTML tags like <details>
                 'nl2br',          # Natural line breaks (2 spaces = <br>)
                 'sane_lists',     # Better list behavior
                 'toc',            # Table of contents generation

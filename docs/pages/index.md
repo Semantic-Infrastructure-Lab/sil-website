@@ -25,7 +25,7 @@ SIL develops **semantic infrastructure**—a substrate where:
 - **Reasoning is inspectable** — you can see how conclusions were reached
 - **Composition works** — systems combine correctly across domains
 
-This is the [Semantic Operating System](/canonical/architecture): persistent memory, unified representations, deterministic engines, multi-agent orchestration, and interfaces where every cognitive layer remains visible.
+This is the [Semantic Operating System](/canonical/semantic-os-architecture): persistent memory, unified representations, deterministic engines, multi-agent orchestration, and interfaces where every cognitive layer remains visible.
 
 ## Production Systems
 

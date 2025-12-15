@@ -4328,7 +4328,7 @@ tia explore "authentication"
 
 # Semantic Feedback Loops: Closed-Loop Control for Semantic Systems
 
-**Version:** 1.0
+**Version:** 1.1
 **Date:** 2025-12-04
 **Status:** Canonical - Foundational Theory
 **Related:** Multi-Agent Protocol Principles, Semantic OS Architecture
@@ -4962,26 +4962,34 @@ Best sessions:
 
 ### 4. Feedback as First-Class Infrastructure
 
-**Semantic OS layer architecture:**
+**Semantic OS layer architecture** (see [SIL_GLOSSARY.md](./SIL_GLOSSARY.md) for canonical definitions):
 ```
-Layer 6: Applications (Scout, Morphogen, etc.)
-Layer 5: Agent Orchestration (agent-ether)
-Layer 4: Semantic Primitives (USIR, knowledge graphs)
-Layer 3: Feedback & Reflection (THIS LAYER!)
-Layer 2: Tool Infrastructure (reveal, tia commands)
-Layer 1: Storage & Indexing (Beth, Gemma)
+Layer 6: Intelligence    (Agent Ether, BrowserBridge)
+Layer 5: Intent          (Pantheon validation, FEEDBACK LOOPS)  ← This document
+Layer 4: Dynamics        (Morphogen scheduler, temporal execution)
+Layer 3: Composition     (Pantheon IR, SUP, GenesisGraph)
+Layer 2: Structures      (TiaCAD, GenesisGraph)
+Layer 1: Primitives      (Morphogen domains, RiffStack)
+Layer 0: Substrate       (Philbrick hardware)
+─────────────────────────────────────────────────────
+Cross-cutting: Observability (Reveal), Provenance (GenesisGraph), Trust (TAP)
 ```
 
-**Layer 3 responsibilities:**
+**Feedback loops live at Layer 5 (Intent)** because they:
+- Measure intent-execution alignment
+- Drive validation and constraint satisfaction
+- Enable precision through reflection-measurement-correction cycles
+
+**Feedback primitives:**
 - Execution tracing (capture what happened)
 - Fitness measurement (evaluate performance)
 - Gap analysis (identify problems)
 - Correction generation (propose fixes)
 - Iteration orchestration (apply and validate)
 
-**Why it's a layer:** Every system above it needs feedback. Making it infrastructure (not application logic) means:
-- Reusable feedback primitives
-- Consistent fitness functions across projects
+**Why feedback is infrastructure:** Every layer benefits from feedback. Making it a first-class primitive means:
+- Reusable feedback patterns across all SIL projects
+- Consistent fitness functions (see [SEMANTIC_OBSERVABILITY.md](./SEMANTIC_OBSERVABILITY.md))
 - Shared reflection tooling (tia session read, beth explore)
 - Systematic improvement methodology
 
@@ -5168,9 +5176,10 @@ Semantic infrastructure where feedback loops are first-class primitives, fitness
 ## References & Further Reading
 
 **Within SIL:**
-- Multi-Agent Protocol Principles (`MULTI_AGENT_PROTOCOL_PRINCIPLES.md`)
-- Semantic OS Architecture (`SIL_SEMANTIC_OS_ARCHITECTURE.md`)
-- SIL Technical Charter (`SIL_TECHNICAL_CHARTER.md`)
+- [SIL Glossary](./SIL_GLOSSARY.md) — Canonical layer definitions (L0-L6)
+- [Semantic Observability](./SEMANTIC_OBSERVABILITY.md) — Fitness functions and intent-execution alignment
+- [Semantic OS Architecture](./SIL_SEMANTIC_OS_ARCHITECTURE.md) — Full architecture with layer details
+- [Multi-Agent Protocol Principles](./MULTI_AGENT_PROTOCOL_PRINCIPLES.md) — Agent coordination patterns
 
 **Case Studies:**
 - Session mighty-shaman-1204: CLAUDE.md reflection loop (this document's genesis)
@@ -5186,12 +5195,13 @@ Semantic infrastructure where feedback loops are first-class primitives, fitness
 ---
 
 **Document Status:** Canonical
-**Version:** 1.0
+**Version:** 1.1
 **Author:** Semantic Infrastructure Lab
-**Date:** 2025-12-04
+**Date:** 2025-12-04 (updated 2025-12-14)
 **License:** CC BY 4.0
 
 **Changelog:**
+- 2025-12-14: Aligned layer model with canonical 7-layer Cognitive OSI Stack
 - 2025-12-04: Initial version based on mighty-shaman-1204 session insight
 
 ---
@@ -5203,8 +5213,8 @@ Semantic infrastructure where feedback loops are first-class primitives, fitness
 # Semantic Observability: Automated Detection of Intent-Execution Alignment
 
 **Authors:** Scott Senkeresty (Chief Architect, Semantic OS), Tia (Chief Semantic Agent)
-**Date:** 2025-12-04
-**Status:** Canonical Document v1
+**Date:** 2025-12-04 (updated 2025-12-14)
+**Status:** Canonical Document v1.1
 
 ---
 
@@ -6231,35 +6241,29 @@ class AdaptiveFitnessLearner:
 
 ## Integration with Semantic OS Architecture
 
-**Observability as Layer 4.5 (between TIA and Pantheon):**
+**Observability as a cross-cutting concern** (see [SIL_GLOSSARY.md](./SIL_GLOSSARY.md) for canonical definitions):
 
 ```
-Layer 7: Applications (Scout, Reveal, Agent-Ether)
-         ↓
-Layer 6: Agent Orchestration (Multi-agent coordination)
-         ↓
-Layer 5: Pantheon (Universal Semantic IR)
-         ↓
-Layer 4.5: SEMANTIC OBSERVABILITY ← This document
-         │   - Intent-execution alignment measurement
-         │   - Multi-dimensional fitness scoring
-         │   - Anti-pattern detection
-         │   - Health monitoring
-         ↓
-Layer 4: TIA (Semantic search, task management, session tracking)
-         ↓
-Layer 3: Beth (Knowledge graph, embeddings)
-         ↓
-Layer 2: Domain modules (git, session, project, etc.)
-         ↓
-Layer 1: Semantic primitives (reveal, grep, jq, etc.)
+Layer 6: Intelligence    (Agent Ether, BrowserBridge)
+Layer 5: Intent          (Pantheon validation, feedback loops)
+Layer 4: Dynamics        (Morphogen scheduler, temporal execution)
+Layer 3: Composition     (Pantheon IR, SUP, GenesisGraph)
+Layer 2: Structures      (TiaCAD, GenesisGraph)
+Layer 1: Primitives      (Morphogen domains, RiffStack)
+Layer 0: Substrate       (Philbrick hardware)
+─────────────────────────────────────────────────────
+Cross-cutting concerns (not layers):
+  • OBSERVABILITY (Reveal) ← This document
+  • Provenance (GenesisGraph)
+  • Trust (TAP + Authorization)
 ```
 
-**Why Layer 4.5?**
+**Why observability is cross-cutting, not a layer:**
 
-- **Below orchestration (Layer 6):** Measures execution, doesn't control it
-- **Above TIA (Layer 4):** Uses TIA's session data as input, but adds intelligence
-- **Feeds back to all layers:** Health metrics inform CLAUDE.md (L7), agent behavior (L6), search patterns (L4)
+- **Applies to all layers:** You can inspect L0 hardware, L3 composition, or L6 agents
+- **Implemented by Reveal:** Universal inspection via progressive disclosure
+- **Feeds into Layer 5:** Observability data drives intent-execution alignment (see [SEMANTIC_FEEDBACK_LOOPS.md](./SEMANTIC_FEEDBACK_LOOPS.md))
+- **No "Layer 4.5" needed:** Cross-cutting concerns span the stack, they don't sit between layers
 
 ---
 
@@ -6299,9 +6303,10 @@ Layer 1: Semantic primitives (reveal, grep, jq, etc.)
 ## References & Further Reading
 
 **Related SIL Documents:**
-- [SEMANTIC_FEEDBACK_LOOPS.md](./SEMANTIC_FEEDBACK_LOOPS.md) - Theoretical foundation for closed-loop control
-- [SIL_SEMANTIC_OS_ARCHITECTURE.md](./SIL_SEMANTIC_OS_ARCHITECTURE.md) - Layer structure and system design
-- [MULTI_AGENT_PROTOCOL_PRINCIPLES.md](./MULTI_AGENT_PROTOCOL_PRINCIPLES.md) - Agent coordination patterns
+- [SIL Glossary](./SIL_GLOSSARY.md) — Canonical layer definitions (L0-L6), Meta-Layer: Observability
+- [Semantic Feedback Loops](./SEMANTIC_FEEDBACK_LOOPS.md) — Theoretical foundation for closed-loop control
+- [Semantic OS Architecture](./SIL_SEMANTIC_OS_ARCHITECTURE.md) — Layer structure and system design
+- [Multi-Agent Protocol Principles](./MULTI_AGENT_PROTOCOL_PRINCIPLES.md) — Agent coordination patterns
 
 **Case Studies:**
 - Session badero-1204 - Meta-feedback loop demonstrating observability principles
@@ -6314,10 +6319,14 @@ Layer 1: Semantic primitives (reveal, grep, jq, etc.)
 
 ---
 
-**Document Status:** Canonical v1
-**Last Updated:** 2025-12-04
+**Document Status:** Canonical v1.1
+**Last Updated:** 2025-12-14
 **Maintainers:** Scott Senkeresty, Tia
-**License:** [To be determined - SIL license policy]
+**License:** CC BY 4.0
+
+**Changelog:**
+- 2025-12-14: Reframed observability as cross-cutting concern, aligned layer model
+- 2025-12-04: Initial version based on badero-1204 session insight
 
 ---
 
@@ -7946,7 +7955,7 @@ Before describing what SIL intends to build, recognize what already exists.
 
 ### Reveal: Semantic Infrastructure in Action
 
-**reveal** (v0.18.0 on PyPI, ~2,000 downloads/month as of Dec 2025) demonstrates that when you prioritize structure, meaning, and provenance, you get systems that work better—and the benefits compound.
+**reveal** (v0.23.0 on PyPI, ~2,000 downloads/month as of Dec 2025) demonstrates that when you prioritize structure, meaning, and provenance, you get systems that work better—and the benefits compound.
 
 **The Problem reveal Solves:**
 
@@ -8420,7 +8429,7 @@ SIL is not aspirational. It is operational.
 The lab has developed **12 projects** spanning the six layers of the Semantic OS, with **4 production-ready systems** and over **3,100 tests** ensuring reliability:
 
 **Production-Ready Today:**
-- **Reveal** (v0.18.0 on PyPI) — Code exploration with 86% token reduction, Python runtime inspection, `--agent-help` standard with 3-tier progressive discovery
+- **Reveal** (v0.23.0 on PyPI) — Code exploration with 86% token reduction, Python runtime inspection, `--agent-help` standard with 3-tier progressive discovery
 - **Morphogen** (v0.11) — Cross-domain deterministic computation
 - **TiaCAD** (v3.1.2) — Declarative parametric CAD in YAML
 - **GenesisGraph** (v0.3.0) — Verifiable provenance with selective disclosure
@@ -8601,7 +8610,7 @@ Following these 14 principles means SIL infrastructure will still be coherent, i
 
 SIL principles are not aspirational—they're operational in production tools today.
 
-**reveal** (v0.18.0 on PyPI, 100+ downloads/day as of Dec 2025) demonstrates how these principles manifest in working software. It's proof that semantic infrastructure isn't hypothetical—it's solving real problems for developers and AI agents.
+**reveal** (v0.23.0 on PyPI, 100+ downloads/day as of Dec 2025) demonstrates how these principles manifest in working software. It's proof that semantic infrastructure isn't hypothetical—it's solving real problems for developers and AI agents.
 
 ### **Principle #1: Structure Before Heuristics**
 
@@ -10148,26 +10157,33 @@ Proceed with campaign? [y/N]
 
 # SIL Semantic OS Architecture
 
+**Version:** 2.0 (December 2025)
+**Canonical Reference:** [SIL_GLOSSARY.md](./SIL_GLOSSARY.md)
+
 ## TL;DR (2-minute overview)
 
-**What is the Semantic OS?** A 6-layer architecture for knowledge work—like Linux for computation, but for meaning.
+**What is the Semantic OS?** A 7-layer architecture for knowledge work—like Linux for computation, but for meaning.
 
 **The core insight:** Just as an OS manages processes, memory, and devices, the Semantic OS manages **knowledge, agents, and deterministic computation**.
 
 ```
-Layer 5: Human Interfaces     ← CLIs, GUIs, conversational agents
-Layer 4: Deterministic Engines ← Morphogen, hermetic builds, verification
-Layer 3: Agent Ether          ← Multi-agent coordination & protocols
-Layer 2: Domain Modules       ← Water, Healthcare, Education, etc.
-Layer 1: Pantheon IR          ← Universal semantic types (the "assembly language")
-Layer 0: Semantic Memory      ← Knowledge graphs, provenance, persistence
+Layer 6: Intelligence    (Agent Ether, BrowserBridge)     ← Multi-agent coordination
+Layer 5: Intent          (Pantheon validation)            ← Constraints & feedback loops
+Layer 4: Dynamics        (Morphogen scheduler)            ← Temporal execution
+Layer 3: Composition     (Pantheon IR, SUP)               ← Cross-domain integration
+Layer 2: Structures      (TiaCAD, GenesisGraph)           ← Data structures & provenance
+Layer 1: Primitives      (Morphogen domains)              ← 40+ computational domains
+Layer 0: Substrate       (Philbrick hardware)             ← Hardware foundation
+─────────────────────────────────────────────────────────────────────────────────
+Cross-cutting: Observability (Reveal), Provenance (GenesisGraph), Trust (TAP)
 ```
 
 **Key innovations:**
-- **Persistent semantic memory** that survives beyond single prompts
-- **Universal IR** enabling cross-domain interoperability
-- **Deterministic execution** for reproducible workflows
-- **Multi-agent protocols** for inspectable collaboration
+- **Hardware-software co-design** from Philbrick substrate to agent intelligence
+- **Universal IR** enabling cross-domain interoperability (Pantheon)
+- **Deterministic execution** for reproducible workflows (Morphogen)
+- **Multi-agent protocols** for inspectable collaboration (Agent Ether)
+- **Verifiable provenance** at every layer (GenesisGraph)
 
 **Want the full architecture?** Read the detailed layer descriptions below ↓
 
@@ -10175,54 +10191,71 @@ Layer 0: Semantic Memory      ← Knowledge graphs, provenance, persistence
 
 ```mermaid
 graph TB
-    subgraph L5["Layer 5: Human Interfaces"]
-        H1[CLIs]
-        H2[GUIs]
-        H3[Chat Agents]
+    subgraph L6["Layer 6: Intelligence"]
+        I1[Agent Ether]
+        I2[BrowserBridge]
     end
 
-    subgraph L4["Layer 4: Deterministic Engines"]
-        D1[Morphogen]
-        D2[Hermetic Builds]
-        D3[Verification]
+    subgraph L5["Layer 5: Intent"]
+        IN1[Validation]
+        IN2[Feedback Loops]
     end
 
-    subgraph L3["Layer 3: Agent Ether"]
-        A1[Coordination]
-        A2[Discovery]
-        A3[Composition]
+    subgraph L4["Layer 4: Dynamics"]
+        D1[Morphogen Scheduler]
+        D2[Multirate Coordination]
     end
 
-    subgraph L2["Layer 2: Domain Modules"]
-        M1[Water]
-        M2[Healthcare]
-        M3[Education]
+    subgraph L3["Layer 3: Composition"]
+        C1[Pantheon IR]
+        C2[SUP]
+        C3[GenesisGraph]
     end
 
-    subgraph L1["Layer 1: Pantheon IR"]
-        P1[Universal Types]
-        P2[Semantic Operators]
+    subgraph L2["Layer 2: Structures"]
+        S1[TiaCAD]
+        S2[GenesisGraph]
     end
 
-    subgraph L0["Layer 0: Semantic Memory"]
-        S1[Knowledge Graphs]
-        S2[Provenance]
-        S3[Persistence]
+    subgraph L1["Layer 1: Primitives"]
+        P1[Morphogen Domains]
+        P2[RiffStack]
     end
 
+    subgraph L0["Layer 0: Substrate"]
+        H1[Philbrick]
+    end
+
+    L6 <--> L5
     L5 <--> L4
     L4 <--> L3
     L3 <--> L2
     L2 <--> L1
     L1 <--> L0
 
-    style L5 fill:#e1f5fe,stroke:#01579b
-    style L4 fill:#e8f5e9,stroke:#2e7d32
-    style L3 fill:#fff3e0,stroke:#e65100
-    style L2 fill:#f3e5f5,stroke:#6a1b9a
-    style L1 fill:#e3f2fd,stroke:#1565c0
-    style L0 fill:#fce4ec,stroke:#880e4f
+    style L6 fill:#e1f5fe,stroke:#01579b
+    style L5 fill:#e8f5e9,stroke:#2e7d32
+    style L4 fill:#fff3e0,stroke:#e65100
+    style L3 fill:#f3e5f5,stroke:#6a1b9a
+    style L2 fill:#e3f2fd,stroke:#1565c0
+    style L1 fill:#fce4ec,stroke:#880e4f
+    style L0 fill:#f5f5f5,stroke:#424242
 ```
+
+### Layer Model Evolution
+
+This document was originally written with a 6-layer conceptual model. The current canonical 7-layer model (above) reflects implementation learnings. The detailed layer descriptions below use the original naming but map to the current model as follows:
+
+| Original (This Doc) | Current Canonical | Key Products |
+|---------------------|-------------------|--------------|
+| L0: Semantic Memory | L2-L3: Structures/Composition | GenesisGraph, Beth |
+| L1: Pantheon IR | L3: Composition | Pantheon IR |
+| L2: Domain Modules | L1: Primitives | Morphogen domains |
+| L3: Agent Ether | L6: Intelligence | Agent Ether, BrowserBridge |
+| L4: Deterministic Engines | L1+L4: Primitives+Dynamics | Morphogen |
+| L5: Human Interfaces | (Cross-cutting) | Reveal, TIA, SUP |
+| (Not in original) | L0: Substrate | Philbrick |
+| (Not in original) | L5: Intent | Pantheon validation |
 
 ---
 
@@ -10234,9 +10267,11 @@ Just as an operating system manages processes, memory, files, and devices, the S
 
 ---
 
-## The Six-Layer Architecture
+## Detailed Layer Descriptions
 
-Each layer below is described in detail with its purpose, core capabilities, and relationships to other layers.
+> **Note:** The sections below use the original 6-layer naming from the initial architecture design. See the [Layer Model Evolution](#layer-model-evolution) table above for mapping to the current 7-layer canonical model.
+
+Each layer is described in detail with its purpose, core capabilities, and relationships to other layers.
 
 ---
 
@@ -10819,26 +10854,30 @@ Just as Linux abstracts hardware and provides common services for applications, 
 
 ## Conclusion
 
-The Semantic OS is **infrastructure for the age of AI and civilizational-scale challenges**. It provides:
+The Semantic OS is **infrastructure for the age of AI and civilizational-scale challenges**. The 7-layer architecture provides:
 
-- **Semantic Memory** - Persistent, queryable, provenance-tracked knowledge
-- **Pantheon IR** - Universal interoperability across domains
-- **Domain Modules** - Specialized systems for real-world problems
-- **Agent Ether** - Coordination for human-AI collaboration
-- **Morphogen** - Reproducible, verifiable computation
-- **Human Interfaces** - Accessible, explainable interaction
+- **L0 Substrate** — Hardware foundation (Philbrick) enabling software/hardware co-design
+- **L1 Primitives** — 40+ unified computational domains (Morphogen)
+- **L2 Structures** — Data structures with spatial reasoning (TiaCAD) and provenance (GenesisGraph)
+- **L3 Composition** — Cross-domain semantic integration (Pantheon IR, SUP)
+- **L4 Dynamics** — Deterministic temporal execution (Morphogen scheduler)
+- **L5 Intent** — Validation, constraints, and feedback loops
+- **L6 Intelligence** — Multi-agent coordination (Agent Ether, BrowserBridge)
 
-Together, these six layers form a **unified platform for building civilizational infrastructure**.
+Plus cross-cutting concerns: **Observability** (Reveal), **Provenance** (GenesisGraph), **Trust** (TAP).
+
+Together, these seven layers form a **unified platform for building civilizational infrastructure**.
 
 This is the technical core of SIL's mission.
 
 ---
 
 **Related Documents:**
-- SIL_GLOSSARY.md - Definitions of key terms
-- SIL_PRINCIPLES.md - The 14 guiding principles
-- ../architecture/UNIFIED_ARCHITECTURE_GUIDE.md - The universal pattern
-- ../../projects/PROJECT_INDEX.md - See how projects map to these layers
+- [SIL Glossary](./SIL_GLOSSARY.md) — Canonical layer definitions (L0-L6)
+- [SIL Principles](./SIL_PRINCIPLES.md) — The 14 guiding principles
+- [Semantic Feedback Loops](./SEMANTIC_FEEDBACK_LOOPS.md) — Closed-loop control theory
+- [Semantic Observability](./SEMANTIC_OBSERVABILITY.md) — Intent-execution alignment
+- [Unified Architecture Guide](../architecture/UNIFIED_ARCHITECTURE_GUIDE.md) — The universal pattern
 
 ---
 
@@ -13187,9 +13226,46 @@ Senior Agent: Checks Beth health, discovers stale index, rebuilds, finds 24 docs
 
 **Start Here** — The single front door to SIL
 
-> **Navigation:** This is the single front door to SIL.
-> - [FAQ](../meta/FAQ.md) — Common questions answered
-> - [Glossary](SIL_GLOSSARY.md) — Terms and definitions
+> **Quick Links:**
+> - [FAQ](/meta/faq) — Common questions answered
+> - [Glossary](/canonical/glossary) — Terms and definitions
+
+---
+
+## SIL at a Glance
+
+```mermaid
+mindmap
+  root((Semantic Infrastructure Lab))
+    Production Tools
+      Reveal
+        Progressive disclosure
+        Token-efficient
+      Morphogen
+        Deterministic execution
+        40+ domains
+      GenesisGraph
+        Provenance tracking
+        Cryptographic attestation
+    Architecture
+      Semantic OS
+        7-layer model
+        Cross-cutting concerns
+      Pantheon IR
+        Universal types
+        Cross-domain composition
+      Agent Ether
+        Multi-agent protocols
+        Choreography and orchestration
+    Research
+      Progressive Disclosure
+      Semantic Transport
+      Feedback Loops
+    Foundation
+      Manifesto
+      Principles
+      Glossary
+```
 
 ---
 
@@ -13222,7 +13298,7 @@ SIL is not a vision document. It's working infrastructure:
 - **Morphogen** — Cross-domain unified primitives (40+ computational domains)
 
 ### Production Tools
-- **Reveal** (v0.18.0) — Progressive disclosure for code structure & Python runtime inspection
+- **Reveal** (v0.23.1) — Progressive disclosure for code structure & Python runtime inspection
   - `pip install reveal-cli`
   - 86% token reduction for agent workflows
   - New: `python://` adapter for runtime environment analysis
@@ -13265,28 +13341,28 @@ SIL builds infrastructure meant to last decades, not chase quarterly trends.
 ## Where to Go Next
 
 ### For the Story
-**[Founder's Letter](FOUNDERS_LETTER.md)** — Why SIL was built, the vision, and what we're inviting you to help build
+**[Founder's Letter](/canonical/founders-letter)** — Why SIL was built, the vision, and what we're inviting you to help build
 
 ### For the Personal Vision
-**[Founder Background](../meta/FOUNDER_BACKGROUND.md)** — Working systems, production metrics, and track record
-**[Influences & Acknowledgments](../meta/INFLUENCES_AND_ACKNOWLEDGMENTS.md)** — The thinkers and traditions that shaped SIL
+**[Founder Background](/meta/founder-background)** — Working systems, production metrics, and track record
+**[Influences & Acknowledgments](/meta/influences-and-acknowledgments)** — The thinkers and traditions that shaped SIL
 
 ### For the Philosophy
-**[Manifesto](SIL_MANIFESTO.md)** — The philosophical foundation
-**[Principles](SIL_PRINCIPLES.md)** — 14 foundational constraints that define SIL
+**[Manifesto](/canonical/manifesto)** — The philosophical foundation
+**[Principles](/canonical/principles)** — 14 foundational constraints that define SIL
 
 ### For the Technical Depth
-**[Technical Charter](SIL_TECHNICAL_CHARTER.md)** — Formal specification with invariants and guarantees
-**[Semantic OS Architecture](../architecture/UNIFIED_ARCHITECTURE_GUIDE.md)** — 7-layer architecture from memory to interfaces
+**[Technical Charter](/canonical/technical-charter)** — Formal specification with invariants and guarantees
+**[Semantic OS Architecture](/canonical/semantic-os-architecture)** — 7-layer architecture from memory to interfaces
 
 ### For the Tools
-**[Reveal](../tools/REVEAL.md)** — Code structure navigation
-**[Agent Help Standard](../research/AGENT_HELP_STANDARD.md)** — Strategic guidance for agents
+**[Reveal](/tools/reveal)** — Code structure navigation
+**[Agent Help Standard](/research/agent-help-standard)** — Strategic guidance for agents
 **[GenesisGraph](https://github.com/Semantic-Infrastructure-Lab/genesisgraph)** — Verifiable provenance
-**[Morphogen](../innovations/MORPHOGEN.md)** — Unified computational substrate
+**[Morphogen](/innovations/morphogen)** — Unified computational substrate
 
 ### For Collaborators
-**[FAQ](../meta/FAQ.md)** — Common questions answered
+**[FAQ](/meta/faq)** — Common questions answered
 **[GitHub](https://github.com/Semantic-Infrastructure-Lab)** — How to join us
 
 ## The Bell Labs of AI
@@ -14066,6 +14142,123 @@ TAP assertions use JSON-LD for semantic interoperability:
 # ========================================
 # CATEGORY: ARCHITECTURE
 # ========================================
+
+
+## Document: ARCHITECTURE_CHEAT_SHEET.md
+## Path: /docs/architecture/ARCHITECTURE_CHEAT_SHEET.md
+
+---
+title: SIL Architecture Cheat Sheet
+type: reference
+status: current
+created: 2025-12-15
+session_id: turbulent-current-1215
+beth_topics:
+  - sil-architecture
+  - invariants
+  - messaging
+  - quick-reference
+summary: One-page reference for SIL's architectural philosophy and decision framework
+---
+
+# SIL Architecture Cheat Sheet
+
+**Use this for:** Quick reference, stakeholder conversations, design reviews.
+
+---
+
+## The Core Insight
+
+**Two frames, one architecture:**
+
+| Frame | Purpose | Question It Answers |
+|-------|---------|---------------------|
+| **Layers** | Organization | "Where does this code belong?" |
+| **Invariants** | Mission | "Does this prevent the worst day?" |
+
+---
+
+## The Five Invariants
+
+These must hold everywhere. They prevent the structural failures SIL committed to fix.
+
+| Invariant | Prevents | Enforced By | Status |
+|-----------|----------|-------------|--------|
+| Everything has lineage | Epistemic collapse | GenesisGraph | Production |
+| Reasoning is inspectable | Black box dictatorship | Reveal | Production |
+| Computation is grounded | Hallucinated science | Morphogen | Prototype |
+| Contracts are explicit | Brittle complexity | Agent Ether | **Gap** |
+| Efficiency is sustainable | Compute as privilege | Beth + Reveal | Production |
+
+---
+
+## The Chief Scientist Test
+
+Before approving any architectural decision, ask:
+
+1. **Lineage:** Does this maintain traceable provenance?
+2. **Transparency:** Is reasoning inspectable?
+3. **Grounding:** Is computation connected to reality?
+4. **Contracts:** Are assumptions explicit?
+5. **Efficiency:** Is this sustainable at scale?
+6. **Agency:** Does this keep humans as conductors?
+
+If any answer is "no" or "unclear," revise the architecture.
+
+---
+
+## The Provenance-First Stack
+
+For organizational questions ("where does this go?"):
+
+```
+L6: Reflection    - Learning from execution (observability)
+L5: Execution     - Doing work under constraints (agents)
+L4: Composition   - Cross-domain integration (Pantheon IR)
+L3: Intent        - What we're accomplishing (contracts)
+L2: Trust         - Who can do what (authorization)
+L1: Meaning       - Embeddings, types, similarity (Beth)
+L0: Provenance    - Everything has lineage (GenesisGraph)
+───────────────────────────────────────────────────────
+L-1: Substrate    - Physical/computational reality (optional)
+```
+
+---
+
+## Key Phrases
+
+**For funders/partners:**
+> "We build transparent infrastructure for AI—semantic foundations that make reasoning visible, provenance verifiable, and intelligence grounded in reality."
+
+**For technical audiences:**
+> "Use layers for organization, invariants for mission. Five guarantees that must hold everywhere."
+
+**The differentiator:**
+> "AGI as colleague, not god. Integrated into human trust frameworks, not transcending them."
+
+---
+
+## Quick Reference
+
+| If you need to... | Go to... |
+|-------------------|----------|
+| Understand why SIL exists | THE_FORK.md |
+| See the full invariants proposal | INVARIANTS_OVER_LAYERS.md |
+| Navigate reading paths | SYNTHESIS_MAP.md |
+| See layer model comparison | LAYER_MODELS_COMPARISON.md |
+| Check implementation status | models/README.md |
+
+---
+
+## The One Sentence
+
+**SIL builds the semantic substrate that makes AI transparent, grounded, and trustworthy—preventing epistemic collapse, not by stopping AI, but by building the steel beneath the wood.**
+
+---
+
+*Last updated: 2025-12-15 (turbulent-current-1215)*
+
+---
 
 
 ## Document: DISTRIBUTED_STORAGE_ARCHITECTURE.md
@@ -15593,6 +15786,1795 @@ def retrieve_document(cid):
 
 **Version History:**
 - v0.1.0 (2025-12-10): Initial research document analyzing IPFS integration points across SIL architecture
+
+---
+
+
+## Document: INVARIANTS_OVER_LAYERS.md
+## Path: /docs/architecture/models/INVARIANTS_OVER_LAYERS.md
+
+---
+title: "Invariants Over Layers: A Mission-Centric Architecture Frame"
+type: architectural-proposal
+status: draft
+created: 2025-12-15
+session_id: pulsing-horizon-1215
+continues: oracular-throne-1215
+beth_topics:
+  - sil-architecture
+  - invariants
+  - mission-alignment
+  - glass-box
+  - provenance
+  - semantic-os
+  - chief-scientist-stewardship
+summary: Proposes reframing SIL architecture from layer organization to invariant enforcement, better serving the mission of preventing epistemic collapse and enabling human-AI coexistence
+related:
+  # Same directory
+  - LAYER_MODELS_COMPARISON.md
+  - MODEL_EVALUATION.md
+  - PROVENANCE_FIRST.md
+  # Foundation docs (in tia/projects/SIL/foundation/)
+  - THE_FORK.md           # tia/projects/SIL/foundation/pitch/
+  - VISION_HOPE.md        # tia/projects/SIL/foundation/pitch/
+  - SCOPE_OF_HOPE.md      # tia/projects/SIL/foundation/
+synthesis_sources:
+  - SIL_VISION_COMPLETE.md
+  - SIL_CIVILIZATIONAL_SYSTEMS_ENGINEERING.md
+  - SIL_MORPHOGEN_PROJECT.md
+  - THE_FORK.md
+  - VISION_HOPE.md
+  - VISION_REALITY.md
+  - SCOPE_OF_HOPE.md
+  - THE_GREAT_CONTINUATION.md
+---
+
+# Invariants Over Layers: A Mission-Centric Architecture Frame
+
+**Session:** pulsing-horizon-1215
+**Continues:** oracular-throne-1215 (which completed layer model evaluation)
+**Author:** TIA (Chief Semantic Agent) with Scott Senkeresty
+
+---
+
+## Executive Summary
+
+After completing the layer model evaluation (oracular-throne-1215, score: Provenance-First 4.15), this session stepped back to ask a deeper question:
+
+> **Does ANY layer model serve the SIL/SIF mission? Or is there a different organizing principle?**
+
+After reading 8 foundational documents (see [Synthesis Sources](#synthesis-sources)), we propose that **invariants matter more than layers**.
+
+**The shift:**
+- Layer models ask: "Where do our 12 projects fit?"
+- Mission alignment asks: "What invariants prevent the worst day?"
+
+**The frame:**
+Instead of L0-L6 layers, organize around **guarantees that must hold everywhere**.
+
+---
+
+## The Question Behind the Question
+
+The layer model evaluation scored Provenance-First highest (4.15 vs 3.05 for Canonical). But during stakeholder review, a deeper question emerged:
+
+> "A god off the mountain is terrifying because we will never understand the alignment. We need AGI integrated INTO existing trust frameworks with provenance and a 'universal translator' (Morphogen) for scientific ideas, with appropriate partial disclosure for SSI..."
+
+This reframes the architectural question entirely.
+
+**The danger isn't AGI that's too powerful. It's AGI that sits ABOVE human frameworks—unknowable, unauditable, delivering pronouncements from on high.**
+
+The alternative: AGI as **colleague, not god**. Integrated into human trust frameworks, not transcending them.
+
+---
+
+## Part I: Best Day / Worst Day (Mission Grounding)
+
+### Best Day (Glass Box Future)
+
+From `VISION_HOPE.md`, `SCOPE_OF_HOPE.md`, `THE_FORK.md`:
+
+1. **Restored Shared Reality** - GenesisGraph provenance makes "where did this come from?" answerable
+2. **Scientific Renaissance** - Morphogen enables physics/biology/chemistry to finally talk
+3. **Auditable Governance** - Citizens can inspect algorithmic decisions
+4. **Cognitive Exoskeleton** - AI extends human capability without replacing agency
+5. **Sustainable Intelligence** - 100x efficiency makes AI accessible worldwide
+
+### Worst Day (Grey Fog)
+
+From `VISION_REALITY.md`, `THE_FORK.md`:
+
+1. **Epistemic Collapse** - Deepfakes indistinguishable, truth subjective, 48% hallucination rates
+2. **Black Box Dictatorship** - "The algorithm said so" is the final answer
+3. **Brittle Complexity** - Silent cascading failures in multi-agent systems
+4. **Trapped Intelligence** - AI hallucinating science instead of doing it
+5. **God Off the Mountain** - AGI we cannot understand, audit, or steer
+
+### What SIL Cannot Fix (Honest Limits)
+
+From `THE_FORK.md`:
+
+- Labor displacement (economic forces)
+- Cognitive atrophy (cultural choice)
+- Emotional exploitation (the human heart)
+- Malicious use (evil exists)
+- Power concentration (market dynamics)
+
+### What SIL MUST Fix (Structural Failures)
+
+From `THE_FORK.md`, `SCOPE_OF_HOPE.md`:
+
+| Structural Failure | SIL Solution |
+|-------------------|--------------|
+| Collapse of shared reality | GenesisGraph (provenance) |
+| Black box governance | Glass Box doctrine (transparency) |
+| Brittle complexity | Agent Ether (contracts) |
+| Trapped intelligence | Morphogen (grounding) |
+| Unsustainable compute | Reveal + Beth (efficiency) |
+
+---
+
+## Part II: Why Layers May Not Be the Right Frame
+
+### The OSI Analogy Problem
+
+The OSI model works because network packets genuinely traverse separable concerns **in sequence**:
+```
+Application → Presentation → Session → Transport → Network → Data Link → Physical
+```
+
+Each layer wraps the one below. Clean interfaces. Sequential traversal.
+
+**But semantic infrastructure may not work this way.**
+
+When Beth retrieves a document, is it "in" Layer 1 (Meaning)? Or does it simultaneously invoke:
+- Provenance (L0) - Where did this document come from?
+- Trust (L2) - Who authored it? Is it authoritative?
+- Composition (L4) - How does it relate to other knowledge?
+
+**Tools span layers. They don't sit in layers.**
+
+The `coral-shine-1212` and `brewing-sleet-1212` sessions identified this:
+> "Layer 1 is the glue" - Intent Verification, Uncertainty Tracking, Cross-Domain Translation connect everything.
+
+### Historical Models Were Product-Centric
+
+From `MODEL_EVALUATION.md`:
+
+> The historical models asked "where do projects fit?" instead of "what solves LLM coexistence?"
+
+This led to:
+- Arguments about which layer Beth belongs in
+- Tools assigned to single layers when they span multiple
+- Architecture serving project organization, not mission
+
+### Provenance as Invariant, Not Foundation
+
+The Provenance-First model puts provenance at L0 - the foundation. But what if provenance isn't a layer at all?
+
+**Provenance might be an invariant** - something that must hold at every layer, woven through everything, not sitting beneath it.
+
+Same for transparency, grounding, contracts, efficiency.
+
+---
+
+## Part III: The Invariants Frame
+
+### Core Insight
+
+Instead of asking "what layer does X go in?", ask "what invariants must always hold?"
+
+### The Five Invariants
+
+| Invariant | What It Prevents | How It's Enforced | Status |
+|-----------|------------------|-------------------|--------|
+| **Everything has lineage** | Epistemic collapse | GenesisGraph - cryptographic provenance | **Production** (v0.3.0) |
+| **Reasoning is inspectable** | Black box dictatorship | Reveal - progressive disclosure | **Production** (v0.23.1) |
+| **Computation is grounded** | Hallucinated science | Morphogen - semantic correctness | **Prototype** (v0.12.0) |
+| **Contracts are explicit** | Brittle complexity | Agent Ether - typed assumptions | **Design** (spec only) |
+| **Efficiency is sustainable** | Compute as privilege | Reveal + Beth - 100x reduction | **Production** |
+
+> **Note (2025-12-15):** Agent Ether is currently specification-only. The "Contracts are explicit" invariant has no enforcement tooling yet. This is a known gap requiring implementation priority. See `VALIDATION_REPORT.md` from session turbulent-current-1215.
+
+### How Invariants Differ from Layers
+
+**Layers:**
+- Organize structure hierarchically
+- Components belong to specific layers
+- Communication flows between layers
+- Abstraction hides lower layers
+
+**Invariants:**
+- Constraints that must hold everywhere
+- Components may touch multiple invariants
+- Enforcement woven through all operations
+- Transparency about what's guaranteed
+
+### Visual Frame
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     INVARIANTS (must hold everywhere)          │
+│  • Provenance  • Transparency  • Grounding  • Contracts        │
+│                • Efficiency                                    │
+├─────────────────────────────────────────────────────────────────┤
+│                     INFRASTRUCTURE (enabling substrate)        │
+│  GenesisGraph │ Reveal/USIR │ Morphogen │ Agent Ether │ Beth   │
+├─────────────────────────────────────────────────────────────────┤
+│                     INTEGRATION (colleague, not god)           │
+│  SSI + Partial Disclosure + Human-in-Loop + Auditable Chains   │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Not layers stacking. Guarantees spanning.**
+
+---
+
+## Part IV: Chief Scientist Stewardship
+
+### What Stewardship Is NOT About
+
+- Organizing projects into layers
+- Deciding which layer tools belong in
+- Creating hierarchies of abstraction
+- Managing technical architecture
+
+### What Stewardship IS About
+
+From `SIL_VISION_COMPLETE.md`:
+
+> "The Founder's Role: Hold the vision, Maintain coherence, Attract the right people, Prototype primitives, Protect the culture. Not the hero, not the savior—the architect and steward."
+
+Applied to architecture:
+
+1. **Maintain invariants that prevent the worst day**
+   - Every system can answer "where did this come from?"
+   - Reasoning is inspectable by default
+   - Computation is grounded in reality
+
+2. **Enforce glass-box transparency as non-negotiable**
+   - "Show your work" is a requirement, not a feature
+   - Black boxes are rejected, not tolerated
+
+3. **Build the universal translator**
+   - Morphogen enables cross-domain reasoning
+   - Physics talks to biology talks to chemistry
+   - The math finally talks to the math
+
+4. **Keep humans as conductors**
+   - AI extends, doesn't replace
+   - SSI preserves human agency
+   - Appropriate partial disclosure, not total surveillance
+
+---
+
+## Part V: Morphogen as Universal Translator
+
+### The Star Trek Insight
+
+From `SIL_MORPHOGEN_PROJECT.md`:
+
+> "Named after Alan Turing's morphogens—the chemicals that generate biological patterns—Morphogen embodies the principle: **Generative systems with reproducible outcomes.**"
+
+But the deeper vision from founder discussion:
+
+> "A Star Trek 'universal translator' for scientific ideas"
+
+This isn't just deterministic computation. It's **cross-domain coherence**:
+- Biologist uses aerospace fluid dynamics for cell membrane modeling
+- Materials scientist applies audio-frequency transforms to stress testing
+- Climate researcher uses ocean physics from submarine engineering
+
+**The math finally talks to the math.**
+
+### Why This Matters for Architecture
+
+Morphogen isn't a "layer." It's the **enforcement mechanism** for the "computation is grounded" invariant.
+
+Every domain that plugs into Morphogen gains:
+- Deterministic reproducibility
+- Cryptographic provenance
+- Cross-domain composability
+- Semantic type checking
+
+---
+
+## Part VI: SSI and Partial Disclosure
+
+### The Human Side of "Not God"
+
+Self-Sovereign Identity (SSI) with appropriate partial disclosure addresses the human agency problem:
+
+| Principle | Implementation |
+|-----------|----------------|
+| **Humans control identity** | SSI - not systems controlling humans |
+| **Reveal what's needed** | Partial disclosure - minimum necessary |
+| **Provenance cuts both ways** | Systems trace what they know, humans trace what they've shared |
+| **Audit is bidirectional** | Humans can inspect AI reasoning; AI declares its inputs |
+
+### Preventing "God Off the Mountain"
+
+The alternative to AGI-as-god is AGI-as-colleague:
+
+| God Model | Colleague Model |
+|-----------|-----------------|
+| Delivers pronouncements | Shows reasoning |
+| Demands trust | Provides verification |
+| Knows everything | Declares uncertainty |
+| Controls access | Respects sovereignty |
+| Sits above humans | Integrates with human frameworks |
+
+The invariants frame enforces the colleague model architecturally.
+
+---
+
+## Part VII: Relationship to Layer Models
+
+### Not Replacing, Complementing
+
+The Provenance-First layer model scored highest (4.15) for good reason:
+- Problem-centric design
+- Addresses LLM coexistence directly
+- Founder alignment ("provenance when I hear SOS")
+
+**The invariants frame doesn't replace the layer model. It recontextualizes it.**
+
+### Reconciliation
+
+```
+LAYER MODEL VIEW:                    INVARIANTS VIEW:
+
+L6: Reflection                       Everything has lineage
+L5: Execution                        Reasoning is inspectable
+L4: Composition          ←→          Computation is grounded
+L3: Intent                           Contracts are explicit
+L2: Trust                            Efficiency is sustainable
+L1: Meaning
+L0: Provenance
+```
+
+The layer model provides **organizational structure**.
+The invariants frame provides **enforcement guarantees**.
+
+Both are true. Both are needed. The question is which is primary.
+
+### Proposed Synthesis
+
+**Use layers for:**
+- Organizing documentation
+- Explaining how tools relate
+- Onboarding new contributors
+- Navigating the codebase
+
+**Use invariants for:**
+- Architectural decisions
+- Design reviews
+- Mission alignment checks
+- "Should we build X?" questions
+
+---
+
+## Part VIII: Decision Framework
+
+### When to Use Layer Thinking
+
+- "Where does this code belong?"
+- "How do these systems communicate?"
+- "What's the dependency structure?"
+- "How do I navigate the codebase?"
+
+### When to Use Invariant Thinking
+
+- "Does this serve the mission?"
+- "Does this prevent the worst day?"
+- "Does this enforce our guarantees?"
+- "Would this create a god or a colleague?"
+
+### The Chief Scientist Test
+
+Before approving architectural decisions, ask:
+
+1. **Provenance:** Does this maintain traceable lineage?
+2. **Transparency:** Is reasoning inspectable?
+3. **Grounding:** Is computation connected to reality?
+4. **Contracts:** Are assumptions explicit?
+5. **Efficiency:** Is this sustainable at scale?
+6. **Agency:** Does this keep humans as conductors?
+
+If any answer is "no" or "unclear," the architecture needs revision.
+
+---
+
+## Synthesis Sources
+
+This document synthesized insights from 8 foundational documents:
+
+| Document | Key Contribution |
+|----------|------------------|
+| `SIL_VISION_COMPLETE.md` | Core principles, founder's role |
+| `SIL_CIVILIZATIONAL_SYSTEMS_ENGINEERING.md` | Scale of ambition, 50-year thinking |
+| `SIL_MORPHOGEN_PROJECT.md` | Universal translator concept |
+| `THE_FORK.md` | Two timelines, structural failures we must fix |
+| `VISION_HOPE.md` | Best day vision |
+| `VISION_REALITY.md` | Honest limits, worst day risks |
+| `SCOPE_OF_HOPE.md` | Complete positioning, bounded hope |
+| `THE_GREAT_CONTINUATION.md` | Session continuity as architecture pattern |
+
+### Session Lineage
+
+```
+enchanted-centaur-1214  - Discovered 4 competing layer models
+         ↓
+heating-snow-1214       - Proposed provenance-first model
+         ↓
+scorching-gust-1215     - Created comparison framework
+         ↓
+oracular-throne-1215    - Completed evaluation, scored models
+         ↓
+pulsing-horizon-1215    - This session: invariants over layers
+```
+
+---
+
+## Next Steps
+
+### Immediate
+
+1. **Stakeholder decision:** Accept invariants frame as complementary to layer model
+2. **Update documentation:** Add invariant checks to design review templates
+3. **Chief Scientist checklist:** Formalize the 6-question test
+
+### Near-term
+
+4. **Enforcement mechanisms:** Map each invariant to specific code/tools that enforce it
+5. **Gap analysis:** Which invariants are weakly enforced today?
+6. **Morphogen roadmap:** Prioritize "universal translator" capability
+
+### Long-term
+
+7. **SSI integration:** Design partial disclosure system
+8. **Audit tooling:** Build tools for bidirectional audit trails
+9. **Mission metrics:** How do we measure "preventing the worst day"?
+
+---
+
+## Conclusion
+
+The layer model evaluation was rigorous and produced a clear winner (Provenance-First, 4.15). But the stakeholder review revealed a deeper question:
+
+**Are we organizing architecture or enforcing mission?**
+
+This document proposes that **invariants matter more than layers** for mission alignment. The five invariants (lineage, transparency, grounding, contracts, efficiency) represent guarantees that must hold everywhere—not structure to organize.
+
+Both frames are valid. Both are needed. The question is which is primary for which purpose:
+- **Layers** for organization and navigation
+- **Invariants** for mission alignment and design decisions
+
+The Chief Scientist's stewardship is ultimately about maintaining these invariants—ensuring SIL builds colleagues, not gods.
+
+---
+
+**Document Status:** Draft with validation
+**Validated By:** turbulent-current-1215 (see VALIDATION_REPORT.md)
+**Confidence:** Frame HIGH (90%), Enforcement 67% (3.5/5 invariants production)
+**Key Gap:** Agent Ether (Contracts are explicit) - specification only, no tooling
+**Next Review:** Agent Ether implementation priority decision
+**Session:** pulsing-horizon-1215
+
+---
+
+
+## Document: LAYER_MODELS_COMPARISON.md
+## Path: /docs/architecture/models/LAYER_MODELS_COMPARISON.md
+
+# Layer Models Comparison
+
+**Version:** 1.0
+**Date:** 2025-12-15
+**Status:** Working document
+
+---
+
+## Overview
+
+This document compares the different layer models that have emerged across SIL documentation. The goal is to understand the differences, evaluate trade-offs, and converge on a canonical model.
+
+---
+
+## Model Summary Table
+
+| Layer | Canonical (Glossary) | Original Semantic OS | Feedback Loops | Observability | Provenance-First |
+|-------|---------------------|---------------------|----------------|---------------|------------------|
+| **L7** | - | - | - | Applications | - |
+| **L6** | Intelligence | - | Applications | Agent Orchestration | Reflection |
+| **L5** | Intent | Human Interfaces | Agent Orchestration | Pantheon | Execution |
+| **L4.5** | - | - | - | **Observability** | - |
+| **L4** | Dynamics | Deterministic Engines | Semantic Primitives | TIA | Composition |
+| **L3** | Composition | Agent Ether | Feedback & Reflection | Beth | Intent |
+| **L2** | Structures | Domain Modules | Tool Infrastructure | Domain modules | Trust |
+| **L1** | Primitives | Pantheon IR | Storage & Indexing | Semantic primitives | Meaning |
+| **L0** | Substrate | Semantic Memory | - | - | **Provenance** |
+| **L-1** | Arena (implicit) | - | - | - | - |
+| **Meta** | Observability | - | - | - | - |
+
+---
+
+## Model 1: Canonical (Glossary v2.2)
+
+**Source:** `SIL_GLOSSARY.md`
+**Status:** Current canonical reference
+
+```
+L6: Intelligence    - Agents, Planning, Adaptation (Agent Ether, BrowserBridge)
+L5: Intent          - Goals, Constraints, Roles (Pantheon validation)
+L4: Dynamics        - Time, Behavior, Execution (Morphogen scheduler)
+L3: Composition     - Graphs, Routing, Topology (Pantheon IR, SUP)
+L2: Structures      - Semantic Units, Types (TiaCAD, GenesisGraph)
+L1: Primitives      - Irreducible Operations (Morphogen domains, RiffStack)
+L0: Substrate       - Physical/Computational Reality (Philbrick hardware)
+─────────────────────────────────────────────────────────────────────────
+Meta: Observability - Cross-cutting (Reveal)
+```
+
+**Characteristics:**
+- Hardware-grounded (Philbrick at L0)
+- Observability as meta-layer
+- Product-centric assignment
+- 7 layers + meta
+
+**Patron Saints (from OSI_LAYER_MAPPING):**
+- L6: Marvin Minsky (Agents)
+- L5: Douglas Engelbart (Augmentation)
+- L4: Alan Turing (Computation)
+- L3: Claude Shannon (Information)
+- L2: George Philbrick (Modularity)
+- L1: Harold Black (Feedback)
+- L0: Richard Feynman (Physics)
+
+---
+
+## Model 2: Original Semantic OS (6-Layer)
+
+**Source:** `SIL_SEMANTIC_OS_ARCHITECTURE.md` (pre-alignment)
+**Status:** Historical, partially updated
+
+```
+L5: Human Interfaces
+L4: Deterministic Engines (Morphogen)
+L3: Agent Ether
+L2: Domain Modules
+L1: Pantheon IR
+L0: Semantic Memory
+```
+
+**Characteristics:**
+- Memory-grounded (Semantic Memory at L0)
+- Human interfaces at top
+- Agent Ether as middleware (L3)
+- 6 layers, no meta
+
+---
+
+## Model 3: Feedback Loops (6-Layer)
+
+**Source:** `SEMANTIC_FEEDBACK_LOOPS.md`
+**Status:** Historical
+
+```
+L6: Applications (Scout, Morphogen)
+L5: Agent Orchestration (agent-ether)
+L4: Semantic Primitives (USIR, knowledge graphs)
+L3: Feedback & Reflection
+L2: Tool Infrastructure (reveal, tia)
+L1: Storage & Indexing (Beth, Gemma)
+```
+
+**Characteristics:**
+- No L0 defined
+- Feedback as explicit layer (L3)
+- Tool infrastructure prominent
+- Application-focused top layers
+
+---
+
+## Model 4: Observability (7-Layer + L4.5)
+
+**Source:** `SEMANTIC_OBSERVABILITY.md` (pre-alignment)
+**Status:** Historical, had unique L4.5
+
+```
+L7: Applications (Scout, Reveal, Agent-Ether)
+L6: Agent Orchestration
+L5: Pantheon
+L4.5: SEMANTIC OBSERVABILITY  ← Unique!
+L4: TIA
+L3: Beth
+L2: Domain modules
+L1: Semantic primitives
+```
+
+**Characteristics:**
+- Observability as full layer (L4.5)
+- Tools as layers (TIA at L4, Beth at L3)
+- 8 effective layers
+- Most tool-centric model
+
+---
+
+## Model 5: Provenance-First (Proposed)
+
+**Source:** `sessions/heating-snow-1214/README_2025-12-15_08-52.md`
+**Status:** Proposed alternative
+
+```
+L6: Reflection      - Learning from execution (observability)
+L5: Execution       - Doing work under constraints (agents)
+L4: Composition     - Cross-domain integration (Pantheon IR)
+L3: Intent          - What we're accomplishing (contracts)
+L2: Trust           - Who can do what (TAP, Authorization)
+L1: Meaning         - Embeddings, types, similarity (Beth, Pantheon)
+L0: Provenance      - Everything has lineage (GenesisGraph)
+```
+
+**Characteristics:**
+- Problem-centric (solves LLM coexistence)
+- Provenance as foundation
+- Trust as explicit layer
+- Philbrick becomes optional backend
+- Tools span layers (like Unix utilities)
+
+**Design Rationale:**
+If core problems are:
+1. Decomposing intent into trackable work
+2. Trust relationships for LLM/AGI coexistence
+3. Cross-domain tooling
+4. Meaning manifolds for analogies
+
+Then layers should reflect those problems, not products.
+
+**Unix Philosophy Parallel:**
+- Unix insight: "Everything is a file"
+- Semantic OS insight: "Everything has meaning and provenance"
+
+---
+
+## Component Assignment Comparison
+
+| Component | Canonical | Original | Feedback | Observability | Provenance-First |
+|-----------|-----------|----------|----------|---------------|------------------|
+| **Agent Ether** | L6 | L3 | L5 | L6/L7 | L5 (Execution) |
+| **Morphogen** | L1+L4 | L4 | L6 | - | spans L4-L5 |
+| **Pantheon IR** | L3 | L1 | L4 | L5 | L4 (Composition) |
+| **GenesisGraph** | L2 | - | - | - | L0 (Foundation) |
+| **Beth** | L2 | - | L1 | L3 | L1 (Meaning) |
+| **Reveal** | Meta | - | L2 | L7 | spans layers |
+| **TIA** | - | - | L2 | L4 | spans L3-L6 |
+| **SUP** | L3 | - | - | - | L4 (Composition) |
+| **Philbrick** | L0 | - | - | - | backend (optional) |
+| **Human Interfaces** | L5 | L5 | - | - | L6 (Reflection) |
+
+---
+
+## Key Architectural Questions
+
+### 1. What is L0?
+
+| Model | L0 Definition | Implication |
+|-------|---------------|-------------|
+| Canonical | Substrate (hardware) | Architecture is hardware-up |
+| Original | Semantic Memory | Architecture is memory-up |
+| Provenance-First | Provenance (lineage) | Architecture is trust-up |
+
+**Question:** Is the foundation hardware, memory, or trust?
+
+### 2. Where do tools fit?
+
+| Approach | Examples | Implication |
+|----------|----------|-------------|
+| Tools as layers | TIA at L4, Beth at L3 | Tools are architectural components |
+| Tools span layers | TIA spans L3-L6 | Tools are utilities, not layers |
+| Tools as meta | Reveal as meta-layer | Tools observe, don't participate |
+
+**Question:** Should TIA/Beth/Reveal be layers or cross-cutting utilities?
+
+### 3. Is Observability a layer or meta?
+
+| Model | Observability Location | Implication |
+|-------|----------------------|-------------|
+| Canonical | Meta-layer | Orthogonal concern |
+| Observability | L4.5 | First-class layer |
+| Provenance-First | L6 (Reflection) | Part of learning loop |
+
+### 4. Where does Trust/Authorization fit?
+
+| Model | Trust Location | Implication |
+|-------|---------------|-------------|
+| Canonical | L5 (Intent) | Trust is part of goal-setting |
+| Provenance-First | L2 | Trust is structural foundation |
+
+---
+
+## Cross-Cutting Concerns (All Models)
+
+Regardless of layer assignment, these span the stack:
+
+1. **Provenance** - Who made what, when, from what
+2. **Trust** - Who can do what to whom
+3. **Observability** - What's happening, how well
+4. **Feedback** - Learning from execution
+
+The Provenance-First model makes two of these (Provenance, Trust) explicit layers rather than cross-cutting.
+
+---
+
+## Critical Missing Subsystems
+
+The `coral-shine-1212` and `brewing-sleet-1212` sessions identified three subsystems that don't yet exist but are critical for any model:
+
+### 1. Intent Verification Subsystem
+
+**Problem:** No mechanical way to verify that an action preserves the original intent.
+
+**Solution:** Intent as cryptographic primitive - asymmetric verification where it's easy to check but hard to fake.
+
+| Model | Where It Lives |
+|-------|---------------|
+| Canonical | L5 (Intent) |
+| Original | L5 (Human Interfaces) |
+| Feedback | L3 (Feedback & Reflection) |
+| Observability | L6 (Agent Orchestration) |
+| **Provenance-First** | **L3 (Intent)** - explicit intent layer |
+
+**Components needed:**
+- `intent.py` - Intent object schema
+- `signature.py` - Intent signature verification
+- `contract.py` - Contract enforcement
+- `amendment.py` - Intent versioning
+
+### 2. Uncertainty Tracking Subsystem
+
+**Problem:** Uncertainty compounds geometrically through operations; system can't detect or prevent runaway uncertainty.
+
+**Solution:** Uncertainty as first-class field - track assumptions, coupling, and propagation gradients.
+
+| Model | Where It Lives |
+|-------|---------------|
+| Canonical | Meta (Observability) |
+| Original | (implicit) |
+| Feedback | L3 (Feedback & Reflection) |
+| Observability | L4.5 |
+| **Provenance-First** | **L6 (Reflection)** - learning from execution |
+
+**Components needed:**
+- `uncertainty.py` - UncertaintyProfile schema
+- `propagation.py` - Gradient tracking
+- `brakes.py` - Abort semantics, checkpoints
+
+### 3. Cross-Domain Translation Subsystem
+
+**Problem:** Domains translate meaning ad-hoc; invariants not preserved; loss untracked.
+
+**Solution:** Semantic operators with contracts - like FFT preserving information while changing representation.
+
+| Model | Where It Lives |
+|-------|---------------|
+| Canonical | L3 (Composition) |
+| Original | L1 (Pantheon IR) |
+| Feedback | L4 (Semantic Primitives) |
+| Observability | L5 (Pantheon) |
+| **Provenance-First** | **L4 (Composition)** - cross-domain integration |
+
+**Components needed:**
+- `operator.py` - SemanticOperator base class
+- `invariant.py` - Invariant schema
+- `registry.py` - Operator catalog
+- `verification.py` - Round-trip testing
+
+### Subsystem Layer Mapping Summary
+
+| Subsystem | Provenance-First Layer | Math Analogy |
+|-----------|----------------------|--------------|
+| Intent Verification | L3 (Intent) | Cryptography (asymmetric verification) |
+| Uncertainty Tracking | L6 (Reflection) | Thermodynamics (entropy flow) |
+| Cross-Domain Translation | L4 (Composition) | FFT (invariant preservation) |
+
+**Key Insight:** These aren't new ideas - we're applying proven mathematical patterns to semantic computing.
+
+---
+
+## Evaluation Criteria
+
+To decide on a canonical model, evaluate against:
+
+1. **Problem fit** - Does it help with LLM coexistence, cross-domain work?
+2. **Conceptual clarity** - Can you explain it in 2 minutes?
+3. **Component coherence** - Do assignments make sense?
+4. **Extension path** - Can new projects find their place?
+5. **Implementation guidance** - Does it help developers?
+
+See [MODEL_EVALUATION.md](MODEL_EVALUATION.md) for detailed analysis.
+
+---
+
+## Session References
+
+- `enchanted-centaur-1214` - Discovery of 4 competing models
+- `heating-snow-1214` - Provenance-first proposal
+- `noble-kraken-1125/COGNITIVE_OS_MASTER_MAP.md` - Comprehensive mapping attempt
+- `temporal-fractal-1214` - Documentation audit
+
+---
+
+## Next Steps
+
+1. [ ] Complete MODEL_EVALUATION.md with criteria scoring
+2. [ ] Draft PROVENANCE_FIRST.md with full rationale
+3. [ ] Get stakeholder input on key questions
+4. [ ] Propose canonical model
+5. [ ] Update source documents to align
+
+---
+
+
+## Document: MODEL_EVALUATION.md
+## Path: /docs/architecture/models/MODEL_EVALUATION.md
+
+# Layer Model Evaluation Framework
+
+**Version:** 1.0
+**Date:** 2025-12-15
+**Status:** Framework ready, scoring pending
+
+---
+
+## Purpose
+
+This document provides a structured framework for evaluating the competing layer models and selecting a canonical approach.
+
+---
+
+## Evaluation Criteria
+
+### 1. Problem Fit (Weight: 30%)
+
+Does the model help solve SIL's core problems?
+
+| Problem | Description |
+|---------|-------------|
+| LLM Coexistence | Human-AI collaboration with trust and attribution |
+| Cross-Domain Work | Composing tools across unrelated domains |
+| Intent Decomposition | Breaking high-level goals into trackable work |
+| Meaning Discovery | Finding similar concepts across contexts |
+
+**Scoring:**
+- 5: Directly addresses problem in layer structure
+- 4: Problem clearly maps to specific layers
+- 3: Problem addressable but not explicit
+- 2: Problem requires spanning multiple layers awkwardly
+- 1: Model doesn't help with this problem
+
+### 2. Conceptual Clarity (Weight: 25%)
+
+Can you explain the model to a new team member in 2 minutes?
+
+**Scoring:**
+- 5: Clear organizing principle, obvious layer boundaries
+- 4: Mostly clear, one or two confusing aspects
+- 3: Requires significant explanation
+- 2: Confusing layer assignments
+- 1: Contradictory or incoherent
+
+### 3. Component Coherence (Weight: 20%)
+
+Do project/tool assignments make intuitive sense?
+
+**Scoring:**
+- 5: Every component has obvious home, no ambiguity
+- 4: Most components clear, few edge cases
+- 3: Significant debate about where things go
+- 2: Components assigned to multiple layers
+- 1: Chaotic assignment, constant disagreement
+
+### 4. Extension Path (Weight: 15%)
+
+When we add new projects, can they find their place?
+
+**Scoring:**
+- 5: New projects obviously fit, layers are extensible
+- 4: Most new projects fit easily
+- 3: Sometimes need to reconsider layer boundaries
+- 2: New projects often don't fit well
+- 1: Model breaks with new additions
+
+### 5. Implementation Guidance (Weight: 10%)
+
+Does the model help developers build things?
+
+**Scoring:**
+- 5: Clear interfaces between layers, implementation path obvious
+- 4: Good guidance for most scenarios
+- 3: Helpful but requires interpretation
+- 2: Abstract, limited practical guidance
+- 1: No implementation value
+
+---
+
+## Model Scores
+
+### Model 1: Canonical (Glossary)
+
+| Criterion | Score | Notes |
+|-----------|-------|-------|
+| Problem Fit | 3 | LLM coexistence not explicit; product-centric design |
+| Conceptual Clarity | 4 | Clear 7-layer stack with patron saints; hardware grounding intuitive |
+| Component Coherence | 2 | Component assignment chaos (Agent Ether at L3 vs L6); tools as layers problematic |
+| Extension Path | 4 | New projects can find home; Philbrick at L0 provides grounding |
+| Implementation Guidance | 3 | OSI_LAYER_MAPPING provides detailed roadmap; but Layer 1 primitives missing |
+| **Weighted Total** | **3.05** | (0.30×3 + 0.25×4 + 0.20×2 + 0.15×4 + 0.10×3) |
+
+### Model 2: Original Semantic OS
+
+| Criterion | Score | Notes |
+|-----------|-------|-------|
+| Problem Fit | 3 | Memory-grounded; but trust/provenance implicit |
+| Conceptual Clarity | 3 | 6 layers simpler; but Human Interfaces at top feels arbitrary |
+| Component Coherence | 3 | Agent Ether at L3 makes sense as middleware; fewer assignment debates |
+| Extension Path | 2 | No meta-layer; observability unclear where to add |
+| Implementation Guidance | 2 | Historical; partially updated; less actionable than Canonical |
+| **Weighted Total** | **2.65** | (0.30×3 + 0.25×3 + 0.20×3 + 0.15×2 + 0.10×2) |
+
+### Model 3: Feedback Loops
+
+| Criterion | Score | Notes |
+|-----------|-------|-------|
+| Problem Fit | 3 | Feedback explicit (L3); but no L0 leaves foundation unclear |
+| Conceptual Clarity | 2 | No L0 confusing; Storage at L1 mixes concerns |
+| Component Coherence | 3 | Tool infrastructure explicit (L2); Scout/Morphogen at L6 reasonable |
+| Extension Path | 2 | Missing L0 makes grounding new projects difficult |
+| Implementation Guidance | 2 | Historical; less detailed than Canonical/Pantheon docs |
+| **Weighted Total** | **2.45** | (0.30×3 + 0.25×2 + 0.20×3 + 0.15×2 + 0.10×2) |
+
+### Model 4: Observability
+
+| Criterion | Score | Notes |
+|-----------|-------|-------|
+| Problem Fit | 3 | Observability as L4.5 innovative; but trust/provenance implicit |
+| Conceptual Clarity | 2 | L4.5 breaks clean layer model; 8 effective layers complex |
+| Component Coherence | 2 | Tools-as-layers (TIA at L4, Beth at L3) causes confusion |
+| Extension Path | 2 | L4.5 awkward for new components; where do they fit? |
+| Implementation Guidance | 2 | Tool-centric but less implementation detail |
+| **Weighted Total** | **2.30** | (0.30×3 + 0.25×2 + 0.20×2 + 0.15×2 + 0.10×2) |
+
+### Model 5: Provenance-First
+
+| Criterion | Score | Notes |
+|-----------|-------|-------|
+| Problem Fit | 5 | Directly addresses LLM coexistence, trust, cross-domain; problem-centric |
+| Conceptual Clarity | 4 | Clean 7-layer with clear Unix parallel; "everything has provenance" memorable |
+| Component Coherence | 4 | Tools span layers (like Unix utilities); explains assignment chaos |
+| Extension Path | 4 | New projects ask: what layer? what layers span? how relates to provenance? |
+| Implementation Guidance | 3 | Needs more detail; but GenesisGraph provides foundation |
+| **Weighted Total** | **4.15** | (0.30×5 + 0.25×4 + 0.20×4 + 0.15×4 + 0.10×3) |
+
+---
+
+## Key Decision Questions
+
+Before scoring, consider these fundamental questions:
+
+### Q1: What is the foundation?
+
+**Options:**
+- A) Physical hardware (Philbrick, compute)
+- B) Semantic memory (storage, indexing)
+- C) Provenance (lineage, trust)
+- D) Something else
+
+**Current answer:** **C) Provenance**
+
+**Rationale:** The core problem is LLM coexistence - humans and AI working together safely. Without provenance (who made what, when, from what), you cannot establish trust in LLM output. Hardware is necessary but not the architectural foundation for a *semantic* OS. Memory is implementation, not abstraction. Provenance is the primitive that makes everything else trustworthy. Scott's gut reaction ("provenance when I hear SOS") aligns with this.
+
+### Q2: Are tools layers or utilities?
+
+**Options:**
+- A) Tools are layers (TIA at L4, Beth at L3)
+- B) Tools span layers (like Unix utilities)
+- C) Tools are meta (outside the layer stack)
+
+**Current answer:** **B) Tools span layers**
+
+**Rationale:** The component assignment chaos (Agent Ether at L3 vs L6, Beth at L1 vs L3, TIA at L4 vs spanning) is explained by tools naturally spanning layers based on function. Unix utilities don't live at one layer of the network stack - `curl` touches application, transport, and network layers. Similarly:
+- Beth: L1 (Meaning) + L0 (Provenance of knowledge)
+- Reveal: L6 (Reflection) + L4 (Composition structure)
+- TIA: L3 (Intent) + L5 (Execution) + L6 (Reflection)
+
+This resolves the "where does X go" debates by acknowledging tools are cross-cutting.
+
+### Q3: Where does trust live?
+
+**Options:**
+- A) Implicit in Intent layer
+- B) Explicit Trust layer
+- C) Cross-cutting concern
+- D) Part of Provenance
+
+**Current answer:** **B) Explicit Trust layer (L2 in Provenance-First)**
+
+**Rationale:** Trust is too important for LLM coexistence to be implicit. The TAP (Trust Assertion Protocol) and Hierarchical Agency Framework already exist as substantial specs. Making Trust an explicit layer (between Meaning and Intent) establishes:
+- You can't express intent without authorization (Trust → Intent dependency)
+- Trust requires understanding meaning (Meaning → Trust dependency)
+- Trust is grounded in provenance (Provenance → Meaning → Trust chain)
+
+Cross-cutting makes trust feel like an afterthought. An explicit layer makes it architectural.
+
+### Q4: Is Observability a layer?
+
+**Options:**
+- A) Meta-layer (orthogonal)
+- B) Explicit layer (L4.5 or L6)
+- C) Part of Reflection/Feedback
+
+**Current answer:** **C) Part of Reflection (L6 in Provenance-First)**
+
+**Rationale:** Observability is *how we learn from execution*. The coral-shine sessions identified "uncertainty tracking" as a critical missing subsystem - this is observability in action. Placing it at L6 (Reflection) makes it:
+- The top of the stack (learning from everything below)
+- Part of a feedback loop (Reflection → informs future Intent)
+- Not a weird L4.5 that breaks clean layering
+
+The Canonical model's "meta-layer" treatment makes observability feel bolted-on. Making it L6 integrates it into the architecture.
+
+---
+
+## Comparison Matrix
+
+| Aspect | Canonical | Original | Feedback | Observability | Provenance |
+|--------|-----------|----------|----------|---------------|------------|
+| L0 definition | Substrate | Memory | (none) | (none) | Provenance |
+| Trust location | L5 | implicit | L3 | implicit | L2 |
+| Tool treatment | layers | layers | layers | layers | utilities |
+| Observability | meta | (none) | L3 | L4.5 | L6 |
+| Layer count | 7+meta | 6 | 6 | 8 | 7 |
+
+---
+
+## Hybrid Possibilities
+
+The models aren't mutually exclusive. Possible hybrids:
+
+### Hybrid A: Canonical + Trust Layer
+
+Keep Glossary model but add explicit Trust between Structures and Composition.
+
+### Hybrid B: Provenance-First + Hardware Substrate
+
+Keep Provenance at L0 but add L-1 for hardware/physics.
+
+### Hybrid C: Tools-as-Utilities for Any Model
+
+Any model could adopt "tools span layers" rather than "tools are layers."
+
+---
+
+## Decision Process
+
+1. [x] Answer key decision questions *(completed 2025-12-15)*
+2. [x] Score each model on criteria *(completed 2025-12-15)*
+3. [x] Evaluate hybrid possibilities *(see below)*
+4. [x] Draft recommendation *(see below)*
+5. [ ] Stakeholder review
+6. [ ] Final decision
+7. [ ] Update canonical docs
+
+---
+
+## Recommendation
+
+**Recommended Model: Provenance-First (with Hybrid B enhancement)**
+
+### Score Summary
+
+| Model | Weighted Score | Rank |
+|-------|---------------|------|
+| Provenance-First | **4.15** | 1st |
+| Canonical (Glossary) | 3.05 | 2nd |
+| Original Semantic OS | 2.65 | 3rd |
+| Feedback Loops | 2.45 | 4th |
+| Observability | 2.30 | 5th |
+
+### Why Provenance-First Wins
+
+1. **Problem Fit (5/5):** Directly addresses LLM coexistence, the core SIL mission
+2. **Explains Assignment Chaos:** Tools-as-utilities resolves years of "where does X go" debates
+3. **Scott's Intuition:** "Provenance when I hear SOS" - founder alignment matters
+4. **Unix Parallel:** "Everything has meaning and provenance" is memorable and explanatory
+5. **Trust as Explicit Layer:** Makes authorization architectural, not afterthought
+
+### Recommended Hybrid: Provenance-First + Hardware Substrate (Hybrid B)
+
+Add L-1 for physical/computational substrate:
+
+```
+L6: Reflection       - Learning from execution (observability)
+L5: Execution        - Doing work under constraints (agents)
+L4: Composition      - Cross-domain integration (Pantheon IR)
+L3: Intent           - What we're accomplishing (contracts)
+L2: Trust            - Who can do what (TAP, Authorization)
+L1: Meaning          - Embeddings, types, similarity (Beth, Pantheon)
+L0: Provenance       - Everything has lineage (GenesisGraph)
+─────────────────────────────────────────────────────────────
+L-1: Substrate       - Physical/computational reality (Philbrick, optional)
+```
+
+This preserves Philbrick's place without making hardware the semantic foundation.
+
+### Critical Missing Subsystems (from coral-shine/brewing-sleet)
+
+These must be built regardless of model choice:
+
+| Subsystem | Primary Layer | Description |
+|-----------|--------------|-------------|
+| Intent Verification | L3 | Cryptographic verification of intent preservation |
+| Uncertainty Tracking | L6 | Geometric uncertainty propagation monitoring |
+| Cross-Domain Translation | L4 | Invariant-preserving semantic operators |
+
+### Next Steps
+
+1. **Stakeholder review** - Present this analysis for feedback
+2. **Prototype the 3 subsystems** - They validate the layer model
+3. **Update SIL_GLOSSARY.md** - After decision confirmed
+4. **Create migration guide** - How to update existing docs
+
+---
+
+## Stakeholder Input
+
+| Stakeholder | Preference | Rationale |
+|-------------|------------|-----------|
+| Scott | Provenance-first? | "Provenance when I hear SOS" |
+| TIA sessions | Various | 4 models evolved independently |
+| Pantheon docs | Cognitive OSI | Hardware-grounded |
+
+---
+
+## References
+
+- [LAYER_MODELS_COMPARISON.md](LAYER_MODELS_COMPARISON.md) - Side-by-side view
+- [PROVENANCE_FIRST.md](PROVENANCE_FIRST.md) - Provenance proposal detail
+- Source documents in canonical/ and pantheon/docs/
+
+---
+
+## Addendum: Synthesis Session (pulsing-horizon-1215)
+
+**Added:** 2025-12-15
+**Session:** pulsing-horizon-1215
+
+### Stakeholder Review Outcome
+
+During review, a deeper question emerged: **Does any layer model serve the mission, or is there a different organizing principle?**
+
+After reading 8 foundational documents (THE_FORK.md, SCOPE_OF_HOPE.md, SIL_VISION_COMPLETE.md, SIL_MORPHOGEN_PROJECT.md, etc.), a new frame was proposed:
+
+### Invariants Over Layers
+
+**Key insight:** Layer models organize structure. Invariants enforce mission.
+
+The five invariants that must hold everywhere:
+1. **Everything has lineage** (GenesisGraph)
+2. **Reasoning is inspectable** (Glass Box)
+3. **Computation is grounded** (Morphogen)
+4. **Contracts are explicit** (Agent Ether)
+5. **Efficiency is sustainable** (Reveal + Beth)
+
+### Proposed Synthesis
+
+- **Use Provenance-First layer model** for organizational structure
+- **Use Invariants frame** for mission alignment and design decisions
+- Both are valid. Question is which is primary for which purpose.
+
+### New Documents
+
+- [INVARIANTS_OVER_LAYERS.md](INVARIANTS_OVER_LAYERS.md) - Full proposal
+- [SYNTHESIS_MAP.md](SYNTHESIS_MAP.md) - Meta-navigation for future sessions
+
+### The Chief Scientist Test
+
+Before approving architectural decisions:
+1. Does this maintain traceable lineage?
+2. Is reasoning inspectable?
+3. Is computation connected to reality?
+4. Are assumptions explicit?
+5. Is this sustainable at scale?
+6. Does this keep humans as conductors?
+
+See [INVARIANTS_OVER_LAYERS.md](INVARIANTS_OVER_LAYERS.md) for full rationale.
+
+---
+
+
+## Document: PROVENANCE_FIRST.md
+## Path: /docs/architecture/models/PROVENANCE_FIRST.md
+
+# Provenance-First Architecture
+
+**Version:** 1.0
+**Date:** 2025-12-15
+**Status:** Proposal for evaluation
+**Origin:** Session `heating-snow-1214`
+
+---
+
+## The Core Thesis
+
+> The current 7-layer Cognitive OSI Stack was designed **product-centric**
+> (where do our 12 projects fit?) rather than **problem-centric**
+> (what abstractions solve LLM coexistence?).
+
+If we start from problems instead of products, **Provenance** emerges as L0, not Philbrick hardware.
+
+---
+
+## The Problem Space
+
+The Semantic OS must solve:
+
+1. **Decomposing intent into trackable work** - How do we know what we're trying to do?
+2. **Trust relationships for LLM/AGI coexistence** - How do humans and AI work together safely?
+3. **Cross-domain tooling** - How do unrelated domains compose?
+4. **Meaning manifolds for analogies** - How do we find similar things across contexts?
+
+The key insight: **Without provenance, you can't trust LLM output.**
+
+---
+
+## The Proposed Model
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ L6: REFLECTION                                              │
+│ Learning from execution, observability, feedback loops      │
+│ Tools: Reveal (structure), metrics, dashboards              │
+└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│ L5: EXECUTION                                               │
+│ Doing work under constraints, agent orchestration           │
+│ Tools: Agent Ether, TIA task execution, schedulers          │
+└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│ L4: COMPOSITION                                             │
+│ Cross-domain integration, graph routing, topology           │
+│ Tools: Pantheon IR, SUP components, workflow engines        │
+└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│ L3: INTENT                                                  │
+│ What we're accomplishing, contracts, goals, constraints     │
+│ Tools: IntentContract, task definitions, acceptance criteria│
+└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│ L2: TRUST                                                   │
+│ Who can do what, authorization, delegation, capability      │
+│ Tools: TAP, AuthorizationGrant, DelegationGrant             │
+└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│ L1: MEANING                                                 │
+│ Embeddings, types, similarity, semantic units               │
+│ Tools: Beth (discovery), Pantheon types, domain schemas     │
+└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│ L0: PROVENANCE                                              │
+│ Everything has lineage - who made what, when, from what     │
+│ Tools: GenesisGraph, hash chains, Merkle trees              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Unix Philosophy Parallel
+
+**Unix insight:** "Everything is a file"
+- Files are the universal abstraction
+- Tools compose through file descriptors
+- The filesystem is the namespace
+
+**Semantic OS insight:** "Everything has meaning and provenance"
+- Semantic objects are the universal abstraction
+- Tools compose through typed interfaces
+- The provenance graph is the trust foundation
+
+### Fundamental Primitives
+
+| Unix | Semantic OS | Purpose |
+|------|-------------|---------|
+| File | Semantic Object | Typed, explicit meaning |
+| Permission bits | Trust Assertion | Verified capability |
+| - | Provenance Record | Lineage, transformations |
+| Process | Intent Contract | What we're trying to do |
+
+Unix lacked provenance - you could copy a file, modify it, and lose all history. The Semantic OS makes lineage a first-class concern.
+
+---
+
+## How Tools Fit (Spanning Layers)
+
+Tools are like Unix utilities - they span layers based on function, not architecture:
+
+| Tool | Layers Touched | Function |
+|------|----------------|----------|
+| **Beth** | L1 (Meaning), L0 (Provenance of knowledge) | Discovery, indexing |
+| **Reveal** | L6 (Reflection), L4 (Composition structure) | Inspection, structure |
+| **TIA** | L3 (Intent), L5 (Execution), L6 (Reflection) | Orchestration |
+| **GenesisGraph** | L0 (Provenance), L2 (Trust chains) | Lineage tracking |
+| **Pantheon** | L1 (Types), L4 (Composition) | Semantic IR |
+| **Agent Ether** | L5 (Execution), L3 (Intent interpretation) | Agent orchestration |
+| **Morphogen** | L4 (Composition), L5 (Execution) | Domain simulation |
+
+This is why component assignment has been chaotic - tools naturally span layers.
+
+---
+
+## Why Provenance at L0?
+
+### The Trust Problem
+
+When an LLM generates code, documentation, or analysis:
+- Who prompted it?
+- What context did it have?
+- What model version?
+- What transformations occurred?
+
+Without provenance, you can't answer these questions. Without answers, you can't trust the output.
+
+### The Coexistence Problem
+
+Human-AI collaboration requires:
+1. Knowing what came from where
+2. Verifying transformations
+3. Attributing decisions
+4. Rolling back changes
+
+All of these depend on provenance.
+
+### The Philbrick Problem
+
+The current model puts Philbrick hardware at L0 because:
+- It's physical
+- It's foundational to computing
+
+But Philbrick is:
+- A fun hardware project
+- Not essential for modern LLM architectures
+- Not solving the trust/coexistence problem
+
+**Philbrick becomes an optional backend**, not the foundation.
+
+---
+
+## Layer Dependencies
+
+```
+L6 Reflection   ← needs execution results from L5
+     ↑
+L5 Execution    ← operates within composition from L4
+     ↑
+L4 Composition  ← composes elements with intent from L3
+     ↑
+L3 Intent       ← intent authorized by trust from L2
+     ↑
+L2 Trust        ← trust based on meaning from L1
+     ↑
+L1 Meaning      ← meaning grounded in provenance from L0
+     ↑
+L0 Provenance   ← foundation: everything has lineage
+```
+
+Each layer depends on the layer below. This dependency chain makes sense:
+- You can't trust without knowing meaning
+- You can't have intent without trust
+- You can't compose without intent
+- You can't execute without composition
+- You can't reflect without execution
+
+---
+
+## Comparison with Current Model
+
+| Aspect | Current (Glossary) | Provenance-First |
+|--------|-------------------|------------------|
+| **Foundation** | Physical hardware | Trust/lineage |
+| **Problem focus** | Where do projects fit? | How do we coexist with AI? |
+| **Trust** | Implicit in Intent | Explicit layer |
+| **Tools** | Assigned to layers | Span layers |
+| **Philbrick** | L0 foundation | Optional backend |
+| **Observability** | Meta-layer | L6 (Reflection) |
+
+---
+
+## Implications
+
+### For GenesisGraph
+
+Becomes foundational infrastructure, not just "provenance tooling." Every operation in the Semantic OS should create provenance records.
+
+### For Trust/Authorization
+
+TAP and the Hierarchical Agency Framework become L2 infrastructure, not just "intent-layer features."
+
+### For Agent Development
+
+Agents operate at L5 (Execution) but must:
+- Respect L2 (Trust) constraints
+- Express L3 (Intent) contracts
+- Produce L6 (Reflection) observability
+
+### For New Projects
+
+When adding a project, ask:
+1. What layer does it primarily serve?
+2. What layers does it span?
+3. How does it relate to provenance?
+
+---
+
+## Open Questions (Addressed)
+
+### 1. Is this too abstract? Does problem-centric lose implementation guidance?
+
+**Answer:** No - it provides *better* guidance.
+
+The brewing-sleet synthesis found "we have more implemented than documented, but critical Layer 1 primitives remain unbuilt." The problem-centric framing tells us *what* to build (Intent Verification, Uncertainty Tracking, Cross-Domain Translation) rather than just *where to put things*.
+
+Implementation guidance comes from the layer dependencies:
+- Build L0 (GenesisGraph provenance) first
+- Then L1 (Beth meaning/types)
+- Then L2 (TAP trust infrastructure)
+- Then L3-L6 as needed
+
+### 2. Where does memory fit? The Original model had Semantic Memory at L0.
+
+**Answer:** Memory is implementation, not abstraction.
+
+Semantic memory (storage, indexing) is *how* we implement L1 (Meaning) and L0 (Provenance). It's infrastructure, not architecture. Just as TCP/IP doesn't have a "RAM layer," the Semantic OS doesn't need memory as a layer - it's assumed.
+
+Beth's index, Gemma's storage, and S3/database backends are all L1 implementation details.
+
+### 3. Are 7 layers right? Could Trust and Meaning collapse?
+
+**Answer:** 7 layers is defensible; collapsing would lose important distinctions.
+
+- **Trust ≠ Meaning:** You can understand what something means without being authorized to act on it
+- **Execution ≠ Reflection:** Doing work and learning from work are different concerns
+
+The OSI model has 7 layers. The Cognitive OSI has 7+meta. 7 seems to be a natural granularity for layered architectures.
+
+### 4. What about hardware? If Philbrick isn't L0, where does physical computing fit?
+
+**Answer:** L-1 (Substrate) - below the semantic layers.
+
+The recommended hybrid adds:
+```
+L0: Provenance       - Everything has lineage
+─────────────────────────────────────────────
+L-1: Substrate       - Physical/computational reality (Philbrick, optional)
+```
+
+This preserves Philbrick's place without making hardware the *semantic* foundation. The Semantic OS runs on hardware but isn't defined by it.
+
+### 5. How do we migrate? Can we align existing docs incrementally?
+
+**Answer:** Yes, with a phased approach.
+
+1. **Phase 1:** Accept this model as canonical (stakeholder review)
+2. **Phase 2:** Update SIL_GLOSSARY.md with new layer definitions
+3. **Phase 3:** Add frontmatter to existing docs noting which model they use
+4. **Phase 4:** Incrementally update canonical docs (SEMANTIC_OS_ARCHITECTURE, SEMANTIC_OBSERVABILITY, etc.)
+5. **Phase 5:** Archive historical models with "superseded by" notes
+
+---
+
+## Evaluation Criteria
+
+Score this model against:
+
+| Criterion | Question | Score (1-5) |
+|-----------|----------|-------------|
+| Problem fit | Does it help with LLM coexistence? | **5** |
+| Conceptual clarity | Can you explain it in 2 minutes? | **4** |
+| Component coherence | Do assignments make sense? | **4** |
+| Extension path | Can new projects find their place? | **4** |
+| Implementation guidance | Does it help developers? | **3** |
+
+**Weighted Total: 4.15** (highest of all 5 models evaluated)
+
+See [MODEL_EVALUATION.md](MODEL_EVALUATION.md) for full comparison and rationale.
+
+---
+
+## References
+
+- `sessions/heating-snow-1214/README_2025-12-15_08-52.md` - Origin of proposal
+- K&R/Unix Philosophy documentation
+- GenesisGraph project documentation
+- Trust Assertion Protocol specification
+
+---
+
+## Synthesis: Sessions That Informed This Model
+
+This proposal synthesizes insights from 6+ sessions:
+
+| Session | Key Contribution |
+|---------|-----------------|
+| `heating-snow-1214` | Original provenance-first proposal |
+| `enchanted-centaur-1214` | Discovery of 4 competing models |
+| `coral-shine-1212` | 3 critical missing subsystems (Intent, Uncertainty, Translation) |
+| `brewing-sleet-1212` | Layer completeness percentages, "Layer 1 is the glue" insight |
+| `noble-kraken-1125` | 696-line COGNITIVE_OS_MASTER_MAP with patron saints |
+| `temporal-fractal-1214` | Documentation audit revealing inconsistencies |
+
+### Key Synthesis Insights
+
+1. **"We have more implemented than documented"** (brewing-sleet)
+   - Infrastructure exists; Layer 1 primitives missing
+   - Problem isn't building from scratch; it's formalizing and connecting
+
+2. **"Layer 1 is the glue"** (brewing-sleet)
+   - Intent Verification, Uncertainty Tracking, Cross-Domain Translation
+   - These connect Agent coordination (L3) ↔ Pantheon IR (L1) ↔ Memory (L0)
+
+3. **"4 competing models"** (enchanted-centaur)
+   - Models evolved independently in different docs
+   - No single authoritative version until now
+
+4. **"Provenance when I hear SOS"** (Scott, heating-snow)
+   - Founder intuition aligned with problem-centric analysis
+   - Trust and lineage are core to the SIL mission
+
+### The Case for Adoption
+
+This model should become canonical because:
+
+1. **Highest evaluation score** (4.15 vs 3.05 for Canonical)
+2. **Resolves component assignment chaos** (tools span layers)
+3. **Addresses core SIL mission** (LLM coexistence requires trust)
+4. **Founder alignment** (Scott's instinct matches the analysis)
+5. **Explains historical divergence** (product-centric vs problem-centric)
+
+### Status
+
+**Proposed for adoption.** Awaiting stakeholder review before updating canonical docs.
+
+---
+
+
+## Document: SYNTHESIS_MAP.md
+## Path: /docs/architecture/models/SYNTHESIS_MAP.md
+
+---
+title: "Architecture Synthesis Map"
+type: meta-documentation
+status: current
+created: 2025-12-15
+session_id: pulsing-horizon-1215
+beth_topics:
+  - sil-architecture
+  - documentation-map
+  - synthesis
+  - meta-docs
+  - progressive-disclosure
+summary: Maps which source documents contribute which insights to architectural understanding, enabling future sessions to efficiently build context
+---
+
+# Architecture Synthesis Map
+
+**Purpose:** Help future agents/humans efficiently build architectural context without reading everything.
+
+**Philosophy:** Progressive disclosure for documentation. Start with this map, dive deeper only where needed.
+
+---
+
+## Quick Context (30 seconds)
+
+**The architectural question:** How should SIL organize its semantic infrastructure?
+
+**Three competing frames:**
+1. **Layer models** (5 variations) - hierarchical organization
+2. **Provenance-First** - layer model with provenance at L0
+3. **Invariants Over Layers** - guarantees that must hold everywhere
+
+**Current synthesis:** Use layers for organization, invariants for mission alignment.
+
+**Key documents in this directory:**
+- `README.md` - Index and decision status
+- `LAYER_MODELS_COMPARISON.md` - 5 layer models compared
+- `MODEL_EVALUATION.md` - Scoring and analysis
+- `PROVENANCE_FIRST.md` - Winning layer model
+- `INVARIANTS_OVER_LAYERS.md` - Mission-centric reframe
+- `SYNTHESIS_MAP.md` - This file (meta-navigation)
+
+---
+
+## Source Documents → Insights
+
+### Tier 1: Mission Grounding (Read First)
+
+These establish WHY we're building anything. Read these before technical architecture.
+
+| Document | Location | Key Insight | Read Time |
+|----------|----------|-------------|-----------|
+| **THE_FORK.md** | `foundation/pitch/` | Two futures: Grey Fog vs Glass Box. What SIL must fix vs cannot fix. | 8 min |
+| **SCOPE_OF_HOPE.md** | `foundation/` | Complete positioning. Best/worst day. Bounded hope framework. | 15 min |
+| **VISION_HOPE.md** | `foundation/pitch/` | What success looks like. Second Enlightenment vision. | 3 min |
+| **VISION_REALITY.md** | `foundation/pitch/` | Honest limits. Structural failures we're obligated to fix. | 3 min |
+
+**After reading these, you understand:**
+- Best day: Shared reality, scientific renaissance, auditable governance
+- Worst day: Epistemic collapse, black box dictatorship, "god off the mountain"
+- What SIL can/cannot fix
+- The "colleague not god" principle
+
+### Tier 2: Technical Vision (Read Second)
+
+These explain WHAT we're building at the technical level.
+
+| Document | Location | Key Insight | Read Time |
+|----------|----------|-------------|-----------|
+| **SIL_VISION_COMPLETE.md** | `staging/vision/` | Semantic OS overview. Founder's role. Design principles. | 8 min |
+| **SIL_MORPHOGEN_PROJECT.md** | `staging/canonical/` | Universal translator. Turing's morphogens. Deterministic computation. | 12 min |
+| **SIL_CIVILIZATIONAL_SYSTEMS_ENGINEERING.md** | `staging/canonical/` | Scale of ambition. 50-year thinking. Software engineering for civilization. | 15 min |
+
+**After reading these, you understand:**
+- Semantic OS components (Memory, USIR, Domains, Agents, Engines, Interfaces)
+- Morphogen as "universal translator" for scientific ideas
+- Why SIL builds infrastructure, not apps
+- The Turing lineage
+
+### Tier 3: Architecture Models (Read Third)
+
+These are the specific architectural proposals being evaluated.
+
+| Document | Location | Key Insight | Read Time |
+|----------|----------|-------------|-----------|
+| **LAYER_MODELS_COMPARISON.md** | This directory | 5 layer models side-by-side. Historical evolution. | 10 min |
+| **MODEL_EVALUATION.md** | This directory | Scoring criteria. Why Provenance-First won. | 8 min |
+| **PROVENANCE_FIRST.md** | This directory | The winning layer model. L0=Provenance. Open questions answered. | 10 min |
+| **INVARIANTS_OVER_LAYERS.md** | This directory | Mission-centric reframe. Guarantees over structure. | 12 min |
+
+**After reading these, you understand:**
+- Why 5 different layer models emerged
+- How they were evaluated (criteria, weights, scores)
+- Why Provenance-First scored highest
+- The invariants alternative frame
+
+### Tier 4: Session Context (Reference as Needed)
+
+Session READMEs that contributed specific insights.
+
+| Session | Key Contribution |
+|---------|------------------|
+| `enchanted-centaur-1214` | Discovered 4 competing models existed |
+| `heating-snow-1214` | Proposed provenance-first model |
+| `coral-shine-1212` | "3 critical missing subsystems" |
+| `brewing-sleet-1212` | "Layer 1 is the glue" insight |
+| `noble-kraken-1125` | COGNITIVE_OS_MASTER_MAP (696 lines) |
+| `scorching-gust-1215` | Created comparison framework |
+| `oracular-throne-1215` | Completed evaluation, scored models |
+| `pulsing-horizon-1215` | Invariants over layers proposal |
+| `turbulent-current-1215` | **Validated invariants frame**, identified Agent Ether gap |
+
+---
+
+## Reading Paths by Goal
+
+### Path A: "Why does SIL exist?"
+```
+THE_FORK.md → VISION_HOPE.md → VISION_REALITY.md
+(14 min total)
+```
+
+### Path B: "What is the technical architecture?"
+```
+SIL_VISION_COMPLETE.md → LAYER_MODELS_COMPARISON.md → PROVENANCE_FIRST.md
+(28 min total)
+```
+
+### Path C: "How should I think about architecture decisions?"
+```
+THE_FORK.md → INVARIANTS_OVER_LAYERS.md
+(20 min total)
+```
+
+### Path D: "Full context for architectural work"
+```
+THE_FORK.md → SIL_VISION_COMPLETE.md → MODEL_EVALUATION.md → INVARIANTS_OVER_LAYERS.md
+(38 min total)
+```
+
+### Path E: "I need to understand Morphogen"
+```
+SIL_MORPHOGEN_PROJECT.md (12 min)
+Optionally: SIL_CIVILIZATIONAL_SYSTEMS_ENGINEERING.md for scale context
+```
+
+---
+
+## Key Concepts Quick Reference
+
+### The Five Invariants
+
+| Invariant | Enforced By | Prevents |
+|-----------|-------------|----------|
+| Everything has lineage | GenesisGraph | Epistemic collapse |
+| Reasoning is inspectable | Glass Box (USIR/Reveal) | Black box dictatorship |
+| Computation is grounded | Morphogen | Hallucinated science |
+| Contracts are explicit | Agent Ether | Brittle complexity |
+| Efficiency is sustainable | Reveal + Beth | Compute as privilege |
+
+### The Provenance-First Stack
+
+```
+L6: Reflection       - Learning from execution
+L5: Execution        - Agents working under constraints
+L4: Composition      - Cross-domain integration (Pantheon IR)
+L3: Intent           - What we're accomplishing (contracts)
+L2: Trust            - Who can do what (TAP, Authorization)
+L1: Meaning          - Embeddings, types, similarity (Beth)
+L0: Provenance       - Everything has lineage (GenesisGraph)
+─────────────────────────────────────────────────────────────
+L-1: Substrate       - Physical/computational reality (Philbrick)
+```
+
+### The Chief Scientist Test
+
+Before approving architecture, ask:
+1. Does this maintain traceable lineage?
+2. Is reasoning inspectable?
+3. Is computation connected to reality?
+4. Are assumptions explicit?
+5. Is this sustainable at scale?
+6. Does this keep humans as conductors?
+
+---
+
+## Document Health
+
+| Document | Last Updated | Status | Needs Review If... |
+|----------|--------------|--------|-------------------|
+| THE_FORK.md | 2025-11-29 | Stable | Mission changes |
+| SCOPE_OF_HOPE.md | 2025-12-13 | Current | Quarterly |
+| SIL_VISION_COMPLETE.md | 2025-11-29 | Stable | Core vision changes |
+| SIL_MORPHOGEN_PROJECT.md | 2025-11-29 | Stable | Morphogen evolves |
+| LAYER_MODELS_COMPARISON.md | 2025-12-15 | Current | New model proposed |
+| MODEL_EVALUATION.md | 2025-12-15 | Current | Criteria change |
+| PROVENANCE_FIRST.md | 2025-12-15 | Current | Decision made |
+| INVARIANTS_OVER_LAYERS.md | 2025-12-15 | **Validated** | Agent Ether implementation |
+| VALIDATION_REPORT.md | 2025-12-15 | Current | Implementation status changes |
+
+---
+
+## For Future Sessions
+
+### If you're continuing architecture work:
+1. Read this map first
+2. Use the reading path that matches your goal
+3. Check session lineage for prior context
+4. Reference INVARIANTS_OVER_LAYERS.md for decision framework
+
+### If you're adding new documents:
+1. Update this map with the new document
+2. Add to appropriate tier
+3. Note key insight and read time
+4. Update document health table
+
+### If architectural decisions change:
+1. Update MODEL_EVALUATION.md with new scores
+2. Update README.md with decision status
+3. Update this map if reading paths change
+
+---
+
+**Document Status:** Current
+**Maintainer:** Architecture documentation should be updated when new synthesis sessions occur
+**Session:** pulsing-horizon-1215
 
 ---
 
@@ -19386,7 +21368,7 @@ We're not building another LLM or agent framework. We're building the **semantic
 
 **Yes - 4 projects are in production:**
 
-1. **[reveal](https://pypi.org/project/reveal-cli/)** (v0.18.0 on PyPI) - Code exploration, 86% token reduction
+1. **[reveal](https://pypi.org/project/reveal-cli/)** (v0.23.1 on PyPI) - Code exploration, 86% token reduction
 2. **morphogen** - Cross-domain computation (audio + physics + circuits)
 3. **tiacad** - Declarative parametric CAD in YAML
 4. **genesisgraph** (v0.3.0) - Verifiable process provenance
@@ -19470,7 +21452,7 @@ reveal your_code.py
 **It depends on what you're asking about:**
 
 **Production-Ready (Mature):**
-- reveal (v0.18.0) - In production, PyPI published
+- reveal (v0.23.1) - In production, PyPI published
 - morphogen (v0.11) - Used daily in cross-domain workflows
 - tiacad (v3.1.2) - Declarative CAD, stable API
 - genesisgraph (v0.3.0) - Provenance tracking
