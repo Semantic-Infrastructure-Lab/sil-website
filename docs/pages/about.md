@@ -54,13 +54,13 @@ SIL's Semantic Operating System is a 7-layer stack:
 
 | Layer | Name | Purpose |
 |-------|------|---------|
-| 0 | Semantic Memory | Persistent knowledge substrate |
-| 1 | USIR | Universal Semantic Intermediate Representation |
-| 2 | Domain Modules | CAD, audio, physics, simulation |
-| 3 | Morphogen | Cross-domain deterministic computation |
-| 4 | Agent Ether | Multi-agent orchestration |
-| 5 | Pantheon | Unified semantic IR |
-| 6 | Human Interfaces | Progressive disclosure, Reveal |
+| 0 | Substrate | Hardware foundation (Philbrick) |
+| 1 | Primitives | Core computational domains (Morphogen) |
+| 2 | Structures | Data structures (TiaCAD, GenesisGraph) |
+| 3 | Composition | Semantic IR (Pantheon, SUP) |
+| 4 | Dynamics | Temporal execution (Morphogen scheduler) |
+| 5 | Intent | Validation & constraint solving |
+| 6 | Intelligence | Agents (Agent Ether, BrowserBridge) |
 
 Each layer builds on the one below. Together they provide the complete semantic substrate for intelligent systems.
 
