@@ -379,4 +379,40 @@ def create_routes(
             "/",
         )
 
+    # =========================================================================
+    # Meta Section (FAQ, Founder, Influences)
+    # =========================================================================
+
+    @router.get("/meta/{name}", response_class=HTMLResponse)
+    async def meta_page(request: Request, name: str) -> Response:
+        """Meta pages - FAQ, founder background, influences."""
+        # Map URL name to filename
+        filename = name.upper().replace("-", "_") + ".md"
+        doc_path = Path("docs/meta") / filename
+
+        if not doc_path.exists():
+            raise HTTPException(status_code=404, detail=f"Page not found: {name}")
+
+        content = doc_path.read_text()
+
+        # Extract title from first H1
+        title = f"{name.replace('-', ' ').title()} - SIL"
+        for line in content.split("\n"):
+            if line.startswith("# "):
+                title = line[2:].strip() + " - SIL"
+                break
+
+        html_content = markdown_renderer.render(content)
+
+        return templates.TemplateResponse(
+            "page.html",
+            {
+                "request": request,
+                "title": title,
+                "content": html_content,
+                "nav_items": nav_items,
+                "current_page": "/about",
+            },
+        )
+
     return router
