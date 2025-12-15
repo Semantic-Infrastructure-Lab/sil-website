@@ -191,7 +191,7 @@ def founding_docs_sidebar(documents: list[Document], current_slug: str = "", cur
     Returns:
         HTML string for sidebar navigation with 3-tier hierarchy
     """
-    # Organize by tier: 1=Founding, 2=Architecture, 3=Research
+    # Organize by tier: 1=Essential, 2=Architecture (usually empty), 3=Reference
     # Sort documents by tier and order
     sorted_docs = sorted(documents, key=lambda d: (d.tier, d.order))
 
@@ -211,16 +211,16 @@ def founding_docs_sidebar(documents: list[Document], current_slug: str = "", cur
     # Build sections
     sections_html = []
 
-    # Tier 1: Founding Documents
+    # Tier 1: Essential Reading (the "1 hour" must-reads)
     if tier1_docs:
         sections_html.append(f"""
-            <h3>Founding Documents</h3>
+            <h3>Essential Reading</h3>
             <nav class="sidebar-nav">
                 {render_doc_links(tier1_docs)}
             </nav>
         """)
 
-    # Tier 2: Architecture
+    # Tier 2: Architecture (often empty - moved to Reference)
     if tier2_docs:
         sections_html.append(f"""
             <h3 class="sidebar-section-header">Architecture</h3>
@@ -229,15 +229,15 @@ def founding_docs_sidebar(documents: list[Document], current_slug: str = "", cur
             </nav>
         """)
 
-    # Tier 3: Research (show only key papers to keep sidebar clean)
+    # Tier 3: Reference (show top 4 for architecture context)
     if tier3_docs:
-        # Show top 5 research papers
-        key_research = tier3_docs[:5]
+        # Show top 4 reference docs (architecture-focused)
+        key_reference = tier3_docs[:4]
         sections_html.append(f"""
-            <h3 class="sidebar-section-header">Key Research</h3>
+            <h3 class="sidebar-section-header">Reference</h3>
             <nav class="sidebar-nav">
-                {render_doc_links(key_research)}
-                <a href="/docs" class="">All Research →</a>
+                {render_doc_links(key_reference)}
+                <a href="/canonical" class="">All Documents →</a>
             </nav>
         """)
 

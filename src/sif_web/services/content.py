@@ -94,47 +94,48 @@ class ContentService:
     }
 
     # Document tier classification (slug -> (tier, order))
-    # Tier 1 = Lab Founding Documents (what SIL is)
-    # Tier 2 = System Architecture (what SIL builds)
-    # Tier 3 = Research Output (what SIL publishes)
+    # Tier 1 = Essential Documents (must-read for any visitor)
+    # Tier 2 = Architecture (technical architecture docs)
+    # Tier 3 = Research Output (deep reference material)
+    # Sidebar shows: All Tier 1, All Tier 2, Top 5 of Tier 3
     DOCUMENT_TIERS = {
-        # Tier 1: Lab Founding Documents (5 docs)
-        # Note: Founder background is in docs/meta/FOUNDER_BACKGROUND.md, not canonical
+        # Tier 1: Essential Documents (5 docs - the "1 hour" reading list)
         "start-here": (1, 1),
-        "founders-letter": (1, 2),
-        "manifesto": (1, 3),
+        "manifesto": (1, 2),
+        "founders-letter": (1, 3),
         "principles": (1, 4),
-        "stewardship-manifesto": (1, 5),
+        "glossary": (1, 5),
+        "research-agenda-year1": (1, 6),
 
-        # Tier 2: System Architecture (4 docs)
-        "semantic-os-architecture": (2, 1),
-        "technical-charter": (2, 2),
-        "design-principles": (2, 3),
-        "glossary": (2, 4),
+        # Tier 2: Architecture Reference (accessible but less prominent)
+        # Empty - moved to Tier 3 to reduce sidebar clutter
 
-        # Tier 3: Research Output (10 docs)
-        # Multi-Agent Systems
-        "hierarchical-agency-framework": (3, 1),
-        "multi-agent-protocol-principles": (3, 2),
-        "founders-note-multishot-agent-learning": (3, 3),
+        # Tier 3: Deep Reference (only top 5 shown in sidebar)
+        # Architecture & Governance
+        "semantic-os-architecture": (3, 1),
+        "stewardship-manifesto": (3, 2),
+        "technical-charter": (3, 3),
+        "design-principles": (3, 4),
 
-        # Observability & Safety
-        "semantic-observability": (3, 4),
-        "semantic-feedback-loops": (3, 5),
-        "safety-thresholds": (3, 6),
-        "tool-quality-monitoring": (3, 7),
+        # Trust & Agency
+        "trust-assertion-protocol": (3, 5),
+        "authorization-protocol": (3, 6),
+        "hierarchical-agency-framework": (3, 7),
+        "safety-thresholds": (3, 8),
 
-        # Interface Design
-        "progressive-disclosure-guide": (3, 8),
+        # Research Papers
+        "semantic-feedback-loops": (3, 9),
+        "semantic-observability": (3, 10),
+        "multi-agent-protocol-principles": (3, 11),
+        "founders-note-multishot-agent-learning": (3, 12),
 
-        # Research Roadmap
-        "research-agenda": (3, 9),
-
-        # Hidden aliases (tier 0 = not displayed in index, but URLs work)
-        "research-agenda-year1": (0, 0),
+        # Implementation Guides
+        "progressive-disclosure-guide": (3, 13),
+        "reveal-beth-progressive-knowledge-system": (3, 14),
+        "tool-quality-monitoring": (3, 15),
 
         # Default tier for any unlisted docs (e.g., README.md)
-        # Will be handled in load_document
+        # Will be handled in load_document with (3, 999)
     }
 
     def __init__(self, docs_path: Path) -> None:
