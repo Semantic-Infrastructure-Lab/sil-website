@@ -54,7 +54,7 @@ No domain is allowed to form an isolated island.
 
 ### **7. Operators Are the Only Way to Change State**
 
-All mutations of semantic objects, [USIR](/foundations/SIL_GLOSSARY) graphs, and workflows must occur through declared operators.
+All mutations of semantic objects, [USIR](./SIL_GLOSSARY.md) graphs, and workflows must occur through declared operators.
 No direct writes, no bypasses, no implicit edits.
 
 ### **8. Version Everything**

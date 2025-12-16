@@ -17,7 +17,7 @@ beth_topics:
 related:
   - /lab/products/reveal
   - /foundation/SCOPE_OF_HOPE.md
-  - /lab/architecture/SEMANTIC_OS_LAYERS
+  - /lab/architecture/SEMANTIC_OS_LAYERS.md
 ---
 
 # Progressive Disclosure for AI Agents
@@ -305,22 +305,7 @@ This isn't marketing. It's measured.
 
 ---
 
----
-
-## Related Reading
-
-**Systems:**
-- [Reveal System Documentation](/systems/reveal) - Progressive code exploration implementing these principles
-- [Reveal on GitHub](https://github.com/Semantic-Infrastructure-Lab/reveal) - Source code and examples
-- [Reveal on PyPI](https://pypi.org/project/reveal-cli/) - Install and try it
-- [Beth](/systems/beth) - Semantic knowledge discovery system
-
-**Research:**
-- [Progressive Disclosure Guide](/research/information-architecture/PROGRESSIVE_DISCLOSURE_GUIDE) - Implementation patterns
-- [Agent Help Standard](/research/AGENT_HELP_STANDARD) - Progressive help systems for AI agents
-- [Reveal-Beth Progressive Knowledge System](/research/information-architecture/REVEAL_BETH_PROGRESSIVE_KNOWLEDGE_SYSTEM) - Integration patterns
-
-**Architecture:**
-- [Semantic OS Architecture](/foundations/semantic-os-architecture) - Layer 5 (Human Interfaces)
-- [Design Principles](/foundations/design-principles) - Progressive disclosure as core principle
+**Related:**
+- [Reveal on GitHub](https://github.com/Semantic-Infrastructure-Lab/reveal)
+- [Reveal on PyPI](https://pypi.org/project/reveal-cli/)
 - [About the Semantic Infrastructure Lab](https://semanticinfrastructurelab.org)

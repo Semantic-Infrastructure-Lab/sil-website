@@ -13,7 +13,7 @@ SIL Technical Charter (v1)
 - ✅ You need to know exactly what's required vs optional
 
 **Read these FIRST:**
-- **`/architecture/UNIFIED_ARCHITECTURE_GUIDE`** ⭐ (30 min) - Get the mental model
+- **`../architecture/UNIFIED_ARCHITECTURE_GUIDE.md`** ⭐ (30 min) - Get the mental model
 - **`./SIL_GLOSSARY.md`** (15 min) - Learn the vocabulary (keep open while reading)
 - **`./SIL_PRINCIPLES.md`** (15 min) - Understand evaluation criteria
 
@@ -23,7 +23,7 @@ SIL Technical Charter (v1)
 **Related Documents:**
 - **Glossary:** `./SIL_GLOSSARY.md` - Look up terms while reading
 - **Principles:** `./SIL_PRINCIPLES.md` - Why these constraints exist
-- **Pattern:** `/architecture/UNIFIED_ARCHITECTURE_GUIDE` - High-level framework
+- **Pattern:** `../architecture/UNIFIED_ARCHITECTURE_GUIDE.md` - High-level framework
 - **Navigation:** [Start Here](START_HERE.md) - Entry point to SIL
 
 **Time Required:** 2-4 hours (reference document, can read sections as needed)

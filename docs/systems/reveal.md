@@ -85,7 +85,7 @@ def load_config(config_path: str) -> Config:
 
 ## SIL Principles in Action
 
-Reveal demonstrates SIL's core principles ([see SIL_PRINCIPLES.md](/foundations/SIL_PRINCIPLES)):
+Reveal demonstrates SIL's core principles ([see SIL_PRINCIPLES.md](../canonical/SIL_PRINCIPLES.md)):
 
 ✅ **Clarity** - Structure is visible, not hidden (see what's in a file without reading it)
 ✅ **Simplicity** - Zero configuration, smart defaults (just works)
@@ -174,7 +174,7 @@ See [Reveal Roadmap](https://github.com/semantic-infrastructure-lab/reveal/blob/
 
 ## Agent-Help Implementation (v0.16.0+, Enhanced v0.17.0)
 
-Reveal validates SIL's proposed [agent-help standard](/research/AGENT_HELP_STANDARD) with a production three-tier implementation:
+Reveal validates SIL's proposed [agent-help standard](../research/AGENT_HELP_STANDARD.md) with a production three-tier implementation:
 
 ```bash
 reveal --agent-help          # Quick strategic guide (~1,500 tokens)
@@ -220,7 +220,7 @@ After 3 months in production (v0.16.0 released Nov 2025, v0.17.0 Dec 2025):
 
 **Conclusion:** The agent-help standard works. The three-tier progressive model is recommended for complex evolving CLI tools.
 
-**See the full standard:** [AGENT_HELP_STANDARD.md](/research/AGENT_HELP_STANDARD)
+**See the full standard:** [AGENT_HELP_STANDARD.md](../research/AGENT_HELP_STANDARD.md)
 
 ---
 
@@ -320,22 +320,13 @@ reveal .                  # Explore current directory
 
 ---
 
-## Related SIL Content
+## Related SIL Projects
 
-**Other Systems:**
-- [Morphogen](/systems/morphogen) - Cross-domain computation (audio, physics, circuits)
-- [TiaCAD](/systems/tiacad) - Declarative parametric CAD in YAML
-- [GenesisGraph](/systems/genesisgraph) - Verifiable process provenance
-- [Agent Ether](/systems/agent-ether) - Multi-agent coordination substrate
+- [**morphogen**](https://github.com/semantic-infrastructure-lab/morphogen) - Cross-domain computation (audio, physics, circuits)
+- [**tiacad**](https://github.com/semantic-infrastructure-lab/tiacad) - Declarative parametric CAD in YAML
+- [**genesisgraph**](https://github.com/semantic-infrastructure-lab/genesisgraph) - Verifiable process provenance
 
-**Research & Essays:**
-- [Progressive Disclosure for AI Agents](/essays/PROGRESSIVE_DISCLOSURE_FOR_AI_AGENTS) - Why structure-first exploration works
-- [Agent Help Standard](/research/AGENT_HELP_STANDARD) - Help systems for AI agents
-- [Progressive Disclosure Guide](/research/information-architecture/PROGRESSIVE_DISCLOSURE_GUIDE) - Implementation patterns
-
-**Architecture:**
-- [Semantic OS Architecture](/foundations/semantic-os-architecture) - Layer 5 (Human Interfaces)
-- [Project Index](/projects/PROJECT_INDEX) - All 12 SIL projects
+See the complete [Project Index](../../projects/PROJECT_INDEX.md) for all 12 SIL projects.
 
 ---
 
