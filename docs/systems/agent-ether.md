@@ -94,9 +94,9 @@ Agent Ether introduces a specification where every tool declares exactly how it 
 ```json
 {
   "devices": {
-    "invoke": "/dev/agent-ether/tools/fs.search/invoke",
-    "events": "/dev/agent-ether/tools/fs.search/jobs/{id}/events",
-    "result": "/dev/agent-ether/tools/fs.search/jobs/{id}/result"
+    "invoke": "/dev/agent-eth/systems/fs.search/invoke",
+    "events": "/dev/agent-eth/systems/fs.search/jobs/{id}/events",
+    "result": "/dev/agent-eth/systems/fs.search/jobs/{id}/result"
   }
 }
 ```
@@ -152,9 +152,9 @@ Agent Ether introduces a specification where every tool declares exactly how it 
     "audit_level": "full"
   },
   "devices": {
-    "invoke": "/dev/agent-ether/tools/fs.search/invoke",
-    "events": "/dev/agent-ether/tools/fs.search/jobs/{id}/events",
-    "result": "/dev/agent-ether/tools/fs.search/jobs/{id}/result"
+    "invoke": "/dev/agent-eth/systems/fs.search/invoke",
+    "events": "/dev/agent-eth/systems/fs.search/jobs/{id}/events",
+    "result": "/dev/agent-eth/systems/fs.search/jobs/{id}/result"
   }
 }
 ```
@@ -216,8 +216,8 @@ for event in invoker.stream_events(job_id):
 
 2. **Virtual Device Filesystem (`/dev/agent-ether/*`)**
    - Unix-like device paths for tool interaction
-   - Agents write to `/dev/agent-ether/tools/{id}/invoke`
-   - Read progress from `/dev/agent-ether/tools/{id}/jobs/{job_id}/events`
+   - Agents write to `/dev/agent-eth/systems/{id}/invoke`
+   - Read progress from `/dev/agent-eth/systems/{id}/jobs/{job_id}/events`
    - Familiar interface, universal access pattern
 
 3. **Four Execution Modes Unified**
@@ -253,7 +253,7 @@ for event in invoker.stream_events(job_id):
 - [Agent Ether GitHub Repository](https://github.com/Semantic-Infrastructure-Lab/agent-ether)
 - [TBC Specification](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/specifications/tool-behavior-contract.md)
 - [Architecture Guide](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/architecture/)
-- [Multi-Agent Coordination](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/architecture/MULTI_AGENT_COORDINATION.md)
+- [Multi-Agent Coordination](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/architecture/MULTI_AGENT_COORDINATION)
 
 **Example Gallery:**
 - [Filesystem Search Tool](https://github.com/Semantic-Infrastructure-Lab/agent-ether/tree/main/examples/fs-search) - Job execution mode

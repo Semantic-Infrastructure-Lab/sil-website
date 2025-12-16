@@ -17,7 +17,7 @@ beth_topics:
 related:
   - /lab/products/reveal
   - /foundation/SCOPE_OF_HOPE.md
-  - /lab/architecture/SEMANTIC_OS_LAYERS.md
+  - /lab/architecture/SEMANTIC_OS_LAYERS
 ---
 
 # Progressive Disclosure for AI Agents

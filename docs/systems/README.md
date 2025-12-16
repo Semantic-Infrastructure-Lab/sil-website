@@ -30,7 +30,7 @@ Tools designed for agents from day one, with:
 
 Some tools implement specific SIL innovations:
 
-- **Reveal** → Implements [Progressive Disclosure](/innovations/progressive-disclosure) innovation
+- **Reveal** → Implements [Progressive Disclosure/systems/progressive-disclosure) innovation
 - **Beth** (TIA integrated) → Knowledge graph + PageRank for documentation
 - **TIA** → Application workspace applying multiple SIL innovations
 
@@ -79,7 +79,7 @@ This pattern will extend across all SIL systems:
 - Provenance chains (GenesisGraph)
 - Multi-agent reasoning (Agent Ether)
 
-**[→ Learn more about Reveal](/tools/reveal)** | **[Try it now](https://pypi.org/project/reveal-cli/)**
+**[→ Learn more about Reveal/systems/reveal)** | **[Try it now](https://pypi.org/project/reveal-cli/)**
 
 ---
 
