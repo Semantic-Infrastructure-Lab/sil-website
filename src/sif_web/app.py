@@ -67,7 +67,7 @@ def create_app() -> FastAPI:
         Configured FastAPI app
     """
     app = FastAPI(
-        title="Semantic Infrastructure Foundation",
+        title="Semantic Infrastructure Lab",
         description="Building the semantic substrate for trustworthy AI",
         version="0.1.0",
         docs_url=None,  # Disable Swagger UI (not needed for public website)
