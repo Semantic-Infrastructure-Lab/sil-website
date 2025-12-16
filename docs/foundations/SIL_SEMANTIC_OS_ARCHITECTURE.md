@@ -1,7 +1,14 @@
 # SIL Semantic OS Architecture
 
+**Document Type:** Technical Reference
 **Version:** 2.0 (December 2025)
 **Canonical Reference:** [SIL_GLOSSARY.md](./SIL_GLOSSARY.md)
+
+> **📖 Two Ways to Learn About Semantic OS:**
+> - **This document** - Technical reference with TL;DR summaries and system mappings
+> - [**The Manifesto**](./semantic-os-architecture.md) - Vision, philosophy, and why it matters
+>
+> New to SIL? Start with the Manifesto for context, then return here for technical details.
 
 ## TL;DR (2-minute overview)
 

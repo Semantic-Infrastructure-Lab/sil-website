@@ -320,13 +320,22 @@ reveal .                  # Explore current directory
 
 ---
 
-## Related SIL Projects
+## Related SIL Content
 
-- [**morphogen**](https://github.com/semantic-infrastructure-lab/morphogen) - Cross-domain computation (audio, physics, circuits)
-- [**tiacad**](https://github.com/semantic-infrastructure-lab/tiacad) - Declarative parametric CAD in YAML
-- [**genesisgraph**](https://github.com/semantic-infrastructure-lab/genesisgraph) - Verifiable process provenance
+**Other Systems:**
+- [Morphogen](/systems/morphogen) - Cross-domain computation (audio, physics, circuits)
+- [TiaCAD](/systems/tiacad) - Declarative parametric CAD in YAML
+- [GenesisGraph](/systems/genesisgraph) - Verifiable process provenance
+- [Agent Ether](/systems/agent-ether) - Multi-agent coordination substrate
 
-See the complete [Project Index](../../projects/PROJECT_INDEX.md) for all 12 SIL projects.
+**Research & Essays:**
+- [Progressive Disclosure for AI Agents](/essays/PROGRESSIVE_DISCLOSURE_FOR_AI_AGENTS) - Why structure-first exploration works
+- [Agent Help Standard](/research/AGENT_HELP_STANDARD) - Help systems for AI agents
+- [Progressive Disclosure Guide](/research/information-architecture/PROGRESSIVE_DISCLOSURE_GUIDE) - Implementation patterns
+
+**Architecture:**
+- [Semantic OS Architecture](/foundations/semantic-os-architecture) - Layer 5 (Human Interfaces)
+- [Project Index](/projects/PROJECT_INDEX) - All 12 SIL projects
 
 ---
 

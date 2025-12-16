@@ -1,6 +1,13 @@
 The Semantic Infrastructure Lab (SIL) Manifesto
 
+**Document Type:** Vision & Philosophy
 On building the semantic substrate intelligent systems still lack.
+
+> **📖 Two Ways to Learn About Semantic OS:**
+> - **This document** - Vision, philosophy, existence proof, and why it matters
+> - [**Technical Reference**](./SIL_SEMANTIC_OS_ARCHITECTURE.md) - TL;DR summaries, layer specs, system mappings (v2.0)
+>
+> Need the quick technical overview? See the [Technical Reference](./SIL_SEMANTIC_OS_ARCHITECTURE.md).
 
 ## 0. Preface — What “Manifesto” Means Here
 
