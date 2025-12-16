@@ -59,9 +59,9 @@ Parametric CAD in YAML. Semantic constraints, not just geometry. Proof that sema
 
 ## Current Research
 
-- **[Progressive Disclosure for AI Agents](/essays/progressive-disclosure-for-ai-agents)** — Why structure-first exploration reduces tokens 25x
-- **[RAG as Semantic Manifold Transport](/research/rag-as-semantic-manifold-transport)** — Rethinking retrieval as geometric transport
-- **[Agent Help Standard](/research/agent-help-standard)** — Strategic guidance for AI agents using CLI tools
+- **[Progressive Disclosure for AI Agents](/essays/PROGRESSIVE_DISCLOSURE_FOR_AI_AGENTS)** — Why structure-first exploration reduces tokens 25x
+- **[RAG as Semantic Manifold Transport](/research/RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT)** — Rethinking retrieval as geometric transport
+- **[Agent Help Standard](/research/AGENT_HELP_STANDARD)** — Strategic guidance for AI agents using CLI tools
 
 ## The Lab
 
@@ -79,7 +79,7 @@ SIL is the research division of the [Semantic Infrastructure Foundation](https:/
 ## Get Involved
 
 - **Use the tools:** `pip install reveal-cli` and try progressive disclosure
-- **Read the research:** [Essays](/essays) and [Research Papers](/research)
+- **Read the research:** [Essays](/essays/PROGRESSIVE_DISCLOSURE_FOR_AI_AGENTS) and [Research Papers](/research)
 - **Explore the architecture:** [Foundations](/foundations)
 - **Collaborate:** [Contact us](/contact) or visit [GitHub](https://github.com/Semantic-Infrastructure-Lab)
 

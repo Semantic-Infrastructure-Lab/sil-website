@@ -5,9 +5,9 @@ On building the semantic substrate intelligent systems still lack.
 
 > **📖 Two Ways to Learn About Semantic OS:**
 > - **This document** - Vision, philosophy, existence proof, and why it matters
-> - [**Technical Reference**](/meta/SIL_SEMANTIC_OS_ARCHITECTURE) - TL;DR summaries, layer specs, system mappings (v2.0)
+> - [**Technical Reference**](/foundations/SIL_SEMANTIC_OS_ARCHITECTURE) - TL;DR summaries, layer specs, system mappings (v2.0)
 >
-> Need the quick technical overview? See the [Technical Reference](/meta/SIL_SEMANTIC_OS_ARCHITECTURE).
+> Need the quick technical overview? See the [Technical Reference](/foundations/SIL_SEMANTIC_OS_ARCHITECTURE).
 
 ## 0. Preface — What “Manifesto” Means Here
 
@@ -579,9 +579,9 @@ That is the work.
 ## Related Reading
 
 **If you want to understand the architecture:**
-- [Semantic OS Architecture](/meta/SIL_SEMANTIC_OS_ARCHITECTURE) - The 6-layer stack in detail
+- [Semantic OS Architecture](/foundations/SIL_SEMANTIC_OS_ARCHITECTURE) - The 6-layer stack in detail
 - [Unified Architecture Guide](/architecture/UNIFIED_ARCHITECTURE_GUIDE) - Universal patterns across all projects
-- [Technical Charter](/meta/SIL_TECHNICAL_CHARTER) - Formal specification (45 min read)
+- [Technical Charter](/foundations/SIL_TECHNICAL_CHARTER) - Formal specification (45 min read)
 
 **If you want to see it in action:**
 - [Project Index](/projects/PROJECT_INDEX) - All 12 projects explained
@@ -591,7 +591,7 @@ That is the work.
 **If you want deeper principles:**
 - [Design Principles](/meta/SIL_PRINCIPLES) - The 14 constraints that guide all work
 - [Stewardship Manifesto](/meta/SIL_STEWARDSHIP_MANIFESTO) - How SIL is governed
-- [Founder's Letter](/meta/FOUNDERS_LETTER) - Personal context and lab purpose
+- [Founder's Letter](/foundations/FOUNDERS_LETTER) - Personal context and lab purpose
 
 **If you want research depth:**
 - [RAG Paper](/research/RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT) - Semantic manifold transport framework

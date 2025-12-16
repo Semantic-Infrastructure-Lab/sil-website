@@ -337,7 +337,7 @@ This is semantic infrastructure in practice: substrate that enables research, no
 - [Unified Architecture Guide](/architecture/UNIFIED_ARCHITECTURE_GUIDE) - Complete system design
 
 **Companion Systems:**
-- [Tia](/meta/TIA) - Chief Semantic Agent who queries Beth
+- [Tia](/systems/tia) - Chief Semantic Agent who queries Beth
 - [GenesisGraph](https://github.com/Semantic-Infrastructure-Lab/genesisgraph) - Cryptographic provenance that Beth integrates
 
 **Philosophy:**

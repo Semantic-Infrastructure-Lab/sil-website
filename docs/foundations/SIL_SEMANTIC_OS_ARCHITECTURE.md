@@ -2,11 +2,11 @@
 
 **Document Type:** Technical Reference
 **Version:** 2.0 (December 2025)
-**Canonical Reference:** [SIL_GLOSSARY.md](/meta/SIL_GLOSSARY)
+**Canonical Reference:** [SIL_GLOSSARY.md](/foundations/SIL_GLOSSARY)
 
 > **📖 Two Ways to Learn About Semantic OS:**
 > - **This document** - Technical reference with TL;DR summaries and system mappings
-> - [**The Manifesto**](/meta/semantic-os-architecture) - Vision, philosophy, and why it matters
+> - [**The Manifesto**](/foundations/semantic-os-architecture) - Vision, philosophy, and why it matters
 >
 > New to SIL? Start with the Manifesto for context, then return here for technical details.
 
@@ -37,7 +37,7 @@ Cross-cutting: Observability (Reveal), Provenance (GenesisGraph), Trust (TAP)
 
 **Want the full architecture?** Read the detailed layer descriptions below ↓
 
-> 💡 **New to SIL terminology?** Keep the [Glossary](/meta/SIL_GLOSSARY) open in another tab.
+> 💡 **New to SIL terminology?** Keep the [Glossary](/foundations/SIL_GLOSSARY) open in another tab.
 
 ```mermaid
 graph TB
@@ -723,8 +723,8 @@ This is the technical core of SIL's mission.
 ---
 
 **Related Documents:**
-- [SIL Glossary](/meta/SIL_GLOSSARY) — Canonical layer definitions (L0-L6)
+- [SIL Glossary](/foundations/SIL_GLOSSARY) — Canonical layer definitions (L0-L6)
 - [SIL Principles](/meta/SIL_PRINCIPLES) — The 14 guiding principles
-- [Semantic Feedback Loops](/meta/SEMANTIC_FEEDBACK_LOOPS) — Closed-loop control theory
-- [Semantic Observability](/meta/SEMANTIC_OBSERVABILITY) — Intent-execution alignment
+- [Semantic Feedback Loops](/research/information-architecture/SEMANTIC_FEEDBACK_LOOPS) — Closed-loop control theory
+- [Semantic Observability](/research/agent-infrastructure/SEMANTIC_OBSERVABILITY) — Intent-execution alignment
 - [Unified Architecture Guide](/architecture/UNIFIED_ARCHITECTURE_GUIDE) — The universal pattern

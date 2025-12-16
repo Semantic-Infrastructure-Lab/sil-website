@@ -142,7 +142,7 @@ If an agent contributes insight, structure, or decomposition, that provenance ge
 - Explore [GitHub](https://github.com/Semantic-Infrastructure-Lab)
 
 **Read our research:**
-- [Essays](/essays) — technical essays on semantic infrastructure
+- [Essays](/essays/PROGRESSIVE_DISCLOSURE_FOR_AI_AGENTS) — technical essays on semantic infrastructure
 - [Research](/research) — deep technical papers
 - [Manifesto](/manifesto) — YOLO and soul documents
 - [Foundations](/foundations) — principles, architecture, charter

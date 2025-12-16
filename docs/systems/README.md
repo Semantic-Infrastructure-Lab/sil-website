@@ -108,7 +108,7 @@ We've **implemented and validated** `--agent-help` in Reveal v0.17.0+ - proving 
 - ✅ 86% token reduction confirmed in practice
 - ✅ Two-tier model works (agents load brief, expand as needed)
 
-**[Read the full standard →](/research/agent-help-standard)**
+**[Read the full standard →](/research/AGENT_HELP_STANDARD)**
 
 **Economic impact at scale:**
 - Current waste: ~$110M/year from poor agent loops
