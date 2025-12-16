@@ -1,6 +1,6 @@
-# SIL Systems
+# SIL Tools - Stop Wasting Money on Agent Loops
 
-Production-ready systems demonstrating SIL principles. Use them today.
+Production-ready tools demonstrating SIL principles. Use them today.
 
 ## The Problem
 
@@ -11,9 +11,9 @@ AI agents waste billions of tokens (and dollars) on inefficient exploration patt
 
 **Global impact:** Estimated $110M+ wasted annually on preventable agent inefficiency.
 
-## Our Solution: Agent-Native Systems
+## Our Solution: Agent-Native Tools
 
-Systems designed for agents from day one, with:
+Tools designed for agents from day one, with:
 - **Progressive disclosure** - Structure before detail (10x token reduction)
 - **Strategic guidance** - When to use this vs alternatives
 - **Composable design** - Pipes, JSON output, unix philosophy
@@ -23,6 +23,20 @@ Systems designed for agents from day one, with:
 - 💰 **86% cost reduction** for common workflows
 - ⚡ **97% token savings** on code exploration
 - 🌍 **Massive energy savings** at scale (~2M kWh per 1000 agents)
+
+---
+
+## Tools → Innovations Mapping
+
+Some tools implement specific SIL innovations:
+
+- **Reveal** → Implements [Progressive Disclosure](/innovations/progressive-disclosure) innovation
+- **Beth** (TIA integrated) → Knowledge graph + PageRank for documentation
+- **TIA** → Application workspace applying multiple SIL innovations
+
+Some tools are applications (not innovations themselves) that demonstrate SIL principles in production.
+
+**See also:** [Innovations](/innovations) for innovation descriptions and the inverse mapping
 
 ---
 
@@ -65,54 +79,19 @@ This pattern will extend across all SIL systems:
 - Provenance chains (GenesisGraph)
 - Multi-agent reasoning (Agent Ether)
 
-**[→ Full Reveal documentation](/systems/reveal)** | **[Try it now](https://pypi.org/project/reveal-cli/)**
+**[→ Learn more about Reveal](/tools/reveal)** | **[Try it now](https://pypi.org/project/reveal-cli/)**
 
 ---
 
-## More Systems
+## More Tools Coming Soon
 
-### Morphogen — Cross-Domain Computation
-**Status:** v0.11 | 1,600+ tests | 85% coverage
+As SIL projects mature, more production tools will be featured here:
 
-Unified computational substrate spanning 40+ domains (audio, physics, circuits, CAD). MLIR-based deterministic execution with cryptographic provenance.
+- **morphogen** - Cross-domain computation (audio, physics, circuits) - *active development*
+- **tiacad** - Declarative parametric CAD in YAML - [Production v3.1.2](https://github.com/Semantic-Infrastructure-Lab/tiacad)
+- **genesisgraph** - Verifiable process provenance - [Production v0.3.0](https://github.com/Semantic-Infrastructure-Lab/genesisgraph)
 
-**[→ Learn more](/systems/morphogen)**
-
----
-
-### TiaCAD — Declarative Parametric CAD
-**Status:** ✅ Production v3.1.2 | [GitHub](https://github.com/Semantic-Infrastructure-Lab/tiacad)
-
-Parametric CAD in YAML. Semantic constraints, not just geometry. Proof that semantic infrastructure works for physical design.
-
-**[→ Learn more](/systems/tiacad)**
-
----
-
-### GenesisGraph — Verifiable Provenance
-**Status:** ✅ Production v0.3.0 | [GitHub](https://github.com/Semantic-Infrastructure-Lab/genesisgraph)
-
-Cryptographic provenance for every transformation. Selective disclosure lets you verify without revealing everything.
-
-**[→ Learn more](/systems/genesisgraph)**
-
----
-
-### Beth — Semantic Documentation Search
-**Status:** Integrated with TIA
-
-Knowledge graph + PageRank for documentation discovery. Semantic search with relevance ranking.
-
-**[→ Learn more](/systems/beth)**
-
----
-
-### Pantheon — Universal Semantic IR
-**Status:** Active research
-
-Universal Semantic Intermediate Representation (USIR) for cross-domain semantic operations.
-
-**[→ Learn more](/systems/pantheon)**
+See all **[Innovations →](/innovations)**
 
 ---
 

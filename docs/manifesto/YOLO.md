@@ -2,10 +2,6 @@
 
 *A Manifesto for the Semantic Infrastructure Lab*
 
-**Status:** DRAFT v0.2 - Updated with YOLO title
-**Date:** 2025-12-15
-**Session:** luminous-prism-1215 (updated from indigo-gem-1215)
-
 ---
 
 Every generation inherits a small set of words that carry far more meaning than they should. They're not definitions or arguments. They're signals—compressed expressions of intent that let people act without stopping to explain themselves.
