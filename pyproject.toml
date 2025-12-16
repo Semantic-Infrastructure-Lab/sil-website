@@ -1,7 +1,7 @@
 [project]
-name = "sif-website"
+name = "sil-website"
 version = "0.1.0"
-description = "Semantic Infrastructure Foundation public website - building the semantic substrate for trustworthy AI"
+description = "Semantic Infrastructure Lab public website - building the semantic substrate for trustworthy AI"
 readme = "README.md"
 requires-python = ">=3.9"
 authors = [

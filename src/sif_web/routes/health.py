@@ -16,6 +16,6 @@ async def health_check() -> dict[str, str]:
     """
     return {
         "status": "healthy",
-        "service": "sif-website",
+        "service": "sil-website",
         "version": "0.1.0",
     }
