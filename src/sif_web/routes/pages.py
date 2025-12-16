@@ -28,14 +28,14 @@ def create_routes(
 ) -> APIRouter:
     """Create routes with injected services."""
 
-    # Navigation items for SIL (Lab-focused)
+    # Navigation items for SIL (Lab-focused, Bell Labs structure)
     nav_items = [
         {"label": "Home", "url": "/"},
-        {"label": "Tools", "url": "/tools"},
-        {"label": "Essays", "url": "/essays"},
+        {"label": "Manifesto", "url": "/manifesto"},
         {"label": "Research", "url": "/research"},
+        {"label": "Systems", "url": "/systems"},
+        {"label": "Foundations", "url": "/foundations"},
         {"label": "About", "url": "/about"},
-        {"label": "Contact", "url": "/contact"},
     ]
 
     def render_markdown_page(
@@ -97,40 +97,36 @@ def create_routes(
         )
 
     # =========================================================================
-    # Tools Section
+    # Manifesto Section
     # =========================================================================
 
-    @router.get("/tools", response_class=HTMLResponse)
-    async def tools_index(request: Request) -> Response:
-        """Tools index - List of production tools."""
+    @router.get("/manifesto", response_class=HTMLResponse)
+    async def manifesto_index(request: Request) -> Response:
+        """Manifesto - YOLO and soul documents."""
         return render_markdown_page(
             request,
-            Path("docs/tools/README.md"),
-            "Tools - Semantic Infrastructure Lab",
-            "/tools",
+            Path("docs/manifesto/README.md"),
+            "Manifesto - Semantic Infrastructure Lab",
+            "/manifesto",
         )
 
-    @router.get("/tools/{name}", response_class=HTMLResponse)
-    async def tool_page(request: Request, name: str) -> Response:
-        """Individual tool documentation."""
-        # Map URL name to filename (reveal -> REVEAL.md)
+    @router.get("/manifesto/{name}", response_class=HTMLResponse)
+    async def manifesto_doc(request: Request, name: str) -> Response:
+        """Individual manifesto document."""
         filename = name.upper() + ".md"
-        tool_path = Path("docs/tools") / filename
+        doc_path = Path("docs/manifesto") / filename
 
-        if not tool_path.exists():
-            raise HTTPException(status_code=404, detail=f"Tool not found: {name}")
+        if not doc_path.exists():
+            raise HTTPException(status_code=404, detail=f"Manifesto document not found: {name}")
 
-        content = tool_path.read_text()
-
-        # Extract title from first H1
-        title = f"{name.title()} - Semantic Infrastructure Lab"
+        content = doc_path.read_text()
+        title = f"{name.title()} - SIL"
         for line in content.split("\n"):
             if line.startswith("# "):
                 title = line[2:].strip() + " - SIL"
                 break
 
         html_content = markdown_renderer.render(content)
-
         return templates.TemplateResponse(
             "page.html",
             {
@@ -138,7 +134,103 @@ def create_routes(
                 "title": title,
                 "content": html_content,
                 "nav_items": nav_items,
-                "current_page": "/tools",
+                "current_page": "/manifesto",
+            },
+        )
+
+    # =========================================================================
+    # Foundations Section
+    # =========================================================================
+
+    @router.get("/foundations", response_class=HTMLResponse)
+    async def foundations_index(request: Request) -> Response:
+        """Foundations - Core principles and architecture."""
+        return render_markdown_page(
+            request,
+            Path("docs/foundations/README.md"),
+            "Foundations - Semantic Infrastructure Lab",
+            "/foundations",
+        )
+
+    @router.get("/foundations/{name}", response_class=HTMLResponse)
+    async def foundations_doc(request: Request, name: str) -> Response:
+        """Individual foundations document."""
+        # Try lowercase with hyphens first
+        filename = name + ".md"
+        doc_path = Path("docs/foundations") / filename
+
+        # Try with SIL_ prefix and underscores
+        if not doc_path.exists():
+            filename = "SIL_" + name.upper().replace("-", "_") + ".md"
+            doc_path = Path("docs/foundations") / filename
+
+        if not doc_path.exists():
+            raise HTTPException(status_code=404, detail=f"Foundations document not found: {name}")
+
+        content = doc_path.read_text()
+        title = f"{name.replace('-', ' ').title()} - SIL"
+        for line in content.split("\n"):
+            if line.startswith("# "):
+                title = line[2:].strip() + " - SIL"
+                break
+
+        html_content = markdown_renderer.render(content)
+        return templates.TemplateResponse(
+            "page.html",
+            {
+                "request": request,
+                "title": title,
+                "content": html_content,
+                "nav_items": nav_items,
+                "current_page": "/foundations",
+            },
+        )
+
+    # =========================================================================
+    # Systems Section (Production Tools)
+    # =========================================================================
+
+    @router.get("/systems", response_class=HTMLResponse)
+    async def systems_index(request: Request) -> Response:
+        """Systems index - Production tools and implementations."""
+        return render_markdown_page(
+            request,
+            Path("docs/systems/README.md"),
+            "Systems - Semantic Infrastructure Lab",
+            "/systems",
+        )
+
+    @router.get("/systems/{name}", response_class=HTMLResponse)
+    async def system_page(request: Request, name: str) -> Response:
+        """Individual system documentation."""
+        # Try lowercase with hyphens first (agent-ether.md)
+        filename = name + ".md"
+        system_path = Path("docs/systems") / filename
+
+        # Try uppercase (REVEAL.md)
+        if not system_path.exists():
+            filename = name.upper() + ".md"
+            system_path = Path("docs/systems") / filename
+
+        if not system_path.exists():
+            raise HTTPException(status_code=404, detail=f"System not found: {name}")
+
+        content = system_path.read_text()
+        title = f"{name.title()} - SIL"
+        for line in content.split("\n"):
+            if line.startswith("# "):
+                title = line[2:].strip() + " - SIL"
+                break
+
+        html_content = markdown_renderer.render(content)
+        return templates.TemplateResponse(
+            "page.html",
+            {
+                "request": request,
+                "title": title,
+                "content": html_content,
+                "nav_items": nav_items,
+                "current_page": "/systems",
             },
         )
 
@@ -270,32 +362,36 @@ def create_routes(
         )
 
     # =========================================================================
-    # Canonical Documents Section
+    # Legacy Redirects (Old structure -> New structure)
     # =========================================================================
 
+    @router.get("/tools", response_class=HTMLResponse)
+    async def tools_redirect(request: Request) -> Response:
+        """Redirect /tools to /systems."""
+        from fastapi.responses import RedirectResponse
+        return RedirectResponse(url="/systems", status_code=301)
+
+    @router.get("/tools/{name}", response_class=HTMLResponse)
+    async def tool_redirect(request: Request, name: str) -> Response:
+        """Redirect /tools/{name} to /systems/{name}."""
+        from fastapi.responses import RedirectResponse
+        return RedirectResponse(url=f"/systems/{name}", status_code=301)
+
     @router.get("/canonical", response_class=HTMLResponse)
-    async def canonical_index(request: Request) -> Response:
-        """Canonical documents index - Manifesto, principles, charter."""
-        return render_markdown_page(
-            request,
-            Path("docs/canonical/README.md"),
-            "Canonical Documents - Semantic Infrastructure Lab",
-            "/canonical",
-        )
+    async def canonical_redirect(request: Request) -> Response:
+        """Redirect /canonical to /foundations."""
+        from fastapi.responses import RedirectResponse
+        return RedirectResponse(url="/foundations", status_code=301)
 
     @router.get("/canonical/{name}", response_class=HTMLResponse)
-    async def canonical_doc(request: Request, name: str) -> Response:
-        """Individual canonical document."""
-        # Map URL name to filename
-        filename = name.upper().replace("-", "_") + ".md"
-        doc_path = Path("docs/canonical") / filename
-
-        # Also try with SIL_ prefix
-        if not doc_path.exists():
-            doc_path = Path("docs/canonical") / f"SIL_{filename}"
-
-        if not doc_path.exists():
-            raise HTTPException(status_code=404, detail=f"Document not found: {name}")
+    async def canonical_doc_redirect(request: Request, name: str) -> Response:
+        """Redirect /canonical/{name} to appropriate new location."""
+        from fastapi.responses import RedirectResponse
+        # Map common canonical docs to new structure
+        if name in ["manifesto", "yolo"]:
+            return RedirectResponse(url=f"/manifesto/{name}", status_code=301)
+        else:
+            return RedirectResponse(url=f"/foundations/{name}", status_code=301)
 
         content = doc_path.read_text()
 
