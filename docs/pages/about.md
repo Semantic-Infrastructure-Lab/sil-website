@@ -64,16 +64,16 @@ SIL's Semantic Operating System is a 7-layer stack:
 
 Each layer builds on the one below. Together they provide the complete semantic substrate for intelligent systems.
 
-## Production Systems
+## Working Systems
 
-SIL isn't vaporware. These systems are in production:
+SIL isn't vaporware. These systems demonstrate the architecture:
 
-| System | Version | Proof |
-|--------|---------|-------|
-| **Reveal** | v0.23.1 | 8.8K total, 3.1K/month (PyPI, 100% organic) |
-| **Morphogen** | v0.11 | 1,600+ tests, 85% coverage |
-| **TiaCAD** | v3.1.2 | 1,027 tests, 92% coverage |
-| **GenesisGraph** | v0.3.0 | Cryptographic provenance |
+| System | Version | Status | Evidence |
+|--------|---------|--------|----------|
+| **Reveal** | v0.23.1 | In production | 8.8K downloads, 3.1K/month (PyPI, 100% organic) |
+| **Morphogen** | v0.11 | Production-grade | 1,600+ tests, 85% coverage, daily internal use |
+| **TiaCAD** | v3.1.2 | Production-grade | 1,027 tests, 92% coverage, active development |
+| **GenesisGraph** | v0.3.0 | Production-grade | Cryptographic provenance, validated architecture |
 
 ## The Team
 

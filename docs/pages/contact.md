@@ -59,7 +59,7 @@ If you're working on:
 
 ## For Engineers
 
-All our production systems are open source:
+All our systems are open source:
 - Bug reports and feature requests welcome
 - Pull requests reviewed thoughtfully
 - Documentation improvements valued

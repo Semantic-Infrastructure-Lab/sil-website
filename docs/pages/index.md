@@ -27,7 +27,7 @@ SIL develops **semantic infrastructure**—a substrate where:
 
 This is the [Semantic Operating System](/foundations/semantic-os-architecture): persistent memory, unified representations, deterministic engines, multi-agent orchestration, and interfaces where every cognitive layer remains visible.
 
-## Production Systems
+## Working Systems
 
 These aren't demos. They're working infrastructure proving the architecture:
 

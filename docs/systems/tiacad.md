@@ -2,7 +2,7 @@
 
 **Tagline:** Parametric CAD in YAML. Semantic constraints, not just geometry.
 
-**Status:** ✅ Production v3.1.2 | Available on [GitHub](https://github.com/Semantic-Infrastructure-Lab/tiacad)
+**Status:** ✅ Production-grade v3.1.2 | Available on [GitHub](https://github.com/Semantic-Infrastructure-Lab/tiacad)
 
 **Latest:** v3.1.2 features visual regression testing, complete cone primitive support, and comprehensive documentation.
 
