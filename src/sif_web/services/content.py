@@ -53,43 +53,30 @@ class ContentService:
     # Slug overrides for special cases (slug -> filename)
     # Only needed when auto-discovery would produce wrong slug
     SLUG_OVERRIDES = {
-        "canonical": {
-            "manifesto": "SIL_MANIFESTO.md",
-            "principles": "SIL_PRINCIPLES.md",
-            # Removed "charter" override - auto-discovers as "technical-charter" (clearer)
+        "manifesto": {
+            "manifesto-overview": "README.md",
+            # YOLO.md auto-discovers as 'yolo'
+        },
+        "foundations": {
+            "foundations-overview": "README.md",
             "glossary": "SIL_GLOSSARY.md",
-            "research-agenda": "SIL_RESEARCH_AGENDA_YEAR1.md",
-            # Alias: prevents auto-discovery of duplicate (tier 0 = hidden from index)
-            "research-agenda-year1": "SIL_RESEARCH_AGENDA_YEAR1.md",
-            # These auto-discover correctly: founders-letter, founder-profile, tia-profile, technical-charter
-            # Override README to have unique slug (avoids collision with other READMEs)
-            "canonical-overview": "README.md",
+            # Other files auto-discover correctly
         },
         "architecture": {
-            # Override README to have unique slug (avoids collision with other READMEs)
             "architecture-overview": "README.md",
         },
-        "guides": {
-            "optimization": "OPTIMIZATION_IN_SIL.md",
-            "ecosystem-layout": "SIL_ECOSYSTEM_PROJECT_LAYOUT.md",
-        },
-        "vision": {
-            # All auto-discover correctly
-        },
         "research": {
-            # Override README to have unique slug (avoids collision with other READMEs)
             "research-overview": "README.md",
+        },
+        "systems": {
+            "systems-overview": "README.md",
+            # Tool files auto-discover correctly (reveal.md -> reveal, etc.)
         },
         "meta": {
             # All auto-discover correctly
         },
-        "semantic-os": {
-            # All auto-discover correctly (README -> overview handled by filename_to_slug)
-        },
-        "tools": {
-            # Override README to avoid conflict with semantic-os/README.md
-            "tools-overview": "README.md",
-            # REVEAL auto-discovers correctly as 'reveal'
+        "essays": {
+            # All auto-discover correctly
         },
     }
 
@@ -279,7 +266,7 @@ class ContentService:
                 )
 
         # Try each category until we find the slug
-        categories = ["canonical", "architecture", "guides", "vision", "research", "meta", "semantic-os", "tools", "about", "principles", "innovations"]
+        categories = ["manifesto", "foundations", "research", "systems", "architecture", "meta", "essays"]
 
         for category in categories:
             doc = self.load_document(category, slug)
@@ -299,7 +286,7 @@ class ContentService:
             List of Document instances
         """
         # Auto-discover all categories or just the requested one
-        all_categories = ["canonical", "architecture", "guides", "vision", "research", "meta", "semantic-os", "tools", "innovations"]
+        all_categories = ["manifesto", "foundations", "research", "systems", "architecture", "meta", "essays"]
         categories_to_list = [category] if category else all_categories
 
         docs = []
