@@ -393,30 +393,8 @@ def create_routes(
         else:
             return RedirectResponse(url=f"/foundations/{name}", status_code=301)
 
-        content = doc_path.read_text()
-
-        # Extract title from first H1
-        title = f"{name.replace('-', ' ').title()} - SIL"
-        for line in content.split("\n"):
-            if line.startswith("# "):
-                title = line[2:].strip() + " - SIL"
-                break
-
-        html_content = markdown_renderer.render(content)
-
-        return templates.TemplateResponse(
-            "page.html",
-            {
-                "request": request,
-                "title": title,
-                "content": html_content,
-                "nav_items": nav_items,
-                "current_page": "/canonical",
-            },
-        )
-
     # =========================================================================
-    # Innovations Section
+    # End Routes
     # =========================================================================
 
     @router.get("/innovations", response_class=HTMLResponse)
