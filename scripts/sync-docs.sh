@@ -42,15 +42,21 @@ echo ""
 # Create website docs directory if it doesn't exist
 mkdir -p "$WEBSITE_DOCS"
 
-# Sync canonical docs
-echo "Syncing docs/canonical/..."
+# Sync manifesto
+echo "Syncing docs/manifesto/..."
 rsync -av --delete \
     --exclude='.git' \
-    --exclude='*.pyc' \
-    --exclude='__pycache__' \
-    "$SIL_REPO/docs/canonical/" \
-    "$WEBSITE_DOCS/canonical/"
-echo -e "${GREEN}✓${NC} Canonical docs synced"
+    "$SIL_REPO/docs/manifesto/" \
+    "$WEBSITE_DOCS/manifesto/"
+echo -e "${GREEN}✓${NC} Manifesto synced"
+
+# Sync foundations
+echo "Syncing docs/foundations/..."
+rsync -av --delete \
+    --exclude='.git' \
+    "$SIL_REPO/docs/foundations/" \
+    "$WEBSITE_DOCS/foundations/"
+echo -e "${GREEN}✓${NC} Foundations synced"
 
 # Sync architecture docs
 echo "Syncing docs/architecture/..."
@@ -78,23 +84,13 @@ rsync -av --delete \
     "$WEBSITE_DOCS/meta/"
 echo -e "${GREEN}✓${NC} Meta docs synced"
 
-# Sync innovations docs
-echo "Syncing docs/innovations/..."
+# Sync systems docs (formerly tools/ and innovations/)
+echo "Syncing docs/systems/..."
 rsync -av --delete \
     --exclude='.git' \
-    "$SIL_REPO/docs/innovations/" \
-    "$WEBSITE_DOCS/innovations/"
-echo -e "${GREEN}✓${NC} Innovations docs synced"
-
-# NOTE: semantic-os/ directory removed from SIL repo (empty placeholder)
-
-# Sync tools docs
-echo "Syncing docs/tools/..."
-rsync -av --delete \
-    --exclude='.git' \
-    "$SIL_REPO/docs/tools/" \
-    "$WEBSITE_DOCS/tools/"
-echo -e "${GREEN}✓${NC} Tools docs synced"
+    "$SIL_REPO/docs/systems/" \
+    "$WEBSITE_DOCS/systems/"
+echo -e "${GREEN}✓${NC} Systems docs synced"
 
 # Sync essays (now in public SIL repo alongside other docs)
 echo "Syncing docs/essays/..."
@@ -133,36 +129,39 @@ echo "========================================="
 echo ""
 
 # Count synced files
-CANONICAL_COUNT=$(find "$WEBSITE_DOCS/canonical" -name "*.md" 2>/dev/null | wc -l)
-ARCHITECTURE_COUNT=$(find "$WEBSITE_DOCS/architecture" -name "*.md" 2>/dev/null | wc -l)
+MANIFESTO_COUNT=$(find "$WEBSITE_DOCS/manifesto" -name "*.md" 2>/dev/null | wc -l)
+FOUNDATIONS_COUNT=$(find "$WEBSITE_DOCS/foundations" -name "*.md" 2>/dev/null | wc -l)
 RESEARCH_COUNT=$(find "$WEBSITE_DOCS/research" -name "*.md" 2>/dev/null | wc -l)
+SYSTEMS_COUNT=$(find "$WEBSITE_DOCS/systems" -name "*.md" 2>/dev/null | wc -l)
+ARCHITECTURE_COUNT=$(find "$WEBSITE_DOCS/architecture" -name "*.md" 2>/dev/null | wc -l)
 META_COUNT=$(find "$WEBSITE_DOCS/meta" -name "*.md" 2>/dev/null | wc -l)
-INNOVATIONS_COUNT=$(find "$WEBSITE_DOCS/innovations" -name "*.md" 2>/dev/null | wc -l)
-TOOLS_COUNT=$(find "$WEBSITE_DOCS/tools" -name "*.md" 2>/dev/null | wc -l)
 ESSAYS_COUNT=$(find "$WEBSITE_DOCS/essays" -name "*.md" 2>/dev/null | wc -l)
 
 echo "Synced files by category:"
-echo "  Canonical:    $CANONICAL_COUNT documents"
-echo "  Architecture: $ARCHITECTURE_COUNT documents"
+echo "  Manifesto:    $MANIFESTO_COUNT documents"
+echo "  Foundations:  $FOUNDATIONS_COUNT documents"
 echo "  Research:     $RESEARCH_COUNT documents"
+echo "  Systems:      $SYSTEMS_COUNT documents"
+echo "  Architecture: $ARCHITECTURE_COUNT documents"
 echo "  Meta:         $META_COUNT documents"
-echo "  Innovations:  $INNOVATIONS_COUNT documents"
-echo "  Tools:        $TOOLS_COUNT documents"
 echo "  Essays:       $ESSAYS_COUNT documents"
 echo ""
 
-TOTAL_COUNT=$((CANONICAL_COUNT + ARCHITECTURE_COUNT + RESEARCH_COUNT + META_COUNT + INNOVATIONS_COUNT + TOOLS_COUNT + ESSAYS_COUNT))
+TOTAL_COUNT=$((MANIFESTO_COUNT + FOUNDATIONS_COUNT + RESEARCH_COUNT + SYSTEMS_COUNT + ARCHITECTURE_COUNT + META_COUNT + ESSAYS_COUNT))
 echo "Total: $TOTAL_COUNT markdown files"
 echo ""
 
 # Check for common required files
 REQUIRED_FILES=(
-    "canonical/SIL_MANIFESTO.md"
-    "canonical/SIL_PRINCIPLES.md"
-    "canonical/SIL_TECHNICAL_CHARTER.md"
-    "canonical/FOUNDERS_LETTER.md"
+    "manifesto/YOLO.md"
+    "foundations/architectural-principles.md"
+    "foundations/design-principles.md"
+    "foundations/SIL_TECHNICAL_CHARTER.md"
+    "foundations/FOUNDERS_LETTER.md"
+    "foundations/SIL_SEMANTIC_OS_ARCHITECTURE.md"
     "architecture/UNIFIED_ARCHITECTURE_GUIDE.md"
-    "research/RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md"
+    "research/information-architecture/PROGRESSIVE_DISCLOSURE_GUIDE.md"
+    "systems/reveal.md"
     "meta/FAQ.md"
     "README.md"
 )
