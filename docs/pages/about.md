@@ -108,16 +108,21 @@ This structure ensures:
 
 [Learn more about SIF →](https://semanticinfrastructurefoundation.org)
 
-## The Bell Labs Inspiration
+## Standing on Shoulders of Giants
 
-SIL aspires to the Bell Labs model: long-term fundamental research protected from quarterly pressures, focused on infrastructure that enables entire industries.
+The pattern SIL follows—long-term infrastructure work, patient capital, open foundations—has precedent.
 
-Bell Labs gave us Unix, C, information theory, the transistor—foundational work that took decades and required patient capital. SIL is building the semantic equivalent.
+Unix, C, information theory, the transistor—foundational technologies that took years to mature but enabled entire industries. This work succeeded because institutions protected researchers from quarterly pressure and focused on infrastructure over applications.
 
-**Historical parallels:**
-- **Claude Shannon** — saw information theory as the missing layer
-- **Doug Engelbart** — saw human augmentation infrastructure
-- **Ken Thompson / Dennis Ritchie** — saw Unix as the missing substrate
+**What that pattern means for SIL:**
+- **Long-term commitment** - Decades, not quarters
+- **Infrastructure first** - The substrate that others build on
+- **Open by default** - Shared foundations, not proprietary lock-in
+- **Resistance to capture** - Mission over short-term incentives
+
+We're not claiming to replicate that success. We're following that approach because it's the only one that works for foundational infrastructure.
+
+The work will speak for itself.
 
 ## Open & Transparent
 
