@@ -25,13 +25,13 @@ SIL develops **semantic infrastructure**—a substrate where:
 - **Reasoning is inspectable** — you can see how conclusions were reached
 - **Composition works** — systems combine correctly across domains
 
-This is the [Semantic Operating System](/canonical/semantic-os-architecture): persistent memory, unified representations, deterministic engines, multi-agent orchestration, and interfaces where every cognitive layer remains visible.
+This is the [Semantic Operating System](/foundations/semantic-os-architecture): persistent memory, unified representations, deterministic engines, multi-agent orchestration, and interfaces where every cognitive layer remains visible.
 
 ## Production Systems
 
 These aren't demos. They're working infrastructure proving the architecture:
 
-### [Reveal](/tools/reveal) — Progressive Code Exploration
+### [Reveal](/systems/reveal) — Progressive Code Exploration
 `pip install reveal-cli` · v0.23.1 · 2K+ downloads/month
 
 Structure-first code exploration with 10-150x token reduction. See file structure before reading content. Extract specific functions without loading entire files.
@@ -42,12 +42,12 @@ reveal app.py          # File structure (functions, classes)
 reveal app.py main     # Extract specific function
 ```
 
-### [Morphogen](/innovations/morphogen) — Cross-Domain Computation
+### [Morphogen](/systems/morphogen) — Cross-Domain Computation
 v0.11 · 1,600+ tests · 85% coverage
 
 Unified computational substrate spanning 40+ domains. MLIR-based deterministic execution with cryptographic provenance.
 
-### [GenesisGraph](/innovations/genesisgraph) — Verifiable Provenance
+### [GenesisGraph](/systems/genesisgraph) — Verifiable Provenance
 v0.3.0 · Cryptographic audit trails
 
 Every transformation produces a provenance record. Selective disclosure lets you verify without revealing everything.
@@ -80,7 +80,7 @@ SIL is the research division of the [Semantic Infrastructure Foundation](https:/
 
 - **Use the tools:** `pip install reveal-cli` and try progressive disclosure
 - **Read the research:** [Essays](/essays) and [Research Papers](/research)
-- **Explore the architecture:** [Canonical Documents](/canonical)
+- **Explore the architecture:** [Foundations](/foundations)
 - **Collaborate:** [Contact us](/contact) or visit [GitHub](https://github.com/Semantic-Infrastructure-Lab)
 
 ---

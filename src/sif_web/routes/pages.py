@@ -331,10 +331,22 @@ def create_routes(
 
     @router.get("/research/{name}", response_class=HTMLResponse)
     async def research_paper(request: Request, name: str) -> Response:
-        """Individual research paper."""
+        """Individual research paper - handles both flat and subdirectory structure."""
         # Map URL name to filename
         filename = name.upper().replace("-", "_") + ".md"
+
+        # Try root level first
         paper_path = Path("docs/research") / filename
+
+        # If not found, search in subdirectories
+        if not paper_path.exists():
+            research_dir = Path("docs/research")
+            for subdir in research_dir.iterdir():
+                if subdir.is_dir():
+                    candidate = subdir / filename
+                    if candidate.exists():
+                        paper_path = candidate
+                        break
 
         if not paper_path.exists():
             raise HTTPException(status_code=404, detail=f"Research paper not found: {name}")
@@ -394,52 +406,6 @@ def create_routes(
             return RedirectResponse(url=f"/foundations/{name}", status_code=301)
 
     # =========================================================================
-    # End Routes
-    # =========================================================================
-
-    @router.get("/innovations", response_class=HTMLResponse)
-    async def innovations_index(request: Request) -> Response:
-        """Innovations index - Major projects and systems."""
-        return render_markdown_page(
-            request,
-            Path("docs/innovations/README.md"),
-            "Innovations - Semantic Infrastructure Lab",
-            "/innovations",
-        )
-
-    @router.get("/innovations/{name}", response_class=HTMLResponse)
-    async def innovation_page(request: Request, name: str) -> Response:
-        """Individual innovation/project page."""
-        # Map URL name to filename
-        filename = name.upper().replace("-", "_") + ".md"
-        doc_path = Path("docs/innovations") / filename
-
-        if not doc_path.exists():
-            raise HTTPException(status_code=404, detail=f"Innovation not found: {name}")
-
-        content = doc_path.read_text()
-
-        # Extract title from first H1
-        title = f"{name.replace('-', ' ').title()} - SIL"
-        for line in content.split("\n"):
-            if line.startswith("# "):
-                title = line[2:].strip() + " - SIL"
-                break
-
-        html_content = markdown_renderer.render(content)
-
-        return templates.TemplateResponse(
-            "page.html",
-            {
-                "request": request,
-                "title": title,
-                "content": html_content,
-                "nav_items": nav_items,
-                "current_page": "/innovations",
-            },
-        )
-
-    # =========================================================================
     # Founder's Letter (Legacy URL support)
     # =========================================================================
 
@@ -448,7 +414,7 @@ def create_routes(
         """Founder's Letter - direct access."""
         return render_markdown_page(
             request,
-            Path("docs/canonical/FOUNDERS_LETTER.md"),
+            Path("docs/foundations/FOUNDERS_LETTER.md"),
             "Founder's Letter - Semantic Infrastructure Lab",
             "/",
         )

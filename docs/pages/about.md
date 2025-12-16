@@ -139,7 +139,8 @@ If an agent contributes insight, structure, or decomposition, that provenance ge
 **Read our research:**
 - [Essays](/essays) — technical essays on semantic infrastructure
 - [Research](/research) — deep technical papers
-- [Canonical Documents](/canonical) — manifesto, principles, charter
+- [Manifesto](/manifesto) — YOLO and soul documents
+- [Foundations](/foundations) — principles, architecture, charter
 
 **Collaborate:**
 - [Contact us](/contact) for research collaboration
