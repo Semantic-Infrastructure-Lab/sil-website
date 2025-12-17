@@ -342,7 +342,7 @@ This is semantic infrastructure in practice: substrate that enables research, no
 
 **Philosophy:**
 - [Founder's Letter](/foundations/FOUNDERS_LETTER) - Glass-box laboratory principles
-- [Design Principles](/foundations/SIL_PRINCIPLES) - Principles Beth validates
+- [Design Principles](/foundations/design-principles) - Principles Beth validates
 
 ---
 

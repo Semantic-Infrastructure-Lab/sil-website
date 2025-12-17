@@ -325,7 +325,7 @@ Our commitments are architectural, not rhetorical:
 - **Reproducibility is a design constraint** — Workflows and transformations should be predictable and repeatable. Stochasticity is allowed, but it must be explicit and tracked.
 - **Interpretability is first-class** — Systems should expose internal structure and reasoning paths—not conceal them behind opaque heuristics.
 
-These commitments are not philosophical decoration. They are engineering constraints. **[See SIL Principles →](/foundations/SIL_PRINCIPLES)** for how they guide system design.
+These commitments are not philosophical decoration. They are engineering constraints. **[See SIL Principles →](/foundations/design-principles)** for how they guide system design.
 
 ## 3. Lineage — Computation as Representation and Transformation
 
@@ -582,7 +582,7 @@ That is the work.
 - [Start Here](/START_HERE) - Try reveal in 10 minutes
 
 **If you want deeper principles:**
-- [Design Principles](/foundations/SIL_PRINCIPLES) - The 14 constraints that guide all work
+- [Design Principles](/foundations/design-principles) - The 14 constraints that guide all work
 - [Stewardship Manifesto](/foundations/SIL_STEWARDSHIP_MANIFESTO) - How SIL is governed
 - [Founder's Letter](/foundations/FOUNDERS_LETTER) - Personal context and lab purpose
 

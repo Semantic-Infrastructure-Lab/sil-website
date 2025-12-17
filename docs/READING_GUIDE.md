@@ -27,7 +27,7 @@ SIL has comprehensive documentation across multiple domains. This guide provides
    - What SIL builds and why it matters
    - **Start here** if you read only one document
 
-3. **[Principles](canonical/SIL_PRINCIPLES)** (10 min)
+3. **[Principles](/foundations/design-principles)** (10 min)
    - The 14 principles that guide all SIL work
    - Core: Clarity, Simplicity, Composability, Correctness, Verifiability
    - Operational: Structure before heuristics, Provenance everywhere, etc.
@@ -281,7 +281,7 @@ All 12 SIL projects detailed.
 1. **Keep the Glossary open** — [SIL_GLOSSARY.md](canonical/SIL_GLOSSARY) defines all 108 terms
 2. **Follow the breadcrumbs** — Each doc has "Related Reading" sections
 3. **Use progressive disclosure** — Start with summaries, drill into details as needed
-4. **Reference the principles** — The [14 principles](canonical/SIL_PRINCIPLES) guide everything
+4. **Reference the principles** — The [14 principles](/foundations/design-principles) guide everything
 5. **Try the tools** — Understanding deepens when you use Reveal yourself
 
 ---

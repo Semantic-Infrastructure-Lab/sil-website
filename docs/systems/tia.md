@@ -252,7 +252,7 @@ It's the research lab practicing what it preaches.
 
 **Philosophy:**
 - [Founder's Letter](/foundations/FOUNDERS_LETTER) - Scott + Tia collaboration explained
-- [Design Principles](/foundations/SIL_PRINCIPLES) - Principles validated through Tia's use
+- [Design Principles](/foundations/design-principles) - Principles validated through Tia's use
 
 ---
 

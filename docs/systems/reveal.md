@@ -85,7 +85,7 @@ def load_config(config_path: str) -> Config:
 
 ## SIL Principles in Action
 
-Reveal demonstrates SIL's core principles ([see SIL_PRINCIPLES.md](/foundations/SIL_PRINCIPLES)):
+Reveal demonstrates SIL's core principles ([see design-principles](/foundations/design-principles)):
 
 ✅ **Clarity** - Structure is visible, not hidden (see what's in a file without reading it)
 ✅ **Simplicity** - Zero configuration, smart defaults (just works)

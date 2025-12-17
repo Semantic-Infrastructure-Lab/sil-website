@@ -1,6 +1,6 @@
 # Manifesto
 
-## [YOLO](/manifesto/YOLO)
+## [YOLO](YOLO)
 
 **You Only Learn Once: On the Compression of Experience**
 

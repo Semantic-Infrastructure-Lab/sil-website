@@ -53,7 +53,7 @@ Build structures that last.**
 
 **If you want deeper philosophy:**
 - [Manifesto](/manifesto/YOLO) - Core vision and principles
-- [Design Principles](/foundations/SIL_PRINCIPLES) - The 14 constraints that guide all work
+- [Design Principles](/foundations/design-principles) - The 14 constraints that guide all work
 
 **If you want to get started:**
 - [Start Here](/START_HERE) - 30-minute guided tour with hands-on example

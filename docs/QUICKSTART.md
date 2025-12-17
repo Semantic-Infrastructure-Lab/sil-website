@@ -72,7 +72,7 @@ Now that you've experienced progressive disclosure, understand the principles:
 ### The 30-Minute Path
 
 1. **[Manifesto](canonical/SIL_MANIFESTO)** (15 min) — Why semantic infrastructure matters
-2. **[Principles](canonical/SIL_PRINCIPLES)** (10 min) — The 14 principles that guide all work
+2. **[Principles](/foundations/design-principles)** (10 min) — The 14 principles that guide all work
 3. **[START_HERE](canonical/START_HERE)** (5 min) — Navigate to deeper topics
 
 ### The Hands-On Path

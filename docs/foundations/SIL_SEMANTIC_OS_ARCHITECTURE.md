@@ -717,7 +717,7 @@ This is the technical core of SIL's mission.
 
 **Related Documents:**
 - [SIL Glossary](/foundations/SIL_GLOSSARY) — Canonical layer definitions (L0-L6)
-- [SIL Principles](/foundations/SIL_PRINCIPLES) — The 14 guiding principles
+- [SIL Principles](/foundations/design-principles) — The 14 guiding principles
 - [Semantic Feedback Loops](/foundations/SEMANTIC_FEEDBACK_LOOPS) — Closed-loop control theory
 - [Semantic Observability](/foundations/SEMANTIC_OBSERVABILITY) — Intent-execution alignment
 - [Unified Architecture Guide](/architecture/UNIFIED_ARCHITECTURE_GUIDE) — The universal pattern
