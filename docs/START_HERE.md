@@ -117,25 +117,25 @@ SIL builds infrastructure meant to last decades, not chase quarterly trends.
 ## Where to Go Next
 
 ### For the Story
-**[Founder's Letter](/canonical/founders-letter)** — Why SIL was built, the vision, and what we're inviting you to help build
+**[Founder's Letter](/foundations/founders-letter)** — Why SIL was built, the vision, and what we're inviting you to help build
 
 ### For the Personal Vision
 **[Founder Background](/meta/founder-background)** — Working systems, production metrics, and track record
 **[Influences & Acknowledgments](/meta/influences-and-acknowledgments)** — The thinkers and traditions that shaped SIL
 
 ### For the Philosophy
-**[Manifesto](/canonical/manifesto)** — The philosophical foundation
-**[Principles](/canonical/principles)** — 14 foundational constraints that define SIL
+**[Manifesto](/manifesto)** — The philosophical foundation
+**[Design Principles](/foundations/design-principles)** — 14 foundational constraints that define SIL
 
 ### For the Technical Depth
-**[Technical Charter](/canonical/technical-charter)** — Formal specification with invariants and guarantees
-**[Semantic OS Architecture](/canonical/semantic-os-architecture)** — 7-layer architecture from memory to interfaces
+**[Technical Charter](/foundations/technical-charter)** — Formal specification with invariants and guarantees
+**[Semantic OS Architecture](/foundations/semantic-os-architecture)** — 7-layer architecture from memory to interfaces
 
 ### For the Tools
-**[Reveal](/tools/reveal)** — Code structure navigation
+**[Reveal](/systems/reveal)** — Code structure navigation
 **[Agent Help Standard](/research/agent-help-standard)** — Strategic guidance for agents
 **[GenesisGraph](https://github.com/Semantic-Infrastructure-Lab/genesisgraph)** — Verifiable provenance
-**[Morphogen](/innovations/morphogen)** — Unified computational substrate
+**[Morphogen](/systems/morphogen)** — Unified computational substrate
 
 ### For Collaborators
 **[FAQ](/meta/faq)** — Common questions answered

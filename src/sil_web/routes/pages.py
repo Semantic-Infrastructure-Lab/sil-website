@@ -164,6 +164,11 @@ def create_routes(
             filename = "SIL_" + name.upper().replace("-", "_") + ".md"
             doc_path = Path("docs/foundations") / filename
 
+        # Try uppercase with underscores (no SIL_ prefix)
+        if not doc_path.exists():
+            filename = name.upper().replace("-", "_") + ".md"
+            doc_path = Path("docs/foundations") / filename
+
         if not doc_path.exists():
             raise HTTPException(status_code=404, detail=f"Foundations document not found: {name}")
 
@@ -423,6 +428,82 @@ def create_routes(
                 "content": html_content,
                 "nav_items": nav_items,
                 "current_page": "/research",
+            },
+        )
+
+    # =========================================================================
+    # Architecture Section
+    # =========================================================================
+
+    @router.get("/architecture/{name}", response_class=HTMLResponse)
+    async def architecture_doc(request: Request, name: str) -> Response:
+        """Individual architecture document."""
+        # Try uppercase with underscores first (UNIFIED_ARCHITECTURE_GUIDE.md)
+        filename = name.upper().replace("-", "_") + ".md"
+        doc_path = Path("docs/architecture") / filename
+
+        # Try lowercase with hyphens
+        if not doc_path.exists():
+            filename = name + ".md"
+            doc_path = Path("docs/architecture") / filename
+
+        if not doc_path.exists():
+            raise HTTPException(status_code=404, detail=f"Architecture document not found: {name}")
+
+        content = doc_path.read_text()
+        title = f"{name.replace('-', ' ').title()} - SIL Architecture"
+        for line in content.split("\n"):
+            if line.startswith("# "):
+                title = line[2:].strip() + " - SIL"
+                break
+
+        html_content = markdown_renderer.render(content)
+        return templates.TemplateResponse(
+            "page.html",
+            {
+                "request": request,
+                "title": title,
+                "content": html_content,
+                "nav_items": nav_items,
+                "current_page": "/architecture",
+            },
+        )
+
+    # =========================================================================
+    # Projects Section
+    # =========================================================================
+
+    @router.get("/projects/{name}", response_class=HTMLResponse)
+    async def project_doc(request: Request, name: str) -> Response:
+        """Individual project document."""
+        # Try uppercase with underscores first (PROJECT_INDEX.md)
+        filename = name.upper().replace("-", "_") + ".md"
+        doc_path = Path("docs/projects") / filename
+
+        # Try lowercase with hyphens
+        if not doc_path.exists():
+            filename = name + ".md"
+            doc_path = Path("docs/projects") / filename
+
+        if not doc_path.exists():
+            raise HTTPException(status_code=404, detail=f"Project document not found: {name}")
+
+        content = doc_path.read_text()
+        title = f"{name.replace('-', ' ').title()} - SIL Projects"
+        for line in content.split("\n"):
+            if line.startswith("# "):
+                title = line[2:].strip() + " - SIL"
+                break
+
+        html_content = markdown_renderer.render(content)
+        return templates.TemplateResponse(
+            "page.html",
+            {
+                "request": request,
+                "title": title,
+                "content": html_content,
+                "nav_items": nav_items,
+                "current_page": "/projects",
             },
         )
 

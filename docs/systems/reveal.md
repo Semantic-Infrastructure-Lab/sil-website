@@ -168,7 +168,7 @@ reveal postgres://prod users   # Database schema (coming soon)
 reveal https://api.github.com  # REST APIs (coming soon)
 ```
 
-See [Reveal Roadmap](https://github.com/semantic-infrastructure-lab/reveal/blob/main/ROADMAP) for adapter evolution.
+See [Reveal Roadmap](https://github.com/semantic-infrastructure-lab/reveal/blob/main/ROADMAP.md) for adapter evolution.
 
 ---
 
@@ -290,7 +290,7 @@ Reveal proves this pattern works for code exploration. As SIL evolves, this same
 **Reveal today:** Explore code semantically
 **SIM vision:** Explore ALL semantic structure (code, graphs, reasoning, provenance)
 
-See the [Reveal Roadmap](https://github.com/semantic-infrastructure-lab/reveal/blob/main/ROADMAP) for detailed plans.
+See the [Reveal Roadmap](https://github.com/semantic-infrastructure-lab/reveal/blob/main/ROADMAP.md) for detailed plans.
 
 ---
 
@@ -310,13 +310,13 @@ reveal .                  # Explore current directory
 
 **Learn more:**
 - [GitHub Repository](https://github.com/semantic-infrastructure-lab/reveal)
-- [Full Documentation](https://github.com/semantic-infrastructure-lab/reveal/blob/main/README)
-- [Changelog](https://github.com/semantic-infrastructure-lab/reveal/blob/main/CHANGELOG)
+- [Full Documentation](https://github.com/semantic-infrastructure-lab/reveal/blob/main/README.md)
+- [Changelog](https://github.com/semantic-infrastructure-lab/reveal/blob/main/CHANGELOG.md)
 - [PyPI Package](https://pypi.org/project/reveal-cli/)
 
 **Report issues or contribute:**
 - [GitHub Issues](https://github.com/semantic-infrastructure-lab/reveal/issues)
-- [Contributing Guide](https://github.com/semantic-infrastructure-lab/reveal/blob/main/CONTRIBUTING)
+- [Contributing Guide](https://github.com/semantic-infrastructure-lab/reveal/blob/main/CONTRIBUTING.md)
 
 ---
 
