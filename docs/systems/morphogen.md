@@ -162,8 +162,8 @@ flow(dt=0.1ms) {
 
 **Full Documentation:**
 - [Morphogen GitHub Repository](https://github.com/Semantic-Infrastructure-Lab/morphogen)
-- [Complete Language Specification](https://github.com/Semantic-Infrastructure-Lab/morphogen/blob/main/SPECIFICATION.md) (2,282 lines)
-- [Domain Catalog](https://github.com/Semantic-Infrastructure-Lab/morphogen/blob/main/docs/DOMAINS.md) - All 40+ domains with examples
+- [Complete Language Specification](https://github.com/Semantic-Infrastructure-Lab/morphogen/blob/main/SPECIFICATION) (2,282 lines)
+- [Domain Catalog](https://github.com/Semantic-Infrastructure-Lab/morphogen/blob/main/docs/DOMAINS) - All 40+ domains with examples
 - [Architecture Guide](https://github.com/Semantic-Infrastructure-Lab/morphogen/blob/main/docs/architecture/) - MLIR compilation, Graph IR, execution model
 
 **Example Gallery:**
@@ -259,5 +259,5 @@ Morphogen (digital) and [Philbrick](https://github.com/Semantic-Infrastructure-L
 
 **Learn More:**
 - [GitHub Repository](https://github.com/Semantic-Infrastructure-Lab/morphogen)
-- [v1.0 Release Plan](https://github.com/Semantic-Infrastructure-Lab/morphogen/blob/main/docs/planning/MORPHOGEN_RELEASE_PLAN.md)
+- [v1.0 Release Plan](https://github.com/Semantic-Infrastructure-Lab/morphogen/blob/main/docs/planning/MORPHOGEN_RELEASE_PLAN)
 - [Complete Documentation](https://github.com/Semantic-Infrastructure-Lab/morphogen/blob/main/docs/)

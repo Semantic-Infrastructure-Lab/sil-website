@@ -251,9 +251,9 @@ for event in invoker.stream_events(job_id):
 
 **Full Documentation:**
 - [Agent Ether GitHub Repository](https://github.com/Semantic-Infrastructure-Lab/agent-ether)
-- [TBC Specification](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/specifications/tool-behavior-contract.md)
+- [TBC Specification](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/specifications/tool-behavior-contract)
 - [Architecture Guide](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/architecture/)
-- [Multi-Agent Coordination](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/architecture/MULTI_AGENT_COORDINATION.md)
+- [Multi-Agent Coordination](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/architecture/MULTI_AGENT_COORDINATION)
 
 **Example Gallery:**
 - [Filesystem Search Tool](https://github.com/Semantic-Infrastructure-Lab/agent-ether/tree/main/examples/fs-search) - Job execution mode
@@ -365,5 +365,5 @@ This transforms multi-agent systems from "pray it works" to "provably correct or
 
 **Learn More:**
 - [GitHub Repository](https://github.com/Semantic-Infrastructure-Lab/agent-ether)
-- [Tool Behavior Contract Spec](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/specifications/tool-behavior-contract.md)
+- [Tool Behavior Contract Spec](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/specifications/tool-behavior-contract)
 - [Architecture](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/architecture/)

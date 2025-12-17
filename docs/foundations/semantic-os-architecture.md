@@ -325,7 +325,7 @@ Our commitments are architectural, not rhetorical:
 - **Reproducibility is a design constraint** — Workflows and transformations should be predictable and repeatable. Stochasticity is allowed, but it must be explicit and tracked.
 - **Interpretability is first-class** — Systems should expose internal structure and reasoning paths—not conceal them behind opaque heuristics.
 
-These commitments are not philosophical decoration. They are engineering constraints. **[See SIL Principles →](./SIL_PRINCIPLES.md)** for how they guide system design.
+These commitments are not philosophical decoration. They are engineering constraints. **[See SIL Principles →](/foundations/SIL_PRINCIPLES)** for how they guide system design.
 
 ## 3. Lineage — Computation as Representation and Transformation
 
@@ -543,9 +543,9 @@ The lab has developed **12 projects** spanning the six layers of the Semantic OS
 **Research & Specification:**
 - Pantheon (universal IR), Agent Ether (multi-agent protocols), Prism (query microkernel)
 
-This is not a roadmap. These are working systems with real users, measured efficiency (10x token reduction - [see FAQ](../meta/FAQ.md)), and test coverage that proves maturity.
+This is not a roadmap. These are working systems with real users, measured efficiency (10x token reduction - [see FAQ](/meta/FAQ)), and test coverage that proves maturity.
 
-**[See the full Project Index →](../../projects/PROJECT_INDEX.md)**
+**[See the full Project Index →](/projects/PROJECT_INDEX)**
 
 ## 12. Founder Stance (Explicitly, Simply)
 
@@ -572,21 +572,21 @@ That is the work.
 ## Related Reading
 
 **If you want to understand the architecture:**
-- [Semantic OS Architecture](./SIL_SEMANTIC_OS_ARCHITECTURE.md) - The 6-layer stack in detail
-- [Unified Architecture Guide](../architecture/UNIFIED_ARCHITECTURE_GUIDE.md) - Universal patterns across all projects
-- [Technical Charter](./SIL_TECHNICAL_CHARTER.md) - Formal specification (45 min read)
+- [Semantic OS Architecture](/foundations/SIL_SEMANTIC_OS_ARCHITECTURE) - The 6-layer stack in detail
+- [Unified Architecture Guide](/architecture/UNIFIED_ARCHITECTURE_GUIDE) - Universal patterns across all projects
+- [Technical Charter](/foundations/SIL_TECHNICAL_CHARTER) - Formal specification (45 min read)
 
 **If you want to see it in action:**
-- [Project Index](../../projects/PROJECT_INDEX.md) - All 12 projects explained
-- [Tools Documentation](../tools/README.md) - Production systems with economic impact data
-- [Start Here](./START_HERE.md) - Try reveal in 10 minutes
+- [Project Index](/projects/PROJECT_INDEX) - All 12 projects explained
+- [Tools Documentation](/systems/README) - Production systems with economic impact data
+- [Start Here](/START_HERE) - Try reveal in 10 minutes
 
 **If you want deeper principles:**
-- [Design Principles](./SIL_PRINCIPLES.md) - The 14 constraints that guide all work
-- [Stewardship Manifesto](./SIL_STEWARDSHIP_MANIFESTO.md) - How SIL is governed
-- [Founder's Letter](./FOUNDERS_LETTER.md) - Personal context and lab purpose
+- [Design Principles](/foundations/SIL_PRINCIPLES) - The 14 constraints that guide all work
+- [Stewardship Manifesto](/foundations/SIL_STEWARDSHIP_MANIFESTO) - How SIL is governed
+- [Founder's Letter](/foundations/FOUNDERS_LETTER) - Personal context and lab purpose
 
 **If you want research depth:**
-- [RAG Paper](../research/RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md) - Semantic manifold transport framework
-- [Agent-Help Standard](../research/AGENT_HELP_STANDARD.md) - Progressive disclosure for agents
-- [Research Agenda Year 1](./SIL_RESEARCH_AGENDA_YEAR1.md) - Near-term research direction
+- [RAG Paper](/research/RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT) - Semantic manifold transport framework
+- [Agent-Help Standard](/research/AGENT_HELP_STANDARD) - Progressive disclosure for agents
+- [Research Agenda Year 1](/foundations/SIL_RESEARCH_AGENDA_YEAR1) - Near-term research direction

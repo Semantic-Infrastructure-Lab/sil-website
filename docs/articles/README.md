@@ -27,7 +27,7 @@ Articles are:
 
 ## Published Articles
 
-### [Stop Reading Code. Start Understanding It](reveal-introduction.md)
+### [Stop Reading Code. Start Understanding It](reveal-introduction)
 **Date:** 2025-12-10
 **Topics:** Reveal, progressive disclosure, token efficiency, semantic stack
 **Audience:** Developers, AI practitioners

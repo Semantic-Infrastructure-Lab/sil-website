@@ -4,8 +4,8 @@
 
 > **Navigation:** This is the hands-on path.
 > - **You are here:** Install tools, try them immediately
-> - [Start Here](canonical/START_HERE.md) — Prefer concepts first? Start there
-> - [Reading Guide](READING_GUIDE.md) — 7 paths for different audiences
+> - [Start Here](canonical/START_HERE) — Prefer concepts first? Start there
+> - [Reading Guide](READING_GUIDE) — 7 paths for different audiences
 
 ---
 
@@ -71,21 +71,21 @@ Now that you've experienced progressive disclosure, understand the principles:
 
 ### The 30-Minute Path
 
-1. **[Manifesto](canonical/SIL_MANIFESTO.md)** (15 min) — Why semantic infrastructure matters
-2. **[Principles](canonical/SIL_PRINCIPLES.md)** (10 min) — The 14 principles that guide all work
-3. **[START_HERE](canonical/START_HERE.md)** (5 min) — Navigate to deeper topics
+1. **[Manifesto](canonical/SIL_MANIFESTO)** (15 min) — Why semantic infrastructure matters
+2. **[Principles](canonical/SIL_PRINCIPLES)** (10 min) — The 14 principles that guide all work
+3. **[START_HERE](canonical/START_HERE)** (5 min) — Navigate to deeper topics
 
 ### The Hands-On Path
 
-1. **[Reveal Documentation](tools/REVEAL.md)** — Learn all reveal features
-2. **[Agent Help Standard](research/AGENT_HELP_STANDARD.md)** — How to make tools agent-friendly
-3. **[Progressive Disclosure Guide](canonical/PROGRESSIVE_DISCLOSURE_GUIDE.md)** — The theory behind what you just experienced
+1. **[Reveal Documentation](tools/REVEAL)** — Learn all reveal features
+2. **[Agent Help Standard](research/AGENT_HELP_STANDARD)** — How to make tools agent-friendly
+3. **[Progressive Disclosure Guide](canonical/PROGRESSIVE_DISCLOSURE_GUIDE)** — The theory behind what you just experienced
 
 ### The Technical Deep-Dive Path
 
-1. **[Semantic OS Architecture](canonical/SIL_SEMANTIC_OS_ARCHITECTURE.md)** (30 min) — The 7-layer architecture
-2. **[Technical Charter](canonical/SIL_TECHNICAL_CHARTER.md)** (45 min) — Formal invariants and guarantees
-3. **[Unified Architecture Guide](architecture/UNIFIED_ARCHITECTURE_GUIDE.md)** (60 min) — How all 12 projects fit together
+1. **[Semantic OS Architecture](canonical/SIL_SEMANTIC_OS_ARCHITECTURE)** (30 min) — The 7-layer architecture
+2. **[Technical Charter](canonical/SIL_TECHNICAL_CHARTER)** (45 min) — Formal invariants and guarantees
+3. **[Unified Architecture Guide](architecture/UNIFIED_ARCHITECTURE_GUIDE)** (60 min) — How all 12 projects fit together
 
 ---
 
@@ -102,10 +102,10 @@ Now that you've experienced progressive disclosure, understand the principles:
 
 Choose your path based on your interest:
 
-- **Researchers:** [Research Agenda Year 1](canonical/SIL_RESEARCH_AGENDA_YEAR1.md)
-- **Developers:** [Project Index](../projects/PROJECT_INDEX.md) — See all 12 projects
-- **Collaborators:** [FAQ](meta/FAQ.md) — Common questions answered
-- **Founders/Stewards:** [Stewardship Manifesto](canonical/SIL_STEWARDSHIP_MANIFESTO.md)
+- **Researchers:** [Research Agenda Year 1](canonical/SIL_RESEARCH_AGENDA_YEAR1)
+- **Developers:** [Project Index](../projects/PROJECT_INDEX) — See all 12 projects
+- **Collaborators:** [FAQ](meta/FAQ) — Common questions answered
+- **Founders/Stewards:** [Stewardship Manifesto](canonical/SIL_STEWARDSHIP_MANIFESTO)
 
 ---
 

@@ -235,7 +235,7 @@ beth_topics:
 tags: [documentation, infrastructure]
 related_docs:
   - ../previous-session/README.md
-  - ../../projects/SIL/docs/relevant-doc.md
+  - /projects/SIL/docs/relevant-doc.md
 project: SIL
 type: documentation
 files_created: 3
@@ -286,7 +286,7 @@ quality:
   practical_value: 98
 related_docs:
   - ../other-research/DOC.md
-  - ../../projects/SIL/docs/canonical/RELATED.md
+  - /projects/SIL/docs/canonical/RELATED.md
 ---
 ```
 
@@ -603,9 +603,9 @@ done
 
 ## Related Documentation
 
-- [Documentation Front Matter Standard](../../projects/sil-website/docs/research/DOCUMENTATION_FRONT_MATTER_STANDARD.md) - Public specification
-- [Reveal + Beth System](../../projects/SIL/docs/canonical/REVEAL_BETH_PROGRESSIVE_KNOWLEDGE_SYSTEM.md) - Architecture overview
-- [TIA Search Ecosystem](../research-gems/TIA_SEARCH_ECOSYSTEM_RESEARCH.md) - Beth deep dive
+- [Documentation Front Matter Standard](/projects/sil-website/docs/research/DOCUMENTATION_FRONT_MATTER_STANDARD) - Public specification
+- [Reveal + Beth System](/projects/SIL/docs/canonical/REVEAL_BETH_PROGRESSIVE_KNOWLEDGE_SYSTEM) - Architecture overview
+- [TIA Search Ecosystem](../research-gems/TIA_SEARCH_ECOSYSTEM_RESEARCH) - Beth deep dive
 
 ---
 

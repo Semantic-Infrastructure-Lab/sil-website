@@ -243,16 +243,16 @@ It's the research lab practicing what it preaches.
 ## Related Reading
 
 **Architecture:**
-- [Semantic OS Architecture](../canonical/SIL_SEMANTIC_OS_ARCHITECTURE.md) - Where Tia fits in the 7-layer stack
-- [Agent Ether](../innovations/AGENT_ETHER.md) - Multi-agent coordination principles informed by Tia's patterns
+- [Semantic OS Architecture](/foundations/SIL_SEMANTIC_OS_ARCHITECTURE) - Where Tia fits in the 7-layer stack
+- [Agent Ether](/systems/AGENT_ETHER) - Multi-agent coordination principles informed by Tia's patterns
 
 **Companion Systems:**
-- [Beth](./BETH.md) - Knowledge substrate that Tia queries
-- [Reveal](./REVEAL.md) - Progressive disclosure tool that Tia uses daily
+- [Beth](/systems/beth) - Knowledge substrate that Tia queries
+- [Reveal](/systems/reveal) - Progressive disclosure tool that Tia uses daily
 
 **Philosophy:**
-- [Founder's Letter](../canonical/FOUNDERS_LETTER.md) - Scott + Tia collaboration explained
-- [Design Principles](../canonical/SIL_PRINCIPLES.md) - Principles validated through Tia's use
+- [Founder's Letter](/foundations/FOUNDERS_LETTER) - Scott + Tia collaboration explained
+- [Design Principles](/foundations/SIL_PRINCIPLES) - Principles validated through Tia's use
 
 ---
 

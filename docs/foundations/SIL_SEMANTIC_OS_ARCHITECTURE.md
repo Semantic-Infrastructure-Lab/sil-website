@@ -1,7 +1,7 @@
 # SIL Semantic OS Architecture
 
 **Version:** 2.0 (December 2025)
-**Canonical Reference:** [SIL_GLOSSARY.md](./SIL_GLOSSARY.md)
+**Canonical Reference:** [SIL_GLOSSARY.md](/foundations/SIL_GLOSSARY)
 
 ## TL;DR (2-minute overview)
 
@@ -30,7 +30,7 @@ Cross-cutting: Observability (Reveal), Provenance (GenesisGraph), Trust (TAP)
 
 **Want the full architecture?** Read the detailed layer descriptions below ↓
 
-> 💡 **New to SIL terminology?** Keep the [Glossary](./SIL_GLOSSARY.md) open in another tab.
+> 💡 **New to SIL terminology?** Keep the [Glossary](/foundations/SIL_GLOSSARY) open in another tab.
 
 ```mermaid
 graph TB
@@ -135,7 +135,7 @@ Semantic Memory is the **persistent knowledge substrate**—the "file system" fo
 **2. Storage Engines**
 - Graph databases (Neo4j, TerminusDB, or custom)
 - Triple stores (RDF-based)
-- Content-addressable storage (IPFS-like) — **See:** [Distributed Storage Architecture](../architecture/DISTRIBUTED_STORAGE_ARCHITECTURE.md) for IPFS integration strategy
+- Content-addressable storage (IPFS-like) — **See:** [Distributed Storage Architecture](/architecture/DISTRIBUTED_STORAGE_ARCHITECTURE) for IPFS integration strategy
 - Hybrid relational + graph models
 
 **3. Query Languages**
@@ -716,8 +716,8 @@ This is the technical core of SIL's mission.
 ---
 
 **Related Documents:**
-- [SIL Glossary](./SIL_GLOSSARY.md) — Canonical layer definitions (L0-L6)
-- [SIL Principles](./SIL_PRINCIPLES.md) — The 14 guiding principles
-- [Semantic Feedback Loops](./SEMANTIC_FEEDBACK_LOOPS.md) — Closed-loop control theory
-- [Semantic Observability](./SEMANTIC_OBSERVABILITY.md) — Intent-execution alignment
-- [Unified Architecture Guide](../architecture/UNIFIED_ARCHITECTURE_GUIDE.md) — The universal pattern
+- [SIL Glossary](/foundations/SIL_GLOSSARY) — Canonical layer definitions (L0-L6)
+- [SIL Principles](/foundations/SIL_PRINCIPLES) — The 14 guiding principles
+- [Semantic Feedback Loops](/foundations/SEMANTIC_FEEDBACK_LOOPS) — Closed-loop control theory
+- [Semantic Observability](/foundations/SEMANTIC_OBSERVABILITY) — Intent-execution alignment
+- [Unified Architecture Guide](/architecture/UNIFIED_ARCHITECTURE_GUIDE) — The universal pattern

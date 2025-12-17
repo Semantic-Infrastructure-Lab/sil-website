@@ -273,7 +273,7 @@ body_3d.save("guitar_body.3mf")
 - [Architecture Guide](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/docs/architecture/)
 - [Schema Specification](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/docs/specifications/)
 - [Morphogen Adapter](https://github.com/Semantic-Infrastructure-Lab/pantheon/tree/main/adapters/morphogen) - Bidirectional translation working ✅
-- [Roadmap](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/ROADMAP.md) - Detailed development timeline
+- [Roadmap](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/ROADMAP) - Detailed development timeline
 
 **Example Gallery:**
 - ✅ [**SQL Over Audio (WORKING)**](https://github.com/Semantic-Infrastructure-Lab/pantheon/tree/main/examples/cross_domain_analytics) - **Prism + Morphogen cross-domain composition**
@@ -403,4 +403,4 @@ This solves the fragmentation that forces professional workflows to span 3-5 inc
 **Learn More:**
 - [GitHub Repository](https://github.com/Semantic-Infrastructure-Lab/pantheon)
 - [Architecture Documentation](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/docs/architecture/)
-- [Roadmap](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/ROADMAP.md)
+- [Roadmap](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/ROADMAP)
