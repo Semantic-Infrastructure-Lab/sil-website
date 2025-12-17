@@ -74,12 +74,44 @@ This guide follows the **TIA Canonical Deployment Pattern** using container regi
 ## Quick Start
 
 ```bash
-# Build, push, and deploy to staging
+# 1. Pre-deployment checks (recommended)
+./scripts/pre-deploy-check.sh staging
+
+# 2. Build, push, and deploy to staging
 ./deploy/deploy-container.sh staging
 
-# Deploy to production
+# 3. Run smoke tests
+./scripts/smoke-test.sh staging
+
+# 4. Deploy to production (after staging verification)
 ./deploy/deploy-container.sh production
+./scripts/smoke-test.sh production
 ```
+
+---
+
+## Content Management
+
+**SIL uses CONTENT_MANIFEST.yaml to control public vs internal documentation:**
+
+- **Location**: `/projects/SIL/docs/CONTENT_MANIFEST.yaml`
+- **Public files**: 58 (synced to website)
+- **Internal files**: 13 (protected from publication)
+- **Validation**: `./scripts/sync-docs.py --validate`
+
+**Before deploying**, ensure sync is current:
+```bash
+cd /home/scottsen/src/projects/sil-website
+./scripts/sync-docs.py              # Sync public docs from SIL repo
+./scripts/sync-docs.py --validate   # Verify no internal files in website
+```
+
+**Deployment workflow**:
+1. Pre-deploy check validates manifest and sync status
+2. Deployment script bakes docs into container
+3. Smoke tests verify critical pages load
+
+See `/projects/SIL/docs/CONTENT_MANIFEST.yaml` for complete file list and rationale.
 
 ---
 
