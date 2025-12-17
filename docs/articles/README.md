@@ -10,11 +10,11 @@
 
 ## About Articles
 
-**Articles vs. Canonical Docs vs. Founder's Notes:**
+**Articles vs. Foundations vs. Founder's Notes:**
 
 - **Articles** (this directory): Product-focused, tutorial-style, accessible but substantive
-- **Canonical** (`/foundations/`): Timeless foundational documents, principles, frameworks
-- **Founder's Notes** (`/foundations/notes/`): Time-stamped technical essays, thought leadership (when notes/ is created)
+- **Foundations** (`/foundations/`): Timeless foundational documents, principles, frameworks
+- **Founder's Notes** (future): Time-stamped technical essays, thought leadership
 
 Articles are:
 - ✅ Time-stamped (can reference current state)
@@ -99,10 +99,9 @@ session_provenance: "[session-id if created in session]"
 
 ## Related Directories
 
-- [Canonical](/foundations/) - Foundational principles and frameworks
-- [Tools](/systems/) - Practical usage guides for SIL systems
-- [Innovations](/systems/) - High-level descriptions of novel contributions
-- [Research](../research/) - Academic-style research papers
+- [Foundations](/foundations/) - Foundational principles and frameworks
+- [Systems](/systems/) - Practical usage guides for SIL systems
+- [Research](/research/) - Academic-style research papers
 
 ---
 

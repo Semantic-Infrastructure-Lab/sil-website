@@ -146,9 +146,9 @@ Semantic Infrastructure Lab
 
 ## Related Reading
 
-- [Founder's Letter](/founders-letter) — The personal why
+- [Founder's Letter](/foundations/FOUNDERS_LETTER) — The personal why
 - [Technical Vision](/foundations/semantic-os-architecture) — The 6-layer architecture
-- [Principles](/foundations/principles) — How we operate
+- [Principles](/foundations/design-principles) — How we operate
 - [Research](/research) — Our published work
 
 ---

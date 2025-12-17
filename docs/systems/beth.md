@@ -333,7 +333,7 @@ This is semantic infrastructure in practice: substrate that enables research, no
 ## Related Reading
 
 **Architecture:**
-- [Semantic OS Architecture](/foundations/SIL_SEMANTIC_OS_ARCHITECTURE.md) - Where Beth fits in the 7-layer stack
+- [Semantic OS Architecture](../canonical/SIL_SEMANTIC_OS_ARCHITECTURE.md) - Where Beth fits in the 7-layer stack
 - [Unified Architecture Guide](../architecture/UNIFIED_ARCHITECTURE_GUIDE.md) - Complete system design
 
 **Companion Systems:**
@@ -341,8 +341,8 @@ This is semantic infrastructure in practice: substrate that enables research, no
 - [GenesisGraph](https://github.com/Semantic-Infrastructure-Lab/genesisgraph) - Cryptographic provenance that Beth integrates
 
 **Philosophy:**
-- [Founder's Letter](/foundations/FOUNDERS_LETTER.md) - Glass-box laboratory principles
-- [Design Principles](/foundations/SIL_PRINCIPLES.md) - Principles Beth validates
+- [Founder's Letter](../canonical/FOUNDERS_LETTER.md) - Glass-box laboratory principles
+- [Design Principles](../canonical/SIL_PRINCIPLES.md) - Principles Beth validates
 
 ---
 

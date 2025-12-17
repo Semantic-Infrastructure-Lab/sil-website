@@ -3,8 +3,8 @@
 **Start Here** — The single front door to SIL
 
 > **Quick Links:**
-> - [FAQ](/meta/FAQ) — Common questions answered
-> - [Glossary](/foundations/SIL_GLOSSARY) — Terms and definitions
+> - [FAQ](/meta/faq) — Common questions answered
+> - [Glossary](/canonical/glossary) — Terms and definitions
 
 ---
 
@@ -117,28 +117,28 @@ SIL builds infrastructure meant to last decades, not chase quarterly trends.
 ## Where to Go Next
 
 ### For the Story
-**[Founder's Letter](/foundations/FOUNDERS_LETTER)** — Why SIL was built, the vision, and what we're inviting you to help build
+**[Founder's Letter](/canonical/founders-letter)** — Why SIL was built, the vision, and what we're inviting you to help build
 
 ### For the Personal Vision
 **[Founder Background](/meta/founder-background)** — Working systems, production metrics, and track record
 **[Influences & Acknowledgments](/meta/influences-and-acknowledgments)** — The thinkers and traditions that shaped SIL
 
 ### For the Philosophy
-**[Manifesto](/manifesto/YOLO)** — The philosophical foundation
-**[Principles](/foundations/design-principles)** — Foundational design principles that define SIL
+**[Manifesto](/canonical/manifesto)** — The philosophical foundation
+**[Principles](/canonical/principles)** — 14 foundational constraints that define SIL
 
 ### For the Technical Depth
-**[Technical Charter](/foundations/SIL_TECHNICAL_CHARTER)** — Formal specification with invariants and guarantees
-**[Semantic OS Architecture](/foundations/semantic-os-architecture)** — 7-layer architecture from memory to interfaces
+**[Technical Charter](/canonical/technical-charter)** — Formal specification with invariants and guarantees
+**[Semantic OS Architecture](/canonical/semantic-os-architecture)** — 7-layer architecture from memory to interfaces
 
 ### For the Tools
-**[Reveal](/systems/reveal)** — Code structure navigation
-**[Agent Help Standard](/research/AGENT_HELP_STANDARD)** — Strategic guidance for agents
+**[Reveal](/tools/reveal)** — Code structure navigation
+**[Agent Help Standard](/research/agent-help-standard)** — Strategic guidance for agents
 **[GenesisGraph](https://github.com/Semantic-Infrastructure-Lab/genesisgraph)** — Verifiable provenance
-**[Morphogen](/systems/morphogen)** — Unified computational substrate
+**[Morphogen](/innovations/morphogen)** — Unified computational substrate
 
 ### For Collaborators
-**[FAQ](/meta/FAQ)** — Common questions answered
+**[FAQ](/meta/faq)** — Common questions answered
 **[GitHub](https://github.com/Semantic-Infrastructure-Lab)** — How to join us
 
 ## The Bell Labs of AI

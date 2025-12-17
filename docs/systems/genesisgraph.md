@@ -284,7 +284,7 @@ edge:
 | Agent Ether | Agent capabilities verified via graph queries |
 | Semantic Passports | Bundles of assertions with provenance chains |
 
-**See:** [Trust Assertion Protocol](/foundations/TRUST_ASSERTION_PROTOCOL.md) for the full TAP specification.
+**See:** [Trust Assertion Protocol](../canonical/TRUST_ASSERTION_PROTOCOL.md) for the full TAP specification.
 
 ---
 

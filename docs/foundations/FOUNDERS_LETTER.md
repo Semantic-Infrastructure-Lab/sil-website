@@ -49,7 +49,7 @@ Build structures that last.**
 
 **If you want to see working systems:**
 - [Project Index](../../projects/PROJECT_INDEX.md) - All 12 projects with status
-- [Tools Documentation](/systems/README.md) - Production systems you can use today
+- [Tools Documentation](../tools/README.md) - Production systems you can use today
 
 **If you want deeper philosophy:**
 - [Manifesto](./SIL_MANIFESTO.md) - Core vision and principles
