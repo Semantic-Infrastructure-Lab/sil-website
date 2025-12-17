@@ -235,6 +235,59 @@ def create_routes(
         )
 
     # =========================================================================
+    # Articles Section
+    # =========================================================================
+
+    @router.get("/articles", response_class=HTMLResponse)
+    async def articles_index(request: Request) -> Response:
+        """Articles index - Technical articles and tutorials."""
+        return render_markdown_page(
+            request,
+            Path("docs/articles/README.md"),
+            "Articles - Semantic Infrastructure Lab",
+            "/articles",
+        )
+
+    @router.get("/articles/{slug}", response_class=HTMLResponse)
+    async def article(request: Request, slug: str) -> Response:
+        """Serve articles by slug."""
+        articles_dir = Path("docs/articles")
+
+        # Map slug to filename (reveal-introduction -> reveal-introduction.md)
+        filename = slug + ".md"
+        article_path = articles_dir / filename
+
+        # Try uppercase with underscores if not found
+        if not article_path.exists():
+            filename = slug.upper().replace("-", "_") + ".md"
+            article_path = articles_dir / filename
+
+        if not article_path.exists():
+            raise HTTPException(status_code=404, detail=f"Article not found: {slug}")
+
+        content = article_path.read_text()
+
+        # Extract title from first H1 if present
+        title = "Article - Semantic Infrastructure Lab"
+        for line in content.split("\n"):
+            if line.startswith("# "):
+                title = line[2:].strip() + " - SIL"
+                break
+
+        html_content = markdown_renderer.render(content)
+
+        return templates.TemplateResponse(
+            "page.html",
+            {
+                "request": request,
+                "title": title,
+                "content": html_content,
+                "nav_items": nav_items,
+                "current_page": "/articles",
+            },
+        )
+
+    # =========================================================================
     # Essays Section
     # =========================================================================
 
@@ -404,6 +457,20 @@ def create_routes(
             return RedirectResponse(url=f"/manifesto/{name}", status_code=301)
         else:
             return RedirectResponse(url=f"/foundations/{name}", status_code=301)
+
+    # =========================================================================
+    # Quick Start & Getting Started Pages
+    # =========================================================================
+
+    @router.get("/start", response_class=HTMLResponse)
+    async def start_here(request: Request) -> Response:
+        """Start Here - Getting started guide."""
+        return render_markdown_page(
+            request,
+            Path("docs/START_HERE.md"),
+            "Start Here - Semantic Infrastructure Lab",
+            "/",
+        )
 
     # =========================================================================
     # Founder's Letter (Legacy URL support)

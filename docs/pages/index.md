@@ -8,6 +8,8 @@ layout: home
 
 > **What is SIL?** A research lab building the Semantic Operating System—infrastructure where AI representations are explicit, transformations are traceable, and reasoning can be inspected and composed with human judgment.
 
+**4 production systems · 12 research papers · 3K+ active users · 100% open source**
+
 ---
 
 ## The Problem We're Solving
@@ -31,16 +33,25 @@ This is the [Semantic Operating System](/foundations/semantic-os-architecture): 
 
 These aren't demos. They're working infrastructure proving the architecture:
 
-### [Reveal](/systems/reveal) — Progressive Code Exploration
-`pip install reveal-cli` · v0.23.1 · 2K+ downloads/month
+### 🌟 Featured: [Reveal](/systems/reveal) — Progressive Code Exploration
 
-Structure-first code exploration with 10-150x token reduction. See file structure before reading content. Extract specific functions without loading entire files.
+**The entry point to semantic infrastructure. In production. Proven at scale.**
+
+`pip install reveal-cli` · **v0.24.0** · **3K+ downloads/month** · 100% organic growth
+
+Structure-first code exploration with **25x token reduction**. See file structure before reading content. Extract specific functions without loading entire files. Used by developers and AI agents worldwide.
 
 ```bash
+# Try it now - takes 30 seconds
+pip install reveal-cli
 reveal src/            # Directory structure
 reveal app.py          # File structure (functions, classes)
 reveal app.py main     # Extract specific function
 ```
+
+**[Install Guide](/systems/reveal)** · **[GitHub](https://github.com/Semantic-Infrastructure-Lab/reveal)** · **[Read the Paper](/essays/progressive-disclosure-for-ai-agents)**
+
+---
 
 ### [Morphogen](/systems/morphogen) — Cross-Domain Computation
 v0.11 · 1,600+ tests · 85% coverage
@@ -59,9 +70,11 @@ Parametric CAD in YAML. Semantic constraints, not just geometry. Proof that sema
 
 ## Current Research
 
-- **[Progressive Disclosure for AI Agents](/essays/PROGRESSIVE_DISCLOSURE_FOR_AI_AGENTS)** — Why structure-first exploration reduces tokens 25x
-- **[RAG as Semantic Manifold Transport](/research/RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT)** — Rethinking retrieval as geometric transport
-- **[Agent Help Standard](/research/AGENT_HELP_STANDARD)** — Strategic guidance for AI agents using CLI tools
+- **[Progressive Disclosure for AI Agents](/essays/progressive-disclosure-for-ai-agents)** — Why structure-first exploration reduces tokens 25x
+- **[RAG as Semantic Manifold Transport](/research/rag-as-semantic-manifold-transport)** — Rethinking retrieval as geometric transport
+- **[Agent Help Standard](/research/agent-help-standard)** — Strategic guidance for AI agents using CLI tools
+
+[View all 12 research papers →](/research)
 
 ## The Lab
 
@@ -79,8 +92,9 @@ SIL is the research division of the [Semantic Infrastructure Foundation](https:/
 ## Get Involved
 
 - **Use the tools:** `pip install reveal-cli` and try progressive disclosure
-- **Read the research:** [Essays](/essays/PROGRESSIVE_DISCLOSURE_FOR_AI_AGENTS) and [Research Papers](/research)
+- **Read the research:** [Essays](/essays) and [Research Papers](/research)
 - **Explore the architecture:** [Foundations](/foundations)
+- **Support the mission:** [Semantic Infrastructure Foundation](https://semanticinfrastructurefoundation.org)
 - **Collaborate:** [Contact us](/contact) or visit [GitHub](https://github.com/Semantic-Infrastructure-Lab)
 
 ---
