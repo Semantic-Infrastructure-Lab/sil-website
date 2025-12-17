@@ -11,7 +11,7 @@ from typing import Optional, cast
 import frontmatter
 import structlog
 
-from sif_web.domain.models import Document, Layer, Project, ProjectStatus
+from sil_web.domain.models import Document, Layer, Project, ProjectStatus
 
 log = structlog.get_logger()
 

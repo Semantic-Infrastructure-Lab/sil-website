@@ -10,10 +10,10 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from starlette.responses import Response
 
-from sif_web.services.content import ContentService
+from sil_web.services.content import ContentService
 
 if TYPE_CHECKING:
-    from sif_web.services.markdown import MarkdownRenderer
+    from sil_web.services.markdown import MarkdownRenderer
 
 router = APIRouter()
 

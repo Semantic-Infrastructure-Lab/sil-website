@@ -17,7 +17,7 @@ from markdown.extensions import Extension
 from markdown.treeprocessors import Treeprocessor
 
 if TYPE_CHECKING:
-    from sif_web.services.content import ContentService
+    from sil_web.services.content import ContentService
 
 
 class LinkRewriterTreeprocessor(Treeprocessor):

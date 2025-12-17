@@ -57,4 +57,4 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
   CMD curl -f http://localhost:8000/health || exit 1
 
 # Run application
-CMD ["uvicorn", "sif_web.app:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info"]
+CMD ["uvicorn", "sil_web.app:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info"]

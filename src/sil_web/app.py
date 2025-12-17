@@ -10,11 +10,11 @@ from fastapi.staticfiles import StaticFiles
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 from starlette.responses import Response
 
-from sif_web.config.settings import DOCS_PATH
-from sif_web.routes.health import router as health_router
-from sif_web.routes.pages import create_routes
-from sif_web.services.content import ContentService
-from sif_web.services.markdown import MarkdownRenderer
+from sil_web.config.settings import DOCS_PATH
+from sil_web.routes.health import router as health_router
+from sil_web.routes.pages import create_routes
+from sil_web.services.content import ContentService
+from sil_web.services.markdown import MarkdownRenderer
 
 # Configure structured logging
 structlog.configure(
@@ -103,10 +103,10 @@ app = create_app()
 if __name__ == "__main__":
     import uvicorn
 
-    from sif_web.config.settings import DEBUG, HOST, PORT
+    from sil_web.config.settings import DEBUG, HOST, PORT
 
     uvicorn.run(
-        "sif_web.app:app",
+        "sil_web.app:app",
         host=HOST,
         port=PORT,
         reload=DEBUG,
