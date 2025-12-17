@@ -2,9 +2,9 @@
 
 **Tagline:** The simplest way to understand code. Point it at a directory, file, or function. Get exactly what you need.
 
-**Status:** ✅ Production v0.23.1 | Available on [PyPI](https://pypi.org/project/reveal-cli/)
+**Status:** ✅ Production v0.24.0 | Available on [PyPI](https://pypi.org/project/reveal-cli/)
 
-**Latest:** v0.23.1 adds AST query system (`ast://`), JSON navigation (`json://`), enhanced help system, and multiline pattern matching.
+**Latest:** v0.24.0 adds enhanced statistics adapter, code quality metrics, improved error handling, and performance optimizations.
 
 ---
 
@@ -330,5 +330,5 @@ See the complete [Project Index](/projects/PROJECT_INDEX) for all 12 SIL project
 
 ---
 
-**Last Updated:** 2025-12-15 (v0.23.1)
-**Document Version:** 1.2
+**Last Updated:** 2025-12-17 (v0.24.0)
+**Document Version:** 1.3

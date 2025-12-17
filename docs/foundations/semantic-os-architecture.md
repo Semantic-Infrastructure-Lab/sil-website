@@ -57,7 +57,7 @@ Before describing what SIL intends to build, recognize what already exists.
 
 ### Reveal: Semantic Infrastructure in Action
 
-**reveal** (v0.23.0 on PyPI, ~2,000 downloads/month as of Dec 2025) demonstrates that when you prioritize structure, meaning, and provenance, you get systems that work better—and the benefits compound.
+**reveal** (v0.24.0 on PyPI, 3K+ downloads/month as of Dec 2025) demonstrates that when you prioritize structure, meaning, and provenance, you get systems that work better—and the benefits compound.
 
 **The Problem reveal Solves:**
 
@@ -237,7 +237,7 @@ When structure is explicit, the system knows what to do. No configuration needed
 - **10x-100x savings** = 10x-100x cost reduction for AI systems
 
 **Adoption:**
-- ~2,000 downloads/month (PyPI)
+- 3K+ downloads/month (PyPI)
 - 18 file types supported (Python, JS, TS, Rust, Go, C, C++, Java, etc.)
 - Production use in AI coding assistants
 
@@ -257,7 +257,7 @@ When structure is explicit, the system knows what to do. No configuration needed
 
 **These aren't promises. These are measurements.**
 
-1. **Semantic infrastructure works** - Production use, ~2,000 downloads/month, measured efficiency
+1. **Semantic infrastructure works** - Production use, 3K+ downloads/month, measured efficiency
 2. **The principles generalize** - Same pattern applies to code, env vars, databases, APIs
 3. **The benefits compound** - Each new feature (pattern detection, URI adapters) leverages previous semantic structure
 4. **It's economical** - 10x token savings, zero configuration, perfect composition

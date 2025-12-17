@@ -44,7 +44,7 @@ Some tools are applications (not innovations themselves) that demonstrate SIL pr
 
 **The simplest way to understand code.** Point it at a directory, file, or function. Get exactly what you need.
 
-**Status:** ✅ Production v0.23.1 | [PyPI](https://pypi.org/project/reveal-cli/) | [GitHub](https://github.com/semantic-infrastructure-lab/reveal)
+**Status:** ✅ Production v0.24.0 | [PyPI](https://pypi.org/project/reveal-cli/) | [GitHub](https://github.com/semantic-infrastructure-lab/reveal)
 
 ### Quick Start
 

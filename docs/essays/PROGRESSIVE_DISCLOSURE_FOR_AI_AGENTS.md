@@ -286,7 +286,7 @@ The pattern is simple. The implications compound.
 
 ## Appendix: Validation
 
-We dogfooded Reveal against its own codebase and beyond. Results from v0.23.1:
+We dogfooded Reveal against its own codebase and beyond. Results from v0.24.0:
 
 | Test | Result |
 |------|--------|
