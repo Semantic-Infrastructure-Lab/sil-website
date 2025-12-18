@@ -1,3 +1,10 @@
+---
+title: "**SIL Principles (v1)**"
+tier: 3
+order: 999
+private: false
+---
+
 # **SIL Principles (v1)**
 
 *Durable constraints for building semantic infrastructure.*

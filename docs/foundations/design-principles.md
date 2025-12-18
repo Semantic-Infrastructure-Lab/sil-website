@@ -1,3 +1,10 @@
+---
+title: "SIL Core Principles"
+tier: 3
+order: 4
+private: false
+---
+
 # SIL Core Principles
 
 **Design Philosophy for Semantic Infrastructure**

@@ -1,3 +1,10 @@
+---
+title: "SYNCED CONTENT - DO NOT EDIT DIRECTLY"
+tier: 3
+order: 999
+private: false
+---
+
 # SYNCED CONTENT - DO NOT EDIT DIRECTLY
 
 ⚠️ **This directory contains synced documentation from /projects/SIL/docs/**

@@ -1,3 +1,10 @@
+---
+title: "TiaCAD - Declarative Parametric CAD"
+tier: 3
+order: 999
+private: false
+---
+
 # TiaCAD - Declarative Parametric CAD
 
 **Tagline:** Parametric CAD in YAML. Semantic constraints, not just geometry.

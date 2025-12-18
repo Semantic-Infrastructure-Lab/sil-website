@@ -1,3 +1,10 @@
+---
+title: "Reveal - Semantic Code Explorer"
+tier: 3
+order: 999
+private: false
+---
+
 # Reveal - Semantic Code Explorer
 
 **Tagline:** The simplest way to understand code. Point it at a directory, file, or function. Get exactly what you need.

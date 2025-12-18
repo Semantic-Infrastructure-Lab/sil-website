@@ -1,6 +1,8 @@
 ---
 title: "Contact"
 description: "Collaborate with the Semantic Infrastructure Lab"
+tier: 3
+order: 999
 ---
 
 # Get In Touch

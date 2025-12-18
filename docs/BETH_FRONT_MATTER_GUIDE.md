@@ -1,3 +1,10 @@
+---
+title: "Beth Front Matter Guide (Internal Technical Reference)"
+tier: 3
+order: 999
+private: false
+---
+
 # Beth Front Matter Guide (Internal Technical Reference)
 
 **Audience**: TIA sessions, internal contributors

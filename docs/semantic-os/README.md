@@ -1,3 +1,10 @@
+---
+title: "Semantic OS Documentation"
+tier: 3
+order: 999
+private: false
+---
+
 # Semantic OS Documentation
 
 **Status:** Content in development

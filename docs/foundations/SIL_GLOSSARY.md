@@ -1,3 +1,11 @@
+---
+title: "**SIL Glossary (v2.2)**"
+tier: 1
+order: 5
+private: false
+description: "TODO: Add description"
+---
+
 # **SIL Glossary (v2.2)**
 
 **Canonical definitions for the Semantic Operating System and its components.**

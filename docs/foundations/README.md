@@ -1,3 +1,10 @@
+---
+title: "SIL Foundations"
+tier: 3
+order: 999
+private: false
+---
+
 # SIL Foundations
 
 **Core principles, architecture, and founding documents**

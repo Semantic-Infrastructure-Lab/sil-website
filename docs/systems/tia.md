@@ -1,3 +1,10 @@
+---
+title: "Tia: Chief Semantic Agent"
+tier: 3
+order: 999
+private: false
+---
+
 # Tia: Chief Semantic Agent
 
 **SIL's Persistent Semantic Toolchain**

@@ -16,6 +16,8 @@ canonical_url: "https://semanticinfrastructurelab.org/articles/reveal-introducti
 reading_time: "12 minutes"
 beth_topics: [reveal, progressive-disclosure, token-efficiency, semantic-stack, beth, knowledge-graphs, pagerank, 7-layer-architecture, sil]
 session_provenance: "emerald-crystal-1210"
+tier: 3
+order: 999
 ---
 
 # Stop Reading Code. Start Understanding It.

@@ -1,3 +1,10 @@
+---
+title: "Sil Technical Charter"
+tier: 3
+order: 3
+private: false
+---
+
 SIL Technical Charter (v1)
 
 ---

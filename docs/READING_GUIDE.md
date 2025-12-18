@@ -1,3 +1,10 @@
+---
+title: "SIL Reading Guide"
+tier: 3
+order: 999
+private: false
+---
+
 # SIL Reading Guide
 
 **Curated paths through the Semantic Infrastructure Lab documentation**

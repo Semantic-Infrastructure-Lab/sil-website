@@ -1,3 +1,10 @@
+---
+title: "The Alignment Thesis: Environmental Alignment"
+tier: 3
+order: 999
+private: false
+---
+
 # The Alignment Thesis: Environmental Alignment
 
 > *You don't align AGI by controlling its internal cognition. You align AGI by embedding it in a meaning-structured, trust-governed world.*

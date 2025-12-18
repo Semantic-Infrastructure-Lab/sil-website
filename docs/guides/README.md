@@ -1,3 +1,10 @@
+---
+title: "SIL Guides"
+tier: 3
+order: 999
+private: false
+---
+
 # SIL Guides
 
 **Status:** Planned content area

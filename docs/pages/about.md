@@ -1,6 +1,8 @@
 ---
 title: "About SIL"
 description: "The Semantic Infrastructure Lab - who we are and what we build"
+tier: 3
+order: 999
 ---
 
 # About the Semantic Infrastructure Lab

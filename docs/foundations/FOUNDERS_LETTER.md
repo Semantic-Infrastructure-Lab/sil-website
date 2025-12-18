@@ -1,3 +1,11 @@
+---
+title: "**Founder's Letter**"
+tier: 1
+order: 3
+private: false
+description: "TODO: Add description"
+---
+
 # **Founder's Letter**
 
 **Semantic Infrastructure Lab (SIL)**

@@ -18,6 +18,8 @@ related:
   - /lab/products/reveal
   - /foundation/SCOPE_OF_HOPE.md
   - /lab/architecture/SEMANTIC_OS_LAYERS.md
+tier: 3
+order: 999
 ---
 
 # Progressive Disclosure for AI Agents

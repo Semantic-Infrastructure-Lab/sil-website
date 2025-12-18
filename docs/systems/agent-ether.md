@@ -1,3 +1,10 @@
+---
+title: "Agent Ether: Tool Behavior Contracts for Multi-Agent Systems"
+tier: 3
+order: 999
+private: false
+---
+
 # Agent Ether: Tool Behavior Contracts for Multi-Agent Systems
 
 > *Universal tool orchestration layer for agentic AI*

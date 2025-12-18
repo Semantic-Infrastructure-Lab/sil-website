@@ -2,6 +2,8 @@
 title: "Semantic Infrastructure Lab"
 description: "Building the semantic substrate for intelligent systems"
 layout: home
+tier: 3
+order: 999
 ---
 
 # Semantic Infrastructure Lab

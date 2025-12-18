@@ -1,3 +1,10 @@
+---
+title: "Directory level - what's inside?"
+tier: 3
+order: 1
+private: false
+---
+
 The Semantic Infrastructure Lab (SIL) Manifesto
 
 On building the semantic substrate intelligent systems still lack.

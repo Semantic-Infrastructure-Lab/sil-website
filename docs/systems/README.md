@@ -1,3 +1,10 @@
+---
+title: "SIL Tools - Stop Wasting Money on Agent Loops"
+tier: 3
+order: 999
+private: false
+---
+
 # SIL Tools - Stop Wasting Money on Agent Loops
 
 Production-ready tools demonstrating SIL principles. Use them today.

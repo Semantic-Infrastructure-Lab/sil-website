@@ -1,3 +1,10 @@
+---
+title: "Manifesto"
+tier: 3
+order: 999
+private: false
+---
+
 # Manifesto
 
 ## [YOLO](/manifesto/YOLO)

@@ -1,3 +1,11 @@
+---
+title: "Welcome to the Semantic Infrastructure Lab"
+tier: 1
+order: 1
+private: false
+description: "TODO: Add description"
+---
+
 # Welcome to the Semantic Infrastructure Lab
 
 **Start Here** — The single front door to SIL

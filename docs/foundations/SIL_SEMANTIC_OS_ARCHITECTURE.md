@@ -1,3 +1,10 @@
+---
+title: "SIL Semantic OS Architecture"
+tier: 3
+order: 1
+private: false
+---
+
 # SIL Semantic OS Architecture
 
 **Version:** 2.0 (December 2025)
