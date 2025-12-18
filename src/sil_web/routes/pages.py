@@ -208,16 +208,22 @@ def create_routes(
     @router.get("/systems/{name}", response_class=HTMLResponse)
     async def system_page(request: Request, name: str) -> Response:
         """Individual system documentation."""
-        # Try lowercase with hyphens first (agent-ether.md)
-        filename = name + ".md"
-        system_path = Path("docs/systems") / filename
+        # Try multiple naming patterns for robustness
+        patterns = [
+            name,  # As provided (agent-ether, reveal, etc.)
+            name.lower().replace("_", "-"),  # AGENT_ETHER → agent-ether
+            name.upper(),  # reveal → REVEAL
+            name.lower(),  # REVEAL → reveal
+        ]
 
-        # Try uppercase (REVEAL.md)
-        if not system_path.exists():
-            filename = name.upper() + ".md"
-            system_path = Path("docs/systems") / filename
+        system_path = None
+        for pattern in patterns:
+            candidate = Path("docs/systems") / f"{pattern}.md"
+            if candidate.exists():
+                system_path = candidate
+                break
 
-        if not system_path.exists():
+        if not system_path:
             raise HTTPException(status_code=404, detail=f"System not found: {name}")
 
         content = system_path.read_text()
@@ -520,6 +526,18 @@ def create_routes(
     @router.get("/tools/{name}", response_class=HTMLResponse)
     async def tool_redirect(request: Request, name: str) -> Response:
         """Redirect /tools/{name} to /systems/{name}."""
+        from fastapi.responses import RedirectResponse
+        return RedirectResponse(url=f"/systems/{name}", status_code=301)
+
+    @router.get("/innovations", response_class=HTMLResponse)
+    async def innovations_redirect(request: Request) -> Response:
+        """Redirect /innovations to /systems."""
+        from fastapi.responses import RedirectResponse
+        return RedirectResponse(url="/systems", status_code=301)
+
+    @router.get("/innovations/{name}", response_class=HTMLResponse)
+    async def innovation_redirect(request: Request, name: str) -> Response:
+        """Redirect /innovations/{name} to /systems/{name}."""
         from fastapi.responses import RedirectResponse
         return RedirectResponse(url=f"/systems/{name}", status_code=301)
 
