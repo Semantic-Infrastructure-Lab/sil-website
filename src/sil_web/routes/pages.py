@@ -305,31 +305,15 @@ def create_routes(
     @router.get("/essays", response_class=HTMLResponse)
     async def essays_index(request: Request) -> Response:
         """Essays index - List all technical essays."""
-        essays_dir = Path("docs/essays")
-
-        # Build dynamic essay list
-        essays = []
-        if essays_dir.exists():
-            for essay_file in sorted(essays_dir.glob("*.md")):
-                if essay_file.name == "README.md":
-                    continue
-                # Convert filename to slug and title
-                slug = essay_file.stem.lower().replace("_", "-")
-                # Read first H1 for title
-                content = essay_file.read_text()
-                title = essay_file.stem.replace("_", " ").title()
-                for line in content.split("\n"):
-                    if line.startswith("# "):
-                        title = line[2:].strip()
-                        break
-                essays.append({"slug": slug, "title": title})
+        # Use content_service to load essays with privacy filtering
+        essay_docs = content_service.list_documents(category="essays", include_private=False)
 
         # Generate markdown content for essay list
         md_content = "# Essays\n\nTechnical essays on semantic infrastructure.\n\n"
-        for essay in essays:
-            md_content += f"- [{essay['title']}](/essays/{essay['slug']})\n"
+        for doc in sorted(essay_docs, key=lambda d: d.order):
+            md_content += f"- [{doc.title}](/essays/{doc.slug})\n"
 
-        if not essays:
+        if not essay_docs:
             md_content += "*No essays published yet.*\n"
 
         html_content = markdown_renderer.render(md_content)
@@ -347,26 +331,20 @@ def create_routes(
 
     @router.get("/essays/{slug}", response_class=HTMLResponse)
     async def essay(request: Request, slug: str) -> Response:
-        """Serve essays by slug. Maps slug to filename in docs/essays/."""
-        essays_dir = Path("docs/essays")
+        """Serve essays by slug with privacy filtering."""
+        # Use content_service to load essay with privacy filtering (Layer 2: Service)
+        doc = content_service.load_document("essays", slug, include_private=False)
 
-        # Map slug back to filename (progressive-disclosure-for-ai-agents -> PROGRESSIVE_DISCLOSURE_FOR_AI_AGENTS.md)
-        filename = slug.upper().replace("-", "_") + ".md"
-        essay_path = essays_dir / filename
-
-        if not essay_path.exists():
+        # Layer 3: Route safety check - 404 for private or non-existent documents
+        if not doc:
             raise HTTPException(status_code=404, detail=f"Essay not found: {slug}")
 
-        content = essay_path.read_text()
+        # Additional safety: Check if document is private (defense-in-depth)
+        if doc.private:
+            raise HTTPException(status_code=404, detail=f"Essay not found: {slug}")
 
-        # Extract title from first H1 if present
-        title = "Essay - Semantic Infrastructure Lab"
-        for line in content.split("\n"):
-            if line.startswith("# "):
-                title = line[2:].strip() + " - SIL"
-                break
-
-        html_content = markdown_renderer.render(content)
+        title = doc.title + " - SIL"
+        html_content = markdown_renderer.render(doc.content)
 
         return templates.TemplateResponse(
             "page.html",

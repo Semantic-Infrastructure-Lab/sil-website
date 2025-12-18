@@ -82,6 +82,9 @@ class Document:
     description: Optional[str] = None
     order: int = 0
     tier: int = 3  # 1=Founding, 2=Architecture, 3=Research
+    private: bool = False  # Privacy flag - hide from public
+    beth_topics: list[str] = field(default_factory=list)
+    tags: list[str] = field(default_factory=list)
 
     def __post_init__(self) -> None:
         """Validate document data."""

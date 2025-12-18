@@ -141,3 +141,72 @@ class TestDocument:
         )
 
         assert doc.word_count == 5
+
+    def test_document_default_private_false(self):
+        """Should default private to False."""
+        doc = Document(
+            title="Test",
+            slug="test",
+            content="Content",
+            category="test",
+        )
+
+        assert doc.private is False
+
+    def test_document_with_private_true(self):
+        """Should accept private=True."""
+        doc = Document(
+            title="Private Doc",
+            slug="private",
+            content="Secret content",
+            category="test",
+            private=True,
+        )
+
+        assert doc.private is True
+
+    def test_document_with_beth_topics(self):
+        """Should accept beth_topics list."""
+        doc = Document(
+            title="Test",
+            slug="test",
+            content="Content",
+            category="test",
+            beth_topics=["topic-1", "topic-2"],
+        )
+
+        assert doc.beth_topics == ["topic-1", "topic-2"]
+
+    def test_document_default_beth_topics_empty(self):
+        """Should default beth_topics to empty list."""
+        doc = Document(
+            title="Test",
+            slug="test",
+            content="Content",
+            category="test",
+        )
+
+        assert doc.beth_topics == []
+
+    def test_document_with_tags(self):
+        """Should accept tags list."""
+        doc = Document(
+            title="Test",
+            slug="test",
+            content="Content",
+            category="test",
+            tags=["tag1", "tag2"],
+        )
+
+        assert doc.tags == ["tag1", "tag2"]
+
+    def test_document_default_tags_empty(self):
+        """Should default tags to empty list."""
+        doc = Document(
+            title="Test",
+            slug="test",
+            content="Content",
+            category="test",
+        )
+
+        assert doc.tags == []

@@ -185,12 +185,13 @@ class ContentService:
         self.log.debug("slugs_discovered", category=category, count=len(slug_map))
         return slug_map
 
-    def load_document(self, category: str, slug: str) -> Optional[Document]:
+    def load_document(self, category: str, slug: str, include_private: bool = False) -> Optional[Document]:
         """Load a document from any category by slug.
 
         Args:
             category: Document category (canonical, architecture, guides, vision, research, meta)
             slug: Document slug (e.g., 'manifesto', 'unified-architecture-guide')
+            include_private: If True, include private documents. Default False.
 
         Returns:
             Document instance or None if not found
@@ -220,8 +221,23 @@ class ContentService:
         title = post.get("title", slug.replace("-", " ").title())
         description = post.get("description")
 
-        # Get tier and order from DOCUMENT_TIERS mapping
-        tier, order = self.DOCUMENT_TIERS.get(slug, (3, 999))  # Default: Tier 3, order 999
+        # Get tier and order from frontmatter first, fallback to DOCUMENT_TIERS
+        tier = post.get("tier")
+        order = post.get("order")
+
+        if tier is None or order is None:
+            # Fallback to hardcoded DOCUMENT_TIERS
+            tier_fallback, order_fallback = self.DOCUMENT_TIERS.get(slug, (3, 999))
+            if tier is None:
+                tier = tier_fallback
+                self.log.warning("document_missing_tier_frontmatter", slug=slug, category=category)
+            if order is None:
+                order = order_fallback
+
+        # Get privacy and metadata fields from frontmatter
+        private = post.get("private", False)
+        beth_topics = post.get("beth_topics", [])
+        tags = post.get("tags", [])
 
         doc = Document(
             title=title,
@@ -231,12 +247,20 @@ class ContentService:
             description=description,
             tier=tier,
             order=order,
+            private=private,
+            beth_topics=beth_topics,
+            tags=tags,
         )
 
-        self.log.info("document_loaded", category=category, slug=slug, tier=tier, order=order, word_count=doc.word_count)
+        # Filter private documents unless explicitly requested
+        if doc.private and not include_private:
+            self.log.debug("private_document_filtered", slug=slug, category=category)
+            return None
+
+        self.log.info("document_loaded", category=category, slug=slug, tier=tier, order=order, private=private, word_count=doc.word_count)
         return doc
 
-    def load_document_by_slug(self, slug: str) -> Optional[Document]:
+    def load_document_by_slug(self, slug: str, include_private: bool = False) -> Optional[Document]:
         """Load a document by slug, searching across all categories.
 
         This is a convenience method for backward compatibility with routes
@@ -244,6 +268,7 @@ class ContentService:
 
         Args:
             slug: Document slug (e.g., 'manifesto', 'rag-manifold-transport')
+            include_private: If True, include private documents. Default False.
 
         Returns:
             Document instance or None if not found
@@ -255,6 +280,13 @@ class ContentService:
                 with open(root_readme, encoding="utf-8") as f:
                     post = frontmatter.load(f)
                 title = post.get("title", "Overview")
+                private = post.get("private", False)
+
+                # Filter private documents unless explicitly requested
+                if private and not include_private:
+                    self.log.debug("private_document_filtered", slug=slug, category="root")
+                    return None
+
                 return Document(
                     title=title,
                     slug=slug,
@@ -263,27 +295,31 @@ class ContentService:
                     description=post.get("description"),
                     tier=1,  # Top-level overview is tier 1
                     order=0,
+                    private=private,
+                    beth_topics=post.get("beth_topics", []),
+                    tags=post.get("tags", []),
                 )
 
         # Try each category until we find the slug
         categories = ["manifesto", "foundations", "research", "systems", "architecture", "meta", "essays"]
 
         for category in categories:
-            doc = self.load_document(category, slug)
+            doc = self.load_document(category, slug, include_private=include_private)
             if doc:
                 return doc
 
         self.log.warning("document_not_found_any_category", slug=slug)
         return None
 
-    def list_documents(self, category: Optional[str] = None) -> list[Document]:
+    def list_documents(self, category: Optional[str] = None, include_private: bool = False) -> list[Document]:
         """List all available documents, optionally filtered by category.
 
         Args:
             category: Optional category to filter by (canonical, architecture, etc.)
+            include_private: If True, include private documents. Default False.
 
         Returns:
-            List of Document instances
+            List of Document instances (excluding private unless include_private=True)
         """
         # Auto-discover all categories or just the requested one
         all_categories = ["manifesto", "foundations", "research", "systems", "architecture", "meta", "essays"]
@@ -294,13 +330,13 @@ class ContentService:
             # Discover all slugs in this category
             slug_map = self._discover_slugs(cat)
 
-            # Load each document
+            # Load each document (privacy filtering happens in load_document)
             for slug in slug_map.keys():
-                doc = self.load_document(cat, slug)
+                doc = self.load_document(cat, slug, include_private=include_private)
                 if doc:
                     docs.append(doc)
 
-        self.log.info("documents_listed", category=category, count=len(docs))
+        self.log.info("documents_listed", category=category, count=len(docs), include_private=include_private)
         return docs
 
     def get_documents_by_tier(self, category: str = "canonical") -> dict[int, list[Document]]:
@@ -337,11 +373,14 @@ class ProjectService:
         """Initialize project service."""
         self.log = log.bind(service="projects")
 
-    def get_all_projects(self) -> list[Project]:
+    def get_all_projects(self, include_private: bool = False) -> list[Project]:
         """Get ALL SIL projects across all maturity levels.
 
+        Args:
+            include_private: If True, include private projects. Default False.
+
         Returns:
-            List of all Project instances
+            List of all Project instances (excluding private unless include_private=True)
         """
         projects = [
             # ===== PRODUCTION PROJECTS =====
@@ -569,25 +608,35 @@ class ProjectService:
             ),
         ]
 
-        self.log.info("all_projects_loaded", count=len(projects))
+        # Filter private projects unless explicitly requested
+        if not include_private:
+            projects = [p for p in projects if not p.is_private]
+
+        self.log.info("all_projects_loaded", count=len(projects), include_private=include_private)
         return projects
 
-    def get_production_projects(self) -> list[Project]:
+    def get_production_projects(self, include_private: bool = False) -> list[Project]:
         """Get all production-ready SIL projects.
 
+        Args:
+            include_private: If True, include private projects. Default False.
+
         Returns:
-            List of production Project instances
+            List of production Project instances (excluding private unless include_private=True)
         """
-        all_projects = self.get_all_projects()
+        all_projects = self.get_all_projects(include_private=include_private)
         return [p for p in all_projects if p.status == ProjectStatus.PRODUCTION]
 
-    def get_projects_by_layer(self) -> dict[Layer, list[Project]]:
+    def get_projects_by_layer(self, include_private: bool = False) -> dict[Layer, list[Project]]:
         """Group all projects by their Semantic OS layer.
 
+        Args:
+            include_private: If True, include private projects. Default False.
+
         Returns:
-            Dict mapping Layer to list of Projects
+            Dict mapping Layer to list of Projects (excluding private unless include_private=True)
         """
-        all_projects = self.get_all_projects()
+        all_projects = self.get_all_projects(include_private=include_private)
         by_layer: dict[Layer, list[Project]] = {}
 
         # Initialize all layers with empty lists
@@ -601,19 +650,26 @@ class ProjectService:
         self.log.info("projects_grouped_by_layer")
         return by_layer
 
-    def get_project(self, slug: str) -> Optional[Project]:
+    def get_project(self, slug: str, include_private: bool = False) -> Optional[Project]:
         """Get a specific project by slug.
 
         Args:
             slug: Project slug (e.g., 'morphogen')
+            include_private: If True, include private projects. Default False.
 
         Returns:
-            Project instance or None if not found
+            Project instance or None if not found (or if private and include_private=False)
         """
-        all_projects = self.get_all_projects()
+        all_projects = self.get_all_projects(include_private=include_private)
         for project in all_projects:
             if project.slug == slug:
                 return project
 
-        self.log.warning("project_not_found", slug=slug)
+        # Don't log warning for private projects (avoid information disclosure)
+        # Only log if project truly doesn't exist
+        if include_private:
+            self.log.warning("project_not_found", slug=slug)
+        else:
+            # Could be private or non-existent - don't disclose which
+            self.log.debug("project_not_accessible", slug=slug)
         return None
