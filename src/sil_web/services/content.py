@@ -80,50 +80,14 @@ class ContentService:
         },
     }
 
-    # Document tier classification (slug -> (tier, order))
+    # Document tier classification is now defined in frontmatter
     # Tier 1 = Essential Documents (must-read for any visitor)
     # Tier 2 = Architecture (technical architecture docs)
     # Tier 3 = Research Output (deep reference material)
     # Sidebar shows: All Tier 1, All Tier 2, Top 5 of Tier 3
-    DOCUMENT_TIERS = {
-        # Tier 1: Essential Documents (5 docs - the "1 hour" reading list)
-        "start-here": (1, 1),
-        "manifesto": (1, 2),
-        "founders-letter": (1, 3),
-        "principles": (1, 4),
-        "glossary": (1, 5),
-        "research-agenda-year1": (1, 6),
-
-        # Tier 2: Architecture Reference (accessible but less prominent)
-        # Empty - moved to Tier 3 to reduce sidebar clutter
-
-        # Tier 3: Deep Reference (only top 5 shown in sidebar)
-        # Architecture & Governance
-        "semantic-os-architecture": (3, 1),
-        "stewardship-manifesto": (3, 2),
-        "technical-charter": (3, 3),
-        "design-principles": (3, 4),
-
-        # Trust & Agency
-        "trust-assertion-protocol": (3, 5),
-        "authorization-protocol": (3, 6),
-        "hierarchical-agency-framework": (3, 7),
-        "safety-thresholds": (3, 8),
-
-        # Research Papers
-        "semantic-feedback-loops": (3, 9),
-        "semantic-observability": (3, 10),
-        "multi-agent-protocol-principles": (3, 11),
-        "founders-note-multishot-agent-learning": (3, 12),
-
-        # Implementation Guides
-        "progressive-disclosure-guide": (3, 13),
-        "reveal-beth-progressive-knowledge-system": (3, 14),
-        "tool-quality-monitoring": (3, 15),
-
-        # Default tier for any unlisted docs (e.g., README.md)
-        # Will be handled in load_document with (3, 999)
-    }
+    #
+    # All documents MUST include 'tier' and 'order' in their YAML frontmatter.
+    # No fallback dict - frontmatter is the single source of truth.
 
     def __init__(self, docs_path: Path) -> None:
         """Initialize content service.
@@ -221,18 +185,17 @@ class ContentService:
         title = post.get("title", slug.replace("-", " ").title())
         description = post.get("description")
 
-        # Get tier and order from frontmatter first, fallback to DOCUMENT_TIERS
+        # Get tier and order from frontmatter (REQUIRED)
         tier = post.get("tier")
         order = post.get("order")
 
-        if tier is None or order is None:
-            # Fallback to hardcoded DOCUMENT_TIERS
-            tier_fallback, order_fallback = self.DOCUMENT_TIERS.get(slug, (3, 999))
-            if tier is None:
-                tier = tier_fallback
-                self.log.warning("document_missing_tier_frontmatter", slug=slug, category=category)
-            if order is None:
-                order = order_fallback
+        # Require tier and order in frontmatter - no fallback
+        if tier is None:
+            self.log.error("document_missing_tier_frontmatter", slug=slug, category=category, path=str(doc_path))
+            return None
+        if order is None:
+            self.log.error("document_missing_order_frontmatter", slug=slug, category=category, path=str(doc_path))
+            return None
 
         # Get privacy and metadata fields from frontmatter
         private = post.get("private", False)
