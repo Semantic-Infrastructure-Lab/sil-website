@@ -1,10 +1,3 @@
----
-title: "SIL Quickstart"
-tier: 3
-order: 999
-private: false
----
-
 # SIL Quickstart
 
 **Get hands-on with Semantic Infrastructure Lab tools in 10 minutes**

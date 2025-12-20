@@ -1,10 +1,3 @@
----
-title: "Morphogen: Cross-Domain Deterministic Computation"
-tier: 3
-order: 999
-private: false
----
-
 # Morphogen: Cross-Domain Deterministic Computation
 
 > *Where computation becomes composition*

@@ -1,8 +1,11 @@
 ---
-title: "Manifesto"
-tier: 3
-order: 999
-private: false
+tier: 1
+order: 2
+beth_topics:
+  - manifesto
+  - philosophy
+  - sil-vision
+  - compression-thesis
 ---
 
 # Manifesto

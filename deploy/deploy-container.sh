@@ -181,6 +181,7 @@ echo "→ Starting new container..."
 podman run -d \
   --name $CONTAINER_NAME \
   -p ${BIND_IP}:$SERVICE_PORT:8000 \
+  -e ENVIRONMENT=$ENVIRONMENT \
   --health-cmd="curl -f http://localhost:8000/health || exit 1" \
   --health-interval=30s \
   --health-timeout=5s \

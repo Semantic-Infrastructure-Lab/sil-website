@@ -1,10 +1,3 @@
----
-title: "Pantheon: Universal Semantic Intermediate Representation"
-tier: 3
-order: 999
-private: false
----
-
 # Pantheon: Universal Semantic Intermediate Representation
 
 > *The semantic substrate for cross-domain composition*

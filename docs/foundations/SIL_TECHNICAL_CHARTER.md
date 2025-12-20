@@ -1,8 +1,11 @@
 ---
-title: "Sil Technical Charter"
 tier: 3
 order: 3
-private: false
+beth_topics:
+  - sil
+  - technical-charter
+  - specification
+  - architecture
 ---
 
 SIL Technical Charter (v1)

@@ -1,8 +1,12 @@
 ---
-title: "SIL Semantic OS Architecture"
 tier: 3
 order: 1
-private: false
+beth_topics:
+  - sil
+  - architecture
+  - semantic-os
+  - layers
+  - infrastructure
 ---
 
 # SIL Semantic OS Architecture

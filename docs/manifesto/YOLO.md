@@ -1,10 +1,3 @@
----
-title: "YOLO"
-tier: 3
-order: 999
-private: false
----
-
 # YOLO
 
 *A Manifesto for the Semantic Infrastructure Lab*

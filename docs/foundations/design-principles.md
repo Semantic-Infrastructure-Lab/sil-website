@@ -1,8 +1,11 @@
 ---
-title: "SIL Core Principles"
 tier: 3
 order: 4
-private: false
+beth_topics:
+  - sil
+  - design-principles
+  - architecture
+  - engineering
 ---
 
 # SIL Core Principles

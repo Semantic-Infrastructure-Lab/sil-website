@@ -1,9 +1,12 @@
 ---
-title: "**SIL Glossary (v2.2)**"
 tier: 1
 order: 5
-private: false
-description: "TODO: Add description"
+beth_topics:
+  - sil
+  - glossary
+  - terminology
+  - definitions
+  - reference
 ---
 
 # **SIL Glossary (v2.2)**

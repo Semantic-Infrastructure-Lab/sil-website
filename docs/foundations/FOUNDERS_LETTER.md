@@ -1,9 +1,12 @@
 ---
-title: "**Founder's Letter**"
 tier: 1
 order: 3
-private: false
-description: "TODO: Add description"
+beth_topics:
+  - sil
+  - founder
+  - mission
+  - transparency
+  - semantic-infrastructure
 ---
 
 # **Founder's Letter**

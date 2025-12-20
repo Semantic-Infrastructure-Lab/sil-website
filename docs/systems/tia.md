@@ -1,10 +1,3 @@
----
-title: "Tia: Chief Semantic Agent"
-tier: 3
-order: 999
-private: false
----
-
 # Tia: Chief Semantic Agent
 
 **SIL's Persistent Semantic Toolchain**
@@ -251,7 +244,7 @@ It's the research lab practicing what it preaches.
 
 **Architecture:**
 - [Semantic OS Architecture](/foundations/SIL_SEMANTIC_OS_ARCHITECTURE) - Where Tia fits in the 7-layer stack
-- [Agent Ether](/systems/agent-ether) - Multi-agent coordination principles informed by Tia's patterns
+- [Agent Ether](/systems/AGENT_ETHER) - Multi-agent coordination principles informed by Tia's patterns
 
 **Companion Systems:**
 - [Beth](/systems/beth) - Knowledge substrate that Tia queries

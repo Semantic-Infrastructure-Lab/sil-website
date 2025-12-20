@@ -1,10 +1,3 @@
----
-title: "SIL Reading Guide"
-tier: 3
-order: 999
-private: false
----
-
 # SIL Reading Guide
 
 **Curated paths through the Semantic Infrastructure Lab documentation**
@@ -95,7 +88,7 @@ You'll understand the technical depth: how SIL achieves explicit meaning, stable
    - Try progressive disclosure hands-on
    - Experience semantic structure exploration
 
-2. **[Reveal Documentation](/systems/reveal)** (15 min)
+2. **[Reveal Documentation](tools/REVEAL)** (15 min)
    - Complete feature guide
    - Semantic navigation patterns
    - Pipeline composition with git, find, jq
@@ -151,19 +144,19 @@ You'll understand SIL's theoretical foundations and research trajectory.
 
 ### Reading Sequence
 
-1. **[Innovation Overview](/systems)** (10 min)
+1. **[Innovation Overview](innovations/INNOVATIONS)** (10 min)
    - Summary of all innovations
    - Impact metrics and adoption
 
 2. **Production Tools** (30 min)
-   - [Reveal](/systems/reveal) — Progressive disclosure for code
-   - [Morphogen](/systems/morphogen) — Cross-domain unified primitives
-   - [Pantheon](/systems/pantheon) — Universal typed IR
+   - [Reveal](tools/REVEAL) — Progressive disclosure for code
+   - [Morphogen](innovations/MORPHOGEN) — Cross-domain unified primitives
+   - [Pantheon](innovations/PANTHEON) — Universal typed IR
 
 3. **Key Techniques** (20 min)
-   - [Progressive Disclosure](/essays/progressive-disclosure-for-ai-agents)
-   - [Agent Ether](/systems/agent-ether)
-   - [GenesisGraph](/systems/genesisgraph) — Cryptographic provenance
+   - [Progressive Disclosure](innovations/PROGRESSIVE_DISCLOSURE)
+   - [Agent Ether](innovations/AGENT_ETHER)
+   - [GenesisGraph](innovations/GENESISGRAPH) — Cryptographic provenance
 
 ### Outcome
 
@@ -236,7 +229,7 @@ Research contributions and theoretical frameworks.
 
 ### 🛠 Tools
 Documentation for production tools (Reveal, TIA, Beth).
-→ [View tools directory](/systems)
+→ [View tools directory](tools/README)
 
 ### 🏗 Architecture
 Technical architecture and system design.
@@ -244,7 +237,7 @@ Technical architecture and system design.
 
 ### 💡 Innovations
 Innovation portfolio — techniques and tools built.
-→ [View innovations](/systems)
+→ [View innovations](innovations/INNOVATIONS)
 
 ### 👤 Meta
 About the founder, influences, FAQ.
@@ -267,7 +260,7 @@ All 12 SIL projects detailed.
 → [Semantic OS Architecture](canonical/SIL_SEMANTIC_OS_ARCHITECTURE), [Technical Charter](canonical/SIL_TECHNICAL_CHARTER)
 
 **Try it hands-on**
-→ [Quickstart](QUICKSTART), [Reveal Docs](/systems/reveal)
+→ [Quickstart](QUICKSTART), [Reveal Docs](tools/REVEAL)
 
 **Review research**
 → [Research Directory](research/README), [Research Agenda](canonical/SIL_RESEARCH_AGENDA_YEAR1)
@@ -276,7 +269,7 @@ All 12 SIL projects detailed.
 → [Stewardship Manifesto](canonical/SIL_STEWARDSHIP_MANIFESTO), [Safety Thresholds](canonical/SIL_SAFETY_THRESHOLDS)
 
 **See what's built**
-→ [Project Index](/projects/PROJECT_INDEX), [Innovation Portfolio](/systems)
+→ [Project Index](../projects/PROJECT_INDEX), [Innovation Portfolio](innovations/INNOVATIONS)
 
 **Get questions answered**
 → [FAQ](meta/FAQ), [Glossary](canonical/SIL_GLOSSARY)

@@ -1,10 +1,3 @@
----
-title: "Beth: Semantic Memory Agent"
-tier: 3
-order: 999
-private: false
----
-
 # Beth: Semantic Memory Agent
 
 **SIL's Knowledge Substrate**

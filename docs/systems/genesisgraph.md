@@ -1,10 +1,3 @@
----
-title: "GenesisGraph: Verifiable Provenance with Selective Disclosure"
-tier: 3
-order: 999
-private: false
----
-
 # GenesisGraph: Verifiable Provenance with Selective Disclosure
 
 > *Proving how things were made—without revealing how you made them*

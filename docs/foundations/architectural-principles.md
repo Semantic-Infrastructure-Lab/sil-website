@@ -1,8 +1,12 @@
 ---
-title: "**SIL Principles (v1)**"
-tier: 3
-order: 999
-private: false
+tier: 1
+order: 4
+beth_topics:
+  - sil
+  - principles
+  - architecture
+  - constraints
+  - semantic-os
 ---
 
 # **SIL Principles (v1)**

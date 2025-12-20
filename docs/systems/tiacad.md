@@ -1,10 +1,3 @@
----
-title: "TiaCAD - Declarative Parametric CAD"
-tier: 3
-order: 999
-private: false
----
-
 # TiaCAD - Declarative Parametric CAD
 
 **Tagline:** Parametric CAD in YAML. Semantic constraints, not just geometry.
@@ -141,6 +134,6 @@ python -m tiacad examples/bracket.yaml --output bracket.step
 
 ## Related SIL Projects
 
-- **[Reveal](/systems/reveal)** — Progressive code exploration
-- **[Morphogen](/systems/morphogen)** — Cross-domain computation substrate
-- **[GenesisGraph](/systems/genesisgraph)** — Provenance tracking for transforms
+- **[Reveal](/tools/reveal)** — Progressive code exploration
+- **[Morphogen](/innovations/morphogen)** — Cross-domain computation substrate
+- **[GenesisGraph](/innovations/genesisgraph)** — Provenance tracking for transforms
