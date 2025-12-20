@@ -12,11 +12,9 @@ Usage:
 """
 
 import argparse
-import re
 import sys
 from pathlib import Path
 from typing import Optional, Tuple
-
 
 # DOCUMENT_TIERS mapping (tier, order)
 # Copied from src/sil_web/services/content.py
@@ -127,19 +125,6 @@ def add_frontmatter_to_file(
     if not title:
         # Generate title from filename
         title = file_path.stem.replace('_', ' ').replace('-', ' ').title()
-
-    # Determine category from directory
-    # docs/foundations/foo.md -> category: foundations
-    # docs/research/standards/bar.md -> category: research
-    category_parts = file_path.parts
-    if 'docs' in category_parts:
-        docs_idx = category_parts.index('docs')
-        if len(category_parts) > docs_idx + 1:
-            category = category_parts[docs_idx + 1]
-        else:
-            category = 'root'
-    else:
-        category = 'unknown'
 
     # Build frontmatter
     frontmatter_lines = [
@@ -269,7 +254,7 @@ def main():
 
     print()
     print("=" * 60)
-    print(f"Summary:")
+    print("Summary:")
     print(f"  Files that would be/were changed: {changed}")
     print(f"  Files skipped (already have frontmatter): {skipped}")
     print(f"  Total files: {changed + skipped}")

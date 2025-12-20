@@ -7,10 +7,11 @@ These tests verify that:
 - Missing frontmatter uses safe defaults
 """
 
+
 import pytest
-from pathlib import Path
-from sil_web.services.content import ContentService, ProjectService
+
 from sil_web.domain.models import ProjectStatus
+from sil_web.services.content import ContentService, ProjectService
 
 
 class TestContentServicePrivacy:

@@ -7,9 +7,11 @@ These tests verify that:
 - Privacy filtering works end-to-end through routes
 """
 
-import pytest
 from pathlib import Path
+
+import pytest
 from fastapi.testclient import TestClient
+
 from sil_web.app import app
 
 
@@ -153,11 +155,10 @@ class TestDefenseInDepth:
 
     def test_privacy_layer_2_service_filtering(self):
         """Layer 2: Service methods filter by default."""
-        from sil_web.services.content import ContentService
-        from pathlib import Path
-
         # Verify service methods have include_private parameter
         import inspect
+
+        from sil_web.services.content import ContentService
 
         # Check load_document signature
         sig = inspect.signature(ContentService.load_document)

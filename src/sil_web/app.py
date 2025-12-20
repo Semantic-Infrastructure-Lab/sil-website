@@ -12,8 +12,8 @@ from starlette.responses import Response
 
 from sil_web.config.settings import DOCS_PATH
 from sil_web.routes.health import router as health_router
-from sil_web.routes.robots import router as robots_router
 from sil_web.routes.pages import create_routes
+from sil_web.routes.robots import router as robots_router
 from sil_web.services.content import ContentService
 from sil_web.services.markdown import MarkdownRenderer
 
