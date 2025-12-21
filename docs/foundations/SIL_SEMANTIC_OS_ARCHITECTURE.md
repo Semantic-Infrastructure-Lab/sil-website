@@ -7,686 +7,629 @@ beth_topics:
   - semantic-os
   - layers
   - infrastructure
+  - provenance-first
+  - invariants
+updated: 2025-12-20
+architecture_decision: Provenance-First model adopted (Dec 15, 2025)
 ---
 
 # SIL Semantic OS Architecture
 
-**Version:** 2.0 (December 2025)
+**Version:** 3.0 (December 2025)
+**Architecture Model:** Provenance-First with Invariants Over Layers
 **Canonical Reference:** [SIL_GLOSSARY.md](/foundations/SIL_GLOSSARY)
+
+---
 
 ## TL;DR (2-minute overview)
 
-**What is the Semantic OS?** A 7-layer architecture for knowledge work—like Linux for computation, but for meaning.
+**What is the Semantic OS?** A semantic infrastructure for human-AI coexistence—organized around provenance, meaning, and trust.
 
-**The core insight:** Just as an OS manages processes, memory, and devices, the Semantic OS manages **knowledge, agents, and deterministic computation**.
+**The core insight:** Just as Unix made "everything is a file" the foundational abstraction, Semantic OS makes "everything has provenance and meaning" the foundational guarantee.
+
+### The Provenance-First Layer Model
 
 ```
-Layer 6: Intelligence    (Agent Ether, BrowserBridge)     ← Multi-agent coordination
-Layer 5: Intent          (Pantheon validation)            ← Constraints & feedback loops
-Layer 4: Dynamics        (Morphogen scheduler)            ← Temporal execution
-Layer 3: Composition     (Pantheon IR, SUP)               ← Cross-domain integration
-Layer 2: Structures      (TiaCAD, GenesisGraph)           ← Data structures & provenance
-Layer 1: Primitives      (Morphogen domains)              ← 40+ computational domains
-Layer 0: Substrate       (Philbrick hardware)             ← Hardware foundation
-─────────────────────────────────────────────────────────────────────────────────
-Cross-cutting: Observability (Reveal), Provenance (GenesisGraph), Trust (TAP)
+L6: Reflection       Learning from execution (observability)
+L5: Execution        Agents working under constraints
+L4: Composition      Cross-domain integration (Pantheon IR)
+L3: Intent           What we're accomplishing (contracts)
+L2: Trust            Who can do what (TAP, Authorization)
+L1: Meaning          Embeddings, types, similarity (Beth)
+L0: Provenance       Everything has lineage (GenesisGraph)
+─────────────────────────────────────────────────────────────
+L-1: Substrate       Physical/computational reality (Philbrick, optional)
 ```
 
 **Key innovations:**
-- **Hardware-software co-design** from Philbrick substrate to agent intelligence
-- **Universal IR** enabling cross-domain interoperability (Pantheon)
-- **Deterministic execution** for reproducible workflows (Morphogen)
-- **Multi-agent protocols** for inspectable collaboration (Agent Ether)
-- **Verifiable provenance** at every layer (GenesisGraph)
+- **Provenance-first foundation** — Every artifact has cryptographic lineage
+- **Trust as architecture** — Authorization explicit, not implicit
+- **Glass Box reasoning** — All decisions inspectable (Reveal)
+- **Deterministic execution** — Reproducible workflows (Morphogen)
+- **Sustainable efficiency** — 100x token reduction proven
 
-**Want the full architecture?** Read the detailed layer descriptions below ↓
-
-> 💡 **New to SIL terminology?** Keep the [Glossary](/foundations/SIL_GLOSSARY) open in another tab.
-
-```mermaid
-graph TB
-    subgraph L6["Layer 6: Intelligence"]
-        I1[Agent Ether]
-        I2[BrowserBridge]
-    end
-
-    subgraph L5["Layer 5: Intent"]
-        IN1[Validation]
-        IN2[Feedback Loops]
-    end
-
-    subgraph L4["Layer 4: Dynamics"]
-        D1[Morphogen Scheduler]
-        D2[Multirate Coordination]
-    end
-
-    subgraph L3["Layer 3: Composition"]
-        C1[Pantheon IR]
-        C2[SUP]
-        C3[GenesisGraph]
-    end
-
-    subgraph L2["Layer 2: Structures"]
-        S1[TiaCAD]
-        S2[GenesisGraph]
-    end
-
-    subgraph L1["Layer 1: Primitives"]
-        P1[Morphogen Domains]
-        P2[RiffStack]
-    end
-
-    subgraph L0["Layer 0: Substrate"]
-        H1[Philbrick]
-    end
-
-    L6 <--> L5
-    L5 <--> L4
-    L4 <--> L3
-    L3 <--> L2
-    L2 <--> L1
-    L1 <--> L0
-
-    style L6 fill:#e1f5fe,stroke:#01579b
-    style L5 fill:#e8f5e9,stroke:#2e7d32
-    style L4 fill:#fff3e0,stroke:#e65100
-    style L3 fill:#f3e5f5,stroke:#6a1b9a
-    style L2 fill:#e3f2fd,stroke:#1565c0
-    style L1 fill:#fce4ec,stroke:#880e4f
-    style L0 fill:#f5f5f5,stroke:#424242
-```
-
-### Layer Model Evolution
-
-This document was originally written with a 6-layer conceptual model. The current canonical 7-layer model (above) reflects implementation learnings. The detailed layer descriptions below use the original naming but map to the current model as follows:
-
-| Original (This Doc) | Current Canonical | Key Products |
-|---------------------|-------------------|--------------|
-| L0: Semantic Memory | L2-L3: Structures/Composition | GenesisGraph, Beth |
-| L1: Pantheon IR | L3: Composition | Pantheon IR |
-| L2: Domain Modules | L1: Primitives | Morphogen domains |
-| L3: Agent Ether | L6: Intelligence | Agent Ether, BrowserBridge |
-| L4: Deterministic Engines | L1+L4: Primitives+Dynamics | Morphogen |
-| L5: Human Interfaces | (Cross-cutting) | Reveal, TIA, SUP |
-| (Not in original) | L0: Substrate | Philbrick |
-| (Not in original) | L5: Intent | Pantheon validation |
+> 💡 **New to SIL?** Read [The Five Invariants](#the-five-invariants) first, then explore the layers.
 
 ---
 
-## Overview
+## Architecture Decision (December 2025)
 
-The **Semantic Operating System** is the core technical infrastructure being developed by SIL-Core. It is a modular, layered architecture for knowledge work—analogous to how Linux provides an operating system for computation.
+This document reflects the **Provenance-First architecture** adopted December 15-20, 2025, following rigorous evaluation of competing models.
 
-Just as an operating system manages processes, memory, files, and devices, the Semantic OS manages **knowledge, meaning, agents, and deterministic computation**.
+**Why this model?**
+- **Scored highest** (4.15 vs 3.05) on problem fit, clarity, and coherence
+- **Mission-aligned** — Directly addresses LLM coexistence and human-AI collaboration
+- **Founder intuition** — "Provenance when I hear Semantic OS"
+- **Problem-centric** — Solves "how do we trust AI?" not "where do projects fit?"
 
----
-
-## Detailed Layer Descriptions
-
-> **Note:** The sections below use the original 6-layer naming from the initial architecture design. See the [Layer Model Evolution](#layer-model-evolution) table above for mapping to the current 7-layer canonical model.
-
-Each layer is described in detail with its purpose, core capabilities, and relationships to other layers.
+**Decision rationale**: See [ARCHITECTURE_DECISION.md](/architecture/decisions/ARCHITECTURE_DECISION)
 
 ---
 
-## Layer 0: Semantic Memory (The Foundation)
+## The Five Invariants (Mission-Critical Guarantees)
 
-### Purpose
+Before diving into layers, understand the **invariants** — guarantees that must hold everywhere in the system:
 
-Semantic Memory is the **persistent knowledge substrate**—the "file system" for meaning. It stores, indexes, and retrieves structured knowledge with full provenance tracking.
+| Invariant | What It Prevents | Enforcement | Status |
+|-----------|------------------|-------------|--------|
+| **Everything has lineage** | Epistemic collapse | GenesisGraph v0.3.0 | ✅ Production |
+| **Reasoning is inspectable** | Black box dictatorship | Reveal v0.25.0 | ✅ Production |
+| **Computation is grounded** | Hallucinated science | Morphogen v0.12.0 | 🟡 Prototype |
+| **Contracts are explicit** | Brittle complexity | Agent Ether 0.1.0-alpha | 🔴 Spec only |
+| **Efficiency is sustainable** | Compute as privilege | Beth + Reveal | ✅ Production |
+
+**Overall Enforcement:** 67% (3.5/5 invariants production-ready)
+
+**Known Gap:** Agent Ether is specification-only (no implementation yet). See [Agent Ether Roadmap](#agent-ether-implementation-priority).
+
+### How Layers and Invariants Relate
+
+**Use layers for:**
+- Organizing documentation
+- Explaining how tools relate
+- Onboarding new contributors
+- Navigating the codebase
+
+**Use invariants for:**
+- Architectural decisions
+- Design reviews
+- Mission alignment checks
+- "Should we build X?" questions
+
+Both are needed. Layers organize structure; invariants enforce mission.
+
+---
+
+## Layer 0: Provenance (Everything Has Lineage)
+
+**Purpose:** Cryptographic chain of custody for every digital artifact — the foundation of trust.
+
+**Why L0?** Without provenance, you can't trust LLM output, verify scientific results, or audit algorithmic decisions. Provenance isn't optional infrastructure—it's the bedrock.
 
 ### Core Capabilities
 
-**1. Knowledge Representation**
-- Entities, relationships, attributes (semantic triples)
-- Temporal versioning (knowledge evolves over time)
-- Uncertainty and confidence (probabilistic assertions)
-- Provenance metadata (where did this knowledge come from?)
+**GenesisGraph (v0.3.0 Production)**
 
-**2. Storage Engines**
-- Graph databases (Neo4j, TerminusDB, or custom)
-- Triple stores (RDF-based)
-- Content-addressable storage (IPFS-like) — **See:** [Distributed Storage Architecture](/architecture/DISTRIBUTED_STORAGE_ARCHITECTURE) for IPFS integration strategy
-- Hybrid relational + graph models
+1. **Cryptographic Attestation**
+   - Ed25519 signatures for identity
+   - DID resolution for decentralized identifiers
+   - Certificate Transparency for public verification
+   - SD-JWT for selective disclosure
 
-**3. Query Languages**
-- SPARQL for RDF graphs
-- Cypher for property graphs
-- Custom semantic query DSL
-- Natural language → structured query translation
+2. **Immutable Lineage Tracking**
+   - Every artifact linked to its source
+   - Full derivation history: inputs → transformations → outputs
+   - Content-addressable storage (hash = identifier)
+   - Temporal versioning (knowledge evolves, lineage preserved)
 
-**4. Provenance Tracking (GenesisGraph)**
-- Every fact linked to its source
-- Full lineage from raw inputs to derived knowledge
-- Cryptographic attestation of derivations
-- Reproducibility guarantees
-
-**5. Knowledge Lifecycle**
-- Ingestion (raw data → structured knowledge)
-- Validation (consistency, completeness checks)
-- Evolution (updating beliefs as evidence changes)
-- Archiving (deprecated knowledge preserved for historical queries)
+3. **Verification Without Recomputation**
+   - Third parties can verify claims without re-running expensive computations
+   - Cryptographic proofs of correctness
+   - Audit trails for regulatory compliance
 
 ### Design Principles
-
-**Content-Addressable:**
-- Knowledge identified by cryptographic hash of its content
-- Same knowledge → same identifier (deduplication)
-- Changes → new identifier (immutability + versioning)
 
 **Provenance-First:**
 - Every assertion includes source metadata
-- Audit trails enable trust verification
+- No "trust me" — always "verify the math"
 - Reproducible derivations
 
-**Multi-Tenant:**
-- Different projects, users, domains share infrastructure
-- Privacy and access control enforced
-- Cross-domain queries when permitted
+**Privacy-Preserving:**
+- Selective disclosure (show lineage without revealing sensitive data)
+- Zero-knowledge proofs where appropriate
+- DID-based sovereignty (users control their identity)
 
 ### Example Use Cases
 
-**SIL-Civilization Water Module:**
-- Stores semantic representation of water utility infrastructure
-- Tracks lineage from sensor data → analysis → policy recommendations
-- Enables queries like "Which pipes were manufactured before 1950?" or "What's the provenance of this risk assessment?"
+**Scientific Reproducibility:**
+- Researcher publishes paper with GenesisGraph provenance
+- Other researchers verify claims cryptographically
+- Replication crisis addressed through verifiable lineage
 
-**SIL-Core Research:**
-- Stores all research papers, notes, and documentation
-- Links concepts across documents
-- Enables queries like "Find all work related to morphogenesis and computation"
+**Deepfake Detection:**
+- Real photos/videos have provenance metadata
+- Synthetic media lacks cryptographic attestation
+- "Where did this come from?" becomes answerable
+
+**Algorithmic Accountability:**
+- Medical diagnosis AI shows provenance of training data and decision inputs
+- Patients/doctors can audit the reasoning chain
+- Regulators verify compliance without access to proprietary models
 
 ---
 
-## Layer 1: Pantheon IR (Intermediate Representation)
+## Layer 1: Meaning (Semantic Understanding)
 
-### Purpose
+**Purpose:** Embeddings, types, similarity, and semantic search — how we understand what things mean.
 
-Pantheon IR is the **universal semantic type system**—the "assembly language" for knowledge composition. It defines standard representations that enable different domain modules to interoperate.
-
-### Inspiration
-
-Named after the Pantheon in Rome—a building that unifies diverse architectural traditions under one dome. Pantheon IR unifies diverse domain semantics under one common representational framework.
+**Why L1?** Provenance tells us "where," but meaning tells us "what." This layer enables semantic queries, concept discovery, and cross-domain understanding.
 
 ### Core Capabilities
 
-**1. Universal Type System**
-- Primitive types (integers, floats, strings, booleans, timestamps)
-- Composite types (structs, unions, enums, algebraic data types)
-- Semantic types (entities, relationships, events, processes)
-- Higher-order types (functions, constraints, specifications)
+**Beth (Production)**
 
-**2. Translation Protocols**
-- Domain-specific schema → Pantheon IR
-- Pantheon IR → Domain-specific schema
-- Lossless round-tripping where possible
-- Graceful degradation when perfect translation is impossible
+1. **Semantic Indexing**
+   - 14,549 files indexed across 60 projects
+   - 1,402 topics automatically discovered
+   - 30,026 keywords with strength scores
 
-**3. Composition Operators**
-- Merge (combining knowledge from multiple sources)
-- Join (relating entities across domains)
-- Transform (applying functions to semantic data)
-- Validate (checking constraints and invariants)
+2. **Similarity Search**
+   - Find similar documents/concepts across domains
+   - Embedding-based retrieval
+   - Topic clustering and exploration
 
-**4. Versioning and Evolution**
-- Schema migrations (v1 → v2 without breaking existing data)
-- Backwards compatibility guarantees
-- Deprecation pathways for old representations
+3. **Efficient Discovery**
+   - 25x token reduction measured across 300+ sessions
+   - Progressive disclosure (structure before detail)
+   - Breadth-first knowledge navigation
 
-**5. Formal Semantics**
-- Type soundness proofs
-- Specification languages for constraints
-- Formal verification of translations
+**Pantheon IR (Type System)**
+
+1. **Universal Semantic Types**
+   - Primitive types (integers, floats, strings, timestamps)
+   - Composite types (structs, unions, algebraic data types)
+   - Semantic types (entities, relationships, events)
+   - Provenance types (lineage as first-class citizen)
+
+2. **Cross-Domain Translation**
+   - Domain-specific schema → Pantheon IR
+   - Lossless round-tripping where possible
+   - Graceful degradation when perfect translation impossible
 
 ### Design Principles
 
-**Minimal but Sufficient:**
-- Small core language (like LLVM IR for code)
-- Everything else compiles to core primitives
-- Avoid feature bloat
-
-**Composable:**
-- Small modules combine to express complex semantics
-- No monolithic schemas
+**Type-Safe:**
+- Semantic operations type-check before execution
+- Formal verification of translations
+- Clear error messages when things don't type
 
 **Human-Readable:**
-- Pantheon IR can be read and written by humans (not just machines)
-- Good error messages when things don't type-check
+- Pantheon IR can be read/written by humans
+- Good error messages
+- Self-documenting schemas
 
 ### Example Use Cases
+
+**Knowledge Discovery:**
+- "Find all work related to provenance and trust" (Beth semantic search)
+- Results ranked by relevance, grouped by topic
+- Progressive disclosure (titles → abstracts → full content)
 
 **Cross-Domain Queries:**
-- "Which healthcare facilities are downstream of this water treatment plant?" requires joining Water and Healthcare modules via Pantheon IR
-
-**Policy Simulation:**
-- Governance module expresses policy in Pantheon IR → executable simulation in Deterministic Engines
-
-**Multi-Agent Collaboration:**
-- Agents from different domains negotiate via Pantheon IR messages
+- "Which healthcare facilities are downstream of this water treatment plant?"
+- Requires joining Water and Healthcare schemas via Pantheon IR
+- Type system ensures coherent composition
 
 ---
 
-## Layer 2: Domain-Specific Modules
+## Layer 2: Trust (Who Can Do What)
 
-### Purpose
+**Purpose:** Authorization, access control, and trust frameworks — making "who can do what" explicit.
 
-Domain modules are **specialized knowledge systems** for different civilizational domains—water, healthcare, education, governance, energy, transportation, etc. They are the "applications" running on the semantic kernel.
-
-### Structure
-
-Each domain module provides:
-
-**1. Domain Schema (in Pantheon IR)**
-- Entities (e.g., Water: pipes, pumps, reservoirs, treatment plants)
-- Relationships (e.g., "pipe connects reservoir to distribution network")
-- Processes (e.g., "water treatment workflow")
-- Constraints (e.g., "flow rate must be positive")
-
-**2. Domain Logic**
-- Rules and policies (e.g., "if chlorine level < threshold, alert operator")
-- Simulation models (e.g., hydraulic flow simulation)
-- Optimization algorithms (e.g., pump scheduling)
-- Analytics (e.g., predictive maintenance)
-
-**3. Integration Adapters**
-- Import from domain-specific tools (e.g., EPANET for water networks)
-- Export to domain-specific formats
-- Bi-directional synchronization with external systems
-
-**4. Domain APIs**
-- REST APIs for external applications
-- GraphQL for flexible querying
-- Streaming APIs for real-time data
-
-### Example Domains
-
-**Water Infrastructure Module:**
-- Semantic model of water distribution networks
-- Integration with SCADA systems
-- Hydraulic simulation via EPANET
-- Risk assessment and maintenance scheduling
-
-**Healthcare Module:**
-- Patient care pathways as semantic workflows
-- Medical knowledge representation (diagnoses, treatments, outcomes)
-- Integration with EHR systems
-- Clinical decision support
-
-**Education Module:**
-- Curriculum as knowledge graph
-- Learning pathways and prerequisites
-- Student progress tracking
-- Adaptive content recommendation
-
-**Governance Module:**
-- Regulatory knowledge representation
-- Policy as code
-- Participatory governance platforms
-- Simulation of policy impacts
-
-**Transportation Module:**
-- Road network semantics
-- Public transit scheduling
-- Traffic simulation
-- Multimodal route planning
-
-### Design Principles
-
-**Domain Expertise Required:**
-- Modules developed in partnership with domain experts (civil engineers, doctors, educators)
-- SIL-Civilization researchers bridge CS and domain knowledge
-
-**Interoperable by Default:**
-- All modules use Pantheon IR
-- Cross-domain queries are first-class citizens
-
-**Open and Extensible:**
-- Third parties can develop new domain modules
-- Documented extension points and APIs
-
----
-
-## Layer 3: Agent Ether (Multi-Agent Protocols)
-
-### Purpose
-
-Agent Ether is the **coordination layer** for multi-agent systems. It provides protocols for agents (human or AI) to discover capabilities, negotiate tasks, compose workflows, and collaborate.
-
-### Metaphor
-
-"Ether" as in the luminiferous ether—the hypothetical medium through which light was thought to travel. Agent Ether is the medium through which coordination and communication propagate across the semantic ecosystem.
+**Why L2?** LLM coexistence requires explicit trust models. This layer makes authorization architectural, not an afterthought.
 
 ### Core Capabilities
 
-**1. Agent Registry and Discovery**
-- Agents advertise their capabilities (e.g., "I can analyze water networks")
-- Capability matching (e.g., "Who can help with this task?")
-- Reputation and trust metrics
+**Trust Assertion Protocol (TAP)**
 
-**2. Protocol Suite**
-- **Task Delegation:** One agent requests another to perform a task
-- **Negotiation:** Agents agree on terms (e.g., "I'll analyze this if you provide sensor data")
-- **Composition:** Complex workflows built from simple agent capabilities
-- **Consensus:** Multiple agents agree on facts or decisions
-- **Verification:** Agents verify each other's work
+1. **Capability-Based Security**
+   - Agents hold capabilities (cryptographic tokens granting permissions)
+   - No ambient authority (must prove right to access)
+   - Fine-grained access control
 
-**3. Choreography vs Orchestration**
-- **Choreography:** Agents coordinate peer-to-peer (decentralized)
-- **Orchestration:** Central coordinator directs agents (centralized)
-- Both patterns supported depending on use case
+2. **Trust Metrics**
+   - Reputation scores for agents
+   - Historical performance tracking
+   - Verification records
 
-**4. Semantic Messaging**
-- All messages in Pantheon IR (universal understanding)
-- Type-safe communication
-- Provenance of messages (who sent, when, why)
-
-**5. Emergent Coordination**
-- Simple agent behaviors → complex emergent patterns
-- Swarm intelligence for distributed problem-solving
-- Self-organizing agent networks
+3. **Hierarchical Agency**
+   - Delegation chains (principal → deputy → sub-deputy)
+   - Auditable authority transfer
+   - Revocation mechanisms
 
 ### Design Principles
 
-**Heterogeneous Agents:**
-- Human agents (researchers, operators, decision-makers)
-- AI agents (LLMs, optimization engines, simulation runners)
-- Hybrid human-AI teams
-
-**Fault Tolerant:**
-- Agents can fail without crashing the system
-- Graceful degradation
-- Automatic retry and recovery
+**Explicit Over Implicit:**
+- No hidden permissions
+- Clear authorization chains
+- Auditable access logs
 
 **Privacy-Preserving:**
-- Agents can collaborate without revealing sensitive data
-- Zero-knowledge proofs where appropriate
-- Differential privacy for aggregate queries
+- Selective disclosure (prove authority without revealing all credentials)
+- Zero-knowledge proofs for sensitive operations
 
 ### Example Use Cases
 
-**Multi-Domain Infrastructure Analysis:**
-- Water agent: "I detect anomaly in flow data"
-- Healthcare agent: "I'll check for correlations with waterborne illness reports"
-- Governance agent: "I'll notify relevant regulatory authorities"
-- All coordinated via Agent Ether
+**Multi-Agent Collaboration:**
+- AI agent requests access to dataset
+- TAP checks: Does agent have capability token?
+- If yes: access granted with audit log
+- If no: request escalates to human approval
 
-**Collaborative Research:**
-- Human researcher: "I need to analyze this dataset"
-- AI agent 1: "I can run statistical analysis"
-- AI agent 2: "I can generate visualizations"
-- AI agent 3: "I can search literature for similar studies"
-- All agents coordinate to produce comprehensive report
+**Regulated Data Access:**
+- Healthcare AI needs patient data for diagnosis
+- TAP verifies: proper authorization + audit trail + consent
+- Access granted only with full compliance chain
 
 ---
 
-## Layer 4: Deterministic Execution Engines (Morphogen)
+## Layer 3: Intent (What We're Accomplishing)
 
-### Purpose
+**Purpose:** Contracts, constraints, and specifications — making assumptions explicit.
 
-Deterministic Execution Engines provide **reproducible, verifiable computation**. Given the same inputs and code, they **always** produce the same outputs—critical for scientific reproducibility, auditing, and trust.
-
-### Core Technology: Morphogen
-
-Morphogen is SIL's flagship deterministic computation platform (named after Alan Turing's morphogenesis work). It builds on ideas from Nix, Bazel, and content-addressable computation.
+**Why L3?** Multi-agent systems fail when assumptions are implicit. This layer makes "what should happen" clear and verifiable.
 
 ### Core Capabilities
 
-**1. Hermetic Execution**
-- All dependencies explicitly declared
-- No hidden state or side effects
-- Sandboxed execution (no network, no filesystem access except declared inputs)
+**Agent Ether (0.1.0-alpha, Specification Only)**
 
-**2. Content-Addressable Caching**
-- Computation results stored by hash of inputs + code
-- Identical inputs + code → retrieve cached result (no recomputation)
-- Massive speedup for repeated analyses
+🔴 **STATUS: Known Gap** — Agent Ether is currently specification-only with no implementation. This is the highest-priority gap in our architecture.
 
-**3. Cryptographic Verification**
-- Every computation produces cryptographic proof of correctness
-- Third parties can verify results without re-running
-- Audit trails for regulatory compliance
+**Planned Capabilities (Specification):**
 
-**4. Incremental Computation**
-- Small input changes → only recompute affected parts
-- Build graphs track dependencies
-- Minimal recomputation on updates
+1. **Tool Behavior Contracts**
+   - Inputs, outputs, preconditions, postconditions
+   - Invariant declarations
+   - Type-safe tool composition
 
-**5. Distributed Execution**
-- Computation graphs distributed across cluster
-- Automatic parallelization
-- Fault tolerance (rerun failed tasks on different nodes)
+2. **Agent Registry**
+   - Capability advertisement ("I can analyze water networks")
+   - Discovery mechanisms
+   - Reputation tracking
+
+3. **Protocol Suite**
+   - Task delegation
+   - Negotiation
+   - Composition (complex workflows from simple capabilities)
+   - Verification
+
+### Design Principles
+
+**Contracts Over Chaos:**
+- All assumptions explicit
+- Failures loud and early, not silent and late
+- Deterministic tool use (no "vibes-based" coordination)
+
+**Heterogeneous Agents:**
+- Human and AI agents collaborate
+- Type-safe communication via Pantheon IR
+- Fault-tolerant coordination
+
+### Implementation Priority
+
+**Agent Ether Roadmap:**
+- **Phase 1:** Registry + Metadata (4 weeks)
+- **Phase 2:** Contract Validation (4 weeks)
+- **Phase 3:** Runtime Enforcement (8 weeks)
+
+See [Agent Ether Implementation Priority](#agent-ether-implementation-priority) for details.
+
+---
+
+## Layer 4: Composition (Cross-Domain Integration)
+
+**Purpose:** Combining knowledge and capabilities across domains — making different systems talk.
+
+**Why L4?** Real problems span domains (water + healthcare, education + governance). This layer enables cross-domain reasoning.
+
+### Core Capabilities
+
+**Pantheon IR (Composition Operators)**
+
+1. **Semantic Composition**
+   - Merge (combining knowledge from multiple sources)
+   - Join (relating entities across domains)
+   - Transform (applying functions to semantic data)
+   - Validate (checking constraints and invariants)
+
+2. **Domain Integration**
+   - Water module ↔ Healthcare module via Pantheon IR
+   - Automatic schema alignment
+   - Conflict resolution
+
+**SUP (Semantic UI Platform)**
+
+1. **UI Component Composition**
+   - Reusable semantic UI primitives
+   - Cross-project component library
+   - Consistent user experiences
+
+### Example Use Cases
+
+**Multi-Domain Analysis:**
+- Water anomaly detection → Healthcare waterborne illness correlation
+- Automatic cross-domain query via Pantheon IR
+- Results composed into unified view
+
+**Policy Simulation:**
+- Governance module expresses policy in Pantheon IR
+- Executable simulation in Morphogen (L5)
+- Results visualized in SUP
+
+---
+
+## Layer 5: Execution (Doing Work Under Constraints)
+
+**Purpose:** Deterministic, reproducible computation — making results verifiable.
+
+**Why L5?** Scientific reproducibility and trust require deterministic execution. This layer makes "it works on my machine" obsolete.
+
+### Core Capabilities
+
+**Morphogen (v0.12.0 Prototype)**
+
+1. **Hermetic Execution**
+   - All dependencies explicitly declared
+   - No hidden state or side effects
+   - Sandboxed execution
+
+2. **Content-Addressable Caching**
+   - Results stored by hash of (inputs + code)
+   - Identical inputs + code → cached result (no recomputation)
+   - Massive speedup for repeated analyses
+
+3. **Cryptographic Verification**
+   - Every computation produces proof of correctness
+   - Third parties verify without re-running
+   - Audit trails for compliance
+
+4. **Domain Grounding**
+   - 39 production domains (physics, chemistry, CAD, etc.)
+   - 1,705 tests ensuring correctness
+   - Grounded in real math, not text approximations
 
 ### Design Principles
 
 **Reproducibility First:**
-- Scientific results must be reproducible
-- "It works on my machine" is not acceptable
-
-**Provenance Everywhere:**
-- Every output linked to exact inputs, code version, execution environment
-- Full lineage tracking (GenesisGraph integration)
+- Same inputs + code → same outputs (always)
+- Cryptographic proof of execution
+- Full lineage tracking (GenesisGraph integration at L0)
 
 **Performance Through Caching:**
 - Determinism enables aggressive caching
-- Vast majority of computations are cache hits in mature systems
+- Mature systems: vast majority of computations are cache hits
 
 ### Example Use Cases
-
-**Policy Simulation:**
-- Governance module runs policy simulation via Morphogen
-- Results are reproducible and verifiable by third parties
-- Changes to policy parameters → only affected parts recomputed
 
 **Scientific Analysis:**
 - Researcher analyzes dataset with Morphogen
-- Analysis is reproducible by other researchers
-- Results published with cryptographic proof of correctness
+- Results reproducible by anyone
+- Published with cryptographic proof
 
 **Infrastructure Optimization:**
 - Water module optimizes pump schedules
-- Optimization is deterministic and auditable
-- Regulators can verify results without re-running expensive optimization
+- Deterministic and auditable
+- Regulators verify without re-running expensive optimization
 
 ---
 
-## Layer 5: Human Interfaces
+## Layer 6: Reflection (Learning From Execution)
 
-### Purpose
+**Purpose:** Observability, feedback loops, and learning — understanding what happened and why.
 
-Human Interfaces are how people interact with the Semantic OS—CLIs, GUIs, conversational agents, APIs, visualizations. This layer translates between human intent and semantic operations.
+**Why L6?** Systems improve through reflection. This layer makes "why did this happen?" answerable.
 
-### Interface Modalities
+### Core Capabilities
 
-**1. Command-Line Interfaces (CLIs)**
-- Power users and developers
-- Scripting and automation
-- Composable with Unix tools
+**Reveal (v0.25.0 Production)**
 
-**2. Graphical User Interfaces (GUIs)**
-- General users and domain experts
-- Visual exploration of knowledge graphs
-- Interactive dashboards and visualizations
+1. **Progressive Disclosure**
+   - Structure-first exploration (file outline → specific function)
+   - 10-150x token reduction proven
+   - 27 file analyzers (Python, TypeScript, Rust, etc.)
 
-**3. Conversational Agents**
-- Natural language queries
-- Guided workflows ("What do you want to do?" → step-by-step guidance)
-- Explanations and help
+2. **AST-Based Queries**
+   - "Show me all functions that call X"
+   - "Find classes implementing interface Y"
+   - Semantic code navigation
 
-**4. APIs (REST, GraphQL, gRPC)**
-- External applications integrating with Semantic OS
-- Third-party tools and extensions
-- Programmatic access
+3. **Provenance Visualization**
+   - Show lineage of decisions
+   - Trace execution paths
+   - Audit algorithmic reasoning
 
-**5. Visualization Tools**
-- Graph visualizations (knowledge graphs, dependency graphs)
-- Geospatial maps (for infrastructure)
-- Temporal visualizations (how knowledge evolves over time)
+**Semantic Observability**
 
-### Design Principles
+1. **Intent-Execution Alignment**
+   - Did execution match intent?
+   - Where did deviations occur?
+   - Feedback for improvement
 
-**Progressive Disclosure:**
-- Simple tasks are simple
-- Complex tasks are possible
-- Don't overwhelm beginners, don't limit experts
-
-**Multi-Modal:**
-- Users can switch between CLI, GUI, conversation as needed
-- State synchronized across modalities
-
-**Accessible:**
-- WCAG accessibility standards
-- Screen reader support
-- Keyboard navigation
-- High contrast modes
-
-**Explainable:**
-- System explains its reasoning
-- Provenance shown in human-readable form
-- "How did you arrive at this conclusion?" always answerable
+2. **Uncertainty Tracking**
+   - Confidence scores for predictions
+   - Probabilistic assertions
+   - "I don't know" instead of hallucination
 
 ### Example Use Cases
 
-**Water Utility Operator (GUI):**
-- Dashboard shows real-time water network status
-- Alerts for anomalies
-- Click on pipe → see full history, maintenance records, risk assessment
-- Provenance shown: "This risk assessment was computed on 2025-11-29 using flow data from sensors X, Y, Z"
+**Debugging Complex Workflows:**
+- Multi-agent system fails at step 27
+- Reveal shows execution trace
+- Provenance identifies: input from Agent 5 was malformed
+- Fix: add contract validation at Agent 5 (back to L3)
 
-**Researcher (CLI):**
-- Query knowledge graph: `semantic query "papers about morphogenesis"`
-- Run analysis: `morphogen run analyze-dataset --input data.csv`
-- Check provenance: `genesis-graph trace result.json`
-
-**Policy Maker (Conversational Agent):**
-- "What would happen if we increased water treatment capacity by 20%?"
-- Agent runs simulation, shows results
-- "Why did the cost increase?" → Agent explains decision tree
+**Algorithmic Accountability:**
+- Citizen questions loan denial
+- Reveal shows decision tree
+- Provenance traces inputs
+- Human auditor verifies reasoning was sound
 
 ---
 
-## Cross-Layer Concerns
+## Layer L-1: Substrate (Optional Physical Foundation)
 
-### 1. Provenance (GenesisGraph)
+**Purpose:** Physical and computational substrate — hardware, energy, physics.
 
-Provenance flows through all layers:
-- Layer 0 (Semantic Memory): Stores provenance metadata
-- Layer 1 (Pantheon IR): Provenance as first-class type
-- Layer 2 (Domain Modules): Domain-specific provenance (e.g., sensor lineage)
-- Layer 3 (Agent Ether): Message provenance (who sent, why)
-- Layer 4 (Morphogen): Computation provenance (inputs → outputs)
-- Layer 5 (Human Interfaces): Provenance visualization
+**Why Optional?** Most Semantic OS operations are software-only. But for some applications (analog computing, edge devices), substrate matters.
+
+### Core Capabilities
+
+**Philbrick (Analog Computing, Planned)**
+
+1. **Hardware-Software Co-Design**
+   - Analog circuits for specific computations
+   - Hybrid analog-digital systems
+   - Energy-efficient specialized hardware
+
+2. **Physical Grounding**
+   - Direct physical measurement (not digitized approximation)
+   - Real-time analog processing
+   - Ultra-low latency
+
+### Status
+
+🟡 **Philbrick is vision-tier** (12-24 month timeline). Not blocking current work.
+
+---
+
+## Cross-Cutting Concerns
+
+### 1. Provenance Everywhere
+
+Provenance (L0) flows through all layers:
+- L1 (Meaning): Provenance of knowledge sources
+- L2 (Trust): Provenance of authorization chains
+- L3 (Intent): Provenance of contracts and specifications
+- L4 (Composition): Provenance of composed results
+- L5 (Execution): Provenance of computations (GenesisGraph integration)
+- L6 (Reflection): Provenance visualization
 
 ### 2. Security and Privacy
 
-Security considerations at each layer:
-- Layer 0: Access control to knowledge graphs
-- Layer 1: Type-level privacy constraints
-- Layer 2: Domain-specific privacy rules (HIPAA, GDPR)
-- Layer 3: Encrypted agent communication
-- Layer 4: Sandboxed execution, no data leakage
-- Layer 5: Authentication, authorization, audit logs
+- L0: Cryptographic attestation
+- L1: Type-safe operations
+- L2: Capability-based security
+- L3: Contract enforcement
+- L4: Cross-domain access control
+- L5: Sandboxed execution
+- L6: Audit logs
 
-### 3. Performance and Scalability
+### 3. Efficiency and Sustainability
 
-Scalability strategies:
-- Layer 0: Distributed graph databases, sharding
-- Layer 1: Efficient compilation to Pantheon IR
-- Layer 2: Domain-specific optimizations
-- Layer 3: Decentralized agent coordination
-- Layer 4: Distributed execution, caching
-- Layer 5: Client-side rendering, edge computing
-
----
-
-## Development Roadmap
-
-### Phase 1: Foundation (Years 1-2)
-
-**Priority: Layers 1, 2, 5**
-- Build Semantic Memory with GenesisGraph provenance
-- Design and implement Pantheon IR
-- Launch Morphogen v1 (basic deterministic execution)
-
-**Deliverables:**
-- Research prototype of Semantic OS kernel
-- Published papers on Pantheon IR and Morphogen
-- Open-source releases
-
-### Phase 2: Domain Modules (Years 2-4)
-
-**Priority: Layer 3**
-- Develop 3-5 flagship domain modules (Water, Healthcare, Education)
-- Prove interoperability via cross-domain queries
-- Deploy pilot systems in real-world contexts
-
-**Deliverables:**
-- Production-ready domain modules
-- Case studies of real-world deployments
-- Cross-domain integration demonstrations
-
-### Phase 3: Multi-Agent Systems (Years 4-6)
-
-**Priority: Layer 4**
-- Design and implement Agent Ether protocols
-- Build human-AI collaboration tools
-- Enable emergent coordination patterns
-
-**Deliverables:**
-- Multi-agent research platform
-- Human-in-the-loop workflows
-- Published research on semantic agent coordination
-
-### Phase 4: Human Interfaces (Years 5-7)
-
-**Priority: Layer 5**
-- Design exceptional user experiences for all modalities
-- Build accessible, explainable interfaces
-- Enable broad adoption beyond specialists
-
-**Deliverables:**
-- Polished CLI, GUI, conversational agents
-- Public-facing Semantic OS distributions
-- Documentation and tutorials for general users
-
-### Phase 5: Ecosystem Maturity (Years 7-10)
-
-**All Layers:**
-- Refine based on real-world usage
-- Support third-party extensions and modules
-- Grow community of contributors and users
-- Establish Semantic OS as foundational infrastructure
+- L0: Content-addressable deduplication
+- L1: Semantic search (vs brute-force)
+- L2: Minimal credential disclosure
+- L3: Declarative contracts (vs imperative coordination)
+- L4: Shared infrastructure
+- L5: Aggressive caching
+- L6: Progressive disclosure (Reveal: 100x reduction)
 
 ---
 
-## Architectural Principles
+## Tools Span Layers (Not "In" Layers)
 
-### 1. Modularity
+**Critical Insight:** Tools are like Unix utilities—they span multiple layers based on function.
 
-Each layer is independently useful:
-- Semantic Memory can be used without Morphogen
-- Morphogen can be used without Agent Ether
-- Domain modules can be developed independently
+| Tool | Layers Touched | Function |
+|------|----------------|----------|
+| **GenesisGraph** | L0 (primary) + all layers | Provenance tracking |
+| **Beth** | L1 (Meaning) + L0 (Provenance of knowledge) | Semantic search |
+| **Reveal** | L6 (Reflection) + L4 (Composition structure) | Progressive disclosure |
+| **TIA** | L3 (Intent) + L5 (Execution) + L6 (Reflection) | Agent orchestration |
+| **Morphogen** | L5 (Execution) + L1 (Domain types) | Deterministic computation |
+| **Agent Ether** | L3 (Intent) + L2 (Trust) | Multi-agent coordination |
 
-### 2. Interoperability
+This explains why historical "where does X go?" debates were intractable—we were asking the wrong question.
 
-Layers communicate via well-defined interfaces:
-- Pantheon IR as universal semantic type system
-- Standard APIs between layers
-- No hidden dependencies
+---
 
-### 3. Openness
+## The Chief Scientist Test (Design Review Checklist)
 
-Entire stack is open source:
-- Permissive licenses (Apache 2.0, MIT)
-- Public development (GitHub)
-- Community governance
+Before approving architectural decisions, ask these six questions:
 
-### 4. Long-Term Thinking
+1. **Provenance:** Does this maintain traceable lineage?
+2. **Transparency:** Is reasoning inspectable?
+3. **Grounding:** Is computation connected to reality?
+4. **Contracts:** Are assumptions explicit?
+5. **Efficiency:** Is this sustainable at scale?
+6. **Agency:** Does this keep humans as conductors?
 
-Built for decades, not quarters:
-- Stable APIs (breaking changes are rare and well-communicated)
-- Backwards compatibility guarantees
-- Designed to outlast any individual researcher or project
+If any answer is "no" or "unclear," revise the architecture.
+
+---
+
+## Agent Ether Implementation Priority
+
+**Current Status:** 0.1.0-alpha (specification only, no implementation)
+
+**Gap Impact:** "Contracts are explicit" invariant cannot be enforced today. Brittle complexity (one of the five structural failures SIL committed to fix) is NOT being prevented architecturally.
+
+**Roadmap:**
+
+### Phase 1: Registry + Metadata (4 weeks)
+- Agent registry database
+- Capability advertisement API
+- Discovery mechanisms
+- Basic metadata schema
+
+**Deliverable:** Agents can register and discover each other
+
+### Phase 2: Contract Validation (4 weeks)
+- Tool Behavior Contract schema (Pantheon IR)
+- Static validation of contracts
+- Type checking
+- Contract composition rules
+
+**Deliverable:** Contracts can be declared and validated
+
+### Phase 3: Runtime Enforcement (8 weeks)
+- Runtime contract checking
+- Precondition/postcondition verification
+- Invariant monitoring
+- Failure handling
+
+**Deliverable:** Contracts enforced during execution
+
+**Total Timeline:** 16 weeks (Q1 2026)
+
+**Priority:** CRITICAL — This is the only invariant without enforcement tooling.
+
+---
+
+## Migration from Previous Models
+
+**Previous Canonical Model:**
+- L0: Substrate (Philbrick hardware)
+- Product-centric ("where do our 12 projects fit?")
+- Scored 3.05 in evaluation
+
+**Current Provenance-First Model:**
+- L0: Provenance (GenesisGraph)
+- Problem-centric ("how do we trust AI?")
+- Scored 4.15 in evaluation
+
+**Why the change?**
+- Provenance is foundational for LLM coexistence
+- Hardware is necessary but not the semantic foundation
+- Founder intuition: "Provenance when I hear Semantic OS"
+- Mission alignment: addresses epistemic collapse directly
+
+**What stayed the same:**
+- Seven primary layers (L0-L6) + optional substrate (L-1)
+- Cross-cutting concerns (provenance, trust, observability)
+- Modular, open, interoperable design
+
+**Migration Guide:** Existing projects map cleanly to new model. Tools that were "in" layers now explicitly "span" layers.
 
 ---
 
@@ -695,40 +638,85 @@ Built for decades, not quarters:
 | Traditional OS | Semantic OS |
 |----------------|-------------|
 | **Processes** | Agents (human + AI) |
-| **Memory** | Semantic Knowledge Graphs |
-| **File System** | Provenance-Tracked Knowledge Repository |
-| **Kernel** | Pantheon IR + Morphogen |
-| **Device Drivers** | Domain-Specific Modules |
-| **System Calls** | Agent Ether Protocols |
-| **Shell/GUI** | Human Interfaces (CLI, GUI, Conversation) |
+| **Memory** | Semantic Knowledge (L1) |
+| **File System** | Provenance Repository (L0) |
+| **Kernel** | Pantheon IR + Morphogen (L4-L5) |
+| **Security** | Trust Layer (L2) + TAP |
+| **Device Drivers** | Domain Modules (via L4) |
+| **System Calls** | Agent Ether Protocols (L3) |
+| **Shell/GUI** | Reflection Tools (L6: Reveal, TIA) |
 
-Just as Linux abstracts hardware and provides common services for applications, Semantic OS abstracts knowledge work and provides common services for civilizational systems.
+Just as Linux abstracts hardware and provides common services for applications, Semantic OS abstracts knowledge work and provides common services for human-AI collaboration.
+
+---
+
+## Architectural Principles
+
+### 1. Provenance-First
+- Every artifact has cryptographic lineage
+- "Where did this come from?" always answerable
+- Trust built on verification, not promises
+
+### 2. Glass Box Over Black Box
+- All reasoning inspectable
+- Progressive disclosure (structure → detail)
+- "Show your work" is mandatory, not optional
+
+### 3. Mission Over Product
+- Architecture serves "prevent the worst day"
+- Invariants enforce mission alignment
+- Layers organize, invariants decide
+
+### 4. Modular and Open
+- Each layer independently useful
+- Well-defined interfaces
+- Open source (Apache 2.0, MIT)
+
+### 5. Long-Term Thinking
+- Built for decades, not quarters
+- Stable APIs
+- Backwards compatibility guarantees
 
 ---
 
 ## Conclusion
 
-The Semantic OS is **infrastructure for the age of AI and civilizational-scale challenges**. The 7-layer architecture provides:
+The Semantic OS is **infrastructure for human-AI coexistence**. The Provenance-First architecture provides:
 
-- **L0 Substrate** — Hardware foundation (Philbrick) enabling software/hardware co-design
-- **L1 Primitives** — 40+ unified computational domains (Morphogen)
-- **L2 Structures** — Data structures with spatial reasoning (TiaCAD) and provenance (GenesisGraph)
-- **L3 Composition** — Cross-domain semantic integration (Pantheon IR, SUP)
-- **L4 Dynamics** — Deterministic temporal execution (Morphogen scheduler)
-- **L5 Intent** — Validation, constraints, and feedback loops
-- **L6 Intelligence** — Multi-agent coordination (Agent Ether, BrowserBridge)
+**Seven Layers:**
+- **L0 Provenance** — Cryptographic lineage for every artifact (GenesisGraph)
+- **L1 Meaning** — Semantic understanding and types (Beth, Pantheon IR)
+- **L2 Trust** — Explicit authorization (TAP)
+- **L3 Intent** — Contracts and specifications (Agent Ether - gap)
+- **L4 Composition** — Cross-domain integration (Pantheon IR)
+- **L5 Execution** — Deterministic computation (Morphogen)
+- **L6 Reflection** — Learning from execution (Reveal)
+- **L-1 Substrate** — Physical foundation (Philbrick - optional)
 
-Plus cross-cutting concerns: **Observability** (Reveal), **Provenance** (GenesisGraph), **Trust** (TAP).
+**Five Invariants:**
+- Everything has lineage (prevents epistemic collapse)
+- Reasoning is inspectable (prevents black box dictatorship)
+- Computation is grounded (prevents hallucinated science)
+- Contracts are explicit (prevents brittle complexity)
+- Efficiency is sustainable (prevents compute as privilege)
 
-Together, these seven layers form a **unified platform for building civilizational infrastructure**.
+**Current Status:**
+- 67% invariant enforcement (3.5/5 production-ready)
+- Known gap: Agent Ether (spec only, 16-week roadmap)
+- Production tools: GenesisGraph, Reveal, Beth
+- Prototype: Morphogen (aggressive v1.0 timeline Q2 2026)
 
-This is the technical core of SIL's mission.
+This is the technical core of SIL's mission: **building Timeline B (Glass Box future) instead of defaulting to Timeline A (Grey Fog)**.
 
 ---
 
 **Related Documents:**
-- [SIL Glossary](/foundations/SIL_GLOSSARY) — Canonical layer definitions (L0-L6)
-- [SIL Principles](/foundations/design-principles) — The 14 guiding principles
-- [Semantic Feedback Loops](/foundations/SEMANTIC_FEEDBACK_LOOPS) — Closed-loop control theory
-- [Semantic Observability](/foundations/SEMANTIC_OBSERVABILITY) — Intent-execution alignment
-- [Unified Architecture Guide](/architecture/UNIFIED_ARCHITECTURE_GUIDE) — The universal pattern
+- [SIL Glossary](/foundations/SIL_GLOSSARY) — Canonical terminology
+- [Architecture Decision Record](/architecture/decisions/ARCHITECTURE_DECISION) — Why Provenance-First
+- [The Fork: Two Futures for AI](/foundation/pitch/THE_FORK) — Five structural failures to fix
+- [Scope of Hope](/foundation/SCOPE_OF_HOPE) — Five pillars of semantic infrastructure
+- [Invariants Over Layers](/architecture/models/INVARIANTS_OVER_LAYERS) — Mission-centric frame
+- [Model Evaluation](/architecture/models/MODEL_EVALUATION) — Scoring rationale (4.15)
+
+**Last Updated:** 2025-12-20
+**Architecture Version:** 3.0 (Provenance-First)

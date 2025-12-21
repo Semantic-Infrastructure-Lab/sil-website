@@ -287,16 +287,18 @@ Reveal isn't working alone. It's **one component in a semantic stack** we're bui
 
 We're building an operating system for semantic computing. Think of it like the OSI network stack, but for meaning instead of packets:
 
-**Layer 0: Hardware/Substrate** - Physical compute and storage
-**Layer 1-2: Semantics** - Names, types, relationships (AST, type systems)
-**Layer 3: Composition** - Structure, geometry, how things fit together
+**Layer 0: Provenance** - Everything has lineage (cryptographic provenance)
+**Layer 1: Primitives** - Names, types, relationships (AST, type systems)
+**Layer 2: Structures** - Data structures, geometry, how things are built
+**Layer 3: Composition** - How components fit together (cross-domain)
 **Layer 4: Dynamics** - Time, simulation, execution flow
 **Layer 5: Intent** - User goals, constraints, what you want
 **Layer 6: Intelligence** - Agents, reasoning, decision-making
+**Layer -1: Substrate** - Physical compute and storage (optional)
 
 **Reveal operates across Layers 1-3:**
-- **Layer 1:** Names (functions, classes, imports)
-- **Layer 2:** Types and relationships (function calls, inheritance)
+- **Layer 1:** Primitives (functions, classes, imports)
+- **Layer 2:** Structures (types and relationships, function calls, inheritance)
 - **Layer 3:** Composition (file structure, module organization)
 
 It extracts semantic meaning from code **without executing it**. That's the key insight.

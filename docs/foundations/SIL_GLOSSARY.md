@@ -7,13 +7,15 @@ beth_topics:
   - terminology
   - definitions
   - reference
+architecture_decision: Provenance-First model adopted (Dec 20, 2025)
 ---
 
-# **SIL Glossary (v2.2)**
+# **SIL Glossary (v2.3)**
 
 **Canonical definitions for the Semantic Operating System and its components.**
 
-**Last Updated**: 2025-12-12
+**Last Updated**: 2025-12-20
+**Architecture Model**: Provenance-First with Invariants Over Layers
 **Terms**: 119 (includes 8 Governance OS Primitives from infinite-quicksilver-1212)
 
 ---
@@ -190,7 +192,7 @@ Domain-specific input format or authoring environment in Pantheon's compilation 
 
 ### **GenesisGraph**
 
-Cryptographically verifiable provenance system with selective disclosure (A/B/C levels). Solves "certification vs IP protection" dilemma through Merkle trees, hash chains, and SD-JWT (Layer 2: Structures, Layer 3: Composition).
+Cryptographically verifiable provenance system with selective disclosure (A/B/C levels). Solves "certification vs IP protection" dilemma through Merkle trees, hash chains, and SD-JWT. Primary implementation of Layer 0 (Provenance), with structures at Layer 2 and composition at Layer 3.
 
 ### **Graph (USIR)**
 
@@ -244,9 +246,13 @@ Long-running task execution mode in TBC where tools provide progress tracking, s
 
 ## L
 
-### **Layer 0: Substrate**
+### **Layer -1: Substrate**
 
-Hardware foundation layer in the 7-layer Semantic OS. Home to Philbrick (analog/digital hybrid computing platform) and RiffStack (live performance interface).
+Physical and computational reality layer (optional). Home to Philbrick (analog/digital hybrid computing platform) and RiffStack (live performance interface). Sits below L0 to emphasize provenance as the foundation.
+
+### **Layer 0: Provenance**
+
+Foundation layer ensuring everything has lineage. Implemented by GenesisGraph with cryptographic verification, selective disclosure (A/B/C levels), and tamper-evident hash chains. The bedrock upon which all semantic operations build.
 
 ### **Layer 1: Primitives**
 
@@ -608,3 +614,4 @@ A versioned, structured operator graph with explicit dependencies, execution sem
 - v2.0 (2025-12-07): Expanded to 108 terms, added projects, architecture, TBC, Pantheon, observability, agency framework
 - v2.1 (2025-12-08): Added Trust Assertion Protocol (TAP) terms: TAP, Trust Assertion, Trust Claim Types, Semantic Passport
 - v2.2 (2025-12-12): Added Governance OS Primitives: Authorization, AuthorizationGrant, BindingAct, DelegationGrant, DeterminismProfile (enhanced), EpistemicType, ExecutionBudget, IntentContract
+- v2.3 (2025-12-20): Updated to Provenance-First architecture model: L0=Provenance (GenesisGraph), L-1=Substrate (optional, Philbrick)

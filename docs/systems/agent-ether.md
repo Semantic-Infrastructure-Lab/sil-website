@@ -289,13 +289,14 @@ cd agent-ether
   - Agents observe browser state, invoke browser tools
   - Same TBC interface for browser automation as any other tool
 
-- **All Layers (0-5):** Universal tool interface
-  - Layer 0 (Substrate): Hardware control tools (Philbrick modules)
+- **All Layers (L-1 through L6):** Universal tool interface
+  - Layer 0 (Provenance): Lineage tracking tools (GenesisGraph operations)
   - Layer 1 (Primitives): Domain operation tools (Morphogen operators)
-  - Layer 2 (Structures): Data structure manipulation tools (TiaCAD geometry)
+  - Layer 2 (Structures): Data structure manipulation tools (TiaCAD geometry, GenesisGraph structures)
   - Layer 3 (Composition): Graph operation tools (Pantheon transformations)
   - Layer 4 (Dynamics): Temporal execution tools (schedulers, timers)
   - Layer 5 (Intent): Constraint solving tools (validators, optimizers)
+  - Layer -1 (Substrate): Hardware control tools (Philbrick modules - optional)
 
 **Architectural Principle:** *Intelligence Scales with Coordination, Not Opacity*
 
