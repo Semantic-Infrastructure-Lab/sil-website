@@ -419,6 +419,16 @@ def create_routes(
     # Architecture Section
     # =========================================================================
 
+    @router.get("/architecture", response_class=HTMLResponse)
+    async def architecture_index(request: Request) -> Response:
+        """Architecture - System design and technical architecture."""
+        return render_markdown_page(
+            request,
+            Path("docs/architecture/README.md"),
+            "Architecture - Semantic Infrastructure Lab",
+            "/architecture",
+        )
+
     @router.get("/architecture/{name}", response_class=HTMLResponse)
     async def architecture_doc(request: Request, name: str) -> Response:
         """Individual architecture document."""
@@ -456,6 +466,16 @@ def create_routes(
     # =========================================================================
     # Projects Section
     # =========================================================================
+
+    @router.get("/projects", response_class=HTMLResponse)
+    async def projects_index(request: Request) -> Response:
+        """Projects - SIL project catalog and documentation."""
+        return render_markdown_page(
+            request,
+            Path("docs/projects/README.md"),
+            "Projects - Semantic Infrastructure Lab",
+            "/projects",
+        )
 
     @router.get("/projects/{name}", response_class=HTMLResponse)
     async def project_doc(request: Request, name: str) -> Response:
