@@ -193,7 +193,7 @@ pytest tests/test_domain.py
 ```
 
 **What this does:**
-1. Builds container image with SIF content baked in
+1. Builds container image with SIL content baked in
 2. Pushes to `registry.mytia.net`
 3. Deploys to target server (tia-staging or tia-apps)
 4. Runs health checks
@@ -201,12 +201,13 @@ pytest tests/test_domain.py
 
 ### Infrastructure
 
-| Environment | Server | URL |
-|-------------|--------|-----|
-| **Staging** | tia-staging | https://sif-staging.mytia.net |
-| **Production** | tia-apps | https://semanticinfrastructurefoundation.org |
+| Environment | Server | Port | URL |
+|-------------|--------|------|-----|
+| **Staging** | tia-staging | 8080 | https://sil-staging.mytia.net |
+| **Production** | tia-apps | 8010 | https://semanticinfrastructurelab.org |
 
-**Container Registry:** `registry.mytia.net/sif-website`
+**Container Registry:** `registry.mytia.net/sil-website`
+**Technology:** FastAPI + Jinja2 (containerized)
 
 ### Full Documentation
 
