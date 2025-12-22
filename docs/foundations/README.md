@@ -6,7 +6,7 @@
 
 ## Core Documents
 
-### [Founder's Letter](/foundations/FOUNDERS_LETTER)
+### [Founder's Letter](/foundations/founders-letter)
 The foundational "steel infrastructure" metaphor. Why SIL exists and what we're building.
 
 *5 minute read*
@@ -41,7 +41,7 @@ The foundational "steel infrastructure" metaphor. Why SIL exists and what we're 
 
 ## Architecture
 
-### [Semantic OS Architecture](/foundations/SIL_SEMANTIC_OS_ARCHITECTURE)
+### [Semantic OS Architecture](/foundations/semantic-os-architecture)
 Complete 7-layer Semantic Operating System specification:
 
 - Layer 0: Semantic Memory
@@ -56,14 +56,14 @@ Complete 7-layer Semantic Operating System specification:
 
 ---
 
-### [Technical Charter](/foundations/SIL_TECHNICAL_CHARTER)
+### [Technical Charter](/foundations/technical-charter)
 Governance, contribution guidelines, and technical decision-making process.
 
 ---
 
 ## Reference
 
-### [Glossary](/foundations/SIL_GLOSSARY)
+### [Glossary](/foundations/glossary)
 Canonical definitions for 100+ SIL terms and concepts.
 
 ---

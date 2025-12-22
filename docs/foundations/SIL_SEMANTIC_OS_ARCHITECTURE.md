@@ -17,7 +17,7 @@ architecture_decision: Provenance-First model adopted (Dec 15, 2025)
 
 **Version:** 3.0 (December 2025)
 **Architecture Model:** Provenance-First with Invariants Over Layers
-**Canonical Reference:** [SIL_GLOSSARY.md](/foundations/SIL_GLOSSARY)
+**Canonical Reference:** [SIL_GLOSSARY.md](/foundations/glossary)
 
 ---
 
@@ -711,12 +711,12 @@ This is the technical core of SIL's mission: **building Timeline B (Glass Box fu
 ---
 
 **Related Documents:**
-- [SIL Glossary](/foundations/SIL_GLOSSARY) — Canonical terminology
+- [SIL Glossary](/foundations/glossary) — Canonical terminology
 - [Architecture Decision Record](/architecture/decisions/ARCHITECTURE_DECISION) — Why Provenance-First
 - [The Fork: Two Futures for AI](/foundation/pitch/THE_FORK) — Five structural failures to fix
 - [Scope of Hope](/foundation/SCOPE_OF_HOPE) — Five pillars of semantic infrastructure
-- [Invariants Over Layers](/architecture/models/INVARIANTS_OVER_LAYERS) — Mission-centric frame
-- [Model Evaluation](/architecture/models/MODEL_EVALUATION) — Scoring rationale (4.15)
+- [Invariants Over Layers](/architecture/invariants-over-layers) — Mission-centric frame
+- [Model Evaluation](/architecture/model-evaluation) — Scoring rationale (4.15)
 
 **Last Updated:** 2025-12-20
 **Architecture Version:** 3.0 (Provenance-First)

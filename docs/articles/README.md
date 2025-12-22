@@ -99,9 +99,9 @@ session_provenance: "[session-id if created in session]"
 
 ## Related Directories
 
-- [Foundations](/foundations/) - Foundational principles and frameworks
-- [Systems](/systems/) - Practical usage guides for SIL systems
-- [Research](/research/) - Academic-style research papers
+- [Foundations](/foundations/overview) - Foundational principles and frameworks
+- [Systems](/systems/overview) - Practical usage guides for SIL systems
+- [Research](/research/overview) - Academic-style research papers
 
 ---
 

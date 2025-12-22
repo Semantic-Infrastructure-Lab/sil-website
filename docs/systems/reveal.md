@@ -174,7 +174,7 @@ See [Reveal Roadmap](https://github.com/semantic-infrastructure-lab/reveal/blob/
 
 ## Agent-Help Implementation (v0.16.0+, Enhanced v0.17.0)
 
-Reveal validates SIL's proposed [agent-help standard](/research/AGENT_HELP_STANDARD) with a production three-tier implementation:
+Reveal validates SIL's proposed [agent-help standard](/research/agent-help-standard) with a production three-tier implementation:
 
 ```bash
 reveal --agent-help          # Quick strategic guide (~1,500 tokens)
@@ -220,7 +220,7 @@ After 3 months in production (v0.16.0 released Nov 2025, v0.17.0 Dec 2025):
 
 **Conclusion:** The agent-help standard works. The three-tier progressive model is recommended for complex evolving CLI tools.
 
-**See the full standard:** [AGENT_HELP_STANDARD.md](/research/AGENT_HELP_STANDARD)
+**See the full standard:** [AGENT_HELP_STANDARD.md](/research/agent-help-standard)
 
 ---
 
@@ -326,7 +326,7 @@ reveal .                  # Explore current directory
 - [**tiacad**](https://github.com/semantic-infrastructure-lab/tiacad) - Declarative parametric CAD in YAML
 - [**genesisgraph**](https://github.com/semantic-infrastructure-lab/genesisgraph) - Verifiable process provenance
 
-See the complete [Project Index](/projects/PROJECT_INDEX) for all 12 SIL projects.
+See the complete [Project Index](/projects/project-index) for all 12 SIL projects.
 
 ---
 

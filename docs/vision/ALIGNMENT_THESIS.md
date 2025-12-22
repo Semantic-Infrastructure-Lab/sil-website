@@ -336,9 +336,9 @@ SIL's thesis is that we can build a **glass-box alternative to black-box AGI**:
 
 ## Related Documentation
 
-- **[Trust Assertion Protocol](/research/standards/TRUST_ASSERTION_PROTOCOL)** — How trust is expressed
-- **[SIL Manifesto](/manifesto/YOLO)** — Overall vision
-- **[Semantic OS Architecture](/foundations/SIL_SEMANTIC_OS_ARCHITECTURE)** — The 6-layer stack
+- **[Trust Assertion Protocol](/research/trust-assertion-protocol)** — How trust is expressed
+- **[SIL Manifesto](/manifesto/yolo)** — Overall vision
+- **[Semantic OS Architecture](/foundations/semantic-os-architecture)** — The 6-layer stack
 
 ---
 

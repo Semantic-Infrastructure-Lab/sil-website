@@ -76,7 +76,7 @@ Parametric CAD in YAML. Semantic constraints, not just geometry. Proof that sema
 - **[RAG as Semantic Manifold Transport](/research/rag-as-semantic-manifold-transport)** — Rethinking retrieval as geometric transport
 - **[Agent Help Standard](/research/agent-help-standard)** — Strategic guidance for AI agents using CLI tools
 
-[View all 12 research papers →](/research)
+[View all 12 research papers →](/research/overview)
 
 ## The Lab
 
@@ -94,8 +94,8 @@ SIL is the research division of the [Semantic Infrastructure Foundation](https:/
 ## Get Involved
 
 - **Use the tools:** `pip install reveal-cli` and try progressive disclosure
-- **Read the research:** [Essays](/essays) and [Research Papers](/research)
-- **Explore the architecture:** [Foundations](/foundations)
+- **Read the research:** [Essays](/essays) and [Research Papers](/research/overview)
+- **Explore the architecture:** [Foundations](/foundations/overview)
 - **Support the mission:** [Semantic Infrastructure Foundation](https://semanticinfrastructurefoundation.org)
 - **Collaborate:** [Contact us](/contact) or visit [GitHub](https://github.com/Semantic-Infrastructure-Lab)
 

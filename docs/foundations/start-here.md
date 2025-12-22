@@ -142,7 +142,7 @@ SIL builds infrastructure meant to last decades, not chase quarterly trends.
 **[Semantic OS Architecture](/canonical/semantic-os-architecture)** — 7-layer architecture from memory to interfaces
 
 ### For the Tools
-**[Reveal](/tools/reveal)** — Code structure navigation
+**[Reveal](/systems/reveal)** — Code structure navigation
 **[Agent Help Standard](/research/agent-help-standard)** — Strategic guidance for agents
 **[GenesisGraph](https://github.com/Semantic-Infrastructure-Lab/genesisgraph)** — Verifiable provenance
 **[Morphogen](/innovations/morphogen)** — Unified computational substrate

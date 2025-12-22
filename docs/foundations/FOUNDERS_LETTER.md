@@ -30,7 +30,7 @@ That's why I founded the Semantic Infrastructure Lab.
 
 AI requires more than models. It requires **semantic infrastructure**—a substrate where representations are explicit, transformations are traceable, and reasoning paths can be inspected, challenged, and composed with human judgment. Without that substrate, progress becomes a sequence of clever heuristics. With it, we have the basis for transparent machine cognition.
 
-This is the work of SIL: designing the **[Semantic Operating System](/foundations/SIL_SEMANTIC_OS_ARCHITECTURE)**—a structured stack of meaning, memory, reasoning, and human–agent collaboration built on interpretable foundations. It includes persistent semantic memory, unified intermediate representations, deterministic engines, multi-agent orchestration, and interfaces where every cognitive layer remains visible.
+This is the work of SIL: designing the **[Semantic Operating System](/foundations/semantic-os-architecture)**—a structured stack of meaning, memory, reasoning, and human–agent collaboration built on interpretable foundations. It includes persistent semantic memory, unified intermediate representations, deterministic engines, multi-agent orchestration, and interfaces where every cognitive layer remains visible.
 
 My role in this lab is architectural. I define the conceptual boundaries, structural aesthetics, and semantic constraints that shape how the system functions as a whole. Infrastructure is only meaningful when it helps others think clearly and build safely.
 
@@ -55,20 +55,20 @@ Build structures that last.**
 ## Related Reading
 
 **If you want to understand the architecture:**
-- [Semantic OS Architecture](/foundations/SIL_SEMANTIC_OS_ARCHITECTURE) - The 6-layer stack explained
-- [Unified Architecture Guide](/architecture/UNIFIED_ARCHITECTURE_GUIDE) - The Rosetta Stone for all SIL projects
+- [Semantic OS Architecture](/foundations/semantic-os-architecture) - The 6-layer stack explained
+- [Unified Architecture Guide](/architecture/unified-architecture-guide) - The Rosetta Stone for all SIL projects
 
 **If you want to see working systems:**
-- [Project Index](/projects/PROJECT_INDEX) - All 12 projects with status
+- [Project Index](/projects/project-index) - All 12 projects with status
 - [Tools Documentation](/systems/README) - Production systems you can use today
 
 **If you want deeper philosophy:**
-- [Manifesto](/manifesto/YOLO) - Core vision and principles
+- [Manifesto](/manifesto/yolo) - Core vision and principles
 - [Design Principles](/foundations/design-principles) - The 14 constraints that guide all work
 
 **If you want to get started:**
-- [Start Here](/START_HERE) - 30-minute guided tour with hands-on example
-- [FAQ](/meta/FAQ) - Common questions answered
+- [Start Here](/foundations/start-here) - 30-minute guided tour with hands-on example
+- [FAQ](/meta/faq) - Common questions answered
 
 ---
 

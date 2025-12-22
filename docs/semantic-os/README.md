@@ -17,8 +17,8 @@ The Semantic OS is currently documented in multiple locations:
 
 ### Core Architecture
 - [Semantic OS Architecture (Manifesto)](/foundations/semantic-os-architecture) - Vision and philosophical foundation
-- [Semantic OS Reference](/foundations/SIL_SEMANTIC_OS_ARCHITECTURE) - Technical reference (v2.0)
-- [Technical Charter](/foundations/SIL_TECHNICAL_CHARTER) - Formal specification
+- [Semantic OS Reference](/foundations/semantic-os-architecture) - Technical reference (v2.0)
+- [Technical Charter](/foundations/technical-charter) - Formal specification
 
 ### Layer-Specific Documentation
 - **Layer 0 (Semantic Memory)** - See Technical Charter §5
@@ -30,9 +30,9 @@ The Semantic OS is currently documented in multiple locations:
 - **Layer 6 (Intelligence)** - [Agent Ether](/systems/agent-ether)
 
 ### Related Research
-- [RAG as Semantic Manifold Transport](/research/RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT)
-- [Hierarchical Agency Framework](/research/agent-infrastructure/HIERARCHICAL_AGENCY_FRAMEWORK)
-- [Progressive Disclosure Guide](/research/information-architecture/PROGRESSIVE_DISCLOSURE_GUIDE)
+- [RAG as Semantic Manifold Transport](/research/rag-manifold-transport)
+- [Hierarchical Agency Framework](/research/hierarchical-agency-framework)
+- [Progressive Disclosure Guide](/research/progressive-disclosure-guide)
 
 ## Planned Content
 

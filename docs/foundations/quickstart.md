@@ -15,7 +15,7 @@ beth_topics:
 > **Navigation:** This is the hands-on path.
 > - **You are here:** Install tools, try them immediately
 > - [Start Here](/foundations/start-here) — Prefer concepts first? Start there
-> - [Reading Guide](READING_GUIDE) — 7 paths for different audiences
+> - [Reading Guide](../READING_GUIDE) — 7 paths for different audiences
 
 ---
 
@@ -88,14 +88,14 @@ Now that you've experienced progressive disclosure, understand the principles:
 ### The Hands-On Path
 
 1. **[Reveal Documentation](/systems/reveal)** — Learn all reveal features
-2. **[Agent Help Standard](research/AGENT_HELP_STANDARD)** — How to make tools agent-friendly
+2. **[Agent Help Standard](/research/agent-help-standard)** — How to make tools agent-friendly
 3. **[Progressive Disclosure Guide](/foundations/progressive-disclosure-guide)** — The theory behind what you just experienced
 
 ### The Technical Deep-Dive Path
 
 1. **[Semantic OS Architecture](/foundations/semantic-os-architecture)** (30 min) — The 7-layer architecture
 2. **[Technical Charter](/foundations/technical-charter)** (45 min) — Formal invariants and guarantees
-3. **[Unified Architecture Guide](architecture/UNIFIED_ARCHITECTURE_GUIDE)** (60 min) — How all 12 projects fit together
+3. **[Unified Architecture Guide](/architecture/unified-architecture-guide)** (60 min) — How all 12 projects fit together
 
 ---
 
@@ -104,7 +104,7 @@ Now that you've experienced progressive disclosure, understand the principles:
 - **Email:** scott@semanticinfrastructurelab.org
 - **GitHub:** [github.com/semantic-infrastructure-lab](https://github.com/semantic-infrastructure-lab)
 - **Website:** [semanticinfrastructurelab.org](https://semanticinfrastructurelab.org)
-- **Documentation:** Complete documentation in [docs/](.)
+- **Documentation:** Complete documentation in [docs/](/overview)
 
 ---
 
@@ -113,8 +113,8 @@ Now that you've experienced progressive disclosure, understand the principles:
 Choose your path based on your interest:
 
 - **Researchers:** [Research Agenda Year 1](/foundations/research-agenda-year-1)
-- **Developers:** [Project Index](../projects/PROJECT_INDEX) — See all 12 projects
-- **Collaborators:** [FAQ](meta/FAQ) — Common questions answered
+- **Developers:** [Project Index](../projects/project-index) — See all 12 projects
+- **Collaborators:** [FAQ](/meta/faq) — Common questions answered
 - **Founders/Stewards:** [Stewardship Manifesto](/foundations/stewardship-manifesto)
 
 ---

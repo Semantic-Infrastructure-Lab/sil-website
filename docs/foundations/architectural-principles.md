@@ -27,7 +27,7 @@ They apply to every layer, every domain, every operator, and every contribution.
 
 These 14 principles govern the **research infrastructure and Semantic OS architecture**. They are foundational constraints for the entire system that apply to every layer, every domain, every operator, and every contribution.
 
-**Related Document:** For practical design patterns and implementation guidance, see [SIL Design Principles](SIL_DESIGN_PRINCIPLES) which covers 9 applied principles for building SIL-aligned tools and systems.
+**Related Document:** For practical design patterns and implementation guidance, see [SIL Design Principles](/foundations/design-principles) which covers 9 applied principles for building SIL-aligned tools and systems.
 
 ---
 
@@ -65,7 +65,7 @@ No domain is allowed to form an isolated island.
 
 ### **7. Operators Are the Only Way to Change State**
 
-All mutations of semantic objects, [USIR](/foundations/SIL_GLOSSARY) graphs, and workflows must occur through declared operators.
+All mutations of semantic objects, [USIR](/foundations/glossary) graphs, and workflows must occur through declared operators.
 No direct writes, no bypasses, no implicit edits.
 
 ### **8. Version Everything**

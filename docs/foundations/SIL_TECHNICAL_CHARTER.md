@@ -23,18 +23,18 @@ SIL Technical Charter (v1)
 - ✅ You need to know exactly what's required vs optional
 
 **Read these FIRST:**
-- **`/architecture/UNIFIED_ARCHITECTURE_GUIDE.md`** ⭐ (30 min) - Get the mental model
-- **`/foundations/SIL_GLOSSARY.md`** (15 min) - Learn the vocabulary (keep open while reading)
+- **`/architecture/unified-architecture-guide.md`** ⭐ (30 min) - Get the mental model
+- **`/foundations/glossary.md`** (15 min) - Learn the vocabulary (keep open while reading)
 - **`/foundations/design-principles.md`** (15 min) - Understand evaluation criteria
 
 **Read these AFTER for deeper context:**
-- **`/manifesto/YOLO.md`** - Why these contracts matter
+- **`/manifesto/yolo.md`** - Why these contracts matter
 
 **Related Documents:**
-- **Glossary:** `/foundations/SIL_GLOSSARY.md` - Look up terms while reading
+- **Glossary:** `/foundations/glossary.md` - Look up terms while reading
 - **Principles:** `/foundations/design-principles.md` - Why these constraints exist
-- **Pattern:** `/architecture/UNIFIED_ARCHITECTURE_GUIDE.md` - High-level framework
-- **Navigation:** [Start Here](START_HERE) - Entry point to SIL
+- **Pattern:** `/architecture/unified-architecture-guide.md` - High-level framework
+- **Navigation:** [Start Here](/foundations/start-here) - Entry point to SIL
 
 **Time Required:** 2-4 hours (reference document, can read sections as needed)
 

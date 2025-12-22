@@ -10,7 +10,7 @@ beth_topics:
 
 # Manifesto
 
-## [YOLO](/manifesto/YOLO)
+## [YOLO](/manifesto/yolo)
 
 **You Only Learn Once: On the Compression of Experience**
 
@@ -39,8 +39,8 @@ YOLO is SIL's manifesto—a demonstration of the compression thesis in both form
 - Media and cultural contexts
 
 **Alternative entry points:**
-- **Technical audience?** Start with [Founder's Letter](/foundations/FOUNDERS_LETTER)
-- **Want architecture?** See [Semantic OS Architecture](/foundations/SIL_SEMANTIC_OS_ARCHITECTURE)
+- **Technical audience?** Start with [Founder's Letter](/foundations/founders-letter)
+- **Want architecture?** See [Semantic OS Architecture](/foundations/semantic-os-architecture)
 - **Institutional funder?** Use The Fork (session document, ask for access)
 
 ### Reading Time
