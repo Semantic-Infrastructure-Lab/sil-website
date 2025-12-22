@@ -1,3 +1,13 @@
+---
+tier: 1
+order: 3
+beth_topics:
+  - quickstart
+  - getting-started
+  - reveal
+  - hands-on
+---
+
 # SIL Quickstart
 
 **Get hands-on with Semantic Infrastructure Lab tools in 10 minutes**

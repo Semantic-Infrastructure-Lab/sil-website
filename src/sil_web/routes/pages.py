@@ -530,8 +530,11 @@ def create_routes(
         """Redirect /canonical/{name} to appropriate new location."""
         from fastapi.responses import RedirectResponse
         # Map common canonical docs to new structure
-        if name in ["manifesto", "yolo"]:
-            return RedirectResponse(url=f"/manifesto/{name}", status_code=301)
+        if name == "manifesto":
+            # Redirect to manifesto index page
+            return RedirectResponse(url="/manifesto", status_code=301)
+        elif name == "yolo":
+            return RedirectResponse(url="/manifesto/yolo", status_code=301)
         else:
             return RedirectResponse(url=f"/foundations/{name}", status_code=301)
 

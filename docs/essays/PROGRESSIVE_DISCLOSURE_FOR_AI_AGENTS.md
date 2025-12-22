@@ -6,6 +6,8 @@ date: 2025-12-14
 type: essay
 status: published
 publication: semanticinfrastructurelab.org
+tier: 1
+order: 1
 beth_topics:
   - reveal
   - reveal-v0.23
