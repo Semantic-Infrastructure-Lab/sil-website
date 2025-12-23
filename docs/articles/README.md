@@ -4,7 +4,7 @@
 
 **Audience:** Developers, AI practitioners, tool users, people discovering SIL through specific projects
 
-**Last updated:** 2025-12-10
+**Last updated:** 2025-12-23
 
 ---
 
@@ -139,4 +139,4 @@ session_provenance: "[session-id if created in session]"
 
 ---
 
-**Status:** ✅ Directory created, first article published (2025-12-10)
+**Status:** ✅ 2 articles published (reveal-introduction, progressive-disclosure-agents)
