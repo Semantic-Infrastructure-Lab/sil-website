@@ -43,6 +43,33 @@ Developers and AI agents waste time reading entire files when they only need to 
 
 **Reveal** provides three levels of detail - start broad, drill down as needed:
 
+```mermaid
+graph TB
+    START["Developer/Agent needs code info"]
+
+    L1["Level 1: Directory Structure<br/>reveal src/<br/><br/>📊 50 tokens<br/>See what exists"]
+    L2["Level 2: File Structure<br/>reveal app.py<br/><br/>📊 50-100 tokens<br/>See what's inside"]
+    L3["Level 3: Element Extraction<br/>reveal app.py func_name<br/><br/>📊 20-50 tokens<br/>Get specific code"]
+
+    TRAD["Traditional Approach<br/>Read entire file<br/><br/>📊 500+ tokens"]
+
+    START -->|"Progressive Disclosure"| L1
+    L1 -->|"Need detail?"| L2
+    L2 -->|"Need code?"| L3
+
+    START -.->|"Old Way"| TRAD
+
+    L3 -->|"Total: 70-150 tokens"| SAVE["86% Token Reduction<br/>$47K saved per 1000 agents/year"]
+    TRAD -.->|"500 tokens per operation"| WASTE["High cost, poor efficiency"]
+
+    style L1 fill:#e8f5e9,stroke:#2e7d32
+    style L2 fill:#e8f5e9,stroke:#2e7d32
+    style L3 fill:#e8f5e9,stroke:#2e7d32
+    style SAVE fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
+    style TRAD fill:#ffebee,stroke:#c62828
+    style WASTE fill:#ffebee,stroke:#c62828
+```
+
 ### 1. Directory Structure
 ```bash
 $ reveal src/

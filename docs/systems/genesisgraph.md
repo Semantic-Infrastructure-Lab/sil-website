@@ -28,6 +28,38 @@ Industries face an impossible choice:
 
 GenesisGraph enables cryptographically verifiable provenance where you choose exactly what to reveal:
 
+```mermaid
+graph TB
+    subgraph LevelA["Level A: Full Disclosure"]
+        A1["Show Everything<br/>• Full pipeline<br/>• All parameters<br/>• Intermediate results"]
+        A2["Use Case:<br/>Open Science"]
+    end
+
+    subgraph LevelB["Level B: Partial Envelope"]
+        B1["Show Constraints<br/>• Parameter ranges proven<br/>• Values hashed<br/>• Policies verified"]
+        B2["Use Case:<br/>Regulated Industries"]
+    end
+
+    subgraph LevelC["Level C: Sealed Subgraph"]
+        C1["Show Inputs/Outputs Only<br/>• Pipeline sealed<br/>• Merkle root commitment<br/>• Policy claims only"]
+        C2["Use Case:<br/>Trade Secret Protection"]
+    end
+
+    PROB["The Problem:<br/>Certification vs IP Protection"]
+    SOL["The Solution:<br/>Verification Without Revelation"]
+
+    PROB --> SOL
+    SOL --> LevelA
+    SOL --> LevelB
+    SOL --> LevelC
+
+    style LevelA fill:#e8f5e9,stroke:#2e7d32
+    style LevelB fill:#fff3e0,stroke:#f57c00
+    style LevelC fill:#e3f2fd,stroke:#1565c0
+    style PROB fill:#ffebee,stroke:#c62828
+    style SOL fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+```
+
 ### Level A: Full Disclosure (Open Science)
 **Use when:** Open source projects, public research, transparency required
 ```yaml

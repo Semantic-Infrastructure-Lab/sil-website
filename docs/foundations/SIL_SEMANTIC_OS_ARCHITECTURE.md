@@ -48,6 +48,28 @@ L-1: Substrate       Physical/computational reality (Philbrick, optional)
 - **Deterministic execution** — Reproducible workflows (Morphogen)
 - **Sustainable efficiency** — 100x token reduction proven
 
+```mermaid
+graph TB
+    subgraph Stack["Semantic OS: Provenance-First Architecture"]
+        L6["L6: Reflection<br/>Learning from execution"]
+        L5["L5: Execution<br/>Agents under constraints"]
+        L4["L4: Composition<br/>Cross-domain integration (Pantheon)"]
+        L3["L3: Intent<br/>What we're accomplishing (contracts)"]
+        L2["L2: Trust<br/>Who can do what (TAP, Authorization)"]
+        L1["L1: Meaning<br/>Embeddings, types, similarity (Beth)"]
+        L0["L0: Provenance<br/>Everything has lineage (GenesisGraph)"]
+        L_1["L-1: Substrate<br/>Physical/computational reality (Philbrick)"]
+    end
+
+    L6 --> L5 --> L4 --> L3 --> L2 --> L1 --> L0 --> L_1
+
+    INV["The Five Invariants:<br/>1. Everything has lineage<br/>2. Reasoning is inspectable<br/>3. Computation is grounded<br/>4. Contracts are explicit<br/>5. Efficiency is sustainable"]
+
+    style L0 fill:#e3f2fd,stroke:#1565c0,stroke-width:3px
+    style L2 fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    style INV fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+```
+
 > 💡 **New to SIL?** Read [The Five Invariants](#the-five-invariants) first, then explore the layers.
 
 ---
