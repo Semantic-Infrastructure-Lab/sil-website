@@ -2,11 +2,11 @@
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-**The official Semantic Infrastructure Lab website - a clean Python web application demonstrating SIL architecture principles.**
+**The official Semantic Infrastructure Lab website - a clean Python web application for rendering research documentation and project information.**
 
 ## Overview
 
-This is the public-facing website for the Semantic Infrastructure Lab, built as a production-quality reference implementation of SIL's architectural principles:
+This is the public-facing website for the Semantic Infrastructure Lab (SIL), built with clean architectural principles:
 
 - **Clarity**: Clean layered architecture
 - **Simplicity**: Minimal dependencies, standard tools
@@ -201,6 +201,8 @@ pytest tests/test_domain.py
 
 ### Infrastructure
 
+**SIL Lab Website (this project):**
+
 | Environment | Server | Port | URL |
 |-------------|--------|------|-----|
 | **Staging** | tia-staging | 8080 | https://sil-staging.mytia.net |
@@ -208,6 +210,8 @@ pytest tests/test_domain.py
 
 **Container Registry:** `registry.mytia.net/sil-website`
 **Technology:** FastAPI + Jinja2 (containerized)
+
+**Note:** The SIF Foundation website (semanticinfrastructurefoundation.org) is separate and uses Hugo static site generation.
 
 ### Full Documentation
 
@@ -254,11 +258,26 @@ Copyright 2025 Semantic Infrastructure Foundation Contributors
 
 **Content License**: Documentation and written content are licensed under CC BY 4.0 - see [CONTENT_LICENSE.md](CONTENT_LICENSE.md)
 
+## Technology Decision: FastAPI vs Hugo
+
+**Current Status (Dec 2025):**
+- **SIL Website (this project)**: FastAPI + Jinja2 (production stable)
+- **SIF Website**: Migrated to Hugo static site (Dec 20, 2025)
+
+**SIF Migration Results:**
+- 2700x faster builds (2 minutes → 45ms)
+- 82% code reduction
+- Simpler deployment (static files vs containers)
+
+**SIL Migration Decision:** Under consideration. SIF Hugo migration was successful and proven stable. FastAPI implementation works well but may be over-engineered for markdown rendering. Decision pending.
+
+See `/home/scottsen/src/tia/projects/SIL/WEBSITES.md` for detailed comparison and migration considerations.
+
 ## Links
 
-- **Live Website**: https://semanticinfrastructurefoundation.org
-- **Staging Website**: https://sif-staging.mytia.net
-- **SIL Repository**: https://github.com/scottsen/sil
+- **Live Website**: https://semanticinfrastructurelab.org (SIL Lab)
+- **Staging Website**: https://sil-staging.mytia.net (SIL Lab)
+- **SIF Website**: https://semanticinfrastructurefoundation.org (Foundation)
 - **TIA System**: https://github.com/scottsen/tia
 
 ---
