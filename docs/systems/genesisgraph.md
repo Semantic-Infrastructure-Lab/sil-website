@@ -111,6 +111,36 @@ sealed_subgraph:
 
 **The magic:** Cryptographic commitments (Merkle trees, hash chains) enable proving properties without revealing values.
 
+### How Cryptographic Provenance Works
+
+```mermaid
+flowchart LR
+    INPUT["Raw Data<br/>hash: abc..."]
+    PREP["Preprocessing<br/>✓ Public"]
+    SEAL["Sealed Training<br/>Merkle Root: xyz..."]
+    MODEL["Model v1<br/>hash: def..."]
+    EVAL["Evaluation<br/>✓ Public"]
+    REPORT["Report<br/>hash: ghi..."]
+
+    INPUT -->|"Operation 1"| PREP
+    PREP -->|"Operation 2<br/>(Hidden)"| SEAL
+    SEAL -->|"Operation 3"| MODEL
+    MODEL -->|"Operation 4"| EVAL
+    EVAL -->|"Operation 5"| REPORT
+
+    SEAL -.->|"Policy Assertion"| CLAIM["FDA 21 CFR Part 11<br/>Compliant ✓<br/><br/>Signature: sig..."]
+
+    VERIFY["Verifier Can Prove:<br/>✓ Chain integrity<br/>✓ Policy compliance<br/>✗ Cannot see sealed pipeline"]
+
+    REPORT --> VERIFY
+    CLAIM --> VERIFY
+
+    style PREP fill:#e8f5e9,stroke:#2e7d32
+    style SEAL fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style EVAL fill:#e8f5e9,stroke:#2e7d32
+    style CLAIM fill:#fff3e0,stroke:#e65100
+```
+
 ---
 
 ## Quick Example: AI Model with Trade Secret Protection

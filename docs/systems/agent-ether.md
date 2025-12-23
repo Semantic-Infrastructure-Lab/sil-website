@@ -194,6 +194,48 @@ for event in invoker.stream_events(job_id):
 
 ---
 
+## Multi-Agent Coordination Example
+
+**Agent Ether enables horizontal coordination between agents at the same level:**
+
+```mermaid
+sequenceDiagram
+    participant A1 as Agent 1<br/>(Researcher)
+    participant C as Coordinator
+    participant A2 as Agent 2<br/>(Coder)
+    participant A3 as Agent 3<br/>(Tester)
+
+    A1->>C: Task: "Build feature X"
+    C->>C: Decompose task
+    C->>A2: Subtask: "Implement"
+    C->>A3: Subtask: "Test"
+
+    A2->>A2: Write code
+    A2->>C: Status: "Implementation done"
+
+    C->>A3: Trigger: "Code ready"
+    A3->>A3: Run tests
+    A3->>C: Result: "3 tests fail"
+
+    C->>A2: Feedback: "Fix failures"
+    A2->>A2: Debug & fix
+    A2->>C: Status: "Fixed"
+
+    C->>A3: Trigger: "Retry tests"
+    A3->>A3: Run tests
+    A3->>C: Result: "All pass ✓"
+
+    C->>A1: Complete: "Feature X ready"
+```
+
+**What makes this work:**
+- All agents speak the same TBC protocol
+- Coordinator discovers agent capabilities via metadata
+- Progress events enable real-time coordination
+- Structured I/O ensures reliable data exchange
+
+---
+
 ## Status & Adoption
 
 **Current Version:** v0.1.0-alpha (Design Phase with Complete Specification)

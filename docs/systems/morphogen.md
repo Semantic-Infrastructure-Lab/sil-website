@@ -112,6 +112,43 @@ flow(dt=0.1ms) {
 
 **Morphogen does it in one deterministic, reproducible program.**
 
+### Cross-Domain Integration Architecture
+
+```mermaid
+graph TB
+    TYPE["Morphogen Universal Type System<br/>Physical Units Enforced at Compile Time"]
+
+    subgraph Domains["40+ Computational Domains"]
+        AUDIO["Audio<br/>48kHz sample-accurate"]
+        PHYSICS["Physics<br/>240Hz rigid body"]
+        FIELDS["Fields<br/>2D/3D simulations"]
+        CHEM["Chemistry<br/>Reaction networks"]
+        GRAPHICS["Graphics<br/>Real-time rendering"]
+        AGENT["Agent Simulation<br/>Multi-agent systems"]
+    end
+
+    TYPE --> AUDIO
+    TYPE --> PHYSICS
+    TYPE --> FIELDS
+    TYPE --> CHEM
+    TYPE --> GRAPHICS
+    TYPE --> AGENT
+
+    COMP["Composition Example:<br/>geometry → physics → acoustics → audio"]
+
+    AUDIO -.-> COMP
+    PHYSICS -.-> COMP
+    FIELDS -.-> COMP
+
+    BENEFIT["Benefit:<br/>Replace $65K+ tool chain<br/>with unified system"]
+
+    COMP --> BENEFIT
+
+    style TYPE fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
+    style Domains fill:#e3f2fd,stroke:#1565c0
+    style BENEFIT fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
 ---
 
 ## Status & Adoption
