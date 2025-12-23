@@ -14,6 +14,7 @@ from sil_web.services.content import ContentService
 
 if TYPE_CHECKING:
     from sil_web.services.markdown import MarkdownRenderer
+    from sil_web.services.metrics import MetricsService
 
 router = APIRouter()
 
@@ -25,8 +26,16 @@ def create_routes(
     content_service: ContentService,
     project_service: None,  # Not used for SIL
     markdown_renderer: "MarkdownRenderer",
+    metrics_service: "MetricsService | None" = None,
 ) -> APIRouter:
-    """Create routes with injected services."""
+    """Create routes with injected services.
+
+    Args:
+        content_service: Content management service
+        project_service: Not used for SIL (kept for compatibility)
+        markdown_renderer: Markdown rendering service
+        metrics_service: Metrics service (optional, for canonical metrics)
+    """
 
     # Navigation items for SIL (Lab-focused, Bell Labs structure)
     nav_items = [
@@ -51,16 +60,20 @@ def create_routes(
         content = page_path.read_text()
         html_content = markdown_renderer.render(content)
 
-        return templates.TemplateResponse(
-            "page.html",
-            {
-                "request": request,
-                "title": title,
-                "content": html_content,
-                "nav_items": nav_items,
-                "current_page": current_page,
-            },
-        )
+        # Build template context
+        context = {
+            "request": request,
+            "title": title,
+            "content": html_content,
+            "nav_items": nav_items,
+            "current_page": current_page,
+        }
+
+        # Add metrics if service is available
+        if metrics_service is not None:
+            context["metrics"] = metrics_service.metrics
+
+        return templates.TemplateResponse("page.html", context)
 
     # =========================================================================
     # Core Pages

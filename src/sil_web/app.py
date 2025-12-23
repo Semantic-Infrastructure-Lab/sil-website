@@ -17,6 +17,7 @@ from sil_web.routes.pages import create_routes
 from sil_web.routes.robots import router as robots_router
 from sil_web.services.content import ContentService
 from sil_web.services.markdown import MarkdownRenderer
+from sil_web.services.metrics import MetricsService
 
 # Configure structured logging
 structlog.configure(
@@ -85,6 +86,7 @@ def create_app() -> FastAPI:
     # Initialize services
     content_service = ContentService(docs_path=DOCS_PATH)
     markdown_renderer = MarkdownRenderer(content_service)
+    metrics_service = MetricsService()  # Uses canonical TIA metrics by default
 
     # Mount health check (no dependencies)
     app.include_router(health_router)
@@ -96,7 +98,7 @@ def create_app() -> FastAPI:
     app.include_router(llms_router)
 
     # Create and mount page routes (SIF doesn't use project_service)
-    routes = create_routes(content_service, None, markdown_renderer)
+    routes = create_routes(content_service, None, markdown_renderer, metrics_service)
     app.include_router(routes)
 
     log.info("app_created", docs_path=str(DOCS_PATH))
