@@ -98,6 +98,36 @@ SIL is not a vision document. It's working infrastructure:
 - **Principles** — 14 foundational constraints (structure before heuristics, provenance everywhere, meaning must be explicit)
 - **Manifesto** — Why semantic infrastructure matters
 
+### Infrastructure & Deployment
+
+SIL's production systems run on distributed infrastructure:
+
+```mermaid
+graph TB
+    subgraph Public["Public Internet"]
+        USER["Users"]
+    end
+
+    subgraph TIA_Staging["tia-staging Server"]
+        NGINX_S["Nginx<br/>:8082"]
+        SIF_HUGO["SIF Website<br/>(Hugo static)"]
+    end
+
+    subgraph TIA_Apps["tia-apps Server"]
+        NGINX_A["Nginx<br/>:8010"]
+        SIL_API["SIL Website<br/>(FastAPI)"]
+    end
+
+    USER -->|"https://semanticinfrastructurefoundation.org"| NGINX_S
+    USER -->|"https://semanticinfrastructurelab.org"| NGINX_A
+
+    NGINX_S --> SIF_HUGO
+    NGINX_A --> SIL_API
+
+    style TIA_Staging fill:#e3f2fd,stroke:#1565c0
+    style TIA_Apps fill:#e8f5e9,stroke:#2e7d32
+```
+
 ## What Makes SIL Different?
 
 Most AI labs build **applications on top of opaque models**.

@@ -10,6 +10,33 @@ Beth is SIL's Semantic Memory Agent—the knowledge substrate that indexes, conn
 
 Beth maintains the lab's semantic memory: 14,549 files across 60 projects, 1,402 emergent topics, 37,020 keywords—all connected in a loose, evolving knowledge graph.
 
+### How Beth Works
+
+```mermaid
+flowchart LR
+    DOCS["Documentation Files<br/>14,549 files"]
+    EXTRACT["Extract Topics<br/>From frontmatter"]
+    EMBED["Generate Embeddings<br/>Semantic vectors"]
+    INDEX["Build Index<br/>9,267 documents<br/>30,076 keywords"]
+
+    QUERY["User Query:<br/>'progressive disclosure'"]
+    SEARCH["Semantic Search<br/>Vector similarity"]
+    RANK["Rank Results<br/>Strength scores"]
+    RETURN["Return Top N<br/>With related topics"]
+
+    DOCS --> EXTRACT
+    EXTRACT --> EMBED
+    EMBED --> INDEX
+
+    QUERY --> SEARCH
+    INDEX -.-> SEARCH
+    SEARCH --> RANK
+    RANK --> RETURN
+
+    style INDEX fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style RETURN fill:#e8f5e9,stroke:#2e7d32
+```
+
 ---
 
 ## Role at SIL
