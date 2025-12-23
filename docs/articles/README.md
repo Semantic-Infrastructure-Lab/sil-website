@@ -45,6 +45,24 @@ Introduction to Reveal and the progressive disclosure pattern. Shows how semanti
 
 ---
 
+### [Progressive Disclosure for AI Agents](/articles/progressive-disclosure-agents)
+**Date:** 2025-12-14
+**Topics:** Progressive disclosure, Reveal, token efficiency, semantic infrastructure
+**Audience:** Developers, AI practitioners, tool users
+
+Deep dive into the progressive disclosure pattern and why AI agents waste 99% of their context reading code. Explains the URI-based resource protocol, shows measured impact ($7,500 file → 50 tokens), and positions progressive disclosure as foundational infrastructure for AI interaction.
+
+**Key points:**
+- Problem: AI agents read entire files (7,500 tokens) to extract tiny insights (50 tokens needed)
+- Pattern: Structure first, details on demand (scan → orient → dive)
+- Architecture: URI-based resource protocol (`python://`, `ast://`, `json://`)
+- Evidence: 25-150x token reduction, proven across 300+ sessions
+- Vision: This should be a standard, not a tool feature
+
+**From session:** azure-gem-1222 (moved from essays)
+
+---
+
 ## Forthcoming Articles
 
 **Potential topics:**
