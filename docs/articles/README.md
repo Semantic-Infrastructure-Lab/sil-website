@@ -5,6 +5,7 @@
 **Audience:** Developers, AI practitioners, tool users, people discovering SIL through specific projects
 
 **Last updated:** 2025-12-23
+**Status:** ✅ 3 articles published
 
 ---
 
@@ -60,6 +61,24 @@ Deep dive into the progressive disclosure pattern and why AI agents waste 99% of
 - Vision: This should be a standard, not a tool feature
 
 **From session:** azure-gem-1222 (moved from essays)
+
+---
+
+### [Configuration as Semantic Contract](/articles/configuration-semantic-contract)
+**Date:** 2025-12-23
+**Topics:** Configuration, progressive disclosure, semantic infrastructure, architecture validation
+**Audience:** Developers, team leads, architects
+
+Deep dive into configuration as semantic contract—why config files should declare meaning, not just tune parameters. Introduces the Progressive Configuration Pattern (3 levels: intelligent defaults, project overrides, custom extensions) and shows how Reveal's architecture validation enforces semantic contracts.
+
+**Key points:**
+- Problem: Binary choice between zero config and configure everything
+- Pattern: Progressive configuration (defaults → overrides → extensions)
+- Solution: Declare architecture in config, tools enforce automatically
+- Evidence: Real architecture validation examples from Reveal
+- Vision: Configuration as Layer 3 of Semantic OS (composition)
+
+**From session:** stormy-gale-1223
 
 ---
 
@@ -139,4 +158,4 @@ session_provenance: "[session-id if created in session]"
 
 ---
 
-**Status:** ✅ 2 articles published (reveal-introduction, progressive-disclosure-agents)
+**Status:** ✅ 3 articles published
