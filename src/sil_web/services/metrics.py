@@ -33,17 +33,19 @@ class MetricsService:
         """Load metrics from YAML file.
 
         Returns:
-            Metrics dictionary
+            Metrics dictionary (empty dict if file doesn't exist)
 
         Raises:
-            FileNotFoundError: If metrics file doesn't exist
             yaml.YAMLError: If YAML parsing fails
         """
         if not self.metrics_path.exists():
-            raise FileNotFoundError(
-                f"Metrics file not found: {self.metrics_path}\n"
-                "Expected canonical metrics at: ~/src/tia/metrics/sil-metrics.yaml"
-            )
+            # Gracefully handle missing metrics file (e.g., in containers without TIA mount)
+            # Return empty structure to prevent crashes
+            return {
+                "systems": {},
+                "websites": {},
+                "lab": {},
+            }
 
         with open(self.metrics_path) as f:
             return yaml.safe_load(f)

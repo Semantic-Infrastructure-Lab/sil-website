@@ -144,7 +144,7 @@ You'll understand SIL's theoretical foundations and research trajectory.
 
 ### Reading Sequence
 
-1. **[Innovation Overview](/systems/overview)** (10 min)
+1. **[Innovation Overview](/systems)** (10 min)
    - Summary of all innovations
    - Impact metrics and adoption
 
@@ -229,7 +229,7 @@ Research contributions and theoretical frameworks.
 
 ### 🛠 Tools
 Documentation for production tools (Reveal, TIA, Beth).
-→ [View tools directory](/systems/overview)
+→ [View tools directory](/systems)
 
 ### 🏗 Architecture
 Technical architecture and system design.
@@ -237,7 +237,7 @@ Technical architecture and system design.
 
 ### 💡 Innovations
 Innovation portfolio — techniques and tools built.
-→ [View innovations](/systems/overview)
+→ [View innovations](/systems)
 
 ### 👤 Meta
 About the founder, influences, FAQ.
@@ -269,7 +269,7 @@ All 12 SIL projects detailed.
 → [Stewardship Manifesto](/meta/stewardship-manifesto), [Safety Thresholds](/meta/safety-thresholds)
 
 **See what's built**
-→ [Project Index](../projects/project-index), [Innovation Portfolio](/systems/overview)
+→ [Project Index](../projects/project-index), [Innovation Portfolio](/systems)
 
 **Get questions answered**
 → [FAQ](/meta/faq), [Glossary](/foundations/glossary)

@@ -137,7 +137,7 @@ session_provenance: "[session-id if created in session]"
 ## Related Directories
 
 - [Foundations](/foundations/overview) - Foundational principles and frameworks
-- [Systems](/systems/overview) - Practical usage guides for SIL systems
+- [Systems](/systems) - Practical usage guides for SIL systems
 - [Research](/research/overview) - Academic-style research papers
 
 ---

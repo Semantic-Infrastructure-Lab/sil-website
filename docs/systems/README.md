@@ -36,7 +36,7 @@ Some tools implement specific SIL innovations:
 
 Some tools are applications (not innovations themselves) that demonstrate SIL principles in production.
 
-**See also:** [Innovations](/systems/overview) for innovation descriptions and the inverse mapping
+**See also:** [Innovations](/systems) for innovation descriptions and the inverse mapping
 
 ---
 
@@ -91,7 +91,7 @@ As SIL projects mature, more production tools will be featured here:
 - **tiacad** - Declarative parametric CAD in YAML - [Production v3.1.2](https://github.com/Semantic-Infrastructure-Lab/tiacad)
 - **genesisgraph** - Verifiable process provenance - [Production v0.3.0](https://github.com/Semantic-Infrastructure-Lab/genesisgraph)
 
-See all **[Innovations →](/systems/overview)**
+See all **[Innovations →](/systems)**
 
 ---
 
