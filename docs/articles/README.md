@@ -82,15 +82,39 @@ Deep dive into configuration as semantic contract—why config files should decl
 
 ---
 
-## Forthcoming Articles
+## Content Pipeline
 
-**Potential topics:**
-- Beth knowledge graphs: PageRank for documentation
-- Agent Ether: Universal tool contracts for multi-agent systems
-- TIA workflows: Progressive disclosure in practice
-- Morphogen deterministic computation: Reproducible AI workflows
+**📋 See [CONTENT_INVENTORY.md](CONTENT_INVENTORY.md) for complete publication pipeline**
 
-**Suggest new topics:** If you have ideas for articles, add them to this list or discuss in sessions.
+**Quick Stats:**
+- ✅ **3 published** (ready to post to LinkedIn/blog)
+- 🔄 **14 adaptable research papers** (2-3 hours each to make accessible)
+- 📦 **7 systems docs** (need expansion into articles)
+- 🏗️ **9 architecture docs** (deep dives or series)
+- 💡 **Unlimited future ideas** (case studies, hot takes, thought leadership)
+
+**Total: 30+ articles in the pipeline**
+
+---
+
+## Forthcoming Articles (Next 12 Weeks)
+
+**Weeks 4-6: Agentic Engineering**
+- How to Build AI Agents That Don't Go Rogue (HIERARCHICAL_AGENCY_FRAMEWORK.md)
+- Why You Can't Debug AI Agents (SEMANTIC_OBSERVABILITY.md)
+- Building Multi-Agent Systems That Work (MULTI_AGENT_PROTOCOL_PRINCIPLES.md)
+
+**Weeks 7-9: Production Systems**
+- How PageRank Beats Vector Search (beth.md)
+- Why Production AI Needs Provenance (PROVENANCE_FIRST.md)
+- Deterministic AI Workflows (morphogen.md)
+
+**Weeks 10-12: Advanced Topics**
+- RAG as Geometry Problem (RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md)
+- Why AI Agents Fail at Your Docs (AI_DOCUMENTATION_STANDARDS.md)
+- Universal Tool Contracts (agent-ether.md)
+
+**See CONTENT_INVENTORY.md for full editorial calendar and content status.**
 
 ---
 
