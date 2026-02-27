@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+### Prepared - 2026-02-27 (drifting-quasar-0227)
+
+#### Logo + White Background (pending deploy)
+- **Body background**: changed from `#fafafa` to `#ffffff`
+- **Logo**: added SIL logo image (`static/images/sil-logo.png`)
+- **Logo bar**: new white logo bar above dark nav header (logo + site title)
+- **Favicon**: added `favicon.ico` (multi-size) and `apple-touch-icon.png` (180x180)
+- **Assets**: `static/images/sil-logo.png`, `static/favicon.ico`, `static/apple-touch-icon.png`
+
 ### Deployed - 2025-12-09
 
 #### Production Launch with Analytics, SEO, and Security (chilling-squall-1209)

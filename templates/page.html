@@ -11,7 +11,9 @@
     <meta name="author" content="Semantic Infrastructure Lab">
 
     <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
 
     <link rel="stylesheet" href="/static/css/style.css">
 
@@ -31,10 +33,15 @@
 </head>
 <body>
     <div class="container">
-        <!-- Simple top navigation -->
+        <!-- Logo bar -->
+        <div class="logo-bar">
+            <a href="/"><img src="/static/images/sil-logo.png" alt="SIL Logo" class="site-logo"></a>
+            <h1 class="site-title"><a href="/">Semantic Infrastructure Lab</a></h1>
+        </div>
+
+        <!-- Navigation -->
         <header class="site-header">
             <div class="header-content">
-                <h1 class="site-title"><a href="/">Semantic Infrastructure Lab</a></h1>
                 <nav class="main-nav">
                     {% for item in nav_items %}
                     <a href="{{ item.url }}" class="nav-link{% if item.url == current_page %} active{% endif %}">{{ item.label }}</a>

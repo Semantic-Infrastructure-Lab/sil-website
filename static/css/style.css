@@ -7,7 +7,7 @@
 }
 
 body {
-    background: #fafafa;
+    background: #ffffff;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.7;
     color: #333;
@@ -21,6 +21,36 @@ body {
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     margin-top: 20px;
     margin-bottom: 40px;
+}
+
+/* Logo Bar */
+.logo-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 40px;
+    background: #ffffff;
+}
+
+.site-logo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+}
+
+.logo-bar .site-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.logo-bar .site-title a {
+    color: #111;
+    text-decoration: none;
+}
+
+.logo-bar .site-title a:hover {
+    color: #1a6fc4;
 }
 
 /* Site Header & Navigation */
