@@ -45,6 +45,7 @@ def create_routes(
         {"label": "Systems", "url": "/systems"},
         {"label": "Foundations", "url": "/foundations"},
         {"label": "About", "url": "/about"},
+        {"label": "Contact", "url": "/contact"},
     ]
 
     def render_markdown_page(
