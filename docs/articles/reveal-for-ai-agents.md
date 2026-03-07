@@ -2,7 +2,7 @@
 title: "Reveal for AI Agents"
 subtitle: "How Claude Code, Cursor, and Copilot Explore Code 25x Faster"
 author: "Scott Senkeresty"
-date: "2026-01-05"
+date: "2026-03-03"
 type: "article"
 status: "draft"
 audience: "developers"
@@ -185,7 +185,7 @@ These aren't hints for humans. They're **instructions for agents**. The agent re
 
 ## Beyond Files: URI Adapters
 
-Reveal isn't just for code files. It has 10 URI adapters for querying different resources:
+Reveal isn't just for code files. It has 19 URI adapters for querying different resources:
 
 ### Find Complex Code
 ```bash
@@ -254,6 +254,60 @@ reveal stats://./src --hotspots
 
 Instantly find the worst files in a codebase. Perfect for prioritizing refactoring.
 
+### Markdown Doc Queries
+```bash
+# Find docs on a specific topic (using front matter metadata)
+reveal 'markdown://docs/?topics=authentication'
+
+# Find incomplete/draft docs
+reveal 'markdown://docs/?status=draft'
+
+# Find docs missing required metadata
+reveal 'markdown://?!topics'
+
+# Validate front matter schema
+reveal sessions/*/README.md --validate-schema session
+```
+
+AI agents working with documentation systems can query docs as structured data — no full-file reads.
+
+### SSL and Infrastructure
+```bash
+# Check SSL certificate health
+reveal ssl://example.com
+
+# Certificate details
+reveal ssl://example.com/san       # All covered domains
+reveal ssl://example.com --check   # Health: expiry, chain, hostname match
+
+# Audit all nginx domains in one pipeline
+reveal /etc/nginx/nginx.conf --extract domains | reveal --stdin --check
+
+# Output per domain:
+# api.example.com         OK  182 days
+# staging.example.com     WARNING  expires in 12 days
+# legacy.example.com      EXPIRED  3 days ago
+
+# Show only problems
+reveal /etc/nginx/nginx.conf --extract domains | reveal --stdin --check --only-failures
+
+# cPanel user SSL overview
+reveal cpanel://USERNAME/ssl      # Disk cert health per domain
+```
+
+For infrastructure agents, this replaces bash scripts that loop through domains, call openssl, and grep output. Two composable commands instead.
+
+### Claude Session Navigation
+```bash
+# Navigate past AI sessions
+reveal claude://                              # All sessions with sizes
+reveal claude://session/my-session-name      # What happened in this session?
+reveal claude://session/my-session-name/workflow  # Commands the agent ran
+reveal claude://session/my-session-name/files     # Files the agent touched
+```
+
+This is the `claude://` project adapter — designed for navigating Claude Code sessions. An AI agent can read its own past work through a structured interface, not raw JSON. Same progressive disclosure pattern applied to AI artifacts.
+
 ---
 
 ## Advanced Workflows
@@ -317,6 +371,19 @@ reveal python://doctor
 ```
 
 This catches the "why isn't my code change working?" class of bugs instantly.
+
+```bash
+# Detect import shadowing (local module hiding a pip package)
+reveal python://module/requests
+# Shows: where Python actually imports from vs where pip thinks it is
+
+# Check stale bytecode specifically
+reveal python://debug/bytecode
+# Lists all .pyc files older than their source
+
+# Inspect sys.path for conflicts
+reveal python://syspath
+```
 
 ---
 
@@ -412,7 +479,7 @@ The `--agent-help` flag is designed to be included in system prompts. It teaches
 
 - [Reveal Quick Start](/articles/reveal-quickstart) - 3-minute intro
 - [Reveal Deep Dive](/articles/reveal-introduction) - Philosophy and architecture
-- [GitHub](https://github.com/scottsen/reveal) - Source and issues
+- [GitHub](https://github.com/Semantic-Infrastructure-Lab/reveal) - Source and issues
 - [PyPI](https://pypi.org/project/reveal-cli/) - Installation
 
 ---
