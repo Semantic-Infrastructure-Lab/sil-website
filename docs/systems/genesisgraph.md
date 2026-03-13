@@ -28,38 +28,6 @@ Industries face an impossible choice:
 
 GenesisGraph enables cryptographically verifiable provenance where you choose exactly what to reveal:
 
-```mermaid
-graph TB
-    subgraph LevelA["Level A: Full Disclosure"]
-        A1["Show Everything<br/>• Full pipeline<br/>• All parameters<br/>• Intermediate results"]
-        A2["Use Case:<br/>Open Science"]
-    end
-
-    subgraph LevelB["Level B: Partial Envelope"]
-        B1["Show Constraints<br/>• Parameter ranges proven<br/>• Values hashed<br/>• Policies verified"]
-        B2["Use Case:<br/>Regulated Industries"]
-    end
-
-    subgraph LevelC["Level C: Sealed Subgraph"]
-        C1["Show Inputs/Outputs Only<br/>• Pipeline sealed<br/>• Merkle root commitment<br/>• Policy claims only"]
-        C2["Use Case:<br/>Trade Secret Protection"]
-    end
-
-    PROB["The Problem:<br/>Certification vs IP Protection"]
-    SOL["The Solution:<br/>Verification Without Revelation"]
-
-    PROB --> SOL
-    SOL --> LevelA
-    SOL --> LevelB
-    SOL --> LevelC
-
-    style LevelA fill:#e8f5e9,stroke:#2e7d32
-    style LevelB fill:#fff3e0,stroke:#f57c00
-    style LevelC fill:#e3f2fd,stroke:#1565c0
-    style PROB fill:#ffebee,stroke:#c62828
-    style SOL fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-```
-
 ### Level A: Full Disclosure (Open Science)
 **Use when:** Open source projects, public research, transparency required
 ```yaml
@@ -110,36 +78,6 @@ sealed_subgraph:
 ```
 
 **The magic:** Cryptographic commitments (Merkle trees, hash chains) enable proving properties without revealing values.
-
-### How Cryptographic Provenance Works
-
-```mermaid
-flowchart LR
-    INPUT["Raw Data<br/>hash: abc..."]
-    PREP["Preprocessing<br/>✓ Public"]
-    SEAL["Sealed Training<br/>Merkle Root: xyz..."]
-    MODEL["Model v1<br/>hash: def..."]
-    EVAL["Evaluation<br/>✓ Public"]
-    REPORT["Report<br/>hash: ghi..."]
-
-    INPUT -->|"Operation 1"| PREP
-    PREP -->|"Operation 2<br/>(Hidden)"| SEAL
-    SEAL -->|"Operation 3"| MODEL
-    MODEL -->|"Operation 4"| EVAL
-    EVAL -->|"Operation 5"| REPORT
-
-    SEAL -.->|"Policy Assertion"| CLAIM["FDA 21 CFR Part 11<br/>Compliant ✓<br/><br/>Signature: sig..."]
-
-    VERIFY["Verifier Can Prove:<br/>✓ Chain integrity<br/>✓ Policy compliance<br/>✗ Cannot see sealed pipeline"]
-
-    REPORT --> VERIFY
-    CLAIM --> VERIFY
-
-    style PREP fill:#e8f5e9,stroke:#2e7d32
-    style SEAL fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
-    style EVAL fill:#e8f5e9,stroke:#2e7d32
-    style CLAIM fill:#fff3e0,stroke:#e65100
-```
 
 ---
 
@@ -302,7 +240,7 @@ genesisgraph validate workflow.gg.yaml --verify-profile
 - **Morphogen (Layer 1/4):** Deterministic execution - Provenance for computational workflows
 - **Agent Ether (Layer 6):** Multi-agent systems - Verifiable agent actions and decisions
 - **Semantic Trust Fabric:** Trust assertions stored as typed graph edges with full provenance
-- **IPFS Storage (Layer 0):** Content-addressed artifact storage - **See:** [Distributed Storage Architecture](/architecture/distributed-storage-architecture) for integration strategy
+- **IPFS Storage (Layer 0):** Content-addressed artifact storage - **See:** [Distributed Storage Architecture](/architecture/DISTRIBUTED_STORAGE_ARCHITECTURE) for integration strategy
 - **All SIL projects:** Universal provenance layer enables "show your work" across the stack
 
 ---
@@ -346,7 +284,7 @@ edge:
 | Agent Ether | Agent capabilities verified via graph queries |
 | Semantic Passports | Bundles of assertions with provenance chains |
 
-**See:** [Trust Assertion Protocol](/research/trust-assertion-protocol) for the full TAP specification.
+**See:** [Trust Assertion Protocol](/foundations/TRUST_ASSERTION_PROTOCOL) for the full TAP specification.
 
 ---
 

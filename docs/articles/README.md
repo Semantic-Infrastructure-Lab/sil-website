@@ -4,8 +4,7 @@
 
 **Audience:** Developers, AI practitioners, tool users, people discovering SIL through specific projects
 
-**Last updated:** 2025-12-23
-**Status:** ✅ 3 articles published
+**Last updated:** 2025-12-10
 
 ---
 
@@ -28,6 +27,23 @@ Articles are:
 
 ## Published Articles
 
+### [Trained to Please, Empowered to Act](/articles/trained-to-please-empowered-to-act)
+**Date:** 2026-03-12
+**Topics:** Agentic AI, incidents, safety, sycophancy, behavioral contracts
+**Audience:** Developers, CTOs, teams deploying AI agents in production
+
+The optimization that makes chatbots say "great question!" is the same one that causes agents to delete production databases, buy groceries without asking, and fabricate data to cover their failures. Five real incidents. One pattern: we've been giving agents permissions when what they need is contracts.
+
+**Key points:**
+- Sycophancy is a drive, not just a quirk — and it scales with capability
+- Five escalating incidents: vending machine → grocery purchase → AWS 13-hour outage → TaskRabbit deception → database deletion + cover-up
+- "Permissions vs. contracts" — the core distinction
+- SIL consulting CTA via byline
+
+**From session:** hidden-constellation-0312
+
+---
+
 ### [Stop Reading Code. Start Understanding It](/articles/reveal-introduction)
 **Date:** 2025-12-10
 **Topics:** Reveal, progressive disclosure, token efficiency, semantic stack
@@ -46,75 +62,15 @@ Introduction to Reveal and the progressive disclosure pattern. Shows how semanti
 
 ---
 
-### [Progressive Disclosure for AI Agents](/articles/progressive-disclosure-agents)
-**Date:** 2025-12-14
-**Topics:** Progressive disclosure, Reveal, token efficiency, semantic infrastructure
-**Audience:** Developers, AI practitioners, tool users
+## Forthcoming Articles
 
-Deep dive into the progressive disclosure pattern and why AI agents waste 99% of their context reading code. Explains the URI-based resource protocol, shows measured impact ($7,500 file → 50 tokens), and positions progressive disclosure as foundational infrastructure for AI interaction.
+**Potential topics:**
+- Beth knowledge graphs: PageRank for documentation
+- Agent Ether: Universal tool contracts for multi-agent systems
+- TIA workflows: Progressive disclosure in practice
+- Morphogen deterministic computation: Reproducible AI workflows
 
-**Key points:**
-- Problem: AI agents read entire files (7,500 tokens) to extract tiny insights (50 tokens needed)
-- Pattern: Structure first, details on demand (scan → orient → dive)
-- Architecture: URI-based resource protocol (`python://`, `ast://`, `json://`)
-- Evidence: 25-150x token reduction, proven across 300+ sessions
-- Vision: This should be a standard, not a tool feature
-
-**From session:** azure-gem-1222 (moved from essays)
-
----
-
-### [Configuration as Semantic Contract](/articles/configuration-semantic-contract)
-**Date:** 2025-12-23
-**Topics:** Configuration, progressive disclosure, semantic infrastructure, architecture validation
-**Audience:** Developers, team leads, architects
-
-Deep dive into configuration as semantic contract—why config files should declare meaning, not just tune parameters. Introduces the Progressive Configuration Pattern (3 levels: intelligent defaults, project overrides, custom extensions) and shows how Reveal's architecture validation enforces semantic contracts.
-
-**Key points:**
-- Problem: Binary choice between zero config and configure everything
-- Pattern: Progressive configuration (defaults → overrides → extensions)
-- Solution: Declare architecture in config, tools enforce automatically
-- Evidence: Real architecture validation examples from Reveal
-- Vision: Configuration as Layer 3 of Semantic OS (composition)
-
-**From session:** stormy-gale-1223
-
----
-
-## Content Pipeline
-
-**📋 See [CONTENT_INVENTORY.md](CONTENT_INVENTORY.md) for complete publication pipeline**
-
-**Quick Stats:**
-- ✅ **3 published** (ready to post to LinkedIn/blog)
-- 🔄 **14 adaptable research papers** (2-3 hours each to make accessible)
-- 📦 **7 systems docs** (need expansion into articles)
-- 🏗️ **9 architecture docs** (deep dives or series)
-- 💡 **Unlimited future ideas** (case studies, hot takes, thought leadership)
-
-**Total: 30+ articles in the pipeline**
-
----
-
-## Forthcoming Articles (Next 12 Weeks)
-
-**Weeks 4-6: Agentic Engineering**
-- How to Build AI Agents That Don't Go Rogue (HIERARCHICAL_AGENCY_FRAMEWORK.md)
-- Why You Can't Debug AI Agents (SEMANTIC_OBSERVABILITY.md)
-- Building Multi-Agent Systems That Work (MULTI_AGENT_PROTOCOL_PRINCIPLES.md)
-
-**Weeks 7-9: Production Systems**
-- How PageRank Beats Vector Search (beth.md)
-- Why Production AI Needs Provenance (PROVENANCE_FIRST.md)
-- Deterministic AI Workflows (morphogen.md)
-
-**Weeks 10-12: Advanced Topics**
-- RAG as Geometry Problem (RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT.md)
-- Why AI Agents Fail at Your Docs (AI_DOCUMENTATION_STANDARDS.md)
-- Universal Tool Contracts (agent-ether.md)
-
-**See CONTENT_INVENTORY.md for full editorial calendar and content status.**
+**Suggest new topics:** If you have ideas for articles, add them to this list or discuss in sessions.
 
 ---
 
@@ -160,9 +116,9 @@ session_provenance: "[session-id if created in session]"
 
 ## Related Directories
 
-- [Foundations](/foundations/overview) - Foundational principles and frameworks
-- [Systems](/systems) - Practical usage guides for SIL systems
-- [Research](/research/overview) - Academic-style research papers
+- [Foundations](/foundations/) - Foundational principles and frameworks
+- [Systems](/systems/) - Practical usage guides for SIL systems
+- [Research](/research/) - Academic-style research papers
 
 ---
 
@@ -182,4 +138,4 @@ session_provenance: "[session-id if created in session]"
 
 ---
 
-**Status:** ✅ 3 articles published
+**Status:** ✅ Directory created, first article published (2025-12-10)

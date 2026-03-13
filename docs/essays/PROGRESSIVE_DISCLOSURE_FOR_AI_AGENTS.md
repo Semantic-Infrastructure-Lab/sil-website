@@ -6,8 +6,6 @@ date: 2025-12-14
 type: essay
 status: published
 publication: semanticinfrastructurelab.org
-tier: 1
-order: 1
 beth_topics:
   - reveal
   - reveal-v0.23
@@ -55,40 +53,6 @@ Human developers don't read files top-to-bottom. We scan, orient, then dive into
 This is **progressive disclosure**—a UX pattern from the 1980s that we somehow forgot to build for AI agents.
 
 Every code editor has this. Fold code, jump to definition, outline view. But when an agent needs to understand code? It gets raw text. No structure. No navigation. Just bytes.
-
-```mermaid
-graph LR
-    PROB["Problem:<br/>AI agents read everything<br/>Token waste, energy waste"]
-
-    PATTERN["Progressive Disclosure Pattern"]
-
-    STEP1["1. Overview<br/>What exists?<br/>📊 Minimal tokens"]
-    STEP2["2. Structure<br/>What's inside?<br/>📊 Low tokens"]
-    STEP3["3. Detail<br/>Specific content<br/>📊 Targeted tokens"]
-
-    REVEAL["Implementation: Reveal"]
-    BETH["Implementation: Beth"]
-    PANTHEON["Future: Pantheon IR"]
-
-    PROB --> PATTERN
-    PATTERN --> STEP1
-    STEP1 --> STEP2
-    STEP2 --> STEP3
-
-    STEP3 --> REVEAL
-    STEP3 --> BETH
-    STEP3 --> PANTHEON
-
-    RESULT["Result:<br/>7-150x token reduction<br/>Sustainable AI"]
-
-    REVEAL --> RESULT
-    BETH --> RESULT
-    PANTHEON --> RESULT
-
-    style PROB fill:#ffebee,stroke:#c62828
-    style PATTERN fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-    style RESULT fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
-```
 
 ---
 

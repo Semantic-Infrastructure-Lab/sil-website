@@ -6,6 +6,8 @@
 
 **Latest:** v0.24.0 adds enhanced statistics adapter, code quality metrics, improved error handling, and performance optimizations.
 
+**Coming in v0.26+:** `.reveal.yaml` configuration standard for project-specific semantics (architecture validation, custom patterns, team rules).
+
 ---
 
 ## Quick Start
@@ -42,33 +44,6 @@ Developers and AI agents waste time reading entire files when they only need to 
 ## The Solution: Progressive Disclosure
 
 **Reveal** provides three levels of detail - start broad, drill down as needed:
-
-```mermaid
-graph TB
-    START["Developer/Agent needs code info"]
-
-    L1["Level 1: Directory Structure<br/>reveal src/<br/><br/>📊 50 tokens<br/>See what exists"]
-    L2["Level 2: File Structure<br/>reveal app.py<br/><br/>📊 50-100 tokens<br/>See what's inside"]
-    L3["Level 3: Element Extraction<br/>reveal app.py func_name<br/><br/>📊 20-50 tokens<br/>Get specific code"]
-
-    TRAD["Traditional Approach<br/>Read entire file<br/><br/>📊 500+ tokens"]
-
-    START -->|"Progressive Disclosure"| L1
-    L1 -->|"Need detail?"| L2
-    L2 -->|"Need code?"| L3
-
-    START -.->|"Old Way"| TRAD
-
-    L3 -->|"Total: 70-150 tokens"| SAVE["86% Token Reduction<br/>$47K saved per 1000 agents/year"]
-    TRAD -.->|"500 tokens per operation"| WASTE["High cost, poor efficiency"]
-
-    style L1 fill:#e8f5e9,stroke:#2e7d32
-    style L2 fill:#e8f5e9,stroke:#2e7d32
-    style L3 fill:#e8f5e9,stroke:#2e7d32
-    style SAVE fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
-    style TRAD fill:#ffebee,stroke:#c62828
-    style WASTE fill:#ffebee,stroke:#c62828
-```
 
 ### 1. Directory Structure
 ```bash
@@ -201,7 +176,7 @@ See [Reveal Roadmap](https://github.com/semantic-infrastructure-lab/reveal/blob/
 
 ## Agent-Help Implementation (v0.16.0+, Enhanced v0.17.0)
 
-Reveal validates SIL's proposed [agent-help standard](/research/agent-help-standard) with a production three-tier implementation:
+Reveal validates SIL's proposed [agent-help standard](/research/AGENT_HELP_STANDARD) with a production three-tier implementation:
 
 ```bash
 reveal --agent-help          # Quick strategic guide (~1,500 tokens)
@@ -247,7 +222,7 @@ After 3 months in production (v0.16.0 released Nov 2025, v0.17.0 Dec 2025):
 
 **Conclusion:** The agent-help standard works. The three-tier progressive model is recommended for complex evolving CLI tools.
 
-**See the full standard:** [AGENT_HELP_STANDARD.md](/research/agent-help-standard)
+**See the full standard:** [AGENT_HELP_STANDARD.md](/research/AGENT_HELP_STANDARD)
 
 ---
 
@@ -347,13 +322,89 @@ reveal .                  # Explore current directory
 
 ---
 
+## Configuration Philosophy (v0.26+)
+
+### Progressive Configuration Pattern
+
+Reveal implements the **Progressive Configuration Pattern**—a three-level system that scales complexity with project needs:
+
+**Level 1: Zero Config (Intelligent Defaults)**
+```bash
+reveal app.py --check           # Works immediately, no setup
+```
+- Sensible built-in rules (bugs, security, complexity)
+- Works for 80% of projects without configuration
+- Safe defaults based on industry best practices
+
+**Level 2: Project Overrides (`.reveal.yaml`)**
+```yaml
+# .reveal.yaml - Team-shared configuration
+architecture:
+  layers:
+    - name: routes
+      path: app/routes/**
+      cannot_import: [repositories/**]  # Enforce clean architecture
+
+semantic:
+  custom_patterns:
+    - name: uses_stripe_api
+      description: "Track payment code"
+      patterns: ["stripe\\..*\\("]
+```
+- Version-controlled team configuration
+- Declare project-specific architecture rules
+- Define custom semantic patterns
+
+**Level 3: Custom Extensions (`~/.reveal/rules/`)**
+```python
+# ~/.reveal/rules/payment_security.py
+# Organization-wide custom rules
+from reveal.rules import Rule
+
+class PaymentSecurityRule(Rule):
+    name = "track-payments"
+    # ... custom logic
+```
+- Full language power for complex checks
+- Organization-wide standards
+- Auto-discovered plugins
+
+### Configuration as Semantic Contract
+
+Reveal's configuration system treats config files as **executable documentation of project semantics**:
+
+- **Architecture rules** declare layer boundaries (not just document them)
+- **Entry points** teach tools about framework patterns (FastAPI routes, pytest tests)
+- **Custom patterns** codify domain knowledge (e.g., "what touches our payment API?")
+- **Quality rules** enforce team standards (different rules for different layers)
+
+**Example: Queryable Domain Knowledge**
+```yaml
+semantic:
+  custom_patterns:
+    - name: uses_email
+      patterns: ["send.*email", "EmailMessage"]
+```
+
+```bash
+reveal 'semantic://app?uses_email'    # Query your domain semantics
+```
+
+**Research context:** This demonstrates SIL's principle "Meaning Must Be Explicit"—configuration declares what code _means_ in your system, not just how to analyze it.
+
+**Documentation:**
+- Research essay: [Configuration as Semantic Contract](/research/information-architecture/CONFIGURATION_AS_SEMANTIC_CONTRACT)
+- Technical note: [Progressive Configuration Pattern](/research/information-architecture/PROGRESSIVE_CONFIGURATION_PATTERN)
+
+---
+
 ## Related SIL Projects
 
 - [**morphogen**](https://github.com/semantic-infrastructure-lab/morphogen) - Cross-domain computation (audio, physics, circuits)
 - [**tiacad**](https://github.com/semantic-infrastructure-lab/tiacad) - Declarative parametric CAD in YAML
 - [**genesisgraph**](https://github.com/semantic-infrastructure-lab/genesisgraph) - Verifiable process provenance
 
-See the complete [Project Index](/projects/project-index) for all 12 SIL projects.
+See the complete [Project Index](/projects/PROJECT_INDEX) for all 12 SIL projects.
 
 ---
 

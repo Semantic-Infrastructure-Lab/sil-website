@@ -17,7 +17,7 @@ architecture_decision: Provenance-First model adopted (Dec 15, 2025)
 
 **Version:** 3.0 (December 2025)
 **Architecture Model:** Provenance-First with Invariants Over Layers
-**Canonical Reference:** [SIL_GLOSSARY.md](/foundations/glossary)
+**Canonical Reference:** [SIL_GLOSSARY.md](/foundations/SIL_GLOSSARY)
 
 ---
 
@@ -47,28 +47,6 @@ L-1: Substrate       Physical/computational reality (Philbrick, optional)
 - **Glass Box reasoning** — All decisions inspectable (Reveal)
 - **Deterministic execution** — Reproducible workflows (Morphogen)
 - **Sustainable efficiency** — 100x token reduction proven
-
-```mermaid
-graph TB
-    subgraph Stack["Semantic OS: Provenance-First Architecture"]
-        L6["L6: Reflection<br/>Learning from execution"]
-        L5["L5: Execution<br/>Agents under constraints"]
-        L4["L4: Composition<br/>Cross-domain integration (Pantheon)"]
-        L3["L3: Intent<br/>What we're accomplishing (contracts)"]
-        L2["L2: Trust<br/>Who can do what (TAP, Authorization)"]
-        L1["L1: Meaning<br/>Embeddings, types, similarity (Beth)"]
-        L0["L0: Provenance<br/>Everything has lineage (GenesisGraph)"]
-        L_1["L-1: Substrate<br/>Physical/computational reality (Philbrick)"]
-    end
-
-    L6 --> L5 --> L4 --> L3 --> L2 --> L1 --> L0 --> L_1
-
-    INV["The Five Invariants:<br/>1. Everything has lineage<br/>2. Reasoning is inspectable<br/>3. Computation is grounded<br/>4. Contracts are explicit<br/>5. Efficiency is sustainable"]
-
-    style L0 fill:#e3f2fd,stroke:#1565c0,stroke-width:3px
-    style L2 fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-    style INV fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-```
 
 > 💡 **New to SIL?** Read [The Five Invariants](#the-five-invariants) first, then explore the layers.
 
@@ -733,12 +711,12 @@ This is the technical core of SIL's mission: **building Timeline B (Glass Box fu
 ---
 
 **Related Documents:**
-- [SIL Glossary](/foundations/glossary) — Canonical terminology
+- [SIL Glossary](/foundations/SIL_GLOSSARY) — Canonical terminology
 - [Architecture Decision Record](/architecture/decisions/ARCHITECTURE_DECISION) — Why Provenance-First
 - [The Fork: Two Futures for AI](/foundation/pitch/THE_FORK) — Five structural failures to fix
 - [Scope of Hope](/foundation/SCOPE_OF_HOPE) — Five pillars of semantic infrastructure
-- [Invariants Over Layers](/architecture/invariants-over-layers) — Mission-centric frame
-- [Model Evaluation](/architecture/model-evaluation) — Scoring rationale (4.15)
+- [Invariants Over Layers](/architecture/models/INVARIANTS_OVER_LAYERS) — Mission-centric frame
+- [Model Evaluation](/architecture/models/MODEL_EVALUATION) — Scoring rationale (4.15)
 
 **Last Updated:** 2025-12-20
 **Architecture Version:** 3.0 (Provenance-First)
