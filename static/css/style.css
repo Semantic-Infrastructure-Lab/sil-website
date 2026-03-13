@@ -135,8 +135,8 @@ body {
 }
 
 h1 {
-    font-size: 36px;
-    font-weight: 600;
+    font-size: 42px;
+    font-weight: 700;
     color: #111;
     margin-bottom: 12px;
     letter-spacing: -0.02em;
@@ -144,11 +144,11 @@ h1 {
 }
 
 h2 {
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 28px;
+    font-weight: 700;
     color: #111;
-    margin: 40px 0 20px 0;
-    letter-spacing: -0.01em;
+    margin: 48px 0 20px 0;
+    letter-spacing: -0.02em;
     padding-bottom: 12px;
     position: relative;
 }
@@ -158,9 +158,9 @@ h2::after {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 120px;
+    width: 48px;
     height: 3px;
-    background: linear-gradient(90deg, #999 0%, #ccc 100%);
+    background: linear-gradient(90deg, #1a6fc4 0%, #4a9fd4 100%);
     border-radius: 2px;
 }
 
@@ -778,11 +778,11 @@ footer {
     }
 
     h1 {
-        font-size: 28px;
+        font-size: 32px;
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 22px;
     }
 }
 
@@ -793,7 +793,7 @@ footer {
     }
 
     h1 {
-        font-size: 24px;
+        font-size: 28px;
     }
 
     .architecture {
