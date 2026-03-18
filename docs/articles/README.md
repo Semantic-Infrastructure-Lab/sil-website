@@ -4,7 +4,7 @@
 
 **Audience:** Developers, AI practitioners, tool users, people discovering SIL through specific projects
 
-**Last updated:** 2025-12-10
+**Last updated:** 2026-03-15
 
 ---
 
@@ -45,7 +45,7 @@ The optimization that makes chatbots say "great question!" is the same one that 
 ---
 
 ### [Stop Reading Code. Start Understanding It](/articles/reveal-introduction)
-**Date:** 2025-12-10
+**Date:** 2025-12-10 (updated 2026-03-15)
 **Topics:** Reveal, progressive disclosure, token efficiency, semantic stack
 **Audience:** Developers, AI practitioners
 
@@ -62,13 +62,71 @@ Introduction to Reveal and the progressive disclosure pattern. Shows how semanti
 
 ---
 
+### [Two Commands That Change How You Work With Code](/articles/reveal-pack-and-review)
+**Date:** 2026-03-15
+**Topics:** Reveal, reveal pack, reveal review, token efficiency, CI/CD, AI agent workflow
+**Audience:** Developers, AI practitioners
+
+Deep dive into `reveal pack` (token-budgeted context snapshots for AI agents) and `reveal review` (one-command PR review with CI gate integration). The two most useful and least documented Reveal subcommands.
+
+**Key points:**
+- `reveal pack` curates the right files for an LLM context window — not all files, the ones that matter
+- `reveal review` replaces git-diff + quality-check + hotspot-scan with one command
+- Both produce machine-readable JSON for CI integration
+- CI exit code protocol: 0 = clean, 1 = warnings, 2 = errors
+
+**From session:** turquoise-spectrum-0315
+
+---
+
+### [Find Every Caller in Your Codebase With One Command](/articles/reveal-call-graphs)
+**Date:** 2026-03-15
+**Topics:** Reveal, calls://, call graph, static analysis, refactoring, impact analysis
+**Audience:** Developers, engineers doing refactoring or impact analysis
+
+Deep dive into `calls://` adapter — cross-file call graph queries for impact analysis, dead code detection, forward/reverse lookups, and Graphviz visualization.
+
+**Key points:**
+- `calls://src?target=X` finds every caller of X across all project files
+- `calls://src?callees=X` finds what X calls (forward lookup)
+- `calls://src?rank=callers` ranks functions by coupling (in-degree metrics)
+- Graphviz dot output for architecture docs
+- Difference from grep: finds actual invocations, not text occurrences
+
+**From session:** turquoise-spectrum-0315
+
+---
+
+### [Reveal for AI Agents](/articles/reveal-for-ai-agents)
+**Date:** 2026-03-03
+**Topics:** Reveal, AI agents, token efficiency, Claude Code, Cursor, GitHub Copilot
+**Audience:** AI practitioners, developers using AI coding tools
+
+How AI agents should use Reveal: the breadcrumb system, URI adapters, progressive workflows, and integration patterns for Claude Code, Cursor, and GitHub Copilot.
+
+---
+
+### [Reveal + Claude Code](/articles/reveal-for-claude-code)
+**Date:** 2026-01-06
+**Topics:** Reveal, Claude Code, token efficiency
+**Audience:** Claude Code users
+
+Focused guide for using Reveal with Claude Code specifically.
+
+---
+
 ## Forthcoming Articles
 
-**Potential topics:**
+**High priority — capabilities with no coverage yet:**
+- `reveal health` — unified health check for SSL/domains/databases/code
+- `claude://` adapter — searching your own Claude Code sessions as structured data
+- `cpanel://` adapter — full cPanel environment audits
+- Quality rules deep dive — the 32-rule system, categories, custom rules
+
+**Also potential:**
 - Beth knowledge graphs: PageRank for documentation
 - Agent Ether: Universal tool contracts for multi-agent systems
 - TIA workflows: Progressive disclosure in practice
-- Morphogen deterministic computation: Reproducible AI workflows
 
 **Suggest new topics:** If you have ideas for articles, add them to this list or discuss in sessions.
 

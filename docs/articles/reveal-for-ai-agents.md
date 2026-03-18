@@ -114,13 +114,15 @@ reveal src/api/routes.py # What endpoints are defined?
 reveal src/api/routes.py create_user  # Show me this one
 ```
 
-**Token savings in practice:**
+**Token savings in practice** (measured on reveal's own codebase, v0.64.x):
 
 | Task | Without Reveal | With Reveal | Savings |
 |------|----------------|-------------|---------|
-| Find a function | 7,500 tokens | 150 tokens | 50x |
-| Understand a module | 15,000 tokens | 400 tokens | 37x |
-| Explore new codebase | 50,000 tokens | 2,000 tokens | 25x |
+| Understand a large file (637 lines) | cat: 5,883 tokens | structure + element: 1,499 tokens | 3.9x |
+| Understand a focused module | cat: 4,128 tokens | structure: 275 tokens | 15x |
+| Find callers of a function | grep: 560 tokens | calls://?target: 84 tokens | 6.7x |
+
+**Typical range: 3.9–15x** on file inspection and call graph queries. See [Benchmarks](../../../projects/reveal/external-git/reveal/docs/BENCHMARKS.md) for full scenarios.
 
 ---
 
@@ -389,7 +391,7 @@ reveal python://syspath
 
 ## Quality Checks
 
-Reveal has 43 quality rules. Agents can check code as they work:
+Reveal has 67 quality rules across 14 categories. Agents can check code as they work:
 
 ```bash
 reveal src/handler.py --check
@@ -400,13 +402,7 @@ reveal src/handler.py --check
 # handler.py:156:1 B003 Property with side effects
 ```
 
-Categories:
-- **B** - Bugs (bare except, static method with self, etc.)
-- **C** - Complexity (cyclomatic complexity, function length)
-- **S** - Security (hardcoded secrets, insecure patterns)
-- **D** - Duplicates (copy-pasted code)
-- **N** - Nginx configuration issues
-- **V** - Validation (schema conformance)
+Categories: **B** (bugs), **C** (complexity), **D** (duplicates), **E** (error handling), **F** (frontmatter), **I** (imports), **L** (links), **M** (maintainability), **N** (nginx), **R** (refactoring), **S** (security), **T** (types), **U** (URLs), **V** (validation)
 
 ---
 
@@ -429,7 +425,7 @@ reveal src/auth/handler.py authenticate       # 80 tokens
 # Total: 160 tokens
 ```
 
-Same information. 50x fewer tokens.
+Same information. ~50x fewer tokens in this example — measured range is 3.9–15x on typical tasks.
 
 ---
 

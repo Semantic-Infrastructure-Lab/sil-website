@@ -412,7 +412,8 @@ reveal file.py --check         # Quality check
 
 # Get agent-optimized help
 reveal help://                 # What's available? (~50 tokens)
-reveal --agent-help            # Quick start (~1,500 tokens)
+reveal help://quick-start      # Getting started guide
+reveal --agent-help            # Strategic guide for AI agents (~1,500 tokens)
 ```
 
 ---
@@ -487,12 +488,17 @@ Reveal is **actively developed** and used in production by:
 - **Scout** - AI-powered code review agent (10x token efficiency measured)
 - **SIL** (Semantic Infrastructure Lab) - Research project for AI-native tooling
 
-**Roadmap highlights:**
-- `reveal diff://` - Compare files, environments, API responses
-- `reveal stats://` - Codebase health metrics
-- `--watch` mode - Live updates on file changes
-- VS Code extension - Bring reveal to your IDE
-- GitHub Action - Automated PR quality checks
+Since this article was written, Reveal has grown substantially. Highlights from recent releases:
+
+- **`reveal pack`** — token-budgeted context snapshots: give AI agents exactly the right files for their context window
+- **`reveal review`** — one-command PR review with CI exit codes (structural diff + quality check + hotspots)
+- **`reveal health`** — unified health check for SSL, domains, databases, and code quality
+- **`reveal hotspots`** — find complexity hotspots across a codebase in one pass
+- **`calls://` adapter** — cross-file call graph queries: find every caller of any function, trace execution paths, export to Graphviz
+- **`claude://` adapter** — search and navigate your own Claude Code sessions as structured data
+- **`cpanel://` adapter** — full cPanel environment audits (SSL + ACL + nginx in one command)
+- **32 quality rules** across 9 categories, including architectural layer violation detection
+- **`.reveal.yaml` configuration** — project-level architecture rules and custom semantic patterns
 
 ---
 
@@ -566,7 +572,7 @@ Try it. Your token budget will thank you.
 - **Scout (Code Review):** https://github.com/scottsen/scout
 - **Research:** 12 projects documented internally, selective public releases
 
-**Current Version:** Reveal v0.23.0
+**Current Version:** Reveal v0.63.0
 **License:** MIT
 **Maintained by:** Scott (Founder, Semantic Infrastructure Lab)
 

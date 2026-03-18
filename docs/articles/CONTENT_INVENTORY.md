@@ -374,8 +374,16 @@
 
 ### 1. Reveal (DONE) ✅
 
-**Source**: `reveal.md` (361 lines)
-**Status**: ✅ Already covered in published articles
+**Source**: `reveal.md` (now fully updated for v0.63.0, 2026-03-15)
+**Status**: ✅ Systems page updated + 2 new articles published (2026-03-15)
+
+**New articles (session turquoise-spectrum-0315):**
+- `reveal-pack-and-review.md` — `reveal pack` + `reveal review` deep dive
+- `reveal-call-graphs.md` — `calls://` adapter guide
+
+**Still needed:**
+- `reveal health` article
+- `claude://` adapter article
 
 ---
 
