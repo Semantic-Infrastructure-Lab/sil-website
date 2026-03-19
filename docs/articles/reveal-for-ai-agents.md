@@ -391,7 +391,7 @@ reveal python://syspath
 
 ## Quality Checks
 
-Reveal has 67 quality rules across 14 categories. Agents can check code as they work:
+Reveal has 69 quality rules across 14 categories. Agents can check code as they work:
 
 ```bash
 reveal src/handler.py --check

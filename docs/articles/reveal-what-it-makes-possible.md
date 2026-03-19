@@ -174,7 +174,7 @@ Before you read a single file. `reveal overview` replaces the multi-command orie
 
 ---
 
-### 67 Quality Rules, No Config Required
+### 69 Quality Rules, No Config Required
 
 ```bash
 reveal check src/              # All rules

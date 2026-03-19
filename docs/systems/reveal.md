@@ -252,7 +252,7 @@ reveal dev inspect-config                     # See effective .reveal.yaml
 
 ## Quality Rules System
 
-67 rules across 14 categories, run via `reveal check` or `reveal review`:
+69 rules across 14 categories, run via `reveal check` or `reveal review`:
 
 | Category | Code | Examples |
 |----------|------|---------|
