@@ -1,510 +1,611 @@
 ---
-title: "Stop Reading Code. Start Understanding It"
-subtitle: "Reveal: Progressive Disclosure for Code Exploration"
+title: "Reveal: A Semantic Query Layer for Code, Infrastructure, and Docs"
+subtitle: "Progressive disclosure, URI-based queries, and 23 adapters — what it actually does and why it matters"
 author: "Scott Senkeresty"
-date: "2025-12-10"
+date: "2026-03-20"
 type: "article"
 status: "published"
 audience: "developers"
-topics: ["reveal", "progressive-disclosure", "token-efficiency", "code-exploration", "semantic-stack", "beth", "knowledge-graphs"]
+topics: ["reveal", "progressive-disclosure", "token-efficiency", "code-exploration", "semantic-stack", "uri-adapters", "call-graph", "ai-agents", "mcp", "imports", "git-blame", "structural-analysis"]
 related_projects: ["reveal", "beth", "sil"]
 related_docs:
   - "PROGRESSIVE_DISCLOSURE_GUIDE.md"
   - "REVEAL_BETH_PROGRESSIVE_KNOWLEDGE_SYSTEM.md"
-  - "REVEAL.md"
+  - "../systems/reveal.md"
 canonical_url: "https://semanticinfrastructurelab.org/articles/reveal-introduction"
-reading_time: "12 minutes"
-beth_topics: [reveal, progressive-disclosure, token-efficiency, semantic-stack, beth, knowledge-graphs, pagerank, 7-layer-architecture, sil]
-session_provenance: "emerald-crystal-1210"
+reading_time: "18 minutes"
+beth_topics: [reveal, progressive-disclosure, token-efficiency, uri-adapters, call-graph, pack, code-review, agent-help, mcp-server, sil, imports, semantic-blame, structural-analysis]
+session_provenance: "crackling-drought-0320"
+version: "v0.66.1"
 ---
 
-# Stop Reading Code. Start Understanding It.
+# Reveal: A Semantic Query Layer for Code, Infrastructure, and Docs
 
-**Or: How We're Building the Semantic OS One Layer at a Time**
-
----
-
-You know that moment when Claude reads your 7,500-line Python file to answer a simple question like "what does the `load_config` function do?"
-
-You watch the tokens burn. You know there's a better way. But `cat` is fast, `grep` is familiar, and you've got a deadline.
-
-**What if I told you there's a tool that gives Claude the same answer using 50 tokens instead of 7,500?**
-
-Not by cutting corners. Not by guessing. By actually understanding your code's structure first, then reading only what matters.
-
-That's **Reveal**.
-
-And it's not just a clever tool. It's a **proof point for an entire semantic infrastructure**—a demonstration that progressive disclosure, knowledge graphs, and semantic understanding can work together to make AI agents 25-30x more efficient.
-
-This is one piece of a bigger vision. Let me show you how it works.
+**Or: one consistent syntax for asking questions about everything in your project**
 
 ---
 
-## The Problem Nobody Talks About
+You know the moment. Claude needs to understand your auth module, so it reads `auth.py`. Then it reads `config.py` because auth imports it. Then `models.py`, `utils.py`, and three more files because who knows what's actually needed. By the time it gets to your question, it's burned 15,000 tokens just navigating the codebase.
 
-AI agents are amazing at reasoning. They're terrible at not reading everything.
+This is the default. It doesn't have to be.
 
-When you ask Claude to "fix the auth bug," here's what actually happens:
+**Reveal** solves this with progressive disclosure — a structured query layer that gives you (and AI agents) exactly what you need without reading everything. But that's just where it starts. By the time we're done here, you'll have seen call-graph analysis, architectural layer enforcement, token-budgeted codebase snapshots, automated PR review, unified health checks spanning code and infrastructure, documentation as a queryable graph, and Excel workbooks parsed like databases.
 
-1. Claude reads `auth.py` (3,200 tokens)
-2. Claude reads `config.py` because auth imports it (1,800 tokens)
-3. Claude reads `utils.py` because why not (2,100 tokens)
-4. Claude finds the bug on line 47 of `auth.py`
-5. You just spent 7,100 tokens to fix a one-line typo
-
-**This is insane.**
-
-Not because Claude is bad. Because our tools are designed for humans with eyes, not agents with context windows.
-
----
-
-## Enter: Semantic Slicing
-
-Here's what Reveal does differently:
+Install it now if you want to follow along:
 
 ```bash
-# Instead of this (7,500 tokens):
-cat auth.py
-
-# Do this (100 tokens):
-reveal auth.py
-```
-
-**Output:**
-```
-Functions (8):
-  auth.py:23    validate_token [12 lines, depth:1]
-  auth.py:47    load_config [23 lines, depth:1]  ← THE BUG IS HERE
-  auth.py:89    refresh_session [45 lines, depth:2]
-  ...
-
-Next: reveal auth.py <function>   # Extract specific function
-      reveal auth.py --check       # Quality check
-```
-
-Now Claude knows:
-- The file has 8 functions
-- Where each one is
-- How complex they are
-- What to do next
-
-**Then extract just what you need** (50 tokens):
-```bash
-reveal auth.py load_config
-```
-
-**Total: 150 tokens instead of 7,500.**
-
-That's **50x reduction**. On a single file. Before you even start debugging.
-
----
-
-## But Wait, There's Way More
-
-Reveal isn't just "structure viewer." It's a **semantic exploration engine**.
-
-### 1. Query Code Like a Database
-
-Find all complex functions in your codebase:
-
-```bash
-reveal 'ast://./src?complexity>10'
-```
-
-Find all test functions:
-
-```bash
-reveal 'ast://.?name=test_*'
-```
-
-No `grep`. No `find`. No regex. Just **questions your code can answer**.
-
----
-
-### 2. Diagnose Python Environments
-
-You know that bug where your code changes don't work? Stale `.pyc` bytecode.
-
-```bash
-reveal python://debug/bytecode
-```
-
-**Output:**
-```
-⚠️  Found 3 stale bytecode files:
-  src/__pycache__/auth.cpython-310.pyc (older than auth.py)
-
-Cleanup: find . -name "*.pyc" -delete
-```
-
-**This has saved me hours.** Multiple times.
-
----
-
-### 3. Validate Infrastructure
-
-Remember that time your nginx config had two upstreams pointing to the same backend on the wrong port, and your $8K/month revenue site served 404s for 6 hours?
-
-Yeah, me too.
-
-```bash
-reveal nginx.conf --check
-```
-
-**Output:**
-```
-N001: Duplicate backend detected
-  upstream api_v1 (port 8001) and upstream api_v2 (port 8001)
-  both point to 127.0.0.1:8001
-
-  Risk: Load balancer serves wrong API version
-```
-
-**Reveal caught this in staging.** Before production. Before the incident.
-
----
-
-### 4. Navigate JSON Like It's a URL
-
-```bash
-reveal json://config.json/database/credentials/password
-```
-
-No `jq` syntax to remember. Just paths. Like URLs.
-
-Want the schema?
-```bash
-reveal json://config.json?schema
-```
-
-Want it grep-able?
-```bash
-reveal json://config.json?flatten
-```
-
----
-
-## The Design Philosophy Nobody Asked For (But Everyone Needs)
-
-Reveal is built on three principles that make AI agents 10x more effective:
-
-### 1. **Progressive Disclosure**
-
-Start general. Get specific. Never read more than you need.
-
-```bash
-reveal src/                    # What's here? (directory tree)
-reveal src/auth.py             # What's in this file? (structure)
-reveal src/auth.py validate    # Show me this function (extraction)
-```
-
-Each step gives you **exactly** what you need to decide the next step.
-
-### 2. **Self-Documenting**
-
-Every capability documents itself:
-
-```bash
-reveal help://                 # What can I do? (~50 tokens)
-reveal help://python           # How does python:// work? (~200 tokens)
-reveal help://tricks           # Show me the cool stuff (~500 tokens)
-```
-
-No 12,000-token manual unless you explicitly ask for it (`--agent-help-full`).
-
-### 3. **Agent-First UX**
-
-When Claude uses Reveal, breadcrumbs suggest **reveal commands**, not vim:
-
-```
-Next: reveal file.py <function>   # Extract specific function
-      reveal file.py --check       # Quality check
-      reveal file.py --outline     # Hierarchical view
-```
-
-Every output teaches Claude what to do next. Zero tokens wasted on "open in editor" suggestions.
-
----
-
-## Real-World Impact
-
-Here's what Reveal enables in practice:
-
-### Scout Code Review Agent
-- **Before Reveal:** Read entire files, 50K+ tokens per review
-- **After Reveal:** Structure first, 5K tokens per review
-- **Result:** 10x more reviews per dollar
-
-### TIA Session Documentation
-- **Pattern:** `git diff --name-only | reveal --stdin --outline`
-- **Result:** Instant overview of all changes without reading files
-- **Use case:** Generate session handoff docs, PR descriptions
-
-### Python Environment Debugging
-- **Symptom:** "My code changes aren't working!"
-- **Command:** `reveal python://debug/bytecode`
-- **Result:** Finds stale `.pyc` files in 0.3 seconds vs. 30 minutes of confusion
-
-### Infrastructure Validation
-- **Problem:** Nginx config errors take down production
-- **Solution:** `reveal nginx.conf --check` in CI/CD
-- **Impact:** Caught 3 critical issues before deployment (measured)
-
----
-
-## The Meta Moment
-
-The best Reveal demo is Reveal itself.
-
-When I was building the `python://` adapter, I triggered a module shadowing bug. My local `types.py` was hiding Python's built-in `types` module.
-
-So I used Reveal to diagnose Reveal:
-
-```bash
-reveal python://module/types
-```
-
-**Output:**
-```
-⚠️  Module 'types' is shadowed!
-  Import resolves to: ./reveal/types.py (your local file)
-  Built-in module 'types' is hidden
-
-  Fix: Rename reveal/types.py to avoid shadowing
-```
-
-**A tool that debugs itself using its own diagnostic capabilities.**
-
-That's when I knew we had something special.
-
----
-
-## The Bigger Picture: Semantic Infrastructure in Action
-
-Reveal isn't working alone. It's **one component in a semantic stack** we're building at the Semantic Infrastructure Lab (SIL).
-
-### The Stack (7 Layers of Semantic Computing)
-
-We're building an operating system for semantic computing. Think of it like the OSI network stack, but for meaning instead of packets:
-
-**Layer 0: Hardware/Substrate** - Physical compute and storage
-**Layer 1-2: Semantics** - Names, types, relationships (AST, type systems)
-**Layer 3: Composition** - Structure, geometry, how things fit together
-**Layer 4: Dynamics** - Time, simulation, execution flow
-**Layer 5: Intent** - User goals, constraints, what you want
-**Layer 6: Intelligence** - Agents, reasoning, decision-making
-
-**Reveal operates across Layers 1-3:**
-- **Layer 1:** Names (functions, classes, imports)
-- **Layer 2:** Types and relationships (function calls, inheritance)
-- **Layer 3:** Composition (file structure, module organization)
-
-It extracts semantic meaning from code **without executing it**. That's the key insight.
-
-### The Beth Connection: Knowledge Graphs Meet Progressive Disclosure
-
-Here's where it gets interesting. Reveal doesn't work alone—it's **paired with Beth**, our semantic search and knowledge graph system.
-
-**What Beth does:**
-- Indexes 15,306 files across our entire infrastructure
-- Builds knowledge graphs with 1,402 emergent topics (not imposed taxonomies)
-- Uses **PageRank-style authority** to rank documents by their connections
-- Makes summaries and indexes discoverable as high-authority nodes
-
-**The measured synergy:**
-- **Reveal alone:** 50x token reduction on individual files
-- **Beth alone:** Fast semantic search across thousands of files
-- **Reveal + Beth together:** 25-30x reduction across entire workflows
-
-**Why it works:**
-1. **Beth finds the right document** (semantic search, <400ms)
-2. **Reveal shows structure** (Orient: "what's in here?")
-3. **You drill down** (Focus: "show me that function")
-4. **Session notes get indexed** (Beth learns patterns, ranks summaries high)
-5. **Future searches work better** (virtuous cycle)
-
-### The Pattern: Progressive Disclosure is Fractal
-
-This isn't just a tool design. It's an **architectural principle** that works at every scale:
-
-**Tools implement it:**
-- Reveal: structure → element
-- Beth: topic → document → section
-- TIA search: recent → content → AST
-
-**Workflows follow it:**
-- Orient (summaries, structure) → 300-500 tokens
-- Navigate (outlines, relationships) → 500-1,500 tokens
-- Focus (specific code) → 1,000-8,000 tokens
-
-**Documentation uses it:**
-- README → Index → Detailed Guide
-- Beth ranks summaries high (PageRank boost from connections)
-- You land on overviews first, drill down as needed
-
-**Measured across 300+ TIA sessions:**
-- Code exploration: 58x reduction (35,000 → 600 tokens)
-- Pattern discovery: 22x reduction (50,000 → 2,200 tokens)
-- Doc navigation: 20x reduction (25,000 → 1,250 tokens)
-- **Average: 27x fewer tokens**
-
-### What We're Proving
-
-**Reveal is evidence** that semantic infrastructure works:
-
-✅ **Progressive disclosure scales** - Same pattern from 10 files to 15,000+ files
-✅ **Knowledge graphs create value** - PageRank for documents works (summaries rank high naturally)
-✅ **Tool composition compounds benefits** - Reveal + Beth = 25x improvement
-✅ **Emergent organization beats imposed hierarchy** - 1,402 topics discovered organically
-✅ **Structure-first beats text-first** - AST queries > regex every time
-
-This is **not about Reveal being clever**. It's about demonstrating that when you build semantic infrastructure properly—with progressive disclosure, knowledge graphs, and composable tools—you get 25x efficiency improvements that actually measure in production.
-
-### The Vision: Semantic OS
-
-Reveal is **Layer 1-3** of a 7-layer semantic operating system. The full stack includes:
-
-- **Morphogen** (simulation, dynamics - Layer 4)
-- **Agent Ether** (intelligence, orchestration - Layer 6)
-- **SUP** (UI, intent - Layer 5)
-- **TiaCAD** (geometry, composition - Layer 3)
-- **GenesisGraph** (provenance, trust)
-- **Pantheon** (unified IR connecting everything)
-
-**The thesis:** When you treat meaning as a first-class concern—not text, not syntax, but **semantic structure**—you can build tools that compose naturally and amplify each other's value.
-
-Reveal is the proof. Beth is the proof. The 25x measured reduction is the proof.
-
-And we're just getting started.
-
----
-
-## Who Should Use Reveal?
-
-**You should use Reveal if:**
-
-✅ You work with AI agents (Claude, GPT, local LLMs)
-✅ You review code (human or AI)
-✅ You debug Python environments
-✅ You maintain infrastructure configs (nginx, docker)
-✅ You care about token efficiency
-✅ You explore unfamiliar codebases
-
-**You probably don't need Reveal if:**
-
-❌ You only work on tiny projects (<5 files)
-❌ You never use AI coding assistants
-❌ You enjoy reading 10,000-line files from top to bottom
-
----
-
-## Quick Start
-
-```bash
-# Install
 pip install reveal-cli
-
-# Try it
-reveal .                       # Directory structure
-reveal file.py                 # File structure
-reveal file.py function_name   # Extract function
-reveal file.py --check         # Quality check
-
-# Get agent-optimized help
-reveal help://                 # What's available? (~50 tokens)
-reveal help://quick-start      # Getting started guide
-reveal --agent-help            # Strategic guide for AI agents (~1,500 tokens)
 ```
 
 ---
 
-## The Stuff That Makes It Awesome
+## Start Here: The Three-Level Drill-Down
 
-### Multi-Language Support
-Python, JavaScript, TypeScript, Rust, Go, Bash, YAML, JSON, Markdown, Dockerfile, Nginx, TOML, JSONL, GDScript, Jupyter notebooks... **plus 37 more via TreeSitter fallback**.
-
-### Pipeline Integration
-```bash
-# PR review workflow
-git diff --name-only | reveal --stdin --outline
-
-# Find issues across codebase
-find src/ -name "*.py" | reveal --stdin --check
-
-# Copy output for sharing
-reveal file.py --copy
-```
-
-### Format Flexibility
-```bash
-reveal file.py                 # Human-readable text
-reveal file.py --format=json   # JSON structure
-reveal file.py --format=grep   # Pipeable (file:line:name)
-reveal file.py --copy          # Copy to clipboard
-```
-
-### Quality Checks
-- **B** (Bugs): bare except clauses, unused variables
-- **C** (Complexity): cyclomatic complexity warnings
-- **E** (Errors): line length, trailing whitespace
-- **N** (Nginx): duplicate upstreams, SSL issues, missing headers
-- **S** (Security): insecure protocols, Docker `:latest` tags
+Most tools give you two options: a directory listing (too little) or full file contents (too much). Reveal enforces three levels:
 
 ```bash
-reveal file.py --check              # All checks
-reveal file.py --check --select B,S # Bugs + security only
+# Level 1: What's in this directory?
+$ reveal src/
+📁 src/ (12 files)
+├── auth.py (342 lines, Python)
+├── config.py (189 lines, Python)
+├── models/
+│   ├── user.py (156 lines, Python)
+│   └── post.py (203 lines, Python)
+└── ...
+```
+
+~100 tokens. You now know what exists. You don't need to read a single file.
+
+```bash
+# Level 2: What's in this file?
+$ reveal src/auth.py
+auth.py (342 lines, Python)
+├── Imports (6)
+├── Classes (1)
+│   └── AuthManager (lines 18-287)
+└── Functions (8)
+    ├── validate_token (lines 291-318, complexity: 7)
+    ├── refresh_token (lines 320-341, complexity: 4)
+    └── ...
+```
+
+~250 tokens. You now know what functions exist, roughly how complex they are, and where they live. You still haven't read the file.
+
+```bash
+# Level 3: What does this function do?
+$ reveal src/auth.py validate_token
+src/auth.py:291-318
+def validate_token(token: str, *, require_fresh: bool = False) -> AuthClaims:
+    """Validate a JWT token and return decoded claims."""
+    try:
+        claims = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
+        if require_fresh and not claims.get("fresh"):
+            raise TokenNotFreshError("Token is not fresh")
+        return AuthClaims(**claims)
+    except jwt.ExpiredSignatureError:
+        raise TokenExpiredError(f"Token expired at {claims.get('exp')}")
+    except jwt.InvalidTokenError as e:
+        raise InvalidTokenError(str(e))
+```
+
+~150 tokens. Exact implementation, nothing else.
+
+**Total: ~500 tokens.** Traditional approach (read all three relevant files): ~8,500 tokens. The 10–150x token reduction claim isn't marketing — it's structurally guaranteed by the architecture. Structure output is always smaller than content output.
+
+But this is the easy part. The three-level drill-down is just the default interaction model. Here's what actually makes Reveal interesting.
+
+---
+
+## The URI Architecture: Everything Is a Resource
+
+Most tools expose features as subcommands: `git log`, `git blame`, `docker ps`. You learn each command separately. Reveal takes a different approach — it exposes *resources* as URIs with query parameters.
+
+```bash
+reveal ast://src/?complexity>10&sort=-complexity
+reveal calls://src/?target=validate_token&depth=3
+reveal imports://src/?circular
+reveal ssl://api.example.com
+reveal mysql://prod/?type=replication
+reveal markdown://docs/?aggregate=type
+```
+
+Same syntax. Same query operators (`=`, `~=`, `>`, `!`, `..`, `*`). Same output format. Whether you're querying code complexity, call graphs, import cycles, SSL certificates, database replication status, or documentation metadata — the mental model is identical.
+
+This isn't an aesthetic choice. It's what makes everything composable. The output of `nginx://` feeds `ssl://`. The output of `diff://` feeds `ast://`. Infrastructure becomes queryable data that pipes into the next analysis.
+
+23 adapters ship today. Let's look at the ones you'll actually use.
+
+---
+
+## Scenario 1: "What Calls This Function — and Who Wrote It?"
+
+You're about to refactor `validate_token`. Before you touch it, you want to know: what else in this codebase depends on it? And once you've scoped the change, who actually understands this code?
+
+### Impact radius with calls://
+
+Reveal's `calls://` adapter walks each function's body at the AST level and builds an inverted call index, distinguishing call expressions from comments, strings, and variable names.
+
+```bash
+# Who calls validate_token — anywhere in the project?
+reveal 'calls://src/?target=validate_token'
+
+# What does validate_token call? (dependency surface)
+reveal 'calls://src/?callees=validate_token'
+
+# Callers of callers — two levels deep
+reveal 'calls://src/?target=validate_token&depth=3'
+
+# Most architecturally load-bearing functions in the whole project
+reveal 'calls://src/?rank=callers&top=20'
+
+# Dead code candidates — functions with no callers in the index
+reveal 'calls://src/?uncalled&type=function'
+
+# Visual call graph
+reveal 'calls://src/?target=validate_token&format=dot' | dot -Tsvg > callgraph.svg
+```
+
+**Honest limitations worth knowing:** This is static analysis, not a language server. It works by name — if two functions share the same name across files, their callers are merged. Method calls written as `self.validate_token()` index under `self.validate_token`. Dynamic dispatch won't appear.
+
+Where it reliably delivers: uniquely-named utility functions, `?rank=callers` coupling metrics (name collisions don't skew relative rankings much), and impact-radius checks before touching well-named functions.
+
+The `?rank=callers` metric is the one I find most useful. It surfaces architecturally load-bearing functions before you know to look for them — not by searching for a specific name, but by asking the whole codebase what it depends on most.
+
+### Ownership with semantic blame
+
+Now the other question: before you refactor, who has the most context on this function?
+
+Standard `git blame` attributes individual lines. Semantic blame understands the *element boundary* — it attributes lines within a function or class, tells you the primary author and contributors, and links directly to the relevant commits.
+
+```bash
+# Who owns validate_token — by function, not by line?
+reveal 'git://src/auth.py?type=blame&element=validate_token'
+```
+
+```
+Element Blame: src/auth.py → validate_token
+Lines 291-318 (1 hunks)
+
+Contributors (by lines owned):
+  Jane Smith                   18 lines (64.3%)  Last: 2026-03-18 14:22:41
+  John Doe                     10 lines (35.7%)  Last: 2025-07-14 09:05:12
+
+Key hunks (largest continuous blocks):
+  Lines 291-308 (18 lines)  def5678 2026-03-18 14:22:41 Jane Smith
+    feat: harden token validation with expiry check
+  Lines 309-318 (10 lines)  abc1234 2025-07-14 09:05:12 John Doe
+    feat: initial JWT implementation
+
+Use: reveal git://src/auth.py?type=blame&detail=full  for line-by-line view
+```
+
+```bash
+# Who owns the AuthManager class?
+reveal 'git://src/auth.py?type=blame&element=AuthManager'
+
+# Class method attribution
+reveal 'git://src/models.py?type=blame&element=User.save'
+```
+
+`?rank=callers` tells you what depends on a function. Semantic blame tells you who to talk to before changing it. Together they're the full picture for safe refactoring.
+
+---
+
+## Scenario 2: "Where Are the Structural Cracks?"
+
+Bad architecture doesn't fail loudly. Circular dependencies accumulate over months. Layer violations creep in when a deadline is tight. By the time you notice, there are dozens of them. Reveal's `imports://` adapter makes this visible.
+
+```bash
+# Find circular dependency chains
+reveal 'imports://src/?circular'
+```
+
+```
+============================================================
+Circular Dependencies: 3
+============================================================
+
+  1. src/models/user.py -> src/services/auth.py -> src/models/user.py
+  2. src/api/routes.py -> src/handlers/users.py -> src/api/routes.py
+  3. src/db/models.py -> src/db/session.py -> src/db/base.py -> src/db/models.py
+```
+
+```bash
+# Imports that are declared but never used
+reveal 'imports://src/?unused'
+
+# Full import graph overview — who imports what across the project
+reveal 'imports://src/'
+```
+
+Layer violations require a `.reveal.yaml` configuration where you define your architecture layers (presentation → application → domain → infrastructure) and the allowed dependencies between them:
+
+```bash
+# Find files that violate your architecture
+reveal 'imports://src/?violations'
+```
+
+```
+============================================================
+Layer Violations: 5
+============================================================
+
+  src/models/user.py:3 - domain importing infrastructure (src.db.session)
+  src/api/routes.py:12 - presentation importing infrastructure (src.db.connection)
+  src/services/auth.py:15 - application importing presentation (src.api.schemas)
+```
+
+These three commands — `?circular`, `?unused`, `?violations` — are a full architectural health audit. Run them before a refactor. Run them in CI. Circular dependencies make testing fragile, cause module initialization failures, and are genuinely hard to find any other way.
+
+---
+
+## Scenario 3: "Give the AI Exactly the Right Codebase Context"
+
+Here's a problem that comes up constantly when working with AI agents: how do you give Claude useful codebase context without burning its entire context window on boilerplate?
+
+The naive approach is to read every file. The thoughtful approach is `reveal pack`:
+
+```bash
+# Fit the most important code in 8000 tokens
+reveal pack src/ --budget 8000
+```
+
+What this does: ranks files by complexity and recency, fills entry points first, then priority files, stops at the budget. The agent gets the right code in the right order at the right size.
+
+But the really useful version is the PR-aware snapshot:
+
+```bash
+# Changed files first, then fill with key dependencies
+reveal pack src/ --since main --budget 8000
+```
+
+`--since main` boosts every file changed in the current branch to priority tier 0 — above entry points, above everything. The remaining budget fills with the most important context. When you hand this to an AI agent for a PR review, it leads with what actually changed, not what's biggest.
+
+This is built for agents, not retrofitted. The token budget is a first-class parameter. The problem it solves — agents exhausting their context on stub `__init__.py` files before reaching the actual logic — is real and constant.
+
+---
+
+## Scenario 4: "Did This PR Make Anything Harder to Maintain?"
+
+Most CI checks catch bugs. Very few catch *architectural decay* — the gradual accumulation of complexity that makes a codebase harder to work with over time.
+
+### reveal review: the full PR picture
+
+```bash
+# Full PR review: structural diff + quality violations + hotspots + complexity delta
+reveal review main..HEAD
+```
+
+Under the hood, `reveal review` composes four things:
+1. **Structural diff** — what functions and classes were added, removed, or modified
+2. **Quality checks** — 69 rules across bugs, security, complexity, and more
+3. **Hotspot detection** — which files got worse
+4. **Complexity delta** — before/after complexity on every changed function
+
+That last one is the novel part. Every modified function carries `complexity_before`, `complexity_after`, and `complexity_delta` in the output. You can now ask: "did this PR make anything meaningfully more complex?"
+
+```bash
+# Find functions that got more complex in this PR
+reveal diff://git://main/.:git://HEAD/. --format json | \
+  jq '.diff.functions[] | select(.complexity_delta > 5)'
+
+# CI gate: exit 0 clean, exit 1 warnings, exit 2 errors
+reveal review main..HEAD || exit 1
+```
+
+### reveal check: surgical quality gates
+
+When you don't need the full PR review, `reveal check` runs the quality rule engine directly against any file or directory:
+
+```bash
+reveal check src/                          # all 69 rules, full recursive scan
+reveal check src/ --select B,S            # bugs and security only — fast CI gate
+reveal check src/ --select I              # imports only (circular, unused, violations)
+reveal check src/ --severity high         # high and critical issues only
+reveal check src/ --only-failures         # hide passing checks
+reveal check --rules                      # list all 69 rules with descriptions
+reveal check --explain C901              # explain the cyclomatic complexity rule
+```
+
+The rule categories span 14 domains: **B**ugs, **C**omplexity, **D**uplicates, **E**rrors, **F**rontmatter, **I**mports, **L**inks, **M**aintainability, i**N**frastructure (nginx), **R**efactoring, **S**ecurity, **T**ypes, **U**RLs, **V**alidation. Every check is a valid CI gate with no configuration.
+
+```bash
+# Drop this in a pre-commit hook
+reveal check src/ --select B,S --only-failures || exit 1
 ```
 
 ---
 
-## The Token Efficiency Breakdown
+## Scenario 5: "One Command for Code, Certs, DNS, and Database"
 
-Let's measure this concretely. Typical Python file (`auth.py`, 342 lines):
+Most teams have three or four separate tools for infrastructure health: something for code quality, `openssl s_client` for certificates, a DNS checker, a MySQL monitoring query. None of them share output formats. None of them compose.
 
-| Approach | Tokens | What You Get |
-|----------|--------|--------------|
-| `cat auth.py` | 7,500 | Entire file |
-| `reveal auth.py` | 100 | Structure (8 functions, imports) |
-| `reveal auth.py validate_token` | 50 | Just the function you need |
-| **Total (reveal)** | **150** | **Same understanding** |
-| **Reduction** | **50x** | **7,350 tokens saved** |
+```bash
+# Check everything at once
+reveal health ./src ssl://api.example.com domain://example.com mysql://prod
+```
 
-On a 50-file codebase review:
-- **Traditional:** 50 files × 7,500 tokens = **375,000 tokens** (~$0.75 on Claude Opus)
-- **Reveal:** 50 files × 150 tokens = **7,500 tokens** (~$0.015 on Claude Opus)
-- **Savings:** **$0.74 per review** (50x reduction)
+One command. Code quality violations + SSL certificate expiry and chain validation + DNS health + MySQL replication status, all under unified exit codes and JSON output.
 
-At scale (100 reviews/month):
-- **Cost savings:** ~$74/month
-- **Context window savings:** Fits 50x more context in same request
-- **Speed improvement:** Less to read = faster responses
+```bash
+# JSON for monitoring pipelines
+reveal health ./src --format json | jq '.overall_exit'
+
+# CI gate
+reveal health ./src && deploy.sh || alert_oncall.sh
+```
+
+### ssl:// — more than just expiry
+
+```bash
+reveal ssl://api.example.com
+# → Status: ✅ HEALTHY (75 days until expiry), Chain Valid, Hostname Match
+
+reveal ssl://api.example.com/san        # all Subject Alternative Names
+reveal ssl://api.example.com/chain      # full certificate chain
+reveal ssl://api.example.com/dates      # expiry details only
+reveal ssl://api.example.com --check    # exit 0/1/2 for CI
+```
+
+### domain:// — full domain health in one shot
+
+`domain://` is one of the most useful single-command tools in the suite. It combines DNS records, WHOIS, SSL status, email deliverability, and HTTP behavior under one adapter:
+
+```bash
+reveal domain://example.com
+# → A records, MX configured, SSL ✅, registrar, expiry
+
+reveal domain://example.com/mail
+# → Status: ❌ FAILURE
+# →   ✅ mx_records: MX configured (5 records)
+# →   ❌ spf_record: No SPF record — domain is open to email spoofing
+# →   ❌ dmarc_record: No DMARC — spoofed emails reach inboxes undetected
+
+reveal domain://example.com/http
+# → http://example.com → 301 → https://example.com → 200
+
+reveal domain://example.com/ns-audit
+# → All 2 NS servers agree — no stale/orphaned entries
+
+reveal domain://example.com --check    # full health gate: DNS + SSL + email + HTTP
+```
+
+The `/mail` element alone — checking SPF and DMARC — catches email deliverability problems that are easy to miss and expensive to discover after the fact.
+
+### nginx config file analysis
+
+The nginx file analyzer works on any `.conf` file regardless of where nginx is running:
+
+```bash
+reveal /etc/nginx/conf.d/myapp.conf     # structure: servers, locations, SSL blocks
+reveal check /etc/nginx/conf.d/myapp.conf     # N rules: missing headers, rate limiting, server_tokens, etc.
+```
+
+To batch-check SSL on every domain in a config file — the output of `--extract domains` already produces `ssl://`-prefixed URIs, ready to pipe:
+
+```bash
+reveal nginx.conf --extract domains | reveal --stdin --check
+# → SSL Batch Check: 3 domains, 2 passed, 1 failed
+```
+
+The output of one adapter feeds the next. This is the composability the URI architecture enables.
 
 ---
 
-## What's Next
+## Scenario 6: "Our Docs Are a Graph, Not a Pile of Files"
 
-Reveal is **actively developed** and used in production by:
-- **TIA** (The Intelligent Agent) - Scott's semantic infrastructure system
-- **Scout** - AI-powered code review agent (10x token efficiency measured)
-- **SIL** (Semantic Infrastructure Lab) - Research project for AI-native tooling
+If your project has significant documentation — architecture docs, guides, references, changelogs — `markdown://` turns it into a queryable graph.
 
-Since this article was written, Reveal has grown substantially. Highlights from recent releases:
+```bash
+# What document types exist across the knowledge base?
+reveal 'markdown://docs/?aggregate=type'
+# → guide: 23, reference: 18, architecture: 7, procedure: 12 ...
 
-- **`reveal pack`** — token-budgeted context snapshots: give AI agents exactly the right files for their context window
-- **`reveal review`** — one-command PR review with CI exit codes (structural diff + quality check + hotspots)
-- **`reveal health`** — unified health check for SSL, domains, databases, and code quality
-- **`reveal hotspots`** — find complexity hotspots across a codebase in one pass
-- **`calls://` adapter** — cross-file call graph queries: find every caller of any function, trace execution paths, export to Graphviz
-- **`claude://` adapter** — search and navigate your own Claude Code sessions as structured data
-- **`cpanel://` adapter** — full cPanel environment audits (SSL + ACL + nginx in one command)
-- **32 quality rules** across 9 categories, including architectural layer violation detection
-- **`.reveal.yaml` configuration** — project-level architecture rules and custom semantic patterns
+# Find all docs tagged with a topic
+reveal 'markdown://docs/?beth_topics~=authentication'
+
+# Full link graph — who links to what, how many backlinks each doc has
+reveal 'markdown://docs/?link-graph'
+# → 50 files | 264 edges | 2 isolated
+# → ADAPTER_AUTHORING_GUIDE.md  (linked by 16)
+# →   → AGENT_HELP.md
+# →   → QUICK_START.md ...
+# → Isolated (2 files with no links):
+# →   REVIEW_VALIDATION_AND_IMPROVEMENTS.md
+# →   UX_ISSUES.md
+
+# Full-text search combined with structured metadata filtering
+reveal 'markdown://docs/?body-contains=retry&type=procedure'
+```
+
+Bidirectional link graphs. Taxonomy frequency tables. Full-text search combined with frontmatter filtering. This is knowledge graph functionality in a code tool. For projects where the docs are first-class (not an afterthought), this changes how you maintain them.
 
 ---
 
-## Try It Right Now
+## Scenario 7: "That Spreadsheet Is a Database"
 
-Seriously. Install it and run it on your current project:
+`xlsx://` and `json://` extend Reveal's query model to data files — treating them as structured resources rather than opaque blobs.
+
+### Excel workbooks
+
+```bash
+# What sheets exist and how big are they?
+reveal report.xlsx
+# → Sheets (3): Sales (1,234 rows × 8 cols), Summary (25 rows × 5 cols), Raw (500 rows × 12 cols)
+
+# Extract a specific sheet
+reveal 'xlsx://report.xlsx?sheet=Sales'
+
+# Pull a specific cell range
+reveal 'xlsx://report.xlsx?sheet=Sales&range=A1:E50'
+
+# Export a sheet to CSV
+reveal 'xlsx://report.xlsx?sheet=Sales&format=csv' > sales.csv
+
+# Search across all sheets for a value
+reveal 'xlsx://report.xlsx?search=Q4 2025'
+```
+
+Power Pivot workbooks (with embedded data models) are also supported — `reveal` will detect them automatically and expose the pivot tables, Power Query M code, and external data connections.
+
+### JSON navigation
+
+```bash
+# Navigate to a nested key — no jq syntax needed
+reveal json://config.json/database/host
+
+# Type introspection
+reveal json://api-response.json/users?type
+# → Array[Object] (150 items)
+
+# Flatten to grep-able lines (gron-style)
+reveal json://config.json?flatten | grep database
+# → config.database.host = "localhost"
+# → config.database.port = 5432
+# → config.database.name = "mydb"
+
+# Filter an array
+reveal 'json://users.json/users?status=active&sort=-created_at&limit=10'
+
+# Schema inference on unknown JSON
+reveal json://api-response.json?schema
+```
+
+Both adapters follow the same progressive disclosure model: start with structure, drill to content, filter to what you need.
+
+---
+
+## The Architecture Behind the Composability
+
+These aren't independent features bolted together. They share a common architecture that makes them composable:
+
+| Design choice | What it enables |
+|---|---|
+| URI-as-language | Same query syntax across all resources — code, infra, data, docs |
+| Universal operators (`=`, `~=`, `>`, `!`, `..`, `*`) | Filter expressions transfer across adapters without learning new syntax |
+| `--stdin` piping | Output of one adapter is input to the next |
+| Structured JSON output | Every query composable with `jq`, scripts, and AI agents |
+| Exit code discipline (0/1/2) | Every check is a valid CI gate with no configuration |
+| Token budgeting | First-class LLM context constraint, not a workaround |
+| `reveal://` self-reference | The tool introspects itself using its own syntax |
+
+The self-reference property is worth dwelling on. `reveal help://schemas/ast` gives you a machine-readable JSON schema for the AST adapter. `reveal help://adapters` lists every adapter with syntax and examples. `reveal --agent-help` generates a condensed decision tree for AI agents encountering the tool for the first time.
+
+This means agents can safely discover what Reveal offers and how to use it without external documentation. The tool documents itself. When you're building AI workflows, adoption friction drops to near zero.
+
+---
+
+## The MCP Server: Agents Get All of This Natively
+
+```bash
+pip install reveal-mcp
+```
+
+`reveal-mcp` exposes all of Reveal's capabilities as MCP tools for Claude Code, Cursor, and Windsurf. Five tools: `reveal_structure`, `reveal_element`, `reveal_query`, `reveal_pack`, `reveal_check`. Agents get progressive disclosure, call-graph analysis, and quality checks without subprocess overhead.
+
+This is how the architecture of progressive disclosure becomes the default behavior for AI agents working on your codebase — not something they have to be instructed to do, but something built into how they access code.
+
+---
+
+## What Nobody Else Does
+
+After using Reveal daily for months, here are capabilities I haven't found elsewhere in a CLI tool:
+
+**Semantic blame by element** — `git://src/auth.py?type=blame&element=validate_token` answers "who owns this *function*?" Not who last touched line 47, but who wrote the 28-line function that lives at lines 291–318, with attribution percentages and direct commit links. Git blame has existed for decades. Semantic blame over a named element is new.
+
+**Architecture layer enforcement** — `imports://src/?violations` catches cases where your domain layer imports from infrastructure, or your presentation layer bypasses the service layer. This is enforced from the command line against `.reveal.yaml` configuration with no additional tooling.
+
+**`reveal health` spanning code + certs + DB + DNS** — a genuine category collapse. One command, one JSON blob, one exit code, four different infrastructure domains. The cross-domain unified exit code makes this work as a real CI gate.
+
+**`complexity_delta` on every changed function** — `diff://` carries `complexity_before`, `complexity_after`, and `complexity_delta` for every modified function. "Did this PR make anything harder to maintain?" is now a scriptable CI check.
+
+**`reveal pack --since <branch> --budget N`** — PR-aware codebase snapshots that boost changed files to priority tier 0. Built for AI agents; the token budget is a first-class parameter.
+
+**`?decorator=*cache*` wildcard matching** — finds all functions decorated with `@lru_cache`, `@cached_property`, `@cache`, or any pattern, without knowing exact decorator names. `reveal 'ast://src/?decorator=*retry*'` surfaces every retry-decorated function in the codebase.
+
+**`markdown://docs/?link-graph`** — bidirectional documentation link analysis with orphan detection. Rare in any tool category.
+
+**`claude://sessions/` session archaeology** — AI work history as queryable structured data. Find every file a session touched, search across sessions for references to a function, reconstruct the context of a decision made three weeks ago.
+
+**Self-describing infrastructure** — `help://schemas/<adapter>` returns machine-readable JSON schemas for every adapter. `reveal --agent-help` generates a decision-tree reference for agents. Agents can discover and use the full API without external documentation.
+
+---
+
+## The 23 Adapters
+
+| Domain | Adapters |
+|--------|----------|
+| Code semantics | `ast://`, `calls://`, `imports://`, `diff://`, `python://` |
+| Data systems | `mysql://`, `sqlite://`, `json://`, `xlsx://` |
+| Infrastructure | `ssl://`, `nginx://`, `domain://`, `cpanel://`, `autossl://`, `letsencrypt://`, `env://` |
+| Documents | `markdown://`, `stats://`, `git://` |
+| Meta / self-referential | `help://`, `reveal://`, `claude://` |
+
+190+ languages: 37 built-in analyzers plus 165 additional via Tree-sitter fallback. 69 quality rules across 14 categories. Zero configuration required.
+
+---
+
+## The Day-to-Day Patterns You'll Actually Use
+
+The scenarios above are the highlights. In practice, these are the patterns you'll run dozens of times a day:
+
+```bash
+# Orient on an unfamiliar codebase
+reveal .                                # directory structure
+reveal src/                             # drill into source
+reveal src/main.py                      # file outline
+reveal src/main.py create_app           # extract one function
+
+# Find things without reading files
+reveal 'ast://src/?name=*auth*'         # anything with "auth" in the name
+reveal 'ast://src/?complexity>10'       # functions that need attention
+reveal 'ast://src/?decorator=*cache*'   # cached functions
+reveal 'ast://src/?decorator=*retry*'   # retry-decorated functions
+
+# Understand architectural coupling
+reveal 'calls://src/?rank=callers&top=20'       # what holds everything together
+reveal 'calls://src/?target=fn_name'            # impact radius before refactoring
+reveal 'imports://src/?circular'                # circular dependency chains
+reveal 'imports://src/?unused'                  # dead imports before a cleanup
+reveal 'imports://src/?violations'              # architecture layer violations
+
+# Code ownership and history
+reveal 'git://src/auth.py?type=blame&element=validate_token'   # who owns this function?
+reveal 'git://src/auth.py?type=blame&element=AuthManager'      # who owns this class?
+
+# Orient an AI agent
+reveal overview .                       # codebase dashboard in one output
+reveal deps .                           # dependency health
+reveal hotspots src/                    # worst files by combined metrics
+reveal pack src/ --since main --budget 8000   # PR context for agent
+
+# Infrastructure health
+reveal ssl://yourdomain.com             # certificate status + expiry
+reveal ssl://yourdomain.com/san         # Subject Alternative Names
+reveal domain://yourdomain.com          # DNS + SSL + WHOIS combined
+reveal domain://yourdomain.com/mail     # SPF + DMARC deliverability check
+reveal domain://yourdomain.com/http     # HTTP→HTTPS redirect chain
+reveal /etc/nginx/conf.d/app.conf       # nginx config structure
+reveal /etc/nginx/conf.d/app.conf --check  # nginx rule violations
+reveal nginx.conf --extract domains | reveal --stdin --check   # batch SSL from nginx
+reveal health ./src ssl://api.example.com    # combined code + SSL gate
+reveal env://                           # runtime environment snapshot
+reveal env://DATABASE_URL               # specific env variable lookup
+
+# Data inspection
+reveal report.xlsx                      # workbook structure
+reveal json://config.json?flatten       # gron-style JSON for grepping
+
+# Before/after a PR
+reveal review main..HEAD                # full review with complexity delta
+reveal check src/ --select B,S         # fast: bugs + security only
+reveal check src/ --select I           # import health: circular, unused, violations
+```
+
+---
+
+## Try It
 
 ```bash
 pip install reveal-cli
@@ -512,92 +613,30 @@ cd ~/your-project
 reveal .
 ```
 
-Pick any file that looks interesting, run `reveal file.py`, and watch it show you the structure in ~100 tokens instead of reading 7,500.
+Pick any file that looks interesting. Run `reveal file.py`. See the outline in ~200 tokens instead of reading 5,000.
 
-Then extract one function: `reveal file.py function_name`
+Then extract one function: `reveal file.py function_name`.
 
-You just saved 7,000 tokens. **On one file.**
+Then ask a structural question: `reveal 'ast://src/?complexity>10'`.
 
-Now imagine doing that across your entire codebase.
+Then find the architectural load-bearing functions: `reveal 'calls://src/?rank=callers&top=20'`.
 
----
+Then check for structural cracks: `reveal 'imports://src/?circular'`.
 
-## The Bottom Line
-
-**Reveal is a semantic code exploration engine built for AI agents.**
-
-It doesn't replace `cat` or `grep`. It replaces **reading entire files to understand structure**.
-
-It's not magic. It's just **treating code as structured data instead of text**.
-
-And it's **open source, production-ready, and actively maintained**.
-
-Try it. Your token budget will thank you.
+Then — if you have a team — ask who owns the most critical code: `reveal 'git://src/core.py?type=blame&element=MainClass'`.
 
 ---
 
-## About the Semantic Infrastructure Lab (SIL)
+## Why This Exists
 
-**SIL** is a research lab building the foundations for semantic computing—an operating system where meaning is the primary abstraction, not files or processes.
+Reveal is the first production system from the **Semantic Infrastructure Lab** — a research project building the foundations for AI-native tooling. The core thesis: AI agents need infrastructure that meets them where they are, not human tools retrofitted for automated use.
 
-**Our work:**
-- **12 projects** across the 7-layer semantic stack
-- **15,306+ files** of documentation, code, and research
-- **1,402 emergent topics** discovered through semantic organization
-- **25-30x measured efficiency gains** in AI agent workflows
+Progressive disclosure is one piece of that. The same pattern that makes Reveal efficient for code will extend to semantic graphs, provenance chains, and multi-agent reasoning systems. But that's the longer story. This is the part that ships today, works immediately on your codebase, and makes your AI agent workflows measurably better.
 
-**Public projects:**
-- **Reveal** - Code structure explorer (this tool)
-- **Scout** - AI code review agent (uses Reveal, 10x more efficient)
-- **Beth** - Semantic search with knowledge graphs
-- **Pantheon** - Unified semantic IR for cross-domain interoperability
-
-**The vision:** Build tools that understand meaning, compose naturally, and prove that semantic infrastructure scales.
-
-**Current status:** Production systems serving real workflows, not research demos. Reveal, Beth, and TIA process 300+ sessions per month with measured 25x token reductions.
+**GitHub:** [Semantic-Infrastructure-Lab/reveal](https://github.com/Semantic-Infrastructure-Lab/reveal)
+**PyPI:** [reveal-cli](https://pypi.org/project/reveal-cli/)
+**MCP Server:** `pip install reveal-mcp`
 
 ---
 
-**Links:**
-
-**Reveal:**
-- **GitHub:** https://github.com/scottsen/reveal
-- **PyPI:** https://pypi.org/project/reveal-cli/
-- **Docs:** `reveal --help` or `reveal help://`
-- **Quick Start:** `reveal --agent-help`
-
-**SIL Ecosystem:**
-- **Website:** [Coming Soon - sil.dev]
-- **GitHub Org:** https://github.com/Semantic-Infrastructure-Lab
-- **Scout (Code Review):** https://github.com/scottsen/scout
-- **Research:** 12 projects documented internally, selective public releases
-
-**Current Version:** Reveal v0.63.0
-**License:** MIT
-**Maintained by:** Scott (Founder, Semantic Infrastructure Lab)
-
----
-
-## Colophon
-
-*This intro was written by TIA (The Intelligent Agent) using reveal to explore reveal's own codebase, and Beth to discover related documentation across 15,306 indexed files. Meta? Absolutely. Effective? You tell me.*
-
-*Token count for this analysis:*
-- *This document: ~4,200 tokens*
-- *Research (Beth + Reveal exploration): ~8,000 tokens*
-- *Total: ~12,200 tokens*
-
-*If I'd used `cat` on reveal's source files + grep through 15K files:*
-- *Reveal source: ~45,000 tokens*
-- *Manual doc search: ~80,000 tokens*
-- *Total: ~125,000 tokens*
-
-*Efficiency gain: **10x reduction** (12,200 vs 125,000 tokens)*
-
-**Case closed. Progressive disclosure works.**
-
----
-
-*Want to learn more about the semantic stack? The full architecture, research, and additional tools are being documented at SIL. We're building in public where it makes sense, keeping proprietary details private where necessary.*
-
-*Reveal is the public face of a much larger vision. If this resonates, stay tuned.*
+*Reveal v0.66.1 — 6,871 tests, 23 URI adapters, 69 quality rules, 190+ languages. MIT license.*
