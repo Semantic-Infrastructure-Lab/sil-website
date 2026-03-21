@@ -1,6 +1,6 @@
 ---
 title: "Reveal: A Semantic Query Layer for Code, Infrastructure, and Docs"
-subtitle: "Progressive disclosure, URI-based queries, and 23 adapters — what it actually does and why it matters"
+subtitle: "Progressive disclosure, URI-based queries, and 22 adapters — what it actually does and why it matters"
 author: "Scott Senkeresty"
 date: "2026-03-20"
 type: "article"
@@ -114,7 +114,7 @@ Same syntax. Same query operators (`=`, `~=`, `>`, `!`, `..`, `*`). Same output 
 
 This isn't an aesthetic choice. It's what makes everything composable. The output of `nginx://` feeds `ssl://`. The output of `diff://` feeds `ast://`. Infrastructure becomes queryable data that pipes into the next analysis.
 
-23 adapters ship today. Let's look at the ones you'll actually use.
+22 adapters ship today. Let's look at the ones you'll actually use.
 
 ---
 
@@ -639,4 +639,4 @@ Progressive disclosure is one piece of that. The same pattern that makes Reveal 
 
 ---
 
-*Reveal v0.66.1 — 6,871 tests, 23 URI adapters, 69 quality rules, 190+ languages. MIT license.*
+*Reveal v0.66.1 — 6,871 tests, 22 URI adapters, 69 quality rules, 190+ languages. MIT license.*
