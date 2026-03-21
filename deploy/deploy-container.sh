@@ -167,8 +167,14 @@ echo ""
 # Deploy via SSH
 echo "📦 Deploying container on $HOST..."
 
+REGISTRY_PASS=$(tia secrets get registry:password 2>/dev/null)
+REGISTRY_USER=$(tia secrets get registry:username 2>/dev/null)
+
 ssh $HOST bash -s <<EOF
 set -e
+
+echo "→ Authenticating with registry..."
+echo "${REGISTRY_PASS}" | podman login registry.mytia.net -u ${REGISTRY_USER} --password-stdin
 
 echo "→ Pulling latest image..."
 podman pull ${IMAGE_NAME}:${CONTAINER_TAG}
