@@ -67,7 +67,7 @@ Build structures that last.**
 - [Design Principles](/foundations/design-principles) - The 14 constraints that guide all work
 
 **If you want to get started:**
-- [Start Here](/START_HERE) - 30-minute guided tour with hands-on example
+- [Start Here](/start) - 30-minute guided tour with hands-on example
 - [FAQ](/meta/FAQ) - Common questions answered
 
 ---

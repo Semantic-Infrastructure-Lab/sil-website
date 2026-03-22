@@ -30,7 +30,7 @@ Tools designed for agents from day one, with:
 
 Some tools implement specific SIL innovations:
 
-- **Reveal** → Implements [Progressive Disclosure](/innovations/progressive-disclosure) innovation
+- **Reveal** → Implements [Progressive Disclosure](/essays/progressive-disclosure-for-ai-agents) innovation
 - **Beth** (TIA integrated) → Knowledge graph + PageRank for documentation
 - **TIA** → Application workspace applying multiple SIL innovations
 

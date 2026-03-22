@@ -34,7 +34,7 @@ SIL Technical Charter (v1)
 - **Glossary:** `/foundations/SIL_GLOSSARY.md` - Look up terms while reading
 - **Principles:** `/foundations/design-principles.md` - Why these constraints exist
 - **Pattern:** `/architecture/UNIFIED_ARCHITECTURE_GUIDE.md` - High-level framework
-- **Navigation:** [Start Here](START_HERE) - Entry point to SIL
+- **Navigation:** [Start Here](/start) - Entry point to SIL
 
 **Time Required:** 2-4 hours (reference document, can read sections as needed)
 

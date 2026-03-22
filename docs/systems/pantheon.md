@@ -269,20 +269,20 @@ body_3d.save("guitar_body.3mf")
 ## Technical Deep Dive
 
 **Full Documentation:**
-- [Pantheon GitHub Repository](https://github.com/Semantic-Infrastructure-Lab/pantheon)
-- [Architecture Guide](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/docs/architecture/)
-- [Schema Specification](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/docs/specifications/)
-- [Morphogen Adapter](https://github.com/Semantic-Infrastructure-Lab/pantheon/tree/main/adapters/morphogen) - Bidirectional translation working ✅
-- [Roadmap](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/ROADMAP) - Detailed development timeline
+- Pantheon Repository (private)
+- Architecture Guide — coming soon
+- Schema Specification — coming soon
+- Morphogen Adapter - Bidirectional translation working ✅ (coming soon)
+- Roadmap — coming soon
 
 **Example Gallery:**
-- ✅ [**SQL Over Audio (WORKING)**](https://github.com/Semantic-Infrastructure-Lab/pantheon/tree/main/examples/cross_domain_analytics) - **Prism + Morphogen cross-domain composition**
+- ✅ **SQL Over Audio (WORKING)** - **Prism + Morphogen cross-domain composition**
   - 390 lines, fully working demo
   - Shows 2x optimization potential
   - Proves cross-domain composition works
-- [Physics-Informed CAD (Planned)](https://github.com/Semantic-Infrastructure-Lab/pantheon/tree/main/examples/physics-informed-cad) - Morphogen → TiaCAD
-- [Provenance-Aware UI (Planned)](https://github.com/Semantic-Infrastructure-Lab/pantheon/tree/main/examples/provenance-ui) - GenesisGraph → SUP
-- [Hardware/Software Co-Design (Planned)](https://github.com/Semantic-Infrastructure-Lab/pantheon/tree/main/examples/hw-sw-codesign) - Morphogen ↔ Philbrick
+- Physics-Informed CAD (Planned) - Morphogen → TiaCAD
+- Provenance-Aware UI (Planned) - GenesisGraph → SUP
+- Hardware/Software Co-Design (Planned) - Morphogen ↔ Philbrick
 
 **Getting Started:**
 ```bash
@@ -401,6 +401,6 @@ This solves the fragmentation that forces professional workflows to span 3-5 inc
 **Status:** Design phase with proof-of-concept (Morphogen adapter working)
 
 **Learn More:**
-- [GitHub Repository](https://github.com/Semantic-Infrastructure-Lab/pantheon)
-- [Architecture Documentation](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/docs/architecture/)
-- [Roadmap](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/ROADMAP)
+- GitHub Repository (private)
+- Architecture Documentation — coming soon
+- Roadmap — coming soon

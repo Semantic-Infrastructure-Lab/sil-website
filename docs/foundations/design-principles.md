@@ -825,8 +825,8 @@ The `--agent-help` flag exists specifically to provide example-rich prompts:
 **Quick Check**: Does your prompt include at least one concrete example of desired output format?
 
 **Related SIL Documentation**:
-- [Hierarchical Agency Framework](/foundations/HIERARCHICAL_AGENCY_FRAMEWORK) - Section 10.1 applies this principle to multi-agent orchestration
-- [Progressive Disclosure Guide](/foundations/PROGRESSIVE_DISCLOSURE_GUIDE) - Examples demonstrate layered information reveal
+- [Hierarchical Agency Framework](/research/hierarchical-agency-framework) - Section 10.1 applies this principle to multi-agent orchestration
+- [Progressive Disclosure Guide](/research/progressive-disclosure-guide) - Examples demonstrate layered information reveal
 
 ---
 
@@ -942,7 +942,7 @@ The `--agent-help` flag exists specifically to provide example-rich prompts:
 - [Unified Architecture Guide](/architecture/UNIFIED_ARCHITECTURE_GUIDE) - Semantic OS architecture
 
 **Quality & Safety**:
-- [Safety Thresholds](/foundations/SIL_SAFETY_THRESHOLDS) - Risk classification and thresholds
+- Safety Thresholds - Risk classification and thresholds
 
 **Tool Documentation**:
 - reveal: `reveal --agent-help-full`

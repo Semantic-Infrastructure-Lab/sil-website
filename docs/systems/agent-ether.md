@@ -250,15 +250,15 @@ for event in invoker.stream_events(job_id):
 ## Technical Deep Dive
 
 **Full Documentation:**
-- [Agent Ether GitHub Repository](https://github.com/Semantic-Infrastructure-Lab/agent-ether)
-- [TBC Specification](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/specifications/tool-behavior-contract)
-- [Architecture Guide](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/architecture/)
-- [Multi-Agent Coordination](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/architecture/MULTI_AGENT_COORDINATION)
+- Agent Ether Repository (private)
+- TBC Specification — coming soon
+- Architecture Guide — coming soon
+- Multi-Agent Coordination — coming soon
 
 **Example Gallery:**
-- [Filesystem Search Tool](https://github.com/Semantic-Infrastructure-Lab/agent-ether/tree/main/examples/fs-search) - Job execution mode
-- [REPL Session Tool](https://github.com/Semantic-Infrastructure-Lab/agent-ether/tree/main/examples/repl) - Interactive session mode
-- [API Call Tool](https://github.com/Semantic-Infrastructure-Lab/agent-ether/tree/main/examples/api-call) - Async execution mode
+- Filesystem Search Tool - Job execution mode (coming soon)
+- REPL Session Tool - Interactive session mode (coming soon)
+- API Call Tool - Async execution mode (coming soon)
 
 **Getting Started:**
 ```bash
@@ -364,6 +364,6 @@ This transforms multi-agent systems from "pray it works" to "provably correct or
 *"The Society of Mind" - Intelligence emerges from coordination of simple agents*
 
 **Learn More:**
-- [GitHub Repository](https://github.com/Semantic-Infrastructure-Lab/agent-ether)
-- [Tool Behavior Contract Spec](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/specifications/tool-behavior-contract)
-- [Architecture](https://github.com/Semantic-Infrastructure-Lab/agent-ether/blob/main/docs/architecture/)
+- GitHub Repository (private)
+- Tool Behavior Contract Spec — coming soon
+- Architecture — coming soon

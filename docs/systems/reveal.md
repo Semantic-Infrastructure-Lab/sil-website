@@ -358,7 +358,7 @@ Reveal demonstrates core SIL design principles:
 Measured on reveal's own codebase (v0.64.x): **3.9–33x** depending on task.
 Typical for file inspection and call graph queries: **3.9–15x**.
 Peak for targeted queries (dead code scan, caller lookup): **15–33x**.
-See [BENCHMARKS.md](../../../projects/reveal/external-git/reveal/docs/BENCHMARKS.md) for reproducible measurements.
+See [BENCHMARKS.md](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/main/docs/BENCHMARKS.md) for reproducible measurements.
 
 ---
 
@@ -375,8 +375,8 @@ reveal --agent-help            # If you're an AI agent
 
 Full documentation:
 - `reveal help://` — built-in, always current
-- [AGENT_HELP.md](../../../projects/reveal/external-git/reveal/docs/AGENT_HELP.md) — complete agent reference
-- [RECIPES.md](../../../projects/reveal/external-git/reveal/docs/RECIPES.md) — workflows and patterns
+- [AGENT_HELP.md](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/main/docs/AGENT_HELP.md) — complete agent reference
+- [RECIPES.md](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/main/docs/RECIPES.md) — workflows and patterns
 
 ---
 
