@@ -260,4 +260,4 @@ Five minutes to understand what it does. The productivity change is immediate 鈥
 
 ---
 
-**[Full documentation](../systems/reveal.md)** 路 **[Benchmarks](../../../projects/reveal/external-git/reveal/docs/BENCHMARKS.md)** 路 **[MCP Setup](../../../projects/reveal/external-git/reveal/docs/MCP_SETUP.md)** 路 **[CI Recipes](../../../projects/reveal/external-git/reveal/docs/CI_RECIPES.md)**
+**[Full documentation](/systems/reveal)** 路 **[Benchmarks](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/main/docs/BENCHMARKS.md)** 路 **[MCP Setup](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/main/docs/MCP_SETUP.md)** 路 **[CI Recipes](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/main/docs/CI_RECIPES.md)**

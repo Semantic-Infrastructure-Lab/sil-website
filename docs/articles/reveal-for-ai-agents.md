@@ -122,7 +122,7 @@ reveal src/api/routes.py create_user  # Show me this one
 | Understand a focused module | cat: 4,128 tokens | structure: 275 tokens | 15x |
 | Find callers of a function | grep: 560 tokens | calls://?target: 84 tokens | 6.7x |
 
-**Typical range: 3.9–15x** on file inspection and call graph queries. See [Benchmarks](../../../projects/reveal/external-git/reveal/docs/BENCHMARKS.md) for full scenarios.
+**Typical range: 3.9–15x** on file inspection and call graph queries. See [Benchmarks](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/main/docs/BENCHMARKS.md) for full scenarios.
 
 ---
 

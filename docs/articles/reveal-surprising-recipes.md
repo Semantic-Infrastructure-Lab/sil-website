@@ -361,4 +361,4 @@ This is why the surprising recipes keep appearing. They're not surprises in the 
 
 ---
 
-**← [Back to the main article](reveal-what-it-makes-possible.md)** · **[Full documentation](../systems/reveal.md)** · **[All recipes](../../../projects/reveal/external-git/reveal/docs/RECIPES.md)**
+**← [Back to the main article](/articles/reveal-what-it-makes-possible)** · **[Full documentation](/systems/reveal)** · **[All recipes](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/main/docs/RECIPES.md)**
