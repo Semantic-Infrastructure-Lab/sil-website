@@ -78,7 +78,7 @@ Parametric CAD in YAML. Semantic constraints, not just geometry. Proof that sema
 
 ## The Lab
 
-SIL is an independent research lab. We build in the open, publish our work, and invite collaboration. The [Semantic Infrastructure Foundation](https://semanticinfrastructurefoundation.org) — the institutional vision that preceded SIL — has closed; [the full account is there](https://semanticinfrastructurefoundation.org).
+SIL is an independent research lab. We build in the open, publish our work, and invite collaboration.
 
 **Current team:**
 - **Scott Senkeresty** — Founder & Chief Architect

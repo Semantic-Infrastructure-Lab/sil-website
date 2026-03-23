@@ -96,9 +96,7 @@ This collaboration demonstrates how transparent agents can extend human reasonin
 
 SIL is an independent research lab — open source, building in public, no institutional overhead.
 
-The [Semantic Infrastructure Foundation](https://semanticinfrastructurefoundation.org) was the institutional vision that preceded this work: a 501(c)(3) nonprofit designed for a 50-year research horizon. After honest assessment of what could actually be built and when, that plan was scaled back. [The full account is there](https://semanticinfrastructurefoundation.org) — it's worth reading.
-
-SIL continues as what it always was: a demonstration that the approach works.
+A prior institutional vision — the [Semantic Infrastructure Foundation](https://semanticinfrastructurefoundation.org) — has closed. SIL continues as what it always was: a demonstration that the approach works.
 
 ## Standing on Shoulders of Giants
 

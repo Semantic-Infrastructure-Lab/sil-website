@@ -71,7 +71,7 @@ All our systems are open source:
 
 ## Funding & Support
 
-SIL is an independent research lab. The [Semantic Infrastructure Foundation](https://semanticinfrastructurefoundation.org) — the institutional vehicle that preceded this work — has closed.
+SIL is an independent research lab — no institutional overhead, no external investors.
 
 **For funding inquiries:** [scott@semanticinfrastructurelab.org](mailto:scott@semanticinfrastructurelab.org)
 
