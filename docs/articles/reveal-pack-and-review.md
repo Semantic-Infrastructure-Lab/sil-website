@@ -17,7 +17,6 @@ beth_topics:
   - reveal-pack
   - reveal-review
 related_docs:
-  - "reveal-for-ai-agents.md"
   - "reveal-introduction.md"
 canonical_url: "https://semanticinfrastructurelab.org/articles/reveal-pack-and-review"
 reading_time: "8 minutes"
@@ -59,21 +58,21 @@ reveal pack .
 
 **Output:**
 ```
-Selected 8 files within 4000-token budget:
+Pack: .  [~4000 tokens budget]
+Selected 8 of 42 files (~3,940 tokens, 421 lines)
 
-  Entry points:
-    app.py              (247 lines, 1,840 tokens)
-    cli.py              (89 lines, 680 tokens)
+── Entry points / focus files ──
+  app.py                                              1840 tokens   247 lines
+  cli.py                                               680 tokens    89 lines
 
-  Key directories:
-    src/auth/handler.py (156 lines, 1,190 tokens)
-    src/models/user.py  (94 lines, 720 tokens)
+── Key directories ──
+  src/auth/handler.py                                 1190 tokens   156 lines
+  src/models/user.py                                   720 tokens    94 lines
 
-  Recently modified:
-    src/auth/tokens.py  (67 lines, 510 tokens)
+── Other files ──
+  src/auth/tokens.py                                   510 tokens    67 lines
 
-  Budget used: 3,940 / 4000 tokens
-  Skipped: 34 files (stubs, tests, generated)
+[34 files excluded — exceeded budget]
 ```
 
 You get the files that matter, sized to fit. Not all 39 Python files. Not random guesses. The ones that are most likely to give an agent useful orientation.
@@ -93,12 +92,12 @@ The `--focus` flag is particularly useful: it doesn't filter out other files, it
 
 ```bash
 # Get the file list as JSON for programmatic use
-reveal pack . --format json | jq '.selected[].relative'
+reveal pack . --format json | jq '.files[].relative'
 ```
 
 This is the intended agent workflow:
 1. Agent calls `reveal pack . --format json`
-2. Gets back a list of 8–12 file paths
+2. Extracts file paths: `jq '.files[].relative'`
 3. Reads *those* files instead of crawling the whole project
 4. Has context budget left over for actual reasoning
 
@@ -160,22 +159,24 @@ One command, complete picture.
 
 ### CI gate integration
 
-```bash
-# Gate on any errors (exit code 2 = has errors)
-reveal review main..HEAD --format json \
-  | jq '.sections.violations | map(select(.severity=="error")) | length == 0'
+Exit codes: `0` = clean, `1` = warnings only, `2` = errors. Shell-script friendly.
 
-# Gate on overall status
-reveal review . --format json | jq '.overall_status == "pass"'
+```bash
+# Gate on errors — exits 2 if errors found, 0 if clean
+reveal review main..HEAD
 ```
 
-Exit codes: `0` = clean, `1` = warnings only, `2` = errors. Shell-script friendly.
+For structured output in scripts:
+```bash
+# Count violations via JSON
+reveal review main..HEAD --format json | jq '.sections.violations | length'
+```
 
 In a GitHub Actions workflow:
 ```yaml
 - name: Reveal Review
-  run: reveal review ${{ github.base_ref }}..${{ github.head_ref }}
-  # exits 2 (and fails) if there are errors
+  run: reveal review origin/${{ github.base_ref }}..HEAD
+  # exits 0 = clean, 1 = warnings (pass), 2 = errors (fail)
 ```
 
 ### Reviewing without a git range
@@ -238,6 +239,5 @@ reveal help://review
 ---
 
 *Part of the Reveal documentation series. See also:*
-- *[Reveal for AI Agents](/articles/reveal-for-ai-agents) — complete agent workflow guide*
 - *[Stop Reading Code. Start Understanding It.](/articles/reveal-introduction) — the big picture*
-- *[Reveal Quick Start](/articles/reveal-quickstart) — get going in 5 minutes*
+- *[Find Every Caller in Your Codebase](/articles/reveal-call-graphs) — call graph analysis*

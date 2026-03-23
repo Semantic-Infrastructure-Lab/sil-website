@@ -94,7 +94,7 @@ reveal reveal://rules/security/S001.py
 reveal reveal://analyzers/python.py
 
 # How is the calls adapter structured?
-reveal reveal://adapters/calls.py
+reveal reveal://adapters/calls
 
 # Extract a specific method from a rule
 reveal reveal://rules/links/L001.py _extract_anchors_from_markdown
@@ -179,7 +179,7 @@ As a GitHub Actions step:
 - name: Dead code check
   run: |
     UNCALLED=$(reveal 'calls://src/?uncalled' --format json | \
-      jq '[.uncalled[]] | length')
+      jq '.entries | length')
     echo "Uncalled functions: $UNCALLED"
     # Advisory — change exit 0 to exit 1 to enforce
 ```
@@ -298,11 +298,10 @@ With 2,000+ sessions, manual search doesn't scale. `?search=` pre-filters with p
 
 ```bash
 # Which docs have the most backlinks?
-reveal 'markdown://docs/?link-graph' --format=grep | \
-  cut -f2 | sort | uniq -c | sort -rn
+reveal 'markdown://docs/?link-graph' | grep "linked by" | sort -t'(' -k2 -rn | head -20
 
-# Docs nobody links to
-reveal 'markdown://docs/?link-graph' | grep 'backlinks: 0'
+# Docs nobody links to (isolated = no "(linked by N)" annotation)
+reveal 'markdown://docs/?link-graph' | grep -v "linked by\|→\|files\|edges\|isolated"
 ```
 
 Most link checkers tell you if a link is broken. This tells you which docs are stranded — technically valid, but unreachable from everything else. Those are the ones that get stale.
