@@ -81,6 +81,42 @@ The seventy-year arc of how machines learned to find what we know — from Luhn'
 
 ---
 
+### [Find Every Caller in Your Codebase With One Command](/articles/reveal-call-graphs)
+**Date:** 2026-03-15
+**Topics:** Reveal, call graphs, impact analysis, refactoring, dead code, architecture
+**Audience:** Developers, AI practitioners
+
+The `calls://` adapter answers three questions that grep can't: who calls this function, what does it call, and which functions are most architecturally coupled. Covers transitive call chains, graph visualization, and practical workflows for refactoring, dead code detection, and understanding unfamiliar codebases.
+
+**Key points:**
+- Impact analysis before refactoring: find every caller in one command
+- Forward lookup: trace exactly what a function depends on
+- Coupling analysis: identify architectural hotspots
+- How calls:// differs from grep (semantic vs. textual)
+- Transitive callers and call chain visualization
+
+**From session:** atomic-zeppelin-0322
+
+---
+
+### [Two Commands That Change How You Work With Code](/articles/reveal-pack-and-review)
+**Date:** 2026-03-15
+**Topics:** Reveal, pack, review, token budget, PR review, AI agents, context curation
+**Audience:** Developers, AI practitioners, teams using AI for code review
+
+`reveal pack` solves context curation — token-budgeted snapshots that give AI agents the right files, not all the files. `reveal review` automates PR review from a git range. Together they eliminate the assembly step between "I want AI help with this codebase" and actually getting it.
+
+**Key points:**
+- `reveal pack`: priority-ranked file selection within a token or line budget
+- `--focus` flag: boost domain-relevant files to the top of the pack
+- `reveal review`: structured PR review from `git diff` in one command
+- CI gate integration: automated review on every PR
+- Using them together for agent context + review workflows
+
+**From session:** atomic-zeppelin-0322
+
+---
+
 ### [The Too-Many-Sausages Problem](/articles/rfq-matching-modern-architecture)
 **Date:** 2026-03-23
 **Topics:** Information retrieval, RFQ matching, semantic search, embeddings, agentic AI, manufacturing, enterprise

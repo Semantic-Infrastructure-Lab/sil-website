@@ -15,9 +15,9 @@ beth_topics:
   - mcp
   - agentic-ai
 related_docs:
-  - "reveal-for-ai-agents.md"
   - "reveal-call-graphs.md"
   - "reveal-pack-and-review.md"
+  - "reveal-surprising-recipes.md"
   - "systems/reveal.md"
 ---
 
