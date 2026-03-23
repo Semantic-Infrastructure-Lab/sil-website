@@ -71,9 +71,9 @@ All our systems are open source:
 
 ## Funding & Support
 
-SIL is the research division of the [Semantic Infrastructure Foundation](https://semanticinfrastructurefoundation.org) (SIF), a 501(c)(3) nonprofit in formation.
+SIL is an independent research lab. The [Semantic Infrastructure Foundation](https://semanticinfrastructurefoundation.org) — the institutional vehicle that preceded this work — has closed.
 
-**For funding inquiries:** Contact [SIF](https://semanticinfrastructurefoundation.org/contact)
+**For funding inquiries:** [scott@semanticinfrastructurelab.org](mailto:scott@semanticinfrastructurelab.org)
 
 ## Response Time
 
@@ -84,8 +84,8 @@ Scott reads every message. Response time varies based on current work, but expec
 **General / Technical:**
 [scott@semanticinfrastructurelab.org](mailto:scott@semanticinfrastructurelab.org)
 
-**Funding & Foundation matters:**
-[SIF Contact Page](https://semanticinfrastructurefoundation.org/contact)
+**Funding inquiries:**
+[scott@semanticinfrastructurelab.org](mailto:scott@semanticinfrastructurelab.org)
 
 ---
 

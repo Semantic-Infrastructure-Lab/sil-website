@@ -141,7 +141,7 @@ If an agent contributes insight, structure, or decomposition, that provenance ge
 
 **Collaborate:**
 - [Contact us](/contact) for research collaboration
-- [SIF](https://semanticinfrastructurefoundation.org/contact) for funding inquiries
+- [scott@semanticinfrastructurelab.org](mailto:scott@semanticinfrastructurelab.org) for funding inquiries
 
 ---
 
