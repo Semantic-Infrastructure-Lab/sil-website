@@ -1,6 +1,6 @@
 ---
 title: "Reveal: A Semantic Query Layer for Code, Infrastructure, and Docs"
-subtitle: "Progressive disclosure, URI-based queries, and 23 adapters — what it actually does and why it matters"
+subtitle: "Progressive disclosure, URI-based queries, and 22 adapters — what it actually does and why it matters"
 author: "Scott Senkeresty"
 date: "2026-03-20"
 type: "article"
@@ -16,7 +16,7 @@ canonical_url: "https://semanticinfrastructurelab.org/articles/reveal-introducti
 reading_time: "18 minutes"
 beth_topics: [reveal, progressive-disclosure, token-efficiency, uri-adapters, call-graph, pack, code-review, agent-help, mcp-server, sil, imports, semantic-blame, structural-analysis]
 session_provenance: "crackling-drought-0320"
-version: "v0.66.1"
+version: "v0.66.2"
 ---
 
 # Reveal: A Semantic Query Layer for Code, Infrastructure, and Docs
@@ -114,7 +114,7 @@ Same syntax. Same query operators (`=`, `~=`, `>`, `!`, `..`, `*`). Same output 
 
 This isn't an aesthetic choice. It's what makes everything composable. The output of `nginx://` feeds `ssl://`. The output of `diff://` feeds `ast://`. Infrastructure becomes queryable data that pipes into the next analysis.
 
-23 adapters ship today. Let's look at the ones you'll actually use.
+22 adapters ship today. Let's look at the ones you'll actually use.
 
 ---
 
@@ -487,8 +487,11 @@ This means agents can safely discover what Reveal offers and how to use it witho
 
 ## The MCP Server: Agents Get All of This Natively
 
+The MCP server ships bundled with `reveal-cli` — no separate install needed:
+
 ```bash
-pip install reveal-mcp
+pip install reveal-cli
+# reveal-mcp command is now available
 ```
 
 `reveal-mcp` exposes all of Reveal's capabilities as MCP tools for Claude Code, Cursor, and Windsurf. Five tools: `reveal_structure`, `reveal_element`, `reveal_query`, `reveal_pack`, `reveal_check`. Agents get progressive disclosure, call-graph analysis, and quality checks without subprocess overhead.
@@ -519,7 +522,7 @@ After using Reveal daily for months, here are capabilities I haven't found elsew
 
 ---
 
-## The 23 Adapters
+## The 22 Adapters
 
 | Domain | Adapters |
 |--------|----------|
@@ -622,8 +625,8 @@ Progressive disclosure is one piece of that. The same pattern that makes Reveal 
 
 **GitHub:** [Semantic-Infrastructure-Lab/reveal](https://github.com/Semantic-Infrastructure-Lab/reveal)
 **PyPI:** [reveal-cli](https://pypi.org/project/reveal-cli/)
-**MCP Server:** `pip install reveal-mcp`
+**MCP Server:** bundled with `reveal-cli` — run `reveal-mcp`
 
 ---
 
-*Reveal v0.66.1 — 6,871 tests, 23 URI adapters, 69 quality rules, 80 languages. MIT license.*
+*Reveal v0.66.2 — 22 URI adapters, 69 quality rules, 80 languages. MIT license.*
