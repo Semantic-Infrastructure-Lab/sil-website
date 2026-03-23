@@ -16,7 +16,6 @@ beth_topics:
   - code-navigation
   - ast-adapter
 related_docs:
-  - "reveal-for-ai-agents.md"
   - "reveal-introduction.md"
   - "reveal-pack-and-review.md"
 canonical_url: "https://semanticinfrastructurelab.org/articles/reveal-call-graphs"
@@ -35,7 +34,10 @@ There's a question that comes up constantly when working on a codebase:
 
 The answer requires knowing every place that function is called — across all files, not just the current one. With grep you can get close, but you'll miss indirect calls, get false positives from comments and strings, and have to mentally filter what's actually a caller vs a usage.
 
-Reveal's `calls://` adapter builds a proper call graph index and answers the question directly:
+Reveal's `calls://` adapter builds a proper call graph index and answers the question directly.
+
+> **Note:** `calls://` is marked experimental. It works well on Python codebases; coverage on other languages varies.
+
 
 ```bash
 reveal 'calls://src/?target=validate_token'
@@ -100,16 +102,27 @@ reveal 'calls://src/?rank=callers&top=10'
 
 **Output:**
 ```
-Functions ranked by callers (in-degree):
+Most-called functions: src/
+Ranking by:            caller count (in-degree)
+Showing:               top 10 of N unique callees
 
-  1.  validate_item        18 callers   src/validation.py:23
-  2.  get_db_connection    14 callers   src/database.py:11
-  3.  log_event            12 callers   src/logging.py:8
-  4.  format_response       9 callers   src/api/utils.py:34
+  validate_item  (18 callers)
+    src/validation.py:23  check_input
+    src/validation.py:67  validate_batch
+    src/api/routes.py:44  create_item
+    … and 15 more
+
+  get_db_connection  (14 callers)
+    src/database.py:88  execute_query
+    src/models/user.py:34  get_user
+    src/models/item.py:21  save_item
+    … and 11 more
   ...
 ```
 
-The top of this list is your architectural hot zone. High-callers functions are the ones worth abstracting, documenting carefully, and testing thoroughly.
+One thing to expect on real Python projects: builtins like `get`, `append`, `join` will appear at the top with hundreds of callers. Filter them out mentally or use `?top=20` to get past them to your domain functions.
+
+The top domain functions in this list are your architectural hot zone — the ones worth abstracting, documenting carefully, and testing thoroughly.
 
 ---
 
@@ -210,7 +223,27 @@ reveal 'calls://src/?callees=process_payment'
 ### Finding dead code
 
 ```bash
-# A function with zero callers may be unused
+# Surface all uncalled functions across the project at once
+reveal 'calls://src/?uncalled'
+```
+
+**Output:**
+```
+Dead code candidates: src/
+Total defined:        847 functions/methods
+Uncalled:             12
+Note: excludes __dunder__ methods and @property/@classmethod/@staticmethod
+
+  src/legacy/sync.py:33   legacy_sync_handler  (function)
+  src/utils/compat.py:91  _py2_fallback         (function, private)
+  src/api/deprecated.py:14  old_create_endpoint (function)
+  ...
+```
+
+This scans the entire project and lists every function with no callers — much faster than checking one at a time. Excludes dunder methods, properties, and classmethods automatically (they're called implicitly).
+
+For targeted confirmation on a specific function:
+```bash
 reveal 'calls://src/?target=legacy_sync_handler'
 # → No callers found.
 ```
@@ -260,6 +293,5 @@ reveal 'calls://src/?target=YOUR_FUNCTION'
 ---
 
 *Part of the Reveal documentation series. See also:*
-- *[Reveal for AI Agents](/articles/reveal-for-ai-agents) — complete agent workflow guide*
 - *[Two Commands That Change How You Work With Code](/articles/reveal-pack-and-review) — pack and review*
 - *[Stop Reading Code. Start Understanding It.](/articles/reveal-introduction) — the big picture*
