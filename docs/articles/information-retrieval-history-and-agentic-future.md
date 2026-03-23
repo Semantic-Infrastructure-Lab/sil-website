@@ -64,7 +64,7 @@ Combined with term frequency, this became **TF-IDF**: the workhorse of informati
 
 Later refinements — most notably **Okapi BM25**, developed by Stephen Robertson and Spärck Jones through the 1970s–90s — added term frequency saturation (diminishing returns for repeated words) and document length normalization. BM25 remains the dominant sparse retrieval baseline in production systems today, **forty years after its invention**.
 
-Beth's inverted index is a direct descendant of this lineage. `beth_topics:` front matter, term weighting, and the index-first architecture all trace back to Luhn and Spärck Jones.
+**Beth** — SIL's document discovery index, built over 14,000+ files across projects — is a direct descendant of this lineage. Topic tags in document front matter, term weighting, and the index-first architecture all trace back to Luhn and Spärck Jones.
 
 ---
 
@@ -80,7 +80,7 @@ This was a profound epistemological shift: **relevance as a social consensus, no
 
 Google's dominance for twenty years was built on this: a combination of BM25-style lexical matching (does this document contain the right words?) with PageRank-style graph authority (does the web think this document matters?).
 
-Beth uses cross-links as an authority signal in exactly this way. Widely-linked docs rise organically — not through `beth_weight` annotations, but because other documents point to them. The design is explicit PageRank thinking applied to a private knowledge base.
+Beth uses cross-links as an authority signal in exactly this way. Widely-linked docs rise organically — not through explicit weight annotations, but because other documents point to them. The design is explicit PageRank thinking applied to a private knowledge base.
 
 ---
 
@@ -105,13 +105,11 @@ But Word2Vec had a critical limitation: **static representations**. Every word g
 
 **Sentence-BERT** (Reimers & Gurevych, 2019) made it practical. A cross-encoder BERT comparing 10,000 sentence pairs took *65 hours*. SBERT, using a siamese network to produce fixed-size sentence embeddings, did it in *5 seconds* — a 47,000× speedup. Dense semantic retrieval at scale became feasible overnight.
 
-**Dense Passage Retrieval** (Karpukhin et al., Facebook AI, 2020) brought this to IR proper: separate BERT encoders for queries and passages, both projecting into a shared vector space, similarity via dot product, ANN search via FAISS. On open-domain QA benchmarks, it outperformed strong BM25 baselines by 9–19% absolute on top-20 retrieval accuracy.
+**Dense Passage Retrieval** (Karpukhin et al., Facebook AI, 2020) brought this to IR proper: separate BERT encoders for queries and passages, both projecting into a shared vector space, similarity via dot product, approximate nearest-neighbor (ANN) search for speed at scale. On open-domain QA benchmarks, it outperformed strong BM25 baselines by 9–19% absolute on top-20 retrieval accuracy.
 
 The vector database industry was born: Pinecone, Weaviate, Chroma, Qdrant, pgvector. Every major cloud provider now offers managed vector search. Embedding dimensionality arc: 100-dimensional Word2Vec in 2013 → 768-dimensional BERT in 2018 → 4,096-dimensional models with 128K context windows by 2026.
 
 **Semantic search changed the world** not by replacing keyword search, but by addressing its fundamental blind spot. The question "does this document contain these words?" became "is this document semantically relevant to this query?" — a qualitatively different operation.
-
-TIA's semantic layer (`tia search`, `tia semantic`) operates in this tradition. The inverted index (Beth) and the semantic index coexist in the system because each catches what the other misses.
 
 ---
 
@@ -132,7 +130,7 @@ Query
 
 RAG converts the retrieval problem into a **context injection problem**. The LLM doesn't "know" your documents — it reads retrieved excerpts at inference time. No fine-tuning required. The knowledge base is separate from the model and can be updated independently.
 
-The original paper combined DPR retrieval with a BART seq2seq generator. It set state-of-the-art on multiple open-domain QA benchmarks and described the generated language as "more specific, diverse, and factual" than parameter-only models. It launched an industry.
+The original paper combined DPR retrieval with a sequence-to-sequence language model. It set state-of-the-art on multiple open-domain QA benchmarks and described the generated language as "more specific, diverse, and factual" than parameter-only models. It launched an industry.
 
 By 2024, over **1,200 RAG-related papers appeared on arXiv** — compared to fewer than 100 the year before. 12× growth in one year.
 
@@ -178,7 +176,7 @@ The reasoning trace isn't just for explanation — it actively updates the plan.
 
 **HyDE (Hypothetical Document Embeddings)** addresses the cold-start problem: a short query embeds poorly because it's sparse. Instead, prompt the LLM to generate a hypothetical document that *would* answer the query, then embed that. The resulting embedding is much richer, and the dense encoder's bottleneck filters out hallucinations — only the semantic gist reaches retrieval. On zero-shot benchmarks, HyDE approaches the quality of fine-tuned retrievers.
 
-**FLARE (Forward-Looking Active Retrieval)** addresses the timing problem: when should retrieval happen? FLARE generates tentatively, monitors the probability of each token, and triggers retrieval when the model shows low confidence — using its own tentative output as the query. Retrieval happens *when and where* it's needed, not once at the start.
+**FLARE (Forward-Looking Active Retrieval)** addresses the timing problem: when should retrieval happen? FLARE generates tentatively, monitors the model's confidence in what it's generating, and triggers retrieval when that confidence drops — using its own tentative output as the query. Retrieval happens *when and where* it's needed, not once at the start.
 
 **Self-RAG** adds a critique loop: the model reflects on whether retrieval was even needed, and whether its output is grounded in what was retrieved. It can reject its own answers and regenerate with different context.
 
@@ -219,7 +217,20 @@ The likely equilibrium is layered:
 
 Each layer handles the queries the previous layer can't answer well.
 
-This is directly relevant to TIA's architecture. Beth (inverted index) + semantic search is the first two layers. Claude-as-agent reasoning over retrieved results is the third and fourth. The layers already exist; the question is when to invoke which.
+This maps directly onto TIA's architecture. Beth (fast lexical index) + dense semantic search covers the first two layers. Claude reasoning over retrieved results is the third and fourth. The layers already exist; the question is when to invoke which.
+
+---
+
+## The Numbers Behind the Stakes
+
+The scale of what these systems must handle is difficult to fully grasp:
+
+- **149 zettabytes** of data exist in the global datasphere as of 2024 — roughly 250 billion DVDs worth of information
+- **402 million terabytes** of data are created, captured, copied, and consumed *every day*
+- **8–14 billion searches** are performed on Google alone *every day*
+- The gap between data generated and data meaningfully indexed and retrievable has been widening for decades
+
+We have never had more information. The retrieval problem has never been harder. And for the first time, the systems working on it can reason about what they find.
 
 ---
 
@@ -239,19 +250,6 @@ This is not science fiction. Deep Research agents from multiple major labs are a
 
 ---
 
-## The Numbers Behind the Stakes
-
-The scale of what these systems must handle is difficult to fully grasp:
-
-- **149 zettabytes** of data exist in the global datasphere as of 2024 — roughly 250 billion DVDs worth of information
-- **402 million terabytes** of data are created, captured, copied, and consumed *every day*
-- **8–14 billion searches** are performed on Google alone *every day*
-- The gap between data generated and data meaningfully indexed and retrievable has been widening for decades
-
-We have never had more information. The retrieval problem has never been harder. And for the first time, the systems working on it can reason about what they find.
-
----
-
 ## Coda: The Shape of the Next Era
 
 The inverted index was an insight about text structure. TF-IDF was an insight about statistical significance. PageRank was an insight about social consensus. Dense retrieval was an insight about semantic geometry. RAG was an insight about context injection.
@@ -268,4 +266,4 @@ What comes next is a system that reads.
 
 ---
 
-*Session: lingering-ice-0322 | Date: 2026-03-22*
+*March 2026*
