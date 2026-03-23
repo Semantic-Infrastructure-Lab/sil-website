@@ -267,3 +267,4 @@ What comes next is a system that reads.
 ---
 
 *March 2026*
+*See also: [RFQ Matching at Scale](/articles/rfq-matching-modern-architecture) — the architecture in this article applied to a concrete production problem | [Reveal](/articles/reveal-introduction) — what agent-native information access looks like for codebases: structured, queryable, and built around progressive disclosure*
