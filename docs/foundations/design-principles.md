@@ -825,7 +825,6 @@ The `--agent-help` flag exists specifically to provide example-rich prompts:
 **Quick Check**: Does your prompt include at least one concrete example of desired output format?
 
 **Related SIL Documentation**:
-- [Hierarchical Agency Framework](/research/hierarchical-agency-framework) - Section 10.1 applies this principle to multi-agent orchestration
 - [Progressive Disclosure Guide](/research/progressive-disclosure-guide) - Examples demonstrate layered information reveal
 
 ---

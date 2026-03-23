@@ -1,6 +1,6 @@
 ---
 title: "Reveal: A Semantic Query Layer for Code, Infrastructure, and Docs"
-subtitle: "Progressive disclosure, URI-based queries, and 22 adapters — what it actually does and why it matters"
+subtitle: "Progressive disclosure, URI-based queries, and 23 adapters — what it actually does and why it matters"
 author: "Scott Senkeresty"
 date: "2026-03-20"
 type: "article"
@@ -114,7 +114,7 @@ Same syntax. Same query operators (`=`, `~=`, `>`, `!`, `..`, `*`). Same output 
 
 This isn't an aesthetic choice. It's what makes everything composable. The output of `nginx://` feeds `ssl://`. The output of `diff://` feeds `ast://`. Infrastructure becomes queryable data that pipes into the next analysis.
 
-22 adapters ship today. Let's look at the ones you'll actually use.
+23 adapters ship today. Let's look at the ones you'll actually use.
 
 ---
 
@@ -219,24 +219,9 @@ reveal 'imports://src/?unused'
 reveal 'imports://src/'
 ```
 
-Layer violations require a `.reveal.yaml` configuration where you define your architecture layers (presentation → application → domain → infrastructure) and the allowed dependencies between them:
+These two commands — `?circular` and `?unused` — are a fast architectural health audit. Run them before a refactor. Run them in CI. Circular dependencies make testing fragile, cause module initialization failures, and are genuinely hard to find any other way.
 
-```bash
-# Find files that violate your architecture
-reveal 'imports://src/?violations'
-```
-
-```
-============================================================
-Layer Violations: 5
-============================================================
-
-  src/models/user.py:3 - domain importing infrastructure (src.db.session)
-  src/api/routes.py:12 - presentation importing infrastructure (src.db.connection)
-  src/services/auth.py:15 - application importing presentation (src.api.schemas)
-```
-
-These three commands — `?circular`, `?unused`, `?violations` — are a full architectural health audit. Run them before a refactor. Run them in CI. Circular dependencies make testing fragile, cause module initialization failures, and are genuinely hard to find any other way.
+Architecture layer enforcement (`?violations`) is on the roadmap — it will catch cases where your domain layer imports from infrastructure or your presentation layer bypasses the service layer, enforced against `.reveal.yaml` configuration.
 
 ---
 
@@ -248,19 +233,23 @@ The naive approach is to read every file. The thoughtful approach is `reveal pac
 
 ```bash
 # Fit the most important code in 8000 tokens
-reveal pack src/ --budget 8000
+reveal pack src/ --budget 8000 --content
 ```
 
-What this does: ranks files by complexity and recency, fills entry points first, then priority files, stops at the budget. The agent gets the right code in the right order at the right size.
+What this does: ranks files by priority (entry points first, then key modules, then recency), fills up to the budget, then emits each file's structure. The agent gets the right code in the right order at the right size.
+
+Without `--content`, pack outputs a prioritized file list — useful for planning what to read, but not for feeding an agent directly.
 
 But the really useful version is the PR-aware snapshot:
 
 ```bash
 # Changed files first, then fill with key dependencies
-reveal pack src/ --since main --budget 8000
+reveal pack src/ --since main --budget 8000 --content
 ```
 
-`--since main` boosts every file changed in the current branch to priority tier 0 — above entry points, above everything. The remaining budget fills with the most important context. When you hand this to an AI agent for a PR review, it leads with what actually changed, not what's biggest.
+`--since main` boosts every file changed in the current branch above entry points, above everything. The remaining budget fills with the most important context. When you hand this to an AI agent for a PR review, it leads with what actually changed, not what's biggest.
+
+Replace `main` with your default branch name if it differs (`master`, `develop`, etc.).
 
 This is built for agents, not retrofitted. The token budget is a first-class parameter. The problem it solves — agents exhausting their context on stub `__init__.py` files before reaching the actual logic — is real and constant.
 
@@ -274,7 +263,7 @@ Most CI checks catch bugs. Very few catch *architectural decay* — the gradual 
 
 ```bash
 # Full PR review: structural diff + quality violations + hotspots + complexity delta
-reveal review main..HEAD
+reveal review main..HEAD   # replace 'main' with your default branch name
 ```
 
 Under the hood, `reveal review` composes four things:
@@ -287,11 +276,11 @@ That last one is the novel part. Every modified function carries `complexity_bef
 
 ```bash
 # Find functions that got more complex in this PR
-reveal diff://git://main/.:git://HEAD/. --format json | \
+reveal diff://git://main/foo.py:git://HEAD/foo.py --format json | \
   jq '.diff.functions[] | select(.complexity_delta > 5)'
 
 # CI gate: exit 0 clean, exit 1 warnings, exit 2 errors
-reveal review main..HEAD || exit 1
+reveal review main..HEAD || exit 1   # replace 'main' with your default branch name
 ```
 
 ### reveal check: surgical quality gates
@@ -301,7 +290,7 @@ When you don't need the full PR review, `reveal check` runs the quality rule eng
 ```bash
 reveal check src/                          # all 69 rules, full recursive scan
 reveal check src/ --select B,S            # bugs and security only — fast CI gate
-reveal check src/ --select I              # imports only (circular, unused, violations)
+reveal check src/ --select I              # imports only (circular, unused)
 reveal check src/ --severity high         # high and critical issues only
 reveal check src/ --only-failures         # hide passing checks
 reveal check --rules                      # list all 69 rules with descriptions
@@ -514,11 +503,9 @@ After using Reveal daily for months, here are capabilities I haven't found elsew
 
 **Semantic blame by element** — `git://src/auth.py?type=blame&element=validate_token` answers "who owns this *function*?" Not who last touched line 47, but who wrote the 28-line function that lives at lines 291–318, with attribution percentages and direct commit links. Git blame has existed for decades. Semantic blame over a named element is new.
 
-**Architecture layer enforcement** — `imports://src/?violations` catches cases where your domain layer imports from infrastructure, or your presentation layer bypasses the service layer. This is enforced from the command line against `.reveal.yaml` configuration with no additional tooling.
-
 **`reveal health` spanning code + certs + DB + DNS** — a genuine category collapse. One command, one JSON blob, one exit code, four different infrastructure domains. The cross-domain unified exit code makes this work as a real CI gate.
 
-**`complexity_delta` on every changed function** — `diff://` carries `complexity_before`, `complexity_after`, and `complexity_delta` for every modified function. "Did this PR make anything harder to maintain?" is now a scriptable CI check.
+**`complexity_delta` on every changed function** — `diff://` carries `complexity_before`, `complexity_after`, and `complexity_delta` for every modified function. Pipe to `jq` to gate on specific thresholds. "Did this PR make anything harder to maintain?" is now a scriptable CI check.
 
 **`reveal pack --since <branch> --budget N`** — PR-aware codebase snapshots that boost changed files to priority tier 0. Built for AI agents; the token budget is a first-class parameter.
 
@@ -542,7 +529,7 @@ After using Reveal daily for months, here are capabilities I haven't found elsew
 | Documents | `markdown://`, `stats://`, `git://` |
 | Meta / self-referential | `help://`, `reveal://`, `claude://` |
 
-190+ languages: 37 built-in analyzers plus 165 additional via Tree-sitter fallback. 69 quality rules across 14 categories. Zero configuration required.
+80 languages: 64 built-in analyzers plus 16 via Tree-sitter fallback. 69 quality rules across 14 categories. Zero configuration required.
 
 ---
 
@@ -568,7 +555,7 @@ reveal 'calls://src/?rank=callers&top=20'       # what holds everything together
 reveal 'calls://src/?target=fn_name'            # impact radius before refactoring
 reveal 'imports://src/?circular'                # circular dependency chains
 reveal 'imports://src/?unused'                  # dead imports before a cleanup
-reveal 'imports://src/?violations'              # architecture layer violations
+reveal 'imports://src/?violations'              # architecture layer violations (roadmap)
 
 # Code ownership and history
 reveal 'git://src/auth.py?type=blame&element=validate_token'   # who owns this function?
@@ -578,7 +565,7 @@ reveal 'git://src/auth.py?type=blame&element=AuthManager'      # who owns this c
 reveal overview .                       # codebase dashboard in one output
 reveal deps .                           # dependency health
 reveal hotspots src/                    # worst files by combined metrics
-reveal pack src/ --since main --budget 8000   # PR context for agent
+reveal pack src/ --since main --budget 8000 --content   # PR context for agent
 
 # Infrastructure health
 reveal ssl://yourdomain.com             # certificate status + expiry
@@ -598,9 +585,9 @@ reveal report.xlsx                      # workbook structure
 reveal json://config.json?flatten       # gron-style JSON for grepping
 
 # Before/after a PR
-reveal review main..HEAD                # full review with complexity delta
+reveal review main..HEAD                # full review with complexity delta (replace 'main' with your branch)
 reveal check src/ --select B,S         # fast: bugs + security only
-reveal check src/ --select I           # import health: circular, unused, violations
+reveal check src/ --select I           # import health: circular, unused
 ```
 
 ---
@@ -639,4 +626,4 @@ Progressive disclosure is one piece of that. The same pattern that makes Reveal 
 
 ---
 
-*Reveal v0.66.1 — 6,871 tests, 22 URI adapters, 69 quality rules, 190+ languages. MIT license.*
+*Reveal v0.66.1 — 6,871 tests, 23 URI adapters, 69 quality rules, 80 languages. MIT license.*

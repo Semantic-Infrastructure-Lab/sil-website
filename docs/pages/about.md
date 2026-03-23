@@ -9,9 +9,9 @@ order: 999
 
 ## What SIL Is
 
-The Semantic Infrastructure Lab (SIL) is a research lab building the **Semantic Operating System**—the missing foundation for transparent, traceable, and composable AI systems.
+The Semantic Infrastructure Lab (SIL) is a research lab building semantic infrastructure for AI systems — a substrate where representations are explicit, transformations are traceable, and reasoning can be inspected.
 
-Just as UNIX provided an operating system for computation, SIL provides an operating system for semantics: a stable foundation where representations are explicit, transformations are traceable, and reasoning is inspectable.
+The thesis: AI needs more than capable models. It needs a semantic layer beneath them where meaning is structured, provenance is preserved, and reasoning can be challenged by the humans who depend on it. SIL is building that layer, one working system at a time.
 
 ## The Problem We're Solving
 
@@ -27,11 +27,7 @@ SIL builds the missing layer: semantic infrastructure that makes meaning explici
 
 ## What Makes SIL Different
 
-Most AI labs build **applications on top of opaque models**. SIL builds **the semantic substrate beneath them**.
-
-This is the difference between:
-- Building apps in the 1960s
-- Building the OS, file system, and memory model that every future app relies on
+Most AI labs build **applications on top of opaque models**. SIL builds **the semantic substrate beneath them** — the layer that makes model outputs inspectable, traceable, and composable with human judgment.
 
 ### Core Commitments
 
@@ -72,7 +68,7 @@ SIL isn't vaporware. These systems demonstrate the architecture:
 
 | System | Version | Status | Evidence |
 |--------|---------|--------|----------|
-| **Reveal** | v0.23.1 | In production | 8.8K downloads, 3.1K/month (PyPI, 100% organic) |
+| **Reveal** | v0.66.0 | In production | 8.8K downloads, 3.1K/month (PyPI, 100% organic) |
 | **Morphogen** | v0.11 | Production-grade | 1,600+ tests, 85% coverage, daily internal use |
 | **TiaCAD** | v3.1.2 | Production-grade | 1,027 tests, 92% coverage, active development |
 | **GenesisGraph** | v0.3.0 | Production-grade | Cryptographic provenance, validated architecture |
@@ -98,17 +94,11 @@ This collaboration demonstrates how transparent agents can extend human reasonin
 
 ## Governance
 
-SIL is the research division of the **Semantic Infrastructure Foundation (SIF)**, a 501(c)(3) nonprofit (in formation).
+SIL is an independent research lab — open source, building in public, no institutional overhead.
 
-- **SIF** governs and funds the work
-- **SIL** builds the technical systems
+The [Semantic Infrastructure Foundation](https://semanticinfrastructurefoundation.org) was the institutional vision that preceded this work: a 501(c)(3) nonprofit designed for a 50-year research horizon. After honest assessment of what could actually be built and when, that plan was scaled back. [The full account is there](https://semanticinfrastructurefoundation.org) — it's worth reading.
 
-This structure ensures:
-- Long-term stewardship (50+ year horizon)
-- Anti-capture by design (no equity, no hostile takeover)
-- Public infrastructure ethos (open, not proprietary)
-
-[Learn more about SIF →](https://semanticinfrastructurefoundation.org)
+SIL continues as what it always was: a demonstration that the approach works.
 
 ## Standing on Shoulders of Giants
 

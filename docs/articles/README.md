@@ -4,7 +4,7 @@
 
 **Audience:** Developers, AI practitioners, tool users, people discovering SIL through specific projects
 
-**Last updated:** 2026-03-15
+**Last updated:** 2025-12-10
 
 ---
 
@@ -45,7 +45,7 @@ The optimization that makes chatbots say "great question!" is the same one that 
 ---
 
 ### [Stop Reading Code. Start Understanding It](/articles/reveal-introduction)
-**Date:** 2025-12-10 (updated 2026-03-15)
+**Date:** 2025-12-10
 **Topics:** Reveal, progressive disclosure, token efficiency, semantic stack
 **Audience:** Developers, AI practitioners
 
@@ -62,71 +62,50 @@ Introduction to Reveal and the progressive disclosure pattern. Shows how semanti
 
 ---
 
-### [Two Commands That Change How You Work With Code](/articles/reveal-pack-and-review)
-**Date:** 2026-03-15
-**Topics:** Reveal, reveal pack, reveal review, token efficiency, CI/CD, AI agent workflow
-**Audience:** Developers, AI practitioners
+### [From Filing Cabinets to Agentic Minds](/articles/information-retrieval-history-and-agentic-future)
+**Date:** 2026-03-22
+**Topics:** Information retrieval, search history, semantic search, RAG, agentic AI, embeddings
+**Audience:** Developers, AI practitioners, technical leaders
 
-Deep dive into `reveal pack` (token-budgeted context snapshots for AI agents) and `reveal review` (one-command PR review with CI gate integration). The two most useful and least documented Reveal subcommands.
-
-**Key points:**
-- `reveal pack` curates the right files for an LLM context window — not all files, the ones that matter
-- `reveal review` replaces git-diff + quality-check + hotspot-scan with one command
-- Both produce machine-readable JSON for CI integration
-- CI exit code protocol: 0 = clean, 1 = warnings, 2 = errors
-
-**From session:** turquoise-spectrum-0315
-
----
-
-### [Find Every Caller in Your Codebase With One Command](/articles/reveal-call-graphs)
-**Date:** 2026-03-15
-**Topics:** Reveal, calls://, call graph, static analysis, refactoring, impact analysis
-**Audience:** Developers, engineers doing refactoring or impact analysis
-
-Deep dive into `calls://` adapter — cross-file call graph queries for impact analysis, dead code detection, forward/reverse lookups, and Graphviz visualization.
+The seventy-year arc of how machines learned to find what we know — from Luhn's inverted index in 1957 through TF-IDF, PageRank, Word2Vec, dense retrieval, RAG, and into agentic systems that reason about what they find. Companion piece to the RFQ matching article.
 
 **Key points:**
-- `calls://src?target=X` finds every caller of X across all project files
-- `calls://src?callees=X` finds what X calls (forward lookup)
-- `calls://src?rank=callers` ranks functions by coupling (in-degree metrics)
-- Graphviz dot output for architecture docs
-- Difference from grep: finds actual invocations, not text occurrences
+- The inverted index and TF-IDF as the foundation of all modern search
+- PageRank as the first social consensus relevance signal
+- The semantic revolution: Word2Vec → BERT → SBERT → DPR
+- RAG: what it solved, where it breaks
+- Agentic retrieval: five capabilities classic RAG can't have
+- The architectural tension: index cost vs. inference cost
 
-**From session:** turquoise-spectrum-0315
-
----
-
-### [Reveal for AI Agents](/articles/reveal-for-ai-agents)
-**Date:** 2026-03-03
-**Topics:** Reveal, AI agents, token efficiency, Claude Code, Cursor, GitHub Copilot
-**Audience:** AI practitioners, developers using AI coding tools
-
-How AI agents should use Reveal: the breadcrumb system, URI adapters, progressive workflows, and integration patterns for Claude Code, Cursor, and GitHub Copilot.
+**From session:** lingering-ice-0322
 
 ---
 
-### [Reveal + Claude Code](/articles/reveal-for-claude-code)
-**Date:** 2026-01-06
-**Topics:** Reveal, Claude Code, token efficiency
-**Audience:** Claude Code users
+### [The Too-Many-Sausages Problem](/articles/rfq-matching-modern-architecture)
+**Date:** 2026-03-23
+**Topics:** Information retrieval, RFQ matching, semantic search, embeddings, agentic AI, manufacturing, enterprise
+**Audience:** ML engineers, software engineers, technical leaders in manufacturing and distribution
 
-Focused guide for using Reveal with Claude Code specifically.
+Every industrial distributor has a version of this story: 200,000 RFQ line items, 14 million catalog products, two weeks to respond. This article traces the full arc from why exact match and monolithic semantic search both fail, through the category-first pipeline architecture that handles 85-90% of volume, to the agentic retrieval layer that handles what pipelines can't — and the hard-negative training strategy that makes all of it work.
+
+**Key points:**
+- The too-many-sausages problem: semantic search returns the whole neighborhood, but you need the certified interchangeable part
+- Category routing reduces search space 14× and enables per-category accuracy measurement
+- ANCE hard negative mining, LoRA adapters, and GISTEmbedLoss as the training stack
+- ReAct agent with structured Corrective RAG escalation for the low-confidence tail
+- Full failure mode analysis: catalog drift, classifier degradation, score miscalibration
+
+**From sessions:** lingering-ice-0322, mountain-whirlwind-0322, oceanic-sea-0322, expanding-meteorite-0322
 
 ---
 
 ## Forthcoming Articles
 
-**High priority — capabilities with no coverage yet:**
-- `reveal health` — unified health check for SSL/domains/databases/code
-- `claude://` adapter — searching your own Claude Code sessions as structured data
-- `cpanel://` adapter — full cPanel environment audits
-- Quality rules deep dive — the 32-rule system, categories, custom rules
-
-**Also potential:**
+**Potential topics:**
 - Beth knowledge graphs: PageRank for documentation
 - Agent Ether: Universal tool contracts for multi-agent systems
 - TIA workflows: Progressive disclosure in practice
+- Morphogen deterministic computation: Reproducible AI workflows
 
 **Suggest new topics:** If you have ideas for articles, add them to this list or discuss in sessions.
 

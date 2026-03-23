@@ -27,7 +27,7 @@ They apply to every layer, every domain, every operator, and every contribution.
 
 These 14 principles govern the **research infrastructure and Semantic OS architecture**. They are foundational constraints for the entire system that apply to every layer, every domain, every operator, and every contribution.
 
-**Related Document:** For practical design patterns and implementation guidance, see [SIL Design Principles](SIL_DESIGN_PRINCIPLES) which covers 9 applied principles for building SIL-aligned tools and systems.
+**Related Document:** For practical design patterns and implementation guidance, see [SIL Design Principles](/foundations/design-principles) which covers 9 applied principles for building SIL-aligned tools and systems.
 
 ---
 

@@ -8,17 +8,15 @@ order: 999
 
 # Semantic Infrastructure Lab
 
-> **What is SIL?** A research lab building the Semantic Operating System—infrastructure where AI representations are explicit, transformations are traceable, and reasoning can be inspected and composed with human judgment.
+> **What is SIL?** A research lab building semantic infrastructure for AI systems — where representations are explicit, transformations are traceable, and reasoning can be inspected.
 
-**4 production systems · 12 research papers · 3K+ active users · 100% open source**
+**Reveal in production · 8.8K downloads · open source · building in public**
 
 ---
 
 ## The Problem We're Solving
 
-AI systems today are powerful but structurally incomplete. They produce impressive results, yet their internal reasoning remains opaque, fragile, and fundamentally uninspectable.
-
-If AI today is **wood**—useful but structurally unreliable—then SIL is building **steel**: the structural materials, building codes, and inspection protocols for production-grade intelligent systems.
+AI systems today produce impressive results but can't show their work — their reasoning is opaque, their outputs aren't grounded in anything stable, and there's no infrastructure for tracing how conclusions were reached.
 
 ## What We Build
 
@@ -39,9 +37,9 @@ These aren't demos. They're working infrastructure proving the architecture:
 
 **The entry point to semantic infrastructure. In production. Proven at scale.**
 
-`pip install reveal-cli` · **v0.24.0** · **3K+ downloads/month** · 100% organic growth
+`pip install reveal-cli` · **v0.66.0** · **3K+ downloads/month** · 100% organic growth
 
-Structure-first code exploration with **25x token reduction**. See file structure before reading content. Extract specific functions without loading entire files. Used by developers and AI agents worldwide.
+Structure-first exploration with **10–150x token reduction**. See file structure before reading content. Extract specific functions without loading entire files. Used by developers and AI agents worldwide.
 
 ```bash
 # Try it now - takes 30 seconds
@@ -76,11 +74,11 @@ Parametric CAD in YAML. Semantic constraints, not just geometry. Proof that sema
 - **[RAG as Semantic Manifold Transport](/research/rag-as-semantic-manifold-transport)** — Rethinking retrieval as geometric transport
 - **[Agent Help Standard](/research/agent-help-standard)** — Strategic guidance for AI agents using CLI tools
 
-[View all 12 research papers →](/research)
+[View all research papers →](/research)
 
 ## The Lab
 
-SIL is the research division of the [Semantic Infrastructure Foundation](https://semanticinfrastructurefoundation.org), a 501(c)(3) nonprofit (forming). We build in the open, publish our work, and invite collaboration.
+SIL is an independent research lab. We build in the open, publish our work, and invite collaboration. The [Semantic Infrastructure Foundation](https://semanticinfrastructurefoundation.org) — the institutional vision that preceded SIL — has closed; [the full account is there](https://semanticinfrastructurefoundation.org).
 
 **Current team:**
 - **Scott Senkeresty** — Founder & Chief Architect
@@ -96,7 +94,6 @@ SIL is the research division of the [Semantic Infrastructure Foundation](https:/
 - **Use the tools:** `pip install reveal-cli` and try progressive disclosure
 - **Read the research:** [Essays](/essays) and [Research Papers](/research)
 - **Explore the architecture:** [Foundations](/foundations)
-- **Support the mission:** [Semantic Infrastructure Foundation](https://semanticinfrastructurefoundation.org)
 - **Collaborate:** [Contact us](/contact) or visit [GitHub](https://github.com/Semantic-Infrastructure-Lab)
 
 ---

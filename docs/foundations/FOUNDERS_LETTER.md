@@ -24,9 +24,7 @@ I love what AI can do today. The systems we have are genuinely powerful and usef
 
 They produce impressive results, yet their internal reasoning remains opaque, fragile, and fundamentally uninspectable. We can ask more ambitious questions than ever before, but the systems answering them can't show their work, preserve their meaning, or guarantee that their outputs are grounded in anything stable.
 
-Here's how I think about it: If AI today is wood—powerful and useful, but structurally unreliable—then SIL is the steel infrastructure laboratory. We're building the structural materials, building codes, and inspection protocols for production-grade intelligent systems. This isn't an upgrade; it's a material transition.
-
-That's why I founded the Semantic Infrastructure Lab.
+That's why I founded the Semantic Infrastructure Lab — to build the semantic substrate that makes AI reasoning visible, traceable, and composable with human judgment.
 
 AI requires more than models. It requires **semantic infrastructure**—a substrate where representations are explicit, transformations are traceable, and reasoning paths can be inspected, challenged, and composed with human judgment. Without that substrate, progress becomes a sequence of clever heuristics. With it, we have the basis for transparent machine cognition.
 

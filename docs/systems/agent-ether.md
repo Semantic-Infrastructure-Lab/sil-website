@@ -250,15 +250,13 @@ for event in invoker.stream_events(job_id):
 ## Technical Deep Dive
 
 **Full Documentation:**
-- Agent Ether Repository (private)
-- TBC Specification — coming soon
-- Architecture Guide — coming soon
-- Multi-Agent Coordination — coming soon
+
+Repository is currently private (in active development). Documentation will be published when the project reaches public beta.
 
 **Example Gallery:**
-- Filesystem Search Tool - Job execution mode (coming soon)
-- REPL Session Tool - Interactive session mode (coming soon)
-- API Call Tool - Async execution mode (coming soon)
+- Filesystem Search Tool - Job execution mode
+- REPL Session Tool - Interactive session mode
+- API Call Tool - Async execution mode
 
 **Getting Started:**
 ```bash
@@ -364,6 +362,4 @@ This transforms multi-agent systems from "pray it works" to "provably correct or
 *"The Society of Mind" - Intelligence emerges from coordination of simple agents*
 
 **Learn More:**
-- GitHub Repository (private)
-- Tool Behavior Contract Spec — coming soon
-- Architecture — coming soon
+- GitHub Repository: `Semantic-Infrastructure-Lab/agent-ether` (private — coming soon)

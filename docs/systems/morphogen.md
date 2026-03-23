@@ -162,9 +162,9 @@ flow(dt=0.1ms) {
 
 **Full Documentation:**
 - [Morphogen GitHub Repository](https://github.com/Semantic-Infrastructure-Lab/morphogen)
-- Language Specification — coming soon
-- Domain Catalog - All 40+ domains with examples — coming soon
-- Architecture Guide - MLIR compilation, Graph IR, execution model — coming soon
+- [Complete Language Specification](https://github.com/Semantic-Infrastructure-Lab/morphogen/blob/main/SPECIFICATION.md) (2,282 lines)
+- [Domain Catalog](https://github.com/Semantic-Infrastructure-Lab/morphogen/blob/main/docs/DOMAINS.md) - All 40+ domains with examples
+- [Architecture Guide](https://github.com/Semantic-Infrastructure-Lab/morphogen/blob/main/docs/architecture/) - MLIR compilation, Graph IR, execution model
 
 **Example Gallery:**
 - [24 Working Examples](https://github.com/Semantic-Infrastructure-Lab/morphogen/tree/main/examples) - Fluid dynamics, reaction-diffusion, audio synthesis, physics
@@ -259,5 +259,4 @@ Morphogen (digital) and [Philbrick](https://github.com/Semantic-Infrastructure-L
 
 **Learn More:**
 - [GitHub Repository](https://github.com/Semantic-Infrastructure-Lab/morphogen)
-- v1.0 Release Plan — coming soon
-- Complete Documentation — coming soon
+- [Complete Documentation](https://github.com/Semantic-Infrastructure-Lab/morphogen/tree/main/docs)

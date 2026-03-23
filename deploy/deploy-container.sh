@@ -231,6 +231,22 @@ else
   echo "   Try: ssh $HOST 'curl -f http://localhost:$SERVICE_PORT/health'"
 fi
 
+# Step 8: Link validation
+echo ""
+echo "🔗 Step 8: Validating links..."
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASE_URL="${HEALTH_URL%/health}"
+
+if python3 "$SCRIPT_DIR/../scripts/check-links.py" "$BASE_URL"; then
+  echo "✅ All links valid"
+else
+  echo ""
+  echo "❌ Broken links detected — deployment succeeded but links need fixing."
+  echo "   Run: python3 scripts/check-links.py $BASE_URL"
+  # Warn but don't block — site is up, links are a content fix
+  LINK_WARNINGS=true
+fi
+
 echo ""
 echo "📊 Deployment Summary"
 echo "===================="
@@ -248,4 +264,8 @@ echo "  ssh $HOST 'podman restart $CONTAINER_NAME'     # Restart"
 echo "  ssh $HOST 'podman stop $CONTAINER_NAME'        # Stop"
 echo "  ssh $HOST 'podman ps --filter name=$CONTAINER_NAME'  # Status"
 echo ""
-echo "✅ Deployment complete!"
+if [[ "${LINK_WARNINGS:-false}" == "true" ]]; then
+  echo "⚠️  Deployment complete — broken links need fixing (see above)"
+else
+  echo "✅ Deployment complete!"
+fi

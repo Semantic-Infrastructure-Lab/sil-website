@@ -135,7 +135,7 @@ SIL builds infrastructure meant to last decades, not chase quarterly trends.
 
 ### For the Philosophy
 **[Manifesto](/canonical/manifesto)** — The philosophical foundation
-**[Principles](/canonical/principles)** — 14 foundational constraints that define SIL
+**[Principles](/foundations/architectural-principles)** — 14 foundational constraints that define SIL
 
 ### For the Technical Depth
 **[Technical Charter](/canonical/technical-charter)** — Formal specification with invariants and guarantees
