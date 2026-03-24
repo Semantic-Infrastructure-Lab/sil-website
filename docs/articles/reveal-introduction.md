@@ -1,6 +1,6 @@
 ---
 title: "Reveal: A Semantic Query Layer for Code, Infrastructure, and Docs"
-subtitle: "Progressive disclosure, URI-based queries, and 23 adapters — what it actually does and why it matters"
+subtitle: "Progressive disclosure, URI-based queries, and 22 adapters — what it actually does and why it matters"
 author: "Scott Senkeresty"
 date: "2026-03-20"
 type: "article"
@@ -114,7 +114,7 @@ Same syntax. Same query operators (`=`, `~=`, `>`, `!`, `..`, `*`). Same output 
 
 This isn't an aesthetic choice. It's what makes everything composable. The output of `nginx://` feeds `ssl://`. The output of `diff://` feeds `ast://`. Infrastructure becomes queryable data that pipes into the next analysis.
 
-23 adapters ship today. Let's look at the ones you'll actually use.
+22 adapters ship today. Let's look at the ones you'll actually use.
 
 ---
 
@@ -522,7 +522,7 @@ After using Reveal daily for months, here are capabilities I haven't found elsew
 
 ---
 
-## The 23 Adapters
+## The 22 Adapters
 
 | Domain | Adapters |
 |--------|----------|
@@ -530,7 +530,7 @@ After using Reveal daily for months, here are capabilities I haven't found elsew
 | Data systems | `mysql://`, `sqlite://`, `json://`, `xlsx://` |
 | Infrastructure | `ssl://`, `nginx://`, `domain://`, `cpanel://`, `autossl://`, `letsencrypt://`, `env://` |
 | Documents | `markdown://`, `stats://`, `git://` |
-| Meta / self-referential | `help://`, `reveal://`, `claude://`, `demo://` |
+| Meta / self-referential | `help://`, `reveal://`, `claude://` |
 
 80 languages: 64 built-in analyzers plus 16 via Tree-sitter fallback. 69 quality rules across 14 categories. Zero configuration required.
 
@@ -629,4 +629,4 @@ Progressive disclosure is one piece of that. The same pattern that makes Reveal 
 
 ---
 
-*Reveal v0.66.2 — 23 URI adapters, 69 quality rules, 80 languages. MIT license.*
+*Reveal v0.66.2 — 22 URI adapters, 69 quality rules, 80 languages. MIT license.*
