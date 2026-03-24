@@ -1,6 +1,6 @@
 ---
 title: "Reveal: A Semantic Query Layer for Code, Infrastructure, and Docs"
-subtitle: "Progressive disclosure, URI-based queries, and 22 adapters — what it actually does and why it matters"
+subtitle: "Progressive disclosure, URI-based queries, and 23 adapters — what it actually does and why it matters"
 author: "Scott Senkeresty"
 date: "2026-03-20"
 type: "article"
@@ -114,7 +114,7 @@ Same syntax. Same query operators (`=`, `~=`, `>`, `!`, `..`, `*`). Same output 
 
 This isn't an aesthetic choice. It's what makes everything composable. The output of `nginx://` feeds `ssl://`. The output of `diff://` feeds `ast://`. Infrastructure becomes queryable data that pipes into the next analysis.
 
-22 adapters ship today. Let's look at the ones you'll actually use.
+23 adapters ship today. Let's look at the ones you'll actually use.
 
 ---
 
@@ -221,7 +221,7 @@ reveal 'imports://src/'
 
 These two commands — `?circular` and `?unused` — are a fast architectural health audit. Run them before a refactor. Run them in CI. Circular dependencies make testing fragile, cause module initialization failures, and are genuinely hard to find any other way.
 
-Architecture layer enforcement (`?violations`) is on the roadmap — it will catch cases where your domain layer imports from infrastructure or your presentation layer bypasses the service layer, enforced against `.reveal.yaml` configuration.
+Architecture layer enforcement (`?violations`) catches cases where your domain layer imports from infrastructure or your presentation layer bypasses the service layer. It requires a `.reveal.yaml` config file defining your layer rules.
 
 ---
 
@@ -522,7 +522,7 @@ After using Reveal daily for months, here are capabilities I haven't found elsew
 
 ---
 
-## The 22 Adapters
+## The 23 Adapters
 
 | Domain | Adapters |
 |--------|----------|
@@ -530,7 +530,7 @@ After using Reveal daily for months, here are capabilities I haven't found elsew
 | Data systems | `mysql://`, `sqlite://`, `json://`, `xlsx://` |
 | Infrastructure | `ssl://`, `nginx://`, `domain://`, `cpanel://`, `autossl://`, `letsencrypt://`, `env://` |
 | Documents | `markdown://`, `stats://`, `git://` |
-| Meta / self-referential | `help://`, `reveal://`, `claude://` |
+| Meta / self-referential | `help://`, `reveal://`, `claude://`, `demo://` |
 
 80 languages: 64 built-in analyzers plus 16 via Tree-sitter fallback. 69 quality rules across 14 categories. Zero configuration required.
 
@@ -558,7 +558,7 @@ reveal 'calls://src/?rank=callers&top=20'       # what holds everything together
 reveal 'calls://src/?target=fn_name'            # impact radius before refactoring
 reveal 'imports://src/?circular'                # circular dependency chains
 reveal 'imports://src/?unused'                  # dead imports before a cleanup
-reveal 'imports://src/?violations'              # architecture layer violations (roadmap)
+reveal 'imports://src/?violations'              # architecture layer violations (requires .reveal.yaml)
 
 # Code ownership and history
 reveal 'git://src/auth.py?type=blame&element=validate_token'   # who owns this function?
@@ -629,4 +629,4 @@ Progressive disclosure is one piece of that. The same pattern that makes Reveal 
 
 ---
 
-*Reveal v0.66.2 — 22 URI adapters, 69 quality rules, 80 languages. MIT license.*
+*Reveal v0.66.2 — 23 URI adapters, 69 quality rules, 80 languages. MIT license.*
