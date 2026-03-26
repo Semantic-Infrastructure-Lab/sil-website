@@ -962,6 +962,4 @@ A small fraction of procurement operations have deployed AI matching at scale â€
 That work is tractable. And the systems it produces are, by any honest measure, a different category of thing than what came before.
 
 ---
-
-*Written in sessions lingering-ice-0322, mountain-whirlwind-0322, oceanic-sea-0322, and expanding-meteorite-0322 | March 2026*
 *See also: [From Filing Cabinets to Agentic Minds](/articles/information-retrieval-history-and-agentic-future) â€” a companion overview of how IR evolved from inverted indexes to RAG to agentic systems*
