@@ -4,7 +4,7 @@
 
 **Audience:** Developers, AI practitioners, tool users, people discovering SIL through specific projects
 
-**Last updated:** 2025-12-10
+**Last updated:** 2026-03-26
 
 ---
 

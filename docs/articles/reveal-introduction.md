@@ -1,6 +1,6 @@
 ---
 title: "Reveal: A Semantic Query Layer for Code, Infrastructure, and Docs"
-subtitle: "Progressive disclosure, URI-based queries, and 22 adapters — what it actually does and why it matters"
+subtitle: "Progressive disclosure, URI-based queries, and 23 adapters — what it actually does and why it matters"
 author: "Scott Senkeresty"
 date: "2026-03-20"
 type: "article"
@@ -16,7 +16,7 @@ canonical_url: "https://semanticinfrastructurelab.org/articles/reveal-introducti
 reading_time: "18 minutes"
 beth_topics: [reveal, progressive-disclosure, token-efficiency, uri-adapters, call-graph, pack, code-review, agent-help, mcp-server, sil, imports, semantic-blame, structural-analysis]
 session_provenance: "crackling-drought-0320"
-version: "v0.66.2"
+version: "v0.66.1"
 ---
 
 # Reveal: A Semantic Query Layer for Code, Infrastructure, and Docs
@@ -114,7 +114,7 @@ Same syntax. Same query operators (`=`, `~=`, `>`, `!`, `..`, `*`). Same output 
 
 This isn't an aesthetic choice. It's what makes everything composable. The output of `nginx://` feeds `ssl://`. The output of `diff://` feeds `ast://`. Infrastructure becomes queryable data that pipes into the next analysis.
 
-22 adapters ship today. Let's look at the ones you'll actually use.
+23 adapters ship today. Let's look at the ones you'll actually use.
 
 ---
 
@@ -221,7 +221,7 @@ reveal 'imports://src/'
 
 These two commands — `?circular` and `?unused` — are a fast architectural health audit. Run them before a refactor. Run them in CI. Circular dependencies make testing fragile, cause module initialization failures, and are genuinely hard to find any other way.
 
-Architecture layer enforcement (`?violations`) catches cases where your domain layer imports from infrastructure or your presentation layer bypasses the service layer. It requires a `.reveal.yaml` config file defining your layer rules.
+Architecture layer enforcement (`?violations`) is on the roadmap — it will catch cases where your domain layer imports from infrastructure or your presentation layer bypasses the service layer, enforced against `.reveal.yaml` configuration.
 
 ---
 
@@ -487,11 +487,8 @@ This means agents can safely discover what Reveal offers and how to use it witho
 
 ## The MCP Server: Agents Get All of This Natively
 
-The MCP server ships bundled with `reveal-cli` — no separate install needed:
-
 ```bash
-pip install reveal-cli
-# reveal-mcp command is now available
+pip install reveal-mcp
 ```
 
 `reveal-mcp` exposes all of Reveal's capabilities as MCP tools for Claude Code, Cursor, and Windsurf. Five tools: `reveal_structure`, `reveal_element`, `reveal_query`, `reveal_pack`, `reveal_check`. Agents get progressive disclosure, call-graph analysis, and quality checks without subprocess overhead.
@@ -522,7 +519,7 @@ After using Reveal daily for months, here are capabilities I haven't found elsew
 
 ---
 
-## The 22 Adapters
+## The 23 Adapters
 
 | Domain | Adapters |
 |--------|----------|
@@ -558,7 +555,7 @@ reveal 'calls://src/?rank=callers&top=20'       # what holds everything together
 reveal 'calls://src/?target=fn_name'            # impact radius before refactoring
 reveal 'imports://src/?circular'                # circular dependency chains
 reveal 'imports://src/?unused'                  # dead imports before a cleanup
-reveal 'imports://src/?violations'              # architecture layer violations (requires .reveal.yaml)
+reveal 'imports://src/?violations'              # architecture layer violations (roadmap)
 
 # Code ownership and history
 reveal 'git://src/auth.py?type=blame&element=validate_token'   # who owns this function?
@@ -625,8 +622,8 @@ Progressive disclosure is one piece of that. The same pattern that makes Reveal 
 
 **GitHub:** [Semantic-Infrastructure-Lab/reveal](https://github.com/Semantic-Infrastructure-Lab/reveal)
 **PyPI:** [reveal-cli](https://pypi.org/project/reveal-cli/)
-**MCP Server:** bundled with `reveal-cli` — run `reveal-mcp`
+**MCP Server:** `pip install reveal-mcp`
 
 ---
 
-*Reveal v0.66.2 — 22 URI adapters, 69 quality rules, 80 languages. MIT license.*
+*Reveal v0.66.1 — 6,871 tests, 23 URI adapters, 69 quality rules, 80 languages. MIT license.*
