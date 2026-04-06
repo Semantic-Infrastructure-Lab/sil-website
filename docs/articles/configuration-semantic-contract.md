@@ -5,6 +5,7 @@ author: "Scott Senkeresty"
 date: "2025-12-23"
 type: "article"
 status: "published"
+linkedin_posted: false
 audience: "developers"
 topics: [configuration, reveal, progressive-disclosure, semantic-infrastructure, architecture-validation]
 related_projects: [reveal]

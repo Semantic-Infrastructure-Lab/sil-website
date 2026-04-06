@@ -5,6 +5,7 @@ author: "Scott Senkeresty"
 date: "2026-03-18"
 type: "article"
 status: "published"
+linkedin_posted: false
 audience: "developers, ai-agent-builders"
 beth_topics:
   - reveal

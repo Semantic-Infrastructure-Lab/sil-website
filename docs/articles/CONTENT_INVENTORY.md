@@ -3,21 +3,45 @@
 **Purpose:** Track all content that can be published as articles, blog posts, or LinkedIn Newsletter content.
 
 **Owner:** Scott Senkeresty
-**Last Updated:** 2026-01-02
+**Last Updated:** 2026-04-06
 **Status:** Living Document
 
 ---
 
 ## TL;DR
 
-- **✅ Published**: 3 articles ready to post (just copy/paste to LinkedIn/blog)
+- **✅ Published**: 14 articles live on SIL website (all files in `docs/articles/` auto-serve)
+- **📣 LinkedIn**: 7 posted, 7 remaining (truth in each article's `linkedin_posted:` frontmatter)
 - **🔄 Adaptable**: 14 research papers (need 2-3 hours to make accessible)
 - **📦 Systems**: 7 systems docs (need expansion into articles)
 - **🏗️ Architecture**: 9 architecture docs (deep dives or series)
 - **💡 Future**: Unlimited ideas from consulting work, case studies, hot takes
 - **Total Pipeline**: 30+ articles available
 
-**Next Action**: Start with 3 published articles (Week 1-3), then adapt research papers (2-3 hours/week)
+**Next Action**: Post 7 queued articles to LinkedIn (see queue below)
+
+---
+
+## LinkedIn Status
+
+| Article | File | LinkedIn |
+|---------|------|----------|
+| Trained to Please, Empowered to Act | `trained-to-please-empowered-to-act.md` | ✅ posted |
+| Stop Reading Code. Start Understanding It | `reveal-introduction.md` | ✅ posted |
+| From Filing Cabinets to Agentic Minds | `information-retrieval-history-and-agentic-future.md` | ✅ posted |
+| The Too-Many-Sausages Problem | `rfq-matching-modern-architecture.md` | ✅ posted |
+| Stop Scrolling. Start Navigating. | `reveal-nav-flags.md` | ✅ posted |
+| The Diff That Shows What Actually Changed | `reveal-diff.md` | ✅ posted |
+| Your Project Has an API Now | `reveal-project-api.md` | ⬜ not yet |
+| Find Every Caller in Your Codebase | `reveal-call-graphs.md` | ⬜ not yet |
+| Two Commands That Change How You Work | `reveal-pack-and-review.md` | ⬜ not yet |
+| Session Archaeology | `claude-session-archaeology.md` | ✅ posted |
+| Reveal: The Surprising Recipes | `reveal-surprising-recipes.md` | ⬜ not yet |
+| From 15 Files to 500 | `reveal-what-it-makes-possible.md` | ⬜ not yet |
+| Configuration as Semantic Contract | `configuration-semantic-contract.md` | ⬜ not yet |
+| Progressive Disclosure for AI Agents | `progressive-disclosure-agents.md` | ⬜ not yet |
+
+*Truth lives in each article's `linkedin_posted:` frontmatter field. Update both when posting.*
 
 ---
 
@@ -59,8 +83,8 @@
 
 **CTA**: "Try reveal-cli today: `pip install reveal-cli`"
 
-**Status**: ✅ Ready to publish
-**LinkedIn Newsletter**: Not yet posted
+**Status**: ✅ Published
+**LinkedIn Newsletter**: ✅ Posted 2026-03-27
 **SIL Blog**: Published at `/articles/reveal-introduction`
 
 ---
@@ -855,7 +879,7 @@
 
 | Category | Count | Status |
 |----------|-------|--------|
-| Published (ready) | 3 | ✅ |
+| Published (on website) | 13 | ✅ |
 | Adaptable research | 14 | 🔄 |
 | Systems docs | 7 | 📦 |
 | Architecture | 9 | 🏗️ |
@@ -869,6 +893,6 @@
 
 ---
 
-**Last Updated**: 2026-01-02
+**Last Updated**: 2026-04-06
 **Owner**: Scott Senkeresty
 **Location**: `/docs/articles/CONTENT_INVENTORY.md`

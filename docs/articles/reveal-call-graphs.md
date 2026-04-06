@@ -5,6 +5,7 @@ author: "Scott Senkeresty"
 date: "2026-03-15"
 type: "article"
 status: "published"
+linkedin_posted: false
 audience: "developers"
 topics: ["reveal", "call-graph", "static-analysis", "refactoring", "code-navigation", "ast"]
 beth_topics:
@@ -36,8 +37,7 @@ The answer requires knowing every place that function is called — across all f
 
 Reveal's `calls://` adapter builds a proper call graph index and answers the question directly.
 
-> **Note:** `calls://` is marked experimental. It works well on Python codebases; coverage on other languages varies.
-
+That's not a search problem. It's a graph query.
 
 ```bash
 reveal 'calls://src/?target=validate_token'
@@ -143,6 +143,8 @@ The difference:
 - `calls://` finds **actual function calls** — only invocations, only within function bodies
 
 You get fewer results with `calls://`, but all of them are real.
+
+Like every Reveal adapter, `calls://` exposes code as queryable structured data — the same URI syntax, the same composability, the same pipeline semantics. Impact analysis becomes a query, not an investigation.
 
 ---
 
@@ -275,13 +277,17 @@ reveal 'calls://src/?target=main&depth=3&format=dot' | dot -Tsvg > docs/call_gra
 
 The index is directory-scoped — `calls://src/` and `calls://src/auth/` build separate indexes.
 
+> **Note:** `calls://` is marked experimental. It works well on Python codebases; coverage on other languages varies.
+
 ---
 
 ## The broader picture
 
 `calls://` is one piece of Reveal's approach to treating code as structured data rather than text. Grep treats your codebase as a pile of strings. `calls://` treats it as a graph of semantic relationships.
 
-The difference shows up when you need answers that text search can't give you cleanly — impact analysis, dead code detection, coupling metrics, architectural understanding. Those answers are in the graph. Reveal surfaces them directly.
+The difference shows up when you need answers that text search can't give you cleanly — impact analysis, dead code detection, coupling metrics, architectural understanding. For agents, it's even more direct: instead of reading files to infer structure, you query the graph for exactly what you need in a fraction of the tokens.
+
+You don't ask "where is this used?" anymore. You query the graph and get the answer.
 
 ```bash
 pip install reveal-cli
@@ -293,5 +299,7 @@ reveal 'calls://src/?target=YOUR_FUNCTION'
 ---
 
 *Part of the Reveal documentation series. See also:*
+- *[Your Project Has an API Now](/articles/reveal-project-api) — the full query layer*
+- *[Structural Diffs, Not Line Diffs](/articles/reveal-diff) — change analysis with diff://*
 - *[Two Commands That Change How You Work With Code](/articles/reveal-pack-and-review) — pack and review*
 - *[Stop Reading Code. Start Understanding It.](/articles/reveal-introduction) — the big picture*

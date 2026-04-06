@@ -17,6 +17,7 @@ reading_time: "18 minutes"
 beth_topics: [reveal, progressive-disclosure, token-efficiency, uri-adapters, call-graph, pack, code-review, agent-help, mcp-server, sil, imports, semantic-blame, structural-analysis]
 session_provenance: "crackling-drought-0320"
 version: "v0.66.1"
+linkedin_posted: true
 ---
 
 # Reveal: A Semantic Query Layer for Code, Infrastructure, and Docs

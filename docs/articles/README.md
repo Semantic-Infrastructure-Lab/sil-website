@@ -27,8 +27,11 @@ Articles are:
 
 ## Published Articles
 
+*13 articles live on the website. LinkedIn status noted per article.*
+
 ### [Trained to Please, Empowered to Act](/articles/trained-to-please-empowered-to-act)
 **Date:** 2026-03-12
+**LinkedIn:** ✅ Posted
 **Topics:** Agentic AI, incidents, safety, sycophancy, behavioral contracts
 **Audience:** Developers, CTOs, teams deploying AI agents in production
 
@@ -46,6 +49,7 @@ The optimization that makes chatbots say "great question!" is the same one that 
 
 ### [Stop Reading Code. Start Understanding It](/articles/reveal-introduction)
 **Date:** 2025-12-10
+**LinkedIn:** ✅ Posted
 **Topics:** Reveal, progressive disclosure, token efficiency, semantic stack
 **Audience:** Developers, AI practitioners
 
@@ -64,6 +68,7 @@ Introduction to Reveal and the progressive disclosure pattern. Shows how semanti
 
 ### [From Filing Cabinets to Agentic Minds](/articles/information-retrieval-history-and-agentic-future)
 **Date:** 2026-03-22
+**LinkedIn:** ✅ Posted
 **Topics:** Information retrieval, search history, semantic search, RAG, agentic AI, embeddings
 **Audience:** Developers, AI practitioners, technical leaders
 
@@ -83,6 +88,7 @@ The seventy-year arc of how machines learned to find what we know — from Luhn'
 
 ### [Find Every Caller in Your Codebase With One Command](/articles/reveal-call-graphs)
 **Date:** 2026-03-15
+**LinkedIn:** ⬜ Not yet posted
 **Topics:** Reveal, call graphs, impact analysis, refactoring, dead code, architecture
 **Audience:** Developers, AI practitioners
 
@@ -101,6 +107,7 @@ The `calls://` adapter answers three questions that grep can't: who calls this f
 
 ### [Two Commands That Change How You Work With Code](/articles/reveal-pack-and-review)
 **Date:** 2026-03-15
+**LinkedIn:** ⬜ Not yet posted
 **Topics:** Reveal, pack, review, token budget, PR review, AI agents, context curation
 **Audience:** Developers, AI practitioners, teams using AI for code review
 
@@ -119,6 +126,7 @@ The `calls://` adapter answers three questions that grep can't: who calls this f
 
 ### [The Too-Many-Sausages Problem](/articles/rfq-matching-modern-architecture)
 **Date:** 2026-03-23
+**LinkedIn:** ✅ Posted
 **Topics:** Information retrieval, RFQ matching, semantic search, embeddings, agentic AI, manufacturing, enterprise
 **Audience:** ML engineers, software engineers, technical leaders in manufacturing and distribution
 
@@ -135,12 +143,115 @@ Every industrial distributor has a version of this story: 200,000 RFQ line items
 
 ---
 
+### [Session Archaeology: Excavating Your Claude Code History](/articles/claude-session-archaeology)
+**Date:** 2026-03-31
+**LinkedIn:** ✅ Posted
+**Topics:** Reveal, Claude Code, session analysis, token cost, workflow observability, cost attribution
+**Audience:** Developers using Claude Code
+
+`reveal claude://` is a git blame for your thinking process, not just your code. Seven scenarios covering the full surface area of session observability: recovering where a session left off, diagnosing session quality from tool success rates, understanding turn-by-turn token cost, tracing the step-by-step workflow with failure markers, finding which files keep coming up across sessions, reconstructing a multi-session bug arc, and reading your own prompt patterns as data.
+
+**Key points:**
+- The drill-down rule: `?last` → `?summary` → full read (50 tokens vs. re-reading 150 messages)
+- Tool success rates as a session quality proxy: Bash > 95% is clean execution, < 85% is significant thrash
+- Cache attribution: real sessions run at 93–99% hit rate; compaction mid-session is where costs spike
+- `/workflow` reads like a story: orientation → failure → diagnosis → fix → verification
+- Loop detection: failure followed by the same command vs. failure followed by a `Read`
+- `claude://history` as the mirror — not what Claude did, but what you kept needing to ask
+
+**From session:** dark-matter-0331
+
+---
+
+### [Your Project Has an API Now](/articles/reveal-project-api)
+**Date:** 2026-04-06
+**LinkedIn:** ⬜ Not yet posted
+**Topics:** Reveal, composability, infrastructure, AST, SSL, diff, AI agents, token efficiency
+**Audience:** Developers, engineering teams, AI practitioners
+
+The flagship meta-article. 22 adapters, one syntax — code structure, SSL certs, structural diffs, databases, markdown docs, and AI session history all queryable with the same query language. Covers the pipeline composability story (Reveal pipes into itself), token math across domains, and `reveal review` as the composed PR review workflow. Thesis: your project is a database, you just couldn't query it.
+
+**From session:** swift-dragon-0406
+
+---
+
+### [Stop Scrolling. Start Navigating.](/articles/reveal-nav-flags)
+**Date:** 2026-04-06
+**LinkedIn:** ✅ Posted
+**Topics:** Reveal, code navigation, AST, token efficiency, debugging, AI agents
+**Audience:** Developers, AI practitioners
+
+Four nav flags (`--outline`, `--scope`, `--varflow`, `--calls`) as four questions every developer already asks when reading a complex function. Includes a real debugging walkthrough using Reveal's own `_walk_var` internals — structure, variable trace, and scope check — without reading 124 lines of code. Token math table shows 7-25x reduction vs. `cat`.
+
+**From session:** celestial-moon-0406
+
+---
+
+### [The Diff That Shows What Actually Changed](/articles/reveal-diff)
+**Date:** 2026-04-06
+**LinkedIn:** ✅ Posted
+**Topics:** Reveal, diff, code review, CI/CD, complexity, AST, refactoring
+**Audience:** Developers, engineering teams
+
+`git diff` is a line counter. `reveal diff://` is a question answerer. Covers four workflows: pre-commit sanity check, PR review orientation, CI complexity gate (with full bash script), and refactor validation (proving complexity went down). Includes import tracking as a signal alongside functions. Real complexity numbers from production code.
+
+**From session:** swift-dragon-0406
+
+---
+
+### [Reveal: The Surprising Recipes](/articles/reveal-surprising-recipes)
+**Date:** 2026-03-27
+**LinkedIn:** ⬜ Not yet posted
+**Topics:** Reveal, recipes, patterns, AST, infrastructure adapters
+
+**From session:** (see frontmatter)
+
+---
+
+### [From 15 Files to 500: What Reveal Makes Possible for AI Agents](/articles/reveal-what-it-makes-possible)
+**Date:** 2026-03-27
+**LinkedIn:** ⬜ Not yet posted
+**Topics:** Reveal, AI agents, token efficiency, MCP, scale
+
+**From session:** (see frontmatter)
+
+---
+
+### [Progressive Disclosure for AI Agents](/articles/progressive-disclosure-agents)
+**Date:** 2025-12-14
+**LinkedIn:** ⬜ Not yet posted
+**Topics:** Progressive disclosure, Reveal, token efficiency, semantic infrastructure
+**Audience:** Developers, AI practitioners
+
+**From session:** azure-gem-1222
+
+---
+
+### [Configuration as Semantic Contract](/articles/configuration-semantic-contract)
+**Date:** 2025-12-23
+**LinkedIn:** ⬜ Not yet posted
+**Topics:** Configuration, progressive disclosure, semantic infrastructure, architecture validation
+**Audience:** Developers, team leads, architects
+
+**From session:** stormy-gale-1223
+
+---
+
 ## Forthcoming Articles
 
-**Potential topics:**
-- Beth knowledge graphs: PageRank for documentation
-- Agent Ether: Universal tool contracts for multi-agent systems
-- TIA workflows: Progressive disclosure in practice
+**Next article candidates (in priority order):**
+- "How AI Agents Should Read Code" — MCP server + `--format json` + schema introspection
+- "Your Infrastructure Has an API Now" — `ssl://`, `nginx://`, `domain://`, `reveal health` category
+- "Reveal as a CI/CD Tool" — `--check`, `diff://`, `review` pipeline gates
+
+**LinkedIn queue (not yet posted, ready now):**
+- reveal-project-api ← flagship, post this next
+- reveal-call-graphs
+- reveal-pack-and-review
+- reveal-surprising-recipes
+- reveal-what-it-makes-possible
+- progressive-disclosure-agents
+- configuration-semantic-contract
 - Morphogen deterministic computation: Reproducible AI workflows
 
 **Suggest new topics:** If you have ideas for articles, add them to this list or discuss in sessions.

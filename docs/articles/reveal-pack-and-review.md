@@ -5,6 +5,7 @@ author: "Scott Senkeresty"
 date: "2026-03-15"
 type: "article"
 status: "published"
+linkedin_posted: false
 audience: "developers"
 topics: ["reveal", "ai-agent", "token-efficiency", "code-review", "ci-cd", "progressive-disclosure"]
 beth_topics:

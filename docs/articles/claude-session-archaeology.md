@@ -24,6 +24,7 @@ beth_topics:
   - archaeology
   - observability
   - history
+linkedin_posted: true
 ---
 
 # Session Archaeology: Excavating Your Claude Code History with `reveal claude://`

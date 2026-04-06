@@ -5,6 +5,7 @@ author: "Scott Senkeresty"
 date: "2025-12-14"
 type: "article"
 status: "published"
+linkedin_posted: false
 audience: "Developers, AI practitioners, tool users"
 topics: [progressive-disclosure, reveal, token-efficiency, semantic-infrastructure]
 related_projects: [reveal]

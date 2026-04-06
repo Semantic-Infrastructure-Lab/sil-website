@@ -5,6 +5,7 @@ author: "Scott Senkeresty"
 date: "2026-03-22"
 type: "article"
 status: "published"
+linkedin_posted: true
 audience: "developers, AI practitioners, technical leaders"
 reading_time: "12 minutes"
 canonical_url: "https://semanticinfrastructurelab.org/articles/information-retrieval-history-and-agentic-future"

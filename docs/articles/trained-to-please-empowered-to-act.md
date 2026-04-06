@@ -22,6 +22,7 @@ related_docs:
   - docs/research/AGENTIC_INCIDENTS.md
   - docs/systems/agent-ether.md
 session_provenance: "hidden-constellation-0312"
+linkedin_posted: true
 ---
 
 # Trained to Please, Empowered to Act

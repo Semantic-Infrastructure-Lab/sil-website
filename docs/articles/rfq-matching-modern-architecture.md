@@ -5,6 +5,7 @@ author: "Scott Senkeresty"
 date: "2026-03-23"
 type: "article"
 status: "published"
+linkedin_posted: true
 audience: "ML engineers, software engineers, technical leaders in manufacturing and distribution"
 reading_time: "25 minutes"
 canonical_url: "https://semanticinfrastructurelab.org/articles/rfq-matching-modern-architecture"
