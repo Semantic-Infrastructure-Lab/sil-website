@@ -163,9 +163,9 @@ The output of one adapter becomes the input of the next. The `--extract domains`
 
 ```mermaid
 graph LR
-    A["nginx.conf"] -->|"--extract domains"| B["ssl://domain1\nssl://domain2\n..."]
-    B -->|"reveal --stdin --check"| C["cert status\nper domain"]
-    C -->|"--only-failures"| D["expired /\nunhealthy certs"]
+    A["nginx.conf"] -->|"--extract domains"| B["ssl://domain1<br/>ssl://domain2<br/>..."]
+    B -->|"reveal --stdin --check"| C["cert status<br/>per domain"]
+    C -->|"--only-failures"| D["expired /<br/>unhealthy certs"]
 
     style A fill:#f1f5f9,stroke:#94a3b8
     style B fill:#e0f2fe,stroke:#0284c7

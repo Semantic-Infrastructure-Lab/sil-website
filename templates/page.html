@@ -71,6 +71,7 @@
         // Configure Mermaid
         mermaid.initialize({
             startOnLoad: false,
+            securityLevel: 'loose',
             theme: 'default',
             themeVariables: {
                 primaryColor: '#e1f5ff',
@@ -89,10 +90,14 @@
             }
         });
 
-        // Helper function to unescape HTML entities
+        // Helper function to unescape HTML entities (preserves tags like <br/>)
         function unescapeHTML(str) {
-            const doc = new DOMParser().parseFromString('<!doctype html><body>' + str, 'text/html');
-            return doc.body.textContent;
+            return str
+                .replace(/&amp;/g, '&')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&#39;/g, "'");
         }
 
         // Convert markdown code blocks to Mermaid diagrams

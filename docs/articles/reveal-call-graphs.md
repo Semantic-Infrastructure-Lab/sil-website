@@ -66,10 +66,10 @@ Four callers, exact file and line numbers, no noise.
 
 ```mermaid
 graph LR
-    callers["authenticate_request\nget_user_profile\ncheck_admin_access"]
+    callers["authenticate_request<br/>get_user_profile<br/>check_admin_access"]
     fn["validate_token"]
-    callees["decode_jwt\ncheck_expiry\nload_session"]
-    hotzone["Most-coupled\nfunctions"]
+    callees["decode_jwt<br/>check_expiry<br/>load_session"]
+    hotzone["Most-coupled<br/>functions"]
 
     callers -->|"?target=fn  ←reverse"| fn
     fn -->|"forward→  ?callees=fn"| callees

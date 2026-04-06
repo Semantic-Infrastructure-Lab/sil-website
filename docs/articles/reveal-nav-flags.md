@@ -62,13 +62,13 @@ The four flags work as a triangulation strategy — each answers a different nav
 
 ```mermaid
 graph TD
-    Start["You have a line number\nor a function to understand"]
-    Start --> Outline["--outline\nSee the shape of the function"]
+    Start["You have a line number<br/>or a function to understand"]
+    Start --> Outline["--outline<br/>See the shape of the function"]
     Outline --> Choice{Need more context?}
-    Choice -->|"locate yourself"| Scope["--scope :LINE\nWhat scope is this line in?"]
-    Choice -->|"follow data"| Varflow["--varflow VAR\nWhere does this variable flow?"]
-    Choice -->|"trace behavior"| Calls["--calls START-END\nWhat does this section call?"]
-    Scope --> Done["Root cause\nidentified"]
+    Choice -->|"locate yourself"| Scope["--scope :LINE<br/>What scope is this line in?"]
+    Choice -->|"follow data"| Varflow["--varflow VAR<br/>Where does this variable flow?"]
+    Choice -->|"trace behavior"| Calls["--calls START-END<br/>What does this section call?"]
+    Scope --> Done["Root cause<br/>identified"]
     Varflow --> Done
     Calls --> Done
 
