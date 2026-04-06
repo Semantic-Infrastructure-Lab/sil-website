@@ -32,7 +32,7 @@
 | The Too-Many-Sausages Problem | `rfq-matching-modern-architecture.md` | ✅ posted |
 | Stop Scrolling. Start Navigating. | `reveal-nav-flags.md` | ✅ posted |
 | The Diff That Shows What Actually Changed | `reveal-diff.md` | ✅ posted |
-| Your Project Has an API Now | `reveal-project-api.md` | ⬜ not yet |
+| Your Project Has an API Now | `reveal-project-api.md` | ✅ posted 2026-04-06 |
 | Find Every Caller in Your Codebase | `reveal-call-graphs.md` | ⬜ not yet |
 | Two Commands That Change How You Work | `reveal-pack-and-review.md` | ⬜ not yet |
 | Session Archaeology | `claude-session-archaeology.md` | ✅ posted |
@@ -911,6 +911,12 @@ Carousels (uploaded as PDFs) get **2–3× more engagement** than text posts. Ea
 ---
 
 ## Notes & Decision Log
+
+### 2026-04-06: reveal-project-api posted to LinkedIn
+- **Post**: "Your project is a database. You just couldn't query it." hook; five URI examples; nginx→SSL pipeline; token math; `pip install reveal-cli` in post body; article link in first comment
+- **Format**: Plain text, blank lines only (no markdown renders on LinkedIn), ~1,350 chars
+- **Strategy**: Link in first comment (~5-10% penalty vs 40-60% in body); saves are top algorithm signal
+- **Next**: reveal-call-graphs, then reveal-pack-and-review
 
 ### 2026-04-06: Mermaid diagrams fixed — reveal-project-api, reveal-call-graphs, reveal-nav-flags
 - **What**: All 3 articles had broken Mermaid diagrams (concatenated node labels)

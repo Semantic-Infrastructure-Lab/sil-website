@@ -4,8 +4,9 @@ subtitle: "22 adapters. One syntax. Code, infrastructure, databases, sessions, a
 author: "Scott Senkeresty"
 date: "2026-04-06"
 type: "article"
-status: "draft"
-linkedin_posted: false
+status: "published"
+linkedin_posted: true
+linkedin_posted_date: "2026-04-06"
 audience: "developers"
 topics: ["reveal", "code-navigation", "infrastructure", "ast", "ssl", "diff", "composability", "ai-agents", "token-efficiency"]
 beth_topics:
