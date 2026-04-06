@@ -852,6 +852,13 @@
 
 ## Notes & Decision Log
 
+### 2026-04-06: Mermaid diagrams fixed — reveal-project-api, reveal-call-graphs, reveal-nav-flags
+- **What**: All 3 articles had broken Mermaid diagrams (concatenated node labels)
+- **Root cause**: `\n` in node labels doesn't work with `htmlLabels: true`; `unescapeHTML` stripped tags via `.textContent`; Mermaid `securityLevel: 'strict'` sanitized `<br>` away
+- **Fix**: `<br/>` in article node labels + regex-based `unescapeHTML` in `page.html` + `securityLevel: 'loose'` in Mermaid config
+- **Status**: Deployed to production (session: plasma-fractal-0406 / twinkling-probe-0406)
+- **Next**: `reveal-project-api` is flagship — post to LinkedIn first
+
 ### 2026-01-02: Initial Inventory Created
 - **Decision**: Start with 3 published articles (weeks 1-3) to validate format
 - **Rationale**: Zero content creation time, immediate momentum
