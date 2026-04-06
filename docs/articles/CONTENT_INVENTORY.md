@@ -762,15 +762,15 @@
 **Time**: 30 minutes per article
 
 1. **Copy content** from `docs/articles/*.md`
-2. **Post to LinkedIn Newsletter**:
-   - Go to LinkedIn → Write Article → Create Newsletter
-   - Paste content (adjust formatting for LinkedIn)
-   - Add hook as subtitle
-   - Publish and notify subscribers
+2. **Write LinkedIn feed post** (see LinkedIn Post Strategy section):
+   - Write a standalone post — don't just paste the article
+   - No markdown renders: no `---`, no backticks, no bold. Blank lines only.
+   - Target 1,300–1,900 characters; hook must work in first ~220 chars
+   - `pip install reveal-cli` in post body; article link in first comment
 3. **Verify on SIL blog**: Already published at `/articles/[slug]`
 4. **Amplify on Twitter/X**:
    - Thread with key insights
-   - Link to LinkedIn Newsletter
+   - Link to SIL article
    - Tag relevant accounts
 5. **Track metrics**: Views, comments, profile visits, leads
 
@@ -815,6 +815,66 @@
    - Show measured impact
    - Provide implementation guide
 3. **Follow publication workflow** above
+
+---
+
+## LinkedIn Post Strategy
+
+### Format rules (LinkedIn renders no markdown)
+
+- **No `---` dividers** — renders as literal dashes, looks like noise. Use blank lines instead.
+- **No backticks, no `**bold**`, no `# headings`** — all render as plain text.
+- **Code blocks** — paste as plain text. No syntax highlighting. Commands still land; don't expect visual polish.
+- **Blank lines** are your only formatting tool. Use them generously between sections.
+- **Unicode bold** (`𝗯𝗼𝗹𝗱`) is possible but looks odd — avoid unless you see others in your niche doing it.
+
+### Length
+
+- Sweet spot: **1,300–1,900 characters** (47% more engagement vs shorter or longer)
+- Only the first **~220 characters** are visible before "see more" — 60–70% of readers never tap it
+- Hook must work as a standalone stop-scroll line
+
+### Hook patterns that work
+
+- **Reframe**: "Your project is a database. You just couldn't query it." — names something people feel but haven't articulated
+- **Contrarian**: challenges a common assumption with data behind it
+- **Specific result**: concrete outcome first, method second
+
+### Links
+
+- Link in post body: **40–60% reach penalty** — LinkedIn deprioritizes off-platform sends
+- Link in first comment: **~5–10% penalty** — still meaningfully better
+- Best reach: no link, give value directly in feed; put install command in post, article link in first comment
+- `pip install reveal-cli` is not a URL — no penalty for including it in post body
+
+### Algorithm signals (2026)
+
+- **Saves** are the #1 signal — ~5× more valuable than likes. Technical reference content (commands, patterns) is naturally save-worthy.
+- **Meaningful comments** > volume of likes — a post with 15 real comments outperforms one with 200 likes
+- Posts that align with your established topic area get distributed to a more relevant audience
+- Relevance + relationship scoring has replaced pure recency
+
+### Post structure that works
+
+```
+[Hook — 1-2 lines, stops the scroll]
+
+[Setup — 2-3 lines, names the problem they recognize]
+
+[Pivot — the tool/insight emerges naturally]
+
+[One concrete example — the most surprising/composable one]
+
+[One more proof point — token math, number, or "not a better X" distinction]
+
+[Numbers + install command]
+
+(link in comments)
+```
+
+### Carousel option
+
+Carousels (uploaded as PDFs) get **2–3× more engagement** than text posts. Each swipe signals interest. Worth creating a carousel version of flagship articles after validating content with a text post first.
 
 ---
 
