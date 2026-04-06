@@ -62,6 +62,25 @@ Four callers, exact file and line numbers, no noise.
 
 ## The three questions calls:// answers
 
+`calls://` answers questions in both directions — who calls a function, what it calls, and where coupling is highest:
+
+```mermaid
+graph LR
+    callers["authenticate_request\nget_user_profile\ncheck_admin_access"]
+    fn["validate_token"]
+    callees["decode_jwt\ncheck_expiry\nload_session"]
+    hotzone["Most-coupled\nfunctions"]
+
+    callers -->|"?target=fn  ←reverse"| fn
+    fn -->|"forward→  ?callees=fn"| callees
+    fn -. "?rank=callers" .-> hotzone
+
+    style fn fill:#3b82f6,color:#fff,stroke:none
+    style callers fill:#f1f5f9,stroke:#94a3b8
+    style callees fill:#f1f5f9,stroke:#94a3b8
+    style hotzone fill:#fef9c3,stroke:#ca8a04
+```
+
 ### 1. Who calls this? (impact analysis)
 
 Before changing `validate_token`, you need to know its blast radius:
@@ -169,6 +188,22 @@ Level 2 (callers of callers):
     ← wsgi.py:38     handle_error
   routes/users.py:47  get_user_profile
     ← router.py:67   route_request
+```
+
+The tree is easier to read visually than the indented output:
+
+```mermaid
+graph TD
+    vt["validate_token"]
+    vt --> ar["authenticate_request"]
+    vt --> gup["get_user_profile"]
+    ar --> dr["dispatch_request"]
+    ar --> he["handle_error"]
+    gup --> rr["route_request"]
+
+    style vt fill:#3b82f6,color:#fff,stroke:none
+    style ar fill:#e0f2fe,stroke:#0284c7
+    style gup fill:#e0f2fe,stroke:#0284c7
 ```
 
 Depth is capped at 5 to prevent combinatorial explosion on tightly-coupled codebases.

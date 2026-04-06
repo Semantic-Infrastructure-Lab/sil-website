@@ -161,6 +161,18 @@ reveal /etc/nginx/nginx.conf --extract domains | reveal --stdin --check
 
 The output of one adapter becomes the input of the next. The `--extract domains` flag on the nginx adapter emits `ssl://` URIs. `reveal --stdin --check` reads URIs from stdin and runs health checks on all of them.
 
+```mermaid
+graph LR
+    A["nginx.conf"] -->|"--extract domains"| B["ssl://domain1\nssl://domain2\n..."]
+    B -->|"reveal --stdin --check"| C["cert status\nper domain"]
+    C -->|"--only-failures"| D["expired /\nunhealthy certs"]
+
+    style A fill:#f1f5f9,stroke:#94a3b8
+    style B fill:#e0f2fe,stroke:#0284c7
+    style C fill:#e0f2fe,stroke:#0284c7
+    style D fill:#fef2f2,stroke:#ef4444
+```
+
 More:
 
 ```bash
@@ -180,7 +192,7 @@ reveal cpanel://USERNAME/domains --format=json | \
   reveal --stdin --check --only-failures
 ```
 
-This is a Unix pipeline, not a GUI audit tool. You compose adapters the same way you compose shell commands. The difference: the data flowing through the pipe is structured, typed, and semantically meaningful — not text.
+This is a Unix pipeline, not a GUI audit tool. You compose adapters the same way you compose shell commands — but data at each stage is structured and typed, not text.
 
 ---
 

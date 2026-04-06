@@ -58,6 +58,25 @@ Together, they let you triangulate to exactly what you need without reading the 
 
 ## The four moves
 
+The four flags work as a triangulation strategy — each answers a different navigation question:
+
+```mermaid
+graph TD
+    Start["You have a line number\nor a function to understand"]
+    Start --> Outline["--outline\nSee the shape of the function"]
+    Outline --> Choice{Need more context?}
+    Choice -->|"locate yourself"| Scope["--scope :LINE\nWhat scope is this line in?"]
+    Choice -->|"follow data"| Varflow["--varflow VAR\nWhere does this variable flow?"]
+    Choice -->|"trace behavior"| Calls["--calls START-END\nWhat does this section call?"]
+    Scope --> Done["Root cause\nidentified"]
+    Varflow --> Done
+    Calls --> Done
+
+    style Start fill:#f1f5f9,stroke:#94a3b8
+    style Done fill:#dcfce7,stroke:#16a34a
+    style Outline fill:#e0f2fe,stroke:#0284c7
+```
+
 ### 1. What's the structure? (`--outline`)
 
 Before you read anything, see the shape:
