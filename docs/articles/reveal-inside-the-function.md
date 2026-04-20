@@ -16,7 +16,7 @@ reading_time: "10 minutes"
 beth_topics: [reveal, progressive-disclosure, nav-flags, boundary, sideeffects, returns, ifmap, varflow, mcp, php, function-navigation]
 session_provenance: "pazevaxe-0419"
 version: "v0.81.0"
-linkedin_posted: false
+linkedin_posted: true
 ---
 
 # Inside the Function: Reveal's Fourth Level of Progressive Disclosure
