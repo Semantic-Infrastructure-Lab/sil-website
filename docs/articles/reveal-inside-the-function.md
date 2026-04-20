@@ -303,8 +303,7 @@ Stop reading functions. Start querying them.
 **Install:**
 
 ```bash
-pip install --upgrade reveal-cli    # CLI
-pip install --upgrade reveal-mcp    # MCP server for Claude Code / Cursor / Windsurf
+pip install --upgrade reveal-cli    # CLI + MCP server (reveal-mcp entry point included)
 ```
 
 **GitHub:** [Semantic-Infrastructure-Lab/reveal](https://github.com/Semantic-Infrastructure-Lab/reveal)
