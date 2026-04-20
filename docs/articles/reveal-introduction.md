@@ -489,10 +489,10 @@ This means agents can safely discover what Reveal offers and how to use it witho
 ## The MCP Server: Agents Get All of This Natively
 
 ```bash
-pip install reveal-mcp
+pip install reveal-cli
 ```
 
-`reveal-mcp` exposes all of Reveal's capabilities as MCP tools for Claude Code, Cursor, and Windsurf. Six tools: `reveal_structure`, `reveal_element`, `reveal_query`, `reveal_pack`, `reveal_check`, `reveal_nav`. Agents get progressive disclosure, call-graph analysis, quality checks, and deep function-level navigation without subprocess overhead.
+`reveal-mcp` (included in `reveal-cli`) exposes all of Reveal's capabilities as MCP tools for Claude Code, Cursor, and Windsurf. Six tools: `reveal_structure`, `reveal_element`, `reveal_query`, `reveal_pack`, `reveal_check`, `reveal_nav`. Agents get progressive disclosure, call-graph analysis, quality checks, and deep function-level navigation without subprocess overhead.
 
 `reveal_nav(path, element, flag)` is the sixth tool — the one that completes the four-level drill-down. It routes all nav flags to agents: `boundary` (function contract: inputs + environment + effects), `sideeffects` (classified outbound calls: db/http/cache/log/file/sleep/hard_stop), `returns` (exit paths with gate conditions), `ifmap`, `varflow`, `deps`, `mutations`, and more. Agents can answer "what does this function touch outside itself?" without ever reading source.
 
@@ -629,7 +629,7 @@ Progressive disclosure is one piece of that. The same pattern that makes Reveal 
 
 **GitHub:** [Semantic-Infrastructure-Lab/reveal](https://github.com/Semantic-Infrastructure-Lab/reveal)
 **PyPI:** [reveal-cli](https://pypi.org/project/reveal-cli/)
-**MCP Server:** `pip install reveal-mcp`
+**MCP Server:** `reveal-mcp` command included in `pip install reveal-cli`
 
 ---
 
