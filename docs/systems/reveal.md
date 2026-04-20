@@ -12,7 +12,7 @@ beth_topics:
 
 # Reveal - Universal Resource Explorer
 
-**Status:** ✅ Production v0.66.0 | Available on [PyPI](https://pypi.org/project/reveal-cli/)
+**Status:** ✅ Production v0.81.0 | Available on [PyPI](https://pypi.org/project/reveal-cli/)
 
 **Tagline:** A semantic query layer — one consistent syntax for asking questions about code, infrastructure, documentation, and data.
 
@@ -266,18 +266,19 @@ The same progressive disclosure pattern Reveal proves for code will extend to: S
 
 ---
 
-## Production Stats (v0.66.0)
+## Production Stats (v0.81.0)
 
 | Metric | Value |
 |--------|-------|
-| Tests | 6,861 passing |
+| Tests | 7,913 passing |
 | Quality score | 99.8/100 |
 | Coverage | 68% overall |
 | CI platforms | Linux / macOS / Windows |
 | Downloads/month | 3.1K (100% organic) |
 | URI adapters | 23 |
 | Quality rules | 69 across 14 categories |
-| Languages | 190+ (37 built-in + tree-sitter) |
+| Languages | 80 (64 built-in + 16 Tree-sitter) |
+| MCP tools | 6 (structure, element, query, pack, check, nav) |
 | Subcommands | check, review, pack, health, hotspots, overview, deps |
 
 ---
@@ -293,4 +294,4 @@ The same progressive disclosure pattern Reveal proves for code will extend to: S
 
 **GitHub:** https://github.com/Semantic-Infrastructure-Lab/reveal
 **PyPI:** https://pypi.org/project/reveal-cli/
-**Last Updated:** 2026-03-20 (v0.66.0)
+**Last Updated:** 2026-04-19 (v0.81.0)
