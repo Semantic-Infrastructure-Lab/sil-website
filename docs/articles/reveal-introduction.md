@@ -2,7 +2,7 @@
 title: "Reveal: A Semantic Query Layer for Code, Infrastructure, and Docs"
 subtitle: "Progressive disclosure, URI-based queries, and 23 adapters — what it actually does and why it matters"
 author: "Scott Senkeresty"
-date: "2026-03-20"
+date: "2026-04-19"
 type: "article"
 status: "published"
 audience: "developers"
@@ -14,9 +14,9 @@ related_docs:
   - "../systems/reveal.md"
 canonical_url: "https://semanticinfrastructurelab.org/articles/reveal-introduction"
 reading_time: "18 minutes"
-beth_topics: [reveal, progressive-disclosure, token-efficiency, uri-adapters, call-graph, pack, code-review, agent-help, mcp-server, sil, imports, semantic-blame, structural-analysis]
+beth_topics: [reveal, progressive-disclosure, token-efficiency, uri-adapters, call-graph, pack, code-review, agent-help, mcp-server, sil, imports, semantic-blame, structural-analysis, nav-flags, boundary, sideeffects]
 session_provenance: "crackling-drought-0320"
-version: "v0.66.1"
+version: "v0.81.0"
 linkedin_posted: true
 ---
 
@@ -492,7 +492,9 @@ This means agents can safely discover what Reveal offers and how to use it witho
 pip install reveal-mcp
 ```
 
-`reveal-mcp` exposes all of Reveal's capabilities as MCP tools for Claude Code, Cursor, and Windsurf. Five tools: `reveal_structure`, `reveal_element`, `reveal_query`, `reveal_pack`, `reveal_check`. Agents get progressive disclosure, call-graph analysis, and quality checks without subprocess overhead.
+`reveal-mcp` exposes all of Reveal's capabilities as MCP tools for Claude Code, Cursor, and Windsurf. Six tools: `reveal_structure`, `reveal_element`, `reveal_query`, `reveal_pack`, `reveal_check`, `reveal_nav`. Agents get progressive disclosure, call-graph analysis, quality checks, and deep function-level navigation without subprocess overhead.
+
+`reveal_nav(path, element, flag)` is the sixth tool — the one that completes the four-level drill-down. It routes all nav flags to agents: `boundary` (function contract: inputs + environment + effects), `sideeffects` (classified outbound calls: db/http/cache/log/file/sleep/hard_stop), `returns` (exit paths with gate conditions), `ifmap`, `varflow`, `deps`, `mutations`, and more. Agents can answer "what does this function touch outside itself?" without ever reading source.
 
 This is how the architecture of progressive disclosure becomes the default behavior for AI agents working on your codebase — not something they have to be instructed to do, but something built into how they access code.
 
@@ -515,6 +517,8 @@ After using Reveal daily for months, here are capabilities I haven't found elsew
 **`markdown://docs/?link-graph`** — bidirectional documentation link analysis with orphan detection. Rare in any tool category.
 
 **`claude://sessions/` session archaeology** — AI work history as queryable structured data. Find every file a session touched, search across sessions for references to a function, reconstruct the context of a decision made three weeks ago.
+
+**`--boundary`: complete function contract in one shot** — `reveal app.py process_order --boundary` emits three sections: INPUTS (variables flowing in), ENVIRONMENT (env reads, PHP superglobals), EFFECTS (all outbound calls classified by category: db/http/cache/log/file/sleep/hard_stop). No other CLI tool answers "what does this function touch outside itself?" as a structured, classified output. `--sideeffects` gives the effects layer alone; `--returns` shows every exit path with its gate conditions. These work on Python and PHP.
 
 **Self-describing infrastructure** — `help://schemas/<adapter>` returns machine-readable JSON schemas for every adapter. `reveal --agent-help` generates a decision-tree reference for agents. Agents can discover and use the full API without external documentation.
 
@@ -613,6 +617,8 @@ Then check for structural cracks: `reveal 'imports://src/?circular'`.
 
 Then — if you have a team — ask who owns the most critical code: `reveal 'git://src/core.py?type=blame&element=MainClass'`.
 
+Then go one level deeper into any function: `reveal file.py function_name --boundary`.
+
 ---
 
 ## Why This Exists
@@ -627,4 +633,4 @@ Progressive disclosure is one piece of that. The same pattern that makes Reveal 
 
 ---
 
-*Reveal v0.66.1 — 6,871 tests, 23 URI adapters, 69 quality rules, 80 languages. MIT license.*
+*Reveal v0.81.0 — 7,913 tests, 23 URI adapters, 69 quality rules, 80 languages. MIT license.*
