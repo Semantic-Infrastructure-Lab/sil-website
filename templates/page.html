@@ -22,14 +22,14 @@
     <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('pre code').forEach((block) => {
+            document.querySelectorAll('pre code:not(.language-mermaid)').forEach((block) => {
                 hljs.highlightElement(block);
             });
         });
     </script>
 
     <!-- Plausible Analytics -->
-    <script defer data-domain="semanticinfrastructurelab.org" src="https://analytics.semanticinfrastructurelab.org/js/script.js"></script>
+    <script async data-domain="semanticinfrastructurelab.org" src="https://analytics.semanticinfrastructurelab.org/js/script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -100,9 +100,11 @@
                 .replace(/&#39;/g, "'");
         }
 
-        // Convert markdown code blocks to Mermaid diagrams
-        document.addEventListener('DOMContentLoaded', async () => {
+        // Convert markdown code blocks to Mermaid diagrams, non-blocking.
+        // Wrapped in async IIFE so top-level await doesn't block DOMContentLoaded.
+        (async () => {
             const mermaidBlocks = document.querySelectorAll('code.language-mermaid');
+            if (mermaidBlocks.length === 0) return;
 
             for (const block of mermaidBlocks) {
                 const code = unescapeHTML(block.textContent);
@@ -113,10 +115,8 @@
                 pre.parentElement.replaceChild(div, pre);
             }
 
-            await mermaid.run({
-                querySelector: '.mermaid'
-            });
-        });
+            await mermaid.run({ querySelector: '.mermaid' });
+        })();
     </script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 
 **Audience:** Developers, AI practitioners, tool users, people discovering SIL through specific projects
 
-**Last updated:** 2026-03-26
+**Last updated:** 2026-04-26
 
 ---
 
@@ -44,6 +44,28 @@ The optimization that makes chatbots say "great question!" is the same one that 
 - SIL consulting CTA via byline
 
 **From session:** hidden-constellation-0312
+
+---
+
+### [Agents That Don't Read Everything](/articles/reveal-subagents)
+**Date:** 2026-04-26
+**LinkedIn:** ⬜ Not yet posted
+**Topics:** Reveal, Claude Code, subagents, progressive disclosure, agent design, code review, static analysis
+**Audience:** Developers, AI practitioners building analysis agents
+
+Most agent failures aren't model failures — they're information architecture failures. Agents fail from reading too much, not too little. This article uses two production agents (`reveal-codereview` and `reveal-investigator`) to show four principles for building analysis agents that produce specific, actionable findings instead of confident-sounding nothing.
+
+**The thesis:** progressive disclosure isn't optimization — it's the architecture that lets LLM intelligence find what matters. Three tool calls and 800 tokens beat reading 18,000 tokens of source.
+
+**The four principles:**
+- **Constrain the agent** — tool restriction as intent declaration; `maxTurns` as safety belt; description as routing signal
+- **Force escalation discipline** — The Escalation Ladder Pattern (Structure → Navigation → Data flow → Code), generalized beyond reveal to any analysis agent
+- **Separate operating modes** — one agent with mode selection, OR multiple agents when workflows diverge enough; never God-agents
+- **Require evidence-bearing outputs** — output contracts with `Evidence` and `Unverified` fields make confident-but-wrong findings structurally impossible
+
+**Plus:** an objection section ("why not just use a bigger context window?"), the token math (9x reduction is secondary to output quality), and honest limitations (structural analysis ≠ runtime truth).
+
+**From session:** wrathful-panther-0426
 
 ---
 

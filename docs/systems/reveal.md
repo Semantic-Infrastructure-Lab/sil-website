@@ -228,10 +228,10 @@ reveal --explain B001            # Explain one rule
 ## MCP Server (`reveal-mcp`)
 
 ```bash
-pip install reveal-mcp
+pip install reveal-cli
 ```
 
-Exposes all reveal capabilities as MCP tools for Claude Code, Cursor, and Windsurf. Five tools: `reveal_structure`, `reveal_element`, `reveal_query`, `reveal_pack`, `reveal_check`. Agents get progressive disclosure and call-graph analysis without subprocess overhead.
+Exposes all reveal capabilities as MCP tools for Claude Code, Cursor, and Windsurf. Six tools: `reveal_structure`, `reveal_element`, `reveal_query`, `reveal_pack`, `reveal_check`, `reveal_nav`. Agents get progressive disclosure and call-graph analysis without subprocess overhead.
 
 ---
 
@@ -277,7 +277,7 @@ The same progressive disclosure pattern Reveal proves for code will extend to: S
 | Downloads/month | 3.1K (100% organic) |
 | URI adapters | 23 |
 | Quality rules | 69 across 14 categories |
-| Languages | 80 (64 built-in + 16 Tree-sitter) |
+| Languages | 185+ (tree-sitter language pack + 12 built-in-only) |
 | MCP tools | 6 (structure, element, query, pack, check, nav) |
 | Subcommands | check, review, pack, health, hotspots, overview, deps |
 
