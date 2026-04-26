@@ -18,7 +18,7 @@ reading_time: "12 minutes"
 beth_topics: [reveal, progressive-disclosure, subagents, claude-code, agent-design, code-review, static-analysis, token-efficiency, multi-agent, output-contracts, tool-restriction]
 session_provenance: "wrathful-panther-0426"
 version: "v0.87.0"
-linkedin_posted: false
+linkedin_posted: true
 ---
 
 # Agents That Don't Read Everything
