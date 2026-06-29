@@ -1,6 +1,6 @@
 ---
 title: "Reveal: A Semantic Query Layer for Code, Infrastructure, and Docs"
-subtitle: "Progressive disclosure, URI-based queries, and 23 adapters — what it actually does and why it matters"
+subtitle: "Progressive disclosure, URI-based queries, and 25 adapters — what it actually does and why it matters"
 author: "Scott Senkeresty"
 date: "2026-04-19"
 type: "article"
@@ -115,7 +115,7 @@ Same syntax. Same query operators (`=`, `~=`, `>`, `!`, `..`, `*`). Same output 
 
 This isn't an aesthetic choice. It's what makes everything composable. The output of `nginx://` feeds `ssl://`. The output of `diff://` feeds `ast://`. Infrastructure becomes queryable data that pipes into the next analysis.
 
-23 adapters ship today. Let's look at the ones you'll actually use.
+25 adapters ship today. Let's look at the ones you'll actually use.
 
 ---
 
@@ -269,7 +269,7 @@ reveal review main..HEAD   # replace 'main' with your default branch name
 
 Under the hood, `reveal review` composes four things:
 1. **Structural diff** — what functions and classes were added, removed, or modified
-2. **Quality checks** — 69 rules across bugs, security, complexity, and more
+2. **Quality checks** — 73 rules across bugs, security, complexity, and more
 3. **Hotspot detection** — which files got worse
 4. **Complexity delta** — before/after complexity on every changed function
 
@@ -289,12 +289,12 @@ reveal review main..HEAD || exit 1   # replace 'main' with your default branch n
 When you don't need the full PR review, `reveal check` runs the quality rule engine directly against any file or directory:
 
 ```bash
-reveal check src/                          # all 69 rules, full recursive scan
+reveal check src/                          # all 73 rules, full recursive scan
 reveal check src/ --select B,S            # bugs and security only — fast CI gate
 reveal check src/ --select I              # imports only (circular, unused)
 reveal check src/ --severity high         # high and critical issues only
 reveal check src/ --only-failures         # hide passing checks
-reveal check --rules                      # list all 69 rules with descriptions
+reveal check --rules                      # list all 73 rules with descriptions
 reveal check --explain C901              # explain the cyclomatic complexity rule
 ```
 
@@ -534,7 +534,7 @@ After using Reveal daily for months, here are capabilities I haven't found elsew
 | Documents | `markdown://`, `stats://`, `git://` |
 | Meta / self-referential | `help://`, `reveal://`, `claude://` |
 
-80 languages: 64 built-in analyzers plus 16 via Tree-sitter fallback. 69 quality rules across 14 categories. Zero configuration required.
+305 languages: built-in analyzers for common languages plus the full Tree-sitter language pack. 73 quality rules across 14 categories. Zero configuration required.
 
 ---
 
@@ -633,4 +633,4 @@ Progressive disclosure is one piece of that. The same pattern that makes Reveal 
 
 ---
 
-*Reveal v0.81.0 — 7,913 tests, 23 URI adapters, 69 quality rules, 80 languages. MIT license.*
+*Reveal v0.100.2 — 9,346 tests, 25 URI adapters, 73 quality rules, 305 languages. MIT license.*

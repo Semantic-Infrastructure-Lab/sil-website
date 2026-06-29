@@ -191,7 +191,7 @@ Every industrial distributor has a version of this story: 200,000 RFQ line items
 **Topics:** Reveal, composability, infrastructure, AST, SSL, diff, AI agents, token efficiency
 **Audience:** Developers, engineering teams, AI practitioners
 
-The flagship meta-article. 22 adapters, one syntax — code structure, SSL certs, structural diffs, databases, markdown docs, and AI session history all queryable with the same query language. Covers the pipeline composability story (Reveal pipes into itself), token math across domains, and `reveal review` as the composed PR review workflow. Thesis: your project is a database, you just couldn't query it.
+The flagship meta-article. 25 adapters, one syntax — code structure, SSL certs, structural diffs, databases, markdown docs, and AI session history all queryable with the same query language. Covers the pipeline composability story (Reveal pipes into itself), token math across domains, and `reveal review` as the composed PR review workflow. Thesis: your project is a database, you just couldn't query it.
 
 **From session:** swift-dragon-0406
 

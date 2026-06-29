@@ -634,7 +634,7 @@ SIL is building the semantic substrate for intelligent systems—infrastructure 
 
 ---
 
-**Current Version:** Reveal v0.24.0 (v0.26+ with full configuration support coming soon)
+**Current Version:** Reveal v0.100.2 (full configuration support shipped)
 **License:** MIT
 **Maintained by:** Scott Senkeresty, Semantic Infrastructure Lab
 

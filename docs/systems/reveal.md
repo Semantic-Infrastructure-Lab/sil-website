@@ -12,7 +12,7 @@ beth_topics:
 
 # Reveal - Universal Resource Explorer
 
-**Status:** ✅ Production v0.81.0 | Available on [PyPI](https://pypi.org/project/reveal-cli/)
+**Status:** ✅ Production v0.100.2 | Available on [PyPI](https://pypi.org/project/reveal-cli/)
 
 **Tagline:** A semantic query layer — one consistent syntax for asking questions about code, infrastructure, documentation, and data.
 
@@ -32,7 +32,7 @@ reveal app.py                  # File → structure (imports, functions, classes
 reveal app.py load_config      # Element → exact function extraction
 ```
 
-Zero configuration. Works immediately on any codebase, 190+ languages.
+Zero configuration. Works immediately on any codebase, 305 languages.
 
 ---
 
@@ -175,21 +175,21 @@ AI work history as queryable structured data. Useful for auditing what a session
 
 ---
 
-## 23 URI Adapters
+## 25 URI Adapters
 
 | Domain | Adapters |
 |--------|----------|
-| Code semantics | `ast://`, `calls://`, `imports://`, `diff://`, `python://` |
+| Code semantics | `ast://`, `calls://`, `imports://`, `depends://`, `diff://`, `python://`, `patches://` |
 | Data systems | `mysql://`, `sqlite://`, `json://`, `xlsx://` |
 | Infrastructure | `ssl://`, `nginx://`, `domain://`, `cpanel://`, `autossl://`, `letsencrypt://`, `env://` |
 | Documents | `markdown://`, `stats://`, `git://` |
-| Meta / self-referential | `help://`, `reveal://`, `claude://`, `demo://` |
+| Meta / self-referential | `help://`, `reveal://`, `claude://`, `codex://` |
 
 Same query operators (`=`, `~=`, `>`, `!`, `..`, `*`) across all adapters. Filter expressions learned once, applied everywhere.
 
 ---
 
-## Quality Rules (69 rules, 14 categories)
+## Quality Rules (73 rules, 14 categories)
 
 | Category | Code | What it finds |
 |----------|------|---------------|
@@ -219,9 +219,9 @@ reveal --explain B001            # Explain one rule
 
 ## Language Support
 
-**190+ languages total:**
-- 37 built-in analyzers (Python, JavaScript, TypeScript, Rust, Go, Ruby, Elixir, Bash, YAML, JSON, TOML, Markdown, Nginx, Dockerfile, GDScript, Jupyter, and more)
-- 165 additional languages via Tree-sitter fallback (AST-accurate, not regex)
+**305 languages total:**
+- Built-in analyzers for common languages (Python, JavaScript, TypeScript, Rust, Go, Ruby, Elixir, Bash, YAML, JSON, TOML, Markdown, Nginx, Dockerfile, GDScript, Jupyter, and more)
+- Full Tree-sitter language pack for the rest (AST-accurate, not regex)
 
 ---
 
@@ -266,18 +266,17 @@ The same progressive disclosure pattern Reveal proves for code will extend to: S
 
 ---
 
-## Production Stats (v0.81.0)
+## Production Stats (v0.100.2)
 
 | Metric | Value |
 |--------|-------|
-| Tests | 7,913 passing |
-| Quality score | 99.8/100 |
+| Tests | 9,346 passing |
 | Coverage | 68% overall |
 | CI platforms | Linux / macOS / Windows |
-| Downloads/month | 3.1K (100% organic) |
-| URI adapters | 23 |
-| Quality rules | 69 across 14 categories |
-| Languages | 185+ (tree-sitter language pack + 12 built-in-only) |
+| Downloads | 62K+ total · ~5K/month (PyPI) |
+| URI adapters | 25 |
+| Quality rules | 73 across 14 categories |
+| Languages | 305 (tree-sitter language pack + built-in) |
 | MCP tools | 6 (structure, element, query, pack, check, nav) |
 | Subcommands | check, review, pack, health, hotspots, overview, deps |
 
@@ -294,4 +293,4 @@ The same progressive disclosure pattern Reveal proves for code will extend to: S
 
 **GitHub:** https://github.com/Semantic-Infrastructure-Lab/reveal
 **PyPI:** https://pypi.org/project/reveal-cli/
-**Last Updated:** 2026-04-19 (v0.81.0)
+**Last Updated:** 2026-06-28 (v0.100.2)

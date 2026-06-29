@@ -361,4 +361,4 @@ pip install --upgrade reveal-cli
 - **GitHub:** [Semantic-Infrastructure-Lab/reveal](https://github.com/Semantic-Infrastructure-Lab/reveal)
 - **PyPI:** [reveal-cli](https://pypi.org/project/reveal-cli/)
 
-*Reveal v0.87.0 — 8,432 tests, 23 URI adapters, 73 quality rules, 190+ languages. MIT license.*
+*Reveal v0.100.2 — 9,346 tests, 25 URI adapters, 73 quality rules, 305 languages. MIT license.*

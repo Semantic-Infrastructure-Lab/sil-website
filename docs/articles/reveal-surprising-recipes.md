@@ -25,7 +25,7 @@ related_docs:
 
 # Reveal: The Surprising Recipes
 
-**The basics are in [the main article](reveal-what-it-makes-possible.md).** This is the rest — the combinations nobody sat down to design, the capabilities that show up unexpectedly, the things that make you stop and say "wait, that works?"
+**The basics are in [the main article](/articles/reveal-what-it-makes-possible).** This is the rest — the combinations nobody sat down to design, the capabilities that show up unexpectedly, the things that make you stop and say "wait, that works?"
 
 Almost all of these are just two adapters composing, or a filter combination nobody thought to try. That's the point.
 
@@ -361,4 +361,4 @@ This is why the surprising recipes keep appearing. They're not surprises in the 
 
 ---
 
-**← [Back to the main article](/articles/reveal-what-it-makes-possible)** · **[Full documentation](/systems/reveal)** · **[All recipes](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/main/docs/RECIPES.md)**
+**← [Back to the main article](/articles/reveal-what-it-makes-possible)** · **[Full documentation](/systems/reveal)** · **[GitHub](https://github.com/Semantic-Infrastructure-Lab/reveal)**

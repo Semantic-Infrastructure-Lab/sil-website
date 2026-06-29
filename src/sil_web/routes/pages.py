@@ -43,6 +43,7 @@ def create_routes(
         {"label": "Manifesto", "url": "/manifesto"},
         {"label": "Research", "url": "/research"},
         {"label": "Systems", "url": "/systems"},
+        {"label": "Articles", "url": "/articles"},
         {"label": "Foundations", "url": "/foundations"},
         {"label": "About", "url": "/about"},
         {"label": "Contact", "url": "/contact"},

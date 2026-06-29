@@ -116,11 +116,11 @@ flow(dt=0.1ms) {
 
 ## Status & Adoption
 
-**Current Version:** v0.11.0 (Production-Ready)
+**Current Version:** v0.12.0 (Production-Ready)
 
 **Production Metrics:**
-- ✅ **40+ computational domains** spanning physics, audio, chemistry, graphics, geometry
-- ✅ **1,600+ comprehensive tests** - all passing, zero technical debt
+- ✅ **39 computational domains** spanning physics, audio, chemistry, graphics, geometry
+- ✅ **1,705 comprehensive tests** - all passing, zero technical debt
 - ✅ **MLIR compilation pipeline** complete with 6 custom dialects
 - ✅ **Deterministic execution** across all platforms (bitwise-identical results)
 
@@ -150,7 +150,7 @@ flow(dt=0.1ms) {
 - **Reproducible research** - Bitwise-identical results enable scientific validation
 - **Professional adoption** - Audio production, digital twins, scientific computing, education
 
-**v1.0 Release Timeline:** 2026-Q2 (24-week roadmap active)
+**v1.0 Release Timeline:** In active development
 - Symbolic + numeric execution (SymPy integration)
 - Circuit → Audio coupling (design pedal circuits, hear sound instantly)
 - Category theory optimization (verified composition, automatic fusion)
@@ -253,7 +253,7 @@ Morphogen (digital) and [Philbrick](https://github.com/Semantic-Infrastructure-L
 
 ---
 
-**Version:** 0.11.0 → 1.0 (2026-Q2)
+**Version:** 0.12.0 → 1.0 (in development)
 **License:** Apache 2.0
 **Status:** Production-ready with active v1.0 development
 

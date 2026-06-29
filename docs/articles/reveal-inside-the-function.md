@@ -311,4 +311,4 @@ pip install --upgrade reveal-cli    # CLI + MCP server (reveal-mcp entry point i
 
 ---
 
-*Reveal v0.81.0 — 7,913 tests, 23 URI adapters, 69 quality rules, 190+ languages. MIT license.*
+*Reveal v0.100.2 — 9,346 tests, 25 URI adapters, 73 quality rules, 305 languages. MIT license.*

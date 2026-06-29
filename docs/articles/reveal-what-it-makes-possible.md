@@ -223,7 +223,7 @@ reveal 'claude://files/auth.py'
 ```
 Every Claude Code session that touched `auth.py` — with Read/Write/Edit counts. Not "who committed this" but "which agent sessions changed it and when."
 
-→ **[More surprising recipes: the full showcase](reveal-surprising-recipes.md)**
+→ **[More surprising recipes: the full showcase](/articles/reveal-surprising-recipes)**
 
 ---
 
@@ -261,4 +261,4 @@ Five minutes to understand what it does. The productivity change is immediate �
 
 ---
 
-**[Full documentation](/systems/reveal)** · **[Benchmarks](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/main/docs/BENCHMARKS.md)** · **[MCP Setup](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/main/docs/MCP_SETUP.md)** · **[CI Recipes](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/main/docs/CI_RECIPES.md)**
+**[Full documentation](/systems/reveal)** · **[GitHub](https://github.com/Semantic-Infrastructure-Lab/reveal)** · **[PyPI](https://pypi.org/project/reveal-cli/)**

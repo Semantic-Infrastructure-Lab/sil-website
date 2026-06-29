@@ -9,7 +9,7 @@ AI agents waste billions of tokens (and dollars) on inefficient exploration patt
 - Parsing unstructured output with brittle regex
 - Repeated exploration because tools don't guide strategic usage
 
-**Global impact:** Estimated $110M+ wasted annually on preventable agent inefficiency.
+**Global impact:** at scale this adds up — an illustrative estimate puts preventable agent inefficiency on the order of $100M+ annually.
 
 ## Our Solution: Agent-Native Tools
 
@@ -20,9 +20,9 @@ Tools designed for agents from day one, with:
 - **Clear contracts** - Predictable output, reliable parsing
 
 **Impact:**
-- 💰 **86% cost reduction** for common workflows
-- ⚡ **97% token savings** on code exploration
-- 🌍 **Massive energy savings** at scale (~2M kWh per 1000 agents)
+- 💰 **86% token reduction** for common workflows (measured)
+- ⚡ **97% token savings** on code exploration (measured)
+- 🌍 **Energy savings at scale** (illustrative model: ~2M kWh per 1000 agents)
 
 ---
 
@@ -44,7 +44,7 @@ Some tools are applications (not innovations themselves) that demonstrate SIL pr
 
 **The simplest way to understand code.** Point it at a directory, file, or function. Get exactly what you need.
 
-**Status:** ✅ Production v0.24.0 | [PyPI](https://pypi.org/project/reveal-cli/) | [GitHub](https://github.com/semantic-infrastructure-lab/reveal)
+**Status:** ✅ Production v0.100.2 · 62K+ downloads | [PyPI](https://pypi.org/project/reveal-cli/) | [GitHub](https://github.com/semantic-infrastructure-lab/reveal)
 
 ### Quick Start
 
@@ -110,17 +110,17 @@ We've **implemented and validated** `--agent-help` in Reveal v0.17.0+ - proving 
 
 **[Read the full standard →](/research/agent-help-standard)**
 
-**Economic impact at scale:**
-- Current waste: ~$110M/year from poor agent loops
-- With `--agent-help`: 50-86% reduction in common workflows
-- Energy savings: Billions of kWh annually
-- Reveal demonstrates: $470K savings per 1000 agents (validated)
+**Economic impact at scale** (illustrative models extrapolated from the measured 86% token reduction):
+- Estimated waste: ~$100M+/year from poor agent loops
+- With `--agent-help`: 50–86% token reduction measured in common workflows; cost impact modeled
+- Energy savings: substantial at scale
+- Modeled savings: ~$470K per 1000 agents
 
 ---
 
 ## Economic Framing: Why This Matters
 
-**Agent costs scale with inefficiency.**
+**Agent costs scale with inefficiency.** *(The figures below are an illustrative model extrapolated from the measured 86% token reduction — not audited financials.)*
 
 At 1000 agents making 100 file explorations/day:
 - **Without Reveal:** $54,750/year

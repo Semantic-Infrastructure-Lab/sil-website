@@ -2,6 +2,8 @@
 
 > *Universal tool orchestration layer for agentic AI*
 
+> **Status: Design-phase concept.** The Tool Behavior Contract specification exists; implementation has not started. Agent Ether is the agent-orchestration layer (Layer 3) of the Semantic OS. The repository is private while in development.
+
 ## The Problem
 
 **The Fragmented Tool Landscape**
@@ -259,11 +261,8 @@ Repository is currently private (in active development). Documentation will be p
 - API Call Tool - Async execution mode
 
 **Getting Started:**
-```bash
-git clone https://github.com/Semantic-Infrastructure-Lab/agent-ether.git
-cd agent-ether
-# Design docs available, implementation in progress
-```
+
+*The Agent Ether repository is private while in design. The core artifact today is the **Tool Behavior Contract specification** — the metadata schema by which a tool declares its execution mode, channels, progress model, and required permissions, so an agent knows how to drive it without guessing.*
 
 ---
 

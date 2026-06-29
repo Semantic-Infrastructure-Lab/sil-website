@@ -1,6 +1,6 @@
 ---
 title: "Your Project Has an API Now"
-subtitle: "22 adapters. One syntax. Code, infrastructure, databases, sessions, and docs — all queryable, all composable."
+subtitle: "25 adapters. One syntax. Code, infrastructure, databases, sessions, and docs — all queryable, all composable."
 author: "Scott Senkeresty"
 date: "2026-04-06"
 type: "article"
@@ -33,7 +33,7 @@ session_id: "swift-dragon-0406"
 
 # Your Project Has an API Now
 
-**One syntax. 22 adapters. Code, infrastructure, databases, sessions, and docs — all queryable, all composable.**
+**One syntax. 25 adapters. Code, infrastructure, databases, sessions, and docs — all queryable, all composable.**
 
 ---
 
@@ -272,7 +272,7 @@ The same way a database doesn't make you grep through CSV files, Reveal doesn't 
 
 Your project — the code, the infrastructure it runs on, the databases it reads, the docs that describe it, the sessions where it was built — is structured data. It was always structured data. You just didn't have a query language for it.
 
-22 adapters today. More coming. Same syntax.
+25 adapters today. More coming. Same syntax.
 
 ```bash
 pip install reveal-cli

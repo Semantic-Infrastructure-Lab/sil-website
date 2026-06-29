@@ -515,7 +515,7 @@ The data has always been there. `reveal` makes it legible.
 
 ---
 
-*Reveal v0.70.0 — 7,209 tests, 23 URI adapters, 69 quality rules, 190+ languages. MIT license.*
+*Reveal v0.100.2 — 9,346 tests, 25 URI adapters, 73 quality rules, 305 languages. MIT license.*
 
 *Part of the Reveal documentation series. See also:*
 - *[Stop Reading Code. Start Understanding It](/articles/reveal-introduction) — the big picture*

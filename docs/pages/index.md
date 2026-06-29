@@ -10,7 +10,7 @@ order: 999
 
 > **What is SIL?** A research lab building semantic infrastructure for AI systems — where representations are explicit, transformations are traceable, and reasoning can be inspected.
 
-**Reveal in production · 8.8K downloads · open source · building in public**
+**Reveal in production · 62K+ downloads · open source · building in public**
 
 ---
 
@@ -37,7 +37,7 @@ These aren't demos. They're working infrastructure proving the architecture:
 
 **The entry point to semantic infrastructure. In production. Proven at scale.**
 
-`pip install reveal-cli` · **v0.66.0** · **3K+ downloads/month** · 100% organic growth
+`pip install reveal-cli` · **v0.100.2** · **62K+ downloads · ~5K/month** · building in public
 
 Structure-first exploration with **10–150x token reduction**. See file structure before reading content. Extract specific functions without loading entire files. Used by developers and AI agents worldwide.
 

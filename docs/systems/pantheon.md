@@ -2,6 +2,8 @@
 
 > *The semantic substrate for cross-domain composition*
 
+> **Status: Design-phase research.** A working core library (`pantheon-core`, 68 tests) with two proven adapters — Morphogen (audio) and Prism (analytics) — demonstrating that one IR captures both domains with round-trip fidelity. Remaining domain adapters and cross-domain composition are in progress. The repository is private while in development.
+
 ## The Problem
 
 **Domain Fragmentation Prevents Composition**
@@ -268,28 +270,17 @@ body_3d.save("guitar_body.3mf")
 
 ## Technical Deep Dive
 
-**Full Documentation:**
-- [Pantheon GitHub Repository](https://github.com/Semantic-Infrastructure-Lab/pantheon)
-- [Architecture Guide](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/docs/architecture/)
-- [Schema Specification](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/docs/specifications/)
-- [Morphogen Adapter](https://github.com/Semantic-Infrastructure-Lab/pantheon/tree/main/adapters/morphogen) - Bidirectional translation working ✅
-- [Roadmap](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/ROADMAP) - Detailed development timeline
+*The Pantheon repository is private while in development. Highlights of what exists today:*
 
-**Example Gallery:**
-- ✅ [**SQL Over Audio (WORKING)**](https://github.com/Semantic-Infrastructure-Lab/pantheon/tree/main/examples/cross_domain_analytics) - **Prism + Morphogen cross-domain composition**
-  - 390 lines, fully working demo
-  - Shows 2x optimization potential
-  - Proves cross-domain composition works
-- [Physics-Informed CAD (Planned)](https://github.com/Semantic-Infrastructure-Lab/pantheon/tree/main/examples/physics-informed-cad) - Morphogen → TiaCAD
-- [Provenance-Aware UI (Planned)](https://github.com/Semantic-Infrastructure-Lab/pantheon/tree/main/examples/provenance-ui) - GenesisGraph → SUP
-- [Hardware/Software Co-Design (Planned)](https://github.com/Semantic-Infrastructure-Lab/pantheon/tree/main/examples/hw-sw-codesign) - Morphogen ↔ Philbrick
+**What works today:**
+- `pantheon-core` library — schema, serialization, validation, typed-graph representation (68 tests passing)
+- **Morphogen adapter** (audio) — bidirectional translation, semantic-time integration, round-trip fidelity verified
+- **Prism adapter** (analytics) — 44 operator types, bidirectional translation, round-trip fidelity verified
+- A working **SQL-over-audio** cross-domain composition demo (Prism + Morphogen) — the proof that one IR generalizes across domains
 
-**Getting Started:**
-```bash
-git clone https://github.com/Semantic-Infrastructure-Lab/pantheon.git
-cd pantheon/adapters/morphogen
-python -m pytest tests/  # See round-trip fidelity tests
-```
+**Designed / in progress:**
+- TiaCAD (geometry), GenesisGraph (provenance), SUP (UI), and Philbrick (hardware) adapters
+- Additional cross-domain examples: physics-informed CAD, provenance-aware UI, hardware/software co-design
 
 ---
 
@@ -396,11 +387,6 @@ This solves the fragmentation that forces professional workflows to span 3-5 inc
 
 ---
 
-**Version:** 0.1.0-alpha → 1.0 (Active Development)
+**Version:** 0.1.0-alpha
 **License:** Apache 2.0
-**Status:** Design phase with proof-of-concept (Morphogen adapter working)
-
-**Learn More:**
-- [GitHub Repository](https://github.com/Semantic-Infrastructure-Lab/pantheon)
-- [Architecture Documentation](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/docs/architecture/)
-- [Roadmap](https://github.com/Semantic-Infrastructure-Lab/pantheon/blob/main/ROADMAP)
+**Status:** Design-phase research with a working core and two proven adapters (Morphogen, Prism). Repository private while in development.
