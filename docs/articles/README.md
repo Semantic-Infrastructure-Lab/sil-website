@@ -27,7 +27,25 @@ Articles are:
 
 ## Published Articles
 
-*13 articles live on the website. LinkedIn status noted per article.*
+*14 articles live on the website. LinkedIn status noted per article.*
+
+### [The Hard Part Isn't Reasoning — It's Grounding](/articles/grounding-not-reasoning)
+**Date:** 2026-07-13
+**LinkedIn:** ⬜ Not yet posted
+**Topics:** Grounding, progressive disclosure, token efficiency, context management, agent orientation, Reveal
+**Audience:** Developers, AI engineers, agent builders
+
+The bottleneck in agentic AI isn't the model's intelligence — it's *grounding*: getting the right information into the agent's head cheaply before it acts. A synthesis of four transferable patterns (continuity across sessions, finding docs without reading them all, reading structure before content, externalizing the task list), each with the design principle that makes it portable and a real example of it paying off.
+
+**Key points:**
+- Four "context-in" pillars, presented as cheap habits with the trap each one avoids
+- Real mechanisms, not hand-waving: the link-authority ranking formula, the token-tier ladder (300 → 40,000), watermark-bounded index freshness, self-hosted IDs that survive tracker churn
+- The honest limit: grounding is the floor (execution-verification and the learning loop are the next layer) — and `claude://` self-reflection is already the raw material for that loop
+- CTA: `pip install reveal-cli` as the one adoptable piece
+
+**From session:** iridescent-gradient-0713
+
+---
 
 ### [Trained to Please, Empowered to Act](/articles/trained-to-please-empowered-to-act)
 **Date:** 2026-03-12
