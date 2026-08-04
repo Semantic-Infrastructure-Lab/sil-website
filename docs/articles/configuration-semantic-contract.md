@@ -3,6 +3,7 @@ title: "Configuration as Semantic Contract"
 subtitle: "Why your config file should declare meaning, not just tune parameters"
 author: "Scott Senkeresty"
 date: "2025-12-23"
+updated: "2026-08-04"
 type: "article"
 status: "published"
 linkedin_posted: false
@@ -27,6 +28,8 @@ session_provenance: "stormy-gale-1223"
 # Configuration as Semantic Contract
 
 *Why your config file should declare meaning, not just tune parameters*
+
+> **Correction (2026-08-04):** The original version of this article described a `semantic://` adapter and `ast.entry_points` config as shipped Reveal features, and showed Reveal validating its own architecture via `.reveal.yaml`. Neither was true at publication (v0.100.2) or is true today (v0.113.0): `semantic://` was considered and explicitly rejected (see [ROADMAP.md](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/master/ROADMAP.md), "Explicitly Not Planned" — over-engineered, requires ML infrastructure); `entry_points` config was never implemented; and Reveal's own `.reveal.yaml` has never declared an `architecture:` block. This revision corrects those sections and marks what's real, what's proposed ([BACK-952](https://github.com/Semantic-Infrastructure-Lab/reveal)), and what was dropped.
 
 ---
 
@@ -104,29 +107,19 @@ What does this mean? Why are we ignoring those paths? Is it for performance? Dea
 
 **Semantic configuration** (meaning-focused):
 ```yaml
-ast:
-  entry_points:
-    - pattern: "def test_"
-      description: "Pytest test functions invoked by test runner"
-      languages: [python]
-
-    - pattern: "@app\\.(route|get|post)"
-      description: "FastHTML route handlers (framework invocation)"
-      languages: [python]
-
 architecture:
   layers:
     - name: routes
-      path: app/routes/**
+      paths: [app/routes/**]
       description: "HTTP route handlers"
-      cannot_import:
-        - repositories/**      # Routes must go through services
+      deny_imports:
+        - repositories      # Routes must go through services
 
     - name: services
-      path: app/services/**
+      paths: [app/services/**]
       description: "Business logic layer"
-      cannot_import:
-        - routes/**            # Services can't depend on HTTP layer
+      deny_imports:
+        - routes            # Services can't depend on HTTP layer
 ```
 
 **Notice the difference:**
@@ -167,30 +160,28 @@ Declare project-specific semantics in version-controlled config:
 
 ```yaml
 # .reveal.yaml - Your team's architectural rules
-imports:
-  ignore_unused:
-    - "**/tests/fixtures/**"     # Test fixtures import for side effects
-
 architecture:
   layers:
     - name: models
-      path: app/models/**
-      can_import: [typing, pydantic, datetime, enum]
-      cannot_import: ["**/!(typing|pydantic|datetime|enum)"]
+      paths: [app/models/**]
+      allow_imports: [typing, pydantic, datetime, enum]
+      deny_imports: [services, routes, repositories]
 
-  rules:
-    - name: no-god-functions
-      pattern: "app/services/**"
-      check: function_lines <= 100
-      severity: error
-      message: "Service functions should be focused and under 100 lines"
+# Rule thresholds — a real, working example from reveal's own .reveal.yaml
+rules:
+  C901:
+    threshold: 21   # Cyclomatic complexity (default: 10)
+  E501:
+    max_length: 100 # Line length (default: 100, made explicit)
 ```
 
 **Design criteria:**
-- Declarative format (YAML/TOML/JSON)
+- Declarative format (YAML)
 - Overrides **extend** defaults (don't replace everything)
 - Committed to version control
 - Schema-validated (catch errors early)
+
+The `no-god-functions`-style free-form `rules: [{check: "..."}]` block from the original version of this article — an arbitrary expression language for custom checks — was never implemented. What's real is per-rule threshold overrides (`C901.threshold`, `E501.max_length`, etc., keyed by the rule's built-in code) and the `architecture.layers` block above.
 
 **When to move here:** Team projects, custom architecture, domain-specific patterns, enforcement needed.
 
@@ -201,18 +192,21 @@ Extend the tool with organization-specific logic when YAML isn't enough:
 ```python
 # ~/.reveal/rules/payment_security.py
 # Custom rule: Track all payment code for PCI compliance audits
-from reveal.rules import Rule
+from reveal.rules.base import BaseRule, Detection, RulePrefix, Severity
 
-class StripeUsageRule(Rule):
-    name = "track-stripe-usage"
-    description = "Log all Stripe API calls for security audit trail"
+class StripeUsage(BaseRule):
+    code = "S901"
+    message = "Stripe API call detected - ensure PCI DSS compliance"
+    category = RulePrefix.S
+    severity = Severity.LOW
+    file_patterns = [".py"]
 
-    def check(self, node):
-        if self.matches_pattern(node, r"stripe\\..*\\("):
-            return self.info(
-                node,
-                "Stripe API call detected - ensure PCI DSS compliance"
-            )
+    def check(self, file_path, structure, content):
+        detections = []
+        for i, line in enumerate(content.splitlines(), start=1):
+            if "stripe." in line:
+                detections.append(self.create_detection(file_path, line=i))
+        return detections
 ```
 
 **Design criteria:**
@@ -240,7 +234,7 @@ This isn't just about making configuration easier. It connects to a deeper princ
 - Drift accumulates until architecture is unrecognizable
 
 **Semantic configuration approach:**
-- Architecture lives in `.reveal.yaml`: `cannot_import: [repositories/**]`
+- Architecture lives in `.reveal.yaml`: `deny_imports: [repositories]`
 - Tool enforces on every commit
 - Violations fail CI immediately
 - **Architecture cannot drift silently**
@@ -249,149 +243,68 @@ Your configuration becomes **executable documentation**—not a promise that mig
 
 ---
 
-## Real-World Example: Reveal's Architecture Validation
+## Declaring a Layered Architecture
 
-Let me show you what this looks like in practice.
-
-**The problem:** I was building Reveal's new pattern detection system. The architecture was clear in my head:
-
-- **Adapters** fetch data (files, environment, AST)
-- **Renderers** display data (text, JSON, tree format)
-- **Rules** validate code quality
-- **Core** orchestrates everything
-
-But code has a way of violating architecture when you're moving fast. Without enforcement, I'd inevitably add "just one quick import" that breaks the layering.
-
-**The solution:** Declare the architecture in `.reveal.yaml`:
+Here's the pattern applied to a typical routes/services/repositories split:
 
 ```yaml
 architecture:
   layers:
-    - name: core
-      path: src/reveal/core/**
-      description: "Orchestration and coordination"
-      can_import:
-        - adapters/**
-        - renderers/**
-        - rules/**
+    - name: routes
+      paths: [src/routes/**]
+      description: "HTTP route handlers"
+      deny_imports: [repositories]
 
-    - name: adapters
-      path: src/reveal/adapters/**
-      description: "Data fetching (AST, files, environment)"
-      cannot_import:
-        - renderers/**    # Adapters don't display
-        - rules/**        # Adapters don't validate
+    - name: services
+      paths: [src/services/**]
+      description: "Business logic layer"
+      deny_imports: [routes]
 
-    - name: renderers
-      path: src/reveal/renderers/**
-      description: "Data display logic"
-      cannot_import:
-        - adapters/**     # Renderers don't fetch
-        - rules/**        # Renderers don't validate
+    - name: repositories
+      paths: [src/repositories/**]
+      description: "Data access layer"
+      deny_imports: [routes, services]
 ```
 
-Now when I run `reveal . --check`, the tool validates its own architecture:
-
-```bash
-$ reveal src/ --check
-
-✓ Architecture validation passed
-  - All layers respect import boundaries
-  - 0 violations detected
-
-Core: 12 files, 2,847 lines
-Adapters: 8 files, 1,923 lines
-Renderers: 6 files, 1,456 lines
-Rules: 14 files, 2,103 lines
-```
-
-**The meta moment:** A tool that checks code architecture, checking its own architecture, using configuration as semantic contract.
-
-If it violates the architecture I declared, **it fails its own quality check**. The configuration isn't documentation. It's proof.
+Running `reveal src/ --check` against this config enforces the layer boundaries as part of the normal quality-check pass.
 
 ---
 
-## The URI Adapter Pattern: Composable Semantics
+## The URI Adapter Pattern: Composable Queries
 
-Configuration becomes even more powerful when combined with **queryable domain knowledge**.
-
-Reveal uses a URI scheme pattern (`python://`, `ast://`, `json://`) that lets you query code like a database. Configuration extends this with project-specific semantics:
-
-```yaml
-semantic:
-  custom_patterns:
-    - name: uses_stripe_api
-      description: "Functions that call Stripe payment API"
-      patterns:
-        - "stripe\\..*\\("
-        - "StripeClient"
-
-    - name: sends_email
-      description: "Functions that send email"
-      patterns:
-        - "send.*email"
-        - "EmailMessage"
-        - "smtp\\."
-```
-
-**Now these become first-class queryable semantics:**
+Reveal uses a URI scheme pattern (`ast://`, `calls://`, `imports://`, `json://`, 24 adapters total — `reveal --adapters`) that lets you query code like a database, without any config:
 
 ```bash
-# Find all code that touches payments
-reveal 'semantic://app?uses_stripe_api'
+# Find complex functions
+reveal 'ast://src?complexity>10'
 
-# Find all email-sending code
-reveal 'semantic://app?sends_email'
+# Find who calls a function
+reveal 'calls://src/?target=validate_item'
+
+# Text/identifier search across a tree
+reveal src/ --grep 'stripe\.'
 ```
 
-**The power:** Domain-specific knowledge that was tribal ("ask Sarah, she knows where payment code is") becomes **explicit, queryable infrastructure**.
-
-This is what "semantic contract" means. You're not just configuring behavior. You're **declaring what patterns mean in your domain**, and tools can query that meaning.
+Domain-specific knowledge — "what code touches our payment provider?" — becomes a one-line query instead of tribal knowledge ("ask Sarah, she knows where the payment code is"). It's deterministic: a grep pattern or a structural filter, not an embedding search. (A named, saved-pattern `semantic://` adapter was considered and explicitly turned down — see ROADMAP.md's "Explicitly Not Planned" list — as requiring ML infrastructure for too little gain over `--grep`.)
 
 ---
 
-## Entry Points as First-Class Concept
+## Entry Points and Dead-Code Detection
 
 Modern frameworks use **implicit invocation**—decorators, dependency injection, event handlers. This breaks dead code detection because tools don't understand "framework magic."
 
-Example: FastHTML route handlers
+Example: a pytest test function
 
 ```python
-@app.route("/login")
-def login_page():
-    return Form(...)
+def test_login_flow():
+    ...
 ```
 
-Is `login_page()` dead code? It's never explicitly called in the codebase. But the framework invokes it via the `@app.route` decorator.
+Is `test_login_flow()` dead code? It's never explicitly called anywhere. But pytest discovers and invokes it by convention.
 
-**Traditional tools see:** Unused function (false positive)
-**Reveal with semantic config sees:** Entry point (framework invocation)
+**What Reveal actually does today:** `calls://?uncalled` already recognizes a fixed, built-in set of implicit-invocation patterns and excludes them from dead-code findings — `property`/`classmethod`/`staticmethod` decorators, pytest fixtures and `test_*` functions, `unittest` lifecycle methods (`setUp`, `tearDown`, ...), and C#/Java test attributes (`[Fact]`, `[Test]`, JUnit `@Test`, etc. — added for BACK-446 after this exact false-positive pattern swamped a C# codebase with 1,577 false "dead code" hits).
 
-```yaml
-ast:
-  entry_points:
-    - pattern: "@app\\.(route|get|post)"
-      description: "FastHTML route handlers"
-      languages: [python]
-
-    - pattern: "@click\\.command"
-      description: "Click CLI commands"
-      languages: [python]
-
-    - pattern: "def test_"
-      description: "Pytest test functions"
-      languages: [python]
-```
-
-Now the tool understands your framework. What was "magic" becomes **declared semantic contract**.
-
-**Generalization:** Any implicit invocation pattern can be declared:
-- React hooks (`useEffect`, `useState`)
-- Event handlers (`addEventListener`, Vue lifecycle)
-- Dependency injection (`@Injectable`, Spring beans)
-- Plugin systems (Jupyter kernels, VSCode extensions)
-
-You teach the tool your domain. The tool validates using your semantics.
+**What it doesn't cover yet:** web/CLI framework routes — Flask/FastAPI/FastHTML `@app.route`, Click `@click.command`, Django views. Those aren't in the built-in list, so `--uncalled` still false-flags every route handler in a web app today. Letting a project declare additional entry-point patterns per `.reveal.yaml` — closer to the original `ast.entry_points` idea, but as a real, scoped extension of the existing built-in list rather than a fabricated already-shipped feature — is filed as [BACK-952](https://github.com/Semantic-Infrastructure-Lab/reveal) in reveal's backlog, not yet built.
 
 ---
 
@@ -415,7 +328,7 @@ Here's what **semantic configuration alignment** looks like:
 
 **Result:** Architecture **cannot drift silently**. The config is living documentation.
 
-**Example from a real code review:**
+**Illustrative scenario** (pre-commit hook wired to `reveal src/ --check`; exact output format not verified against current CLI text):
 
 ```bash
 $ git commit -m "Add quick database access to route"
@@ -519,7 +432,7 @@ environments:
 
 ---
 
-## Try It: Reveal v0.26+
+## Try It: Reveal v0.113+
 
 Progressive configuration is live in Reveal. Here's how to try it:
 
@@ -536,21 +449,22 @@ cat > .reveal.yaml << EOF
 architecture:
   layers:
     - name: routes
-      path: app/routes/**
-      cannot_import: [repositories/**]
+      paths: [app/routes/**]
+      deny_imports: [repositories]
 
     - name: services
-      path: app/services/**
+      paths: [app/services/**]
 
-quality:
-  max_function_lines: 100
+rules:
+  C901:
+    threshold: 15   # cyclomatic complexity
 EOF
 
-# Now validate architecture
+# Now validate architecture + rule thresholds
 reveal src/ --check               # Enforces your rules
 
-# Query custom semantics
-reveal 'semantic://app?complexity>10'
+# Query structural properties directly (no config needed)
+reveal 'ast://src?complexity>10'
 ```
 
 **The progression:**
@@ -634,7 +548,7 @@ SIL is building the semantic substrate for intelligent systems—infrastructure 
 
 ---
 
-**Current Version:** Reveal v0.100.2 (full configuration support shipped)
+**Current Version:** Reveal v0.113.0. `architecture: layers:` config and `.reveal/rules/` custom-rule plugins are real and working; `semantic://` and `entry_points` config, described in earlier versions of this article, are not (see correction note above).
 **License:** MIT
 **Maintained by:** Scott Senkeresty, Semantic Infrastructure Lab
 
