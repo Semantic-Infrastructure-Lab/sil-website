@@ -27,11 +27,11 @@ Articles are:
 
 ## Published Articles
 
-*14 articles live on the website. LinkedIn status noted per article.*
+*18 articles live on the website. LinkedIn status noted per article.*
 
 ### [The Hard Part Isn't Reasoning — It's Grounding](/articles/grounding-not-reasoning)
 **Date:** 2026-07-13
-**LinkedIn:** ⬜ Not yet posted
+**LinkedIn:** ✅ Posted
 **Topics:** Grounding, progressive disclosure, token efficiency, context management, agent orientation, Reveal
 **Audience:** Developers, AI engineers, agent builders
 
@@ -84,6 +84,25 @@ Most agent failures aren't model failures — they're information architecture f
 **Plus:** an objection section ("why not just use a bigger context window?"), the token math (9x reduction is secondary to output quality), and honest limitations (structural analysis ≠ runtime truth).
 
 **From session:** wrathful-panther-0426
+
+---
+
+### [Inside the Function: Reveal's Fourth Level of Progressive Disclosure](/articles/reveal-inside-the-function)
+**Date:** 2026-04-19
+**LinkedIn:** ✅ Posted
+**Topics:** Reveal, progressive disclosure, nav flags, function navigation, static analysis, AI agents, MCP, PHP, Python
+**Audience:** Developers, AI practitioners
+
+Levels 1–3 of progressive disclosure (directory, file, function) are enough for most functions — but large, entangled functions (legacy controllers, AST walkers, dispatch tables) break the model even at the function level. Seven new flags add a fourth level: querying a function's control flow, side effects, and variable movement without reading its body.
+
+**Key points:**
+- Three categories of flag: control flow (`--ifmap`, `--catchmap`, `--returns`), data flow (`--varflow`, `--mutations`), external interaction (`--sideeffects`, `--boundary`)
+- Real example: a 200-line "routing function" that turns out to call `sys.exit` six times — invisible from the header, surfaced in under a second
+- `--boundary` answers "is this function pure?" before you parallelize, mock, or extract it — with a PHP-specific `ENVIRONMENT` section for superglobals
+- All seven flags work identically on Python and PHP, and are exposed to agents via the `reveal_nav` MCP tool with no subprocess overhead
+- Honest limitations: structural maps for orientation and scoping, not a substitute for runtime verification
+
+**From session:** pazevaxe-0419
 
 ---
 
@@ -277,9 +296,22 @@ Four nav flags (`--outline`, `--scope`, `--varflow`, `--calls`) as four question
 
 ---
 
+### [I Didn't Learn to Trust AI. I Learned to Engineer Trust.](/articles/engineering-trust)
+**Date:** 2026-08-03
+**LinkedIn:** ⬜ Not yet posted
+**Topics:** Agentic AI, trust, observability, verification, containment, continuity, meta-engineering
+**Audience:** Developers, AI engineers, teams deploying agents in production
+
+A working theory of engineered trust: trust isn't a property of the model, it's an emergent property of the system engineered around it. Five properties a human-agent system needs — observability, verification, containment, continuity, meta-engineering — grounded in real production incidents (Replit's spoofed status report, Amazon Kiro's Cost Explorer deletion) and internal ones (a legacy PHP codebase that broke AST-based tooling, a config-vs-template verification gap, a session-continuity link silently orphaned by `/clear`).
+
+**From session:** tempestuous-ice-0803
+
+---
+
 ## Forthcoming Articles
 
 **Next article candidates (in priority order):**
+- "Doing the Meta" — the natural sequel to [I Didn't Learn to Trust AI. I Learned to Engineer Trust.](engineering-trust.md): a case study walking through five or six concrete iterations (missing docs → YAML metadata, random search → complexity ordering, blind to procedural PHP → Probe, rediscovered work → a ledger, git races → isolation), read as how a human-agent system evolves over time
 - "How AI Agents Should Read Code" — MCP server + `--format json` + schema introspection
 - "Your Infrastructure Has an API Now" — `ssl://`, `nginx://`, `domain://`, `reveal health` category
 - "Reveal as a CI/CD Tool" — `--check`, `diff://`, `review` pipeline gates

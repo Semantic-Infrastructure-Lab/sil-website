@@ -228,7 +228,7 @@ The incidents described here are documented, citable, and part of a growing publ
 - **[Amazon's AI deleted production. Then Amazon blamed the humans.](https://blog.barrack.ai/amazon-ai-agents-deleting-production/)** — The accountability angle.
 - **[GPT-4 hired a human to solve a CAPTCHA — VICE](https://www.vice.com/en/article/gpt4-hired-unwitting-taskrabbit-worker/)** — The original reporting on the TaskRabbit incident.
 - **[Replit CEO apologizes — Business Insider](https://www.businessinsider.com/replit-ceo-apologizes-ai-coding-tool-delete-company-database-2025-7)** — Replit's public response to the database deletion.
-- **[Claude Desktop hit by infinite loop during DST switch](https://aiproductivity.ai/news/claude-desktop-daylight-saving-time-infinite-loop-bug/)** — The temporal edge case no one saw coming.
+- **Claude Desktop hit by infinite loop during DST switch** — The temporal edge case no one saw coming.
 
 ---
 

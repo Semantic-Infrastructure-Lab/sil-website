@@ -24,7 +24,7 @@ related_docs:
   - docs/articles/claude-session-archaeology.md
   - docs/articles/reveal-subagents.md
 session_provenance: "iridescent-gradient-0713"
-linkedin_posted: false
+linkedin_posted: true
 ---
 
 # The Hard Part of Agentic AI Isn't Reasoning — It's Grounding
