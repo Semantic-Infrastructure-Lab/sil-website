@@ -316,67 +316,11 @@ The seventy-year arc of how machines learned to find what we know — from Luhn'
 
 ---
 
-## Writing Guidelines
-
-**Article structure (recommended):**
-1. **Hook** - Relatable problem, concrete example
-2. **Problem deep-dive** - Why current approaches fail
-3. **Solution** - How this tool/approach works
-4. **Evidence** - Measured data, real-world examples
-5. **How it works** - Technical details (accessible)
-6. **Broader context** - How it fits in SIL vision
-7. **Try it now** - Installation, quick start, links
-
-**Style:**
-- Engaging but substantive (not clickbait, not dry)
-- Concrete examples (real commands, real output)
-- Measured data (token counts, time savings, success rates)
-- Accessible technical depth (explain jargon, don't avoid it)
-
-**Frontmatter requirements:**
-```yaml
----
-title: "[Full Title]"
-subtitle: "[Tool/Topic description]"
-author: "Scott Senkeresty"
-date: "YYYY-MM-DD"
-type: "article"
-status: "published|draft"
-audience: "[target audience]"
-topics: [topic1, topic2, topic3]
-related_projects: [project-name]
-related_docs:
-  - "RELATED_DOC.md"
-canonical_url: "https://semanticinfrastructurelab.org/articles/slug"
-reading_time: "X minutes"
-beth_topics: [topic-slug-1, topic-slug-2]
-session_provenance: "[session-id if created in session]"
----
-```
-
----
-
 ## Related Directories
 
 - [Foundations](/foundations/) - Foundational principles and frameworks
 - [Systems](/systems/) - Practical usage guides for SIL systems
 - [Research](/research/) - Academic-style research papers
-
----
-
-## Publication Workflow
-
-**From session → published article:**
-
-1. **Create in session directory** (ephemeral workspace)
-2. **Classify as article** (product intro, tutorial, etc.)
-3. **Add frontmatter** (YAML metadata)
-4. **Copy to articles/** (this directory)
-5. **Update articles/README.md** (add to index above)
-6. **Sync to website** (see `/home/scottsen/src/tia/projects/SIL/docs/DOCUMENTATION_MAP.md`)
-7. **Announce** (Twitter thread, email newsletter per Multi-Channel Strategy)
-
-**See also:** `foundation/communications/PUBLICATION_CONTENT_STRATEGY.md` for complete workflow.
 
 ---
 
