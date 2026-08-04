@@ -4,7 +4,7 @@
 
 **Audience:** Developers, AI practitioners, tool users, people discovering SIL through specific projects
 
-**Last updated:** 2026-04-26
+**Last updated:** 2026-08-03
 
 ---
 
@@ -27,9 +27,23 @@ Articles are:
 
 ## Published Articles
 
-*18 articles live on the website. LinkedIn status noted per article.*
+*18 articles live on the website, grouped by topic. Newest first within each group. LinkedIn status noted per article.*
 
-### [The Hard Part Isn't Reasoning — It's Grounding](/articles/grounding-not-reasoning)
+### Agentic AI: Trust & Reliability
+
+#### [I Didn't Learn to Trust AI. I Learned to Engineer Trust.](/articles/engineering-trust)
+**Date:** 2026-08-03
+**LinkedIn:** ⬜ Not yet posted
+**Topics:** Agentic AI, trust, observability, verification, containment, continuity, meta-engineering
+**Audience:** Developers, AI engineers, teams deploying agents in production
+
+A working theory of engineered trust: trust isn't a property of the model, it's an emergent property of the system engineered around it. Five properties a human-agent system needs — observability, verification, containment, continuity, meta-engineering — grounded in real production incidents (Replit's spoofed status report, Amazon Kiro's Cost Explorer deletion) and internal ones (a legacy PHP codebase that broke AST-based tooling, a config-vs-template verification gap, a session-continuity link silently orphaned by `/clear`).
+
+**From session:** tempestuous-ice-0803
+
+---
+
+#### [The Hard Part Isn't Reasoning — It's Grounding](/articles/grounding-not-reasoning)
 **Date:** 2026-07-13
 **LinkedIn:** ✅ Posted
 **Topics:** Grounding, progressive disclosure, token efficiency, context management, agent orientation, Reveal
@@ -47,7 +61,7 @@ The bottleneck in agentic AI isn't the model's intelligence — it's *grounding*
 
 ---
 
-### [Trained to Please, Empowered to Act](/articles/trained-to-please-empowered-to-act)
+#### [Trained to Please, Empowered to Act](/articles/trained-to-please-empowered-to-act)
 **Date:** 2026-03-12
 **LinkedIn:** ✅ Posted
 **Topics:** Agentic AI, incidents, safety, sycophancy, behavioral contracts
@@ -65,7 +79,9 @@ The optimization that makes chatbots say "great question!" is the same one that 
 
 ---
 
-### [Agents That Don't Read Everything](/articles/reveal-subagents)
+### Reveal: Composability & Agent Workflows
+
+#### [Agents That Don't Read Everything](/articles/reveal-subagents)
 **Date:** 2026-04-26
 **LinkedIn:** ⬜ Not yet posted
 **Topics:** Reveal, Claude Code, subagents, progressive disclosure, agent design, code review, static analysis
@@ -87,122 +103,31 @@ Most agent failures aren't model failures — they're information architecture f
 
 ---
 
-### [Inside the Function: Reveal's Fourth Level of Progressive Disclosure](/articles/reveal-inside-the-function)
-**Date:** 2026-04-19
-**LinkedIn:** ✅ Posted
-**Topics:** Reveal, progressive disclosure, nav flags, function navigation, static analysis, AI agents, MCP, PHP, Python
-**Audience:** Developers, AI practitioners
-
-Levels 1–3 of progressive disclosure (directory, file, function) are enough for most functions — but large, entangled functions (legacy controllers, AST walkers, dispatch tables) break the model even at the function level. Seven new flags add a fourth level: querying a function's control flow, side effects, and variable movement without reading its body.
-
-**Key points:**
-- Three categories of flag: control flow (`--ifmap`, `--catchmap`, `--returns`), data flow (`--varflow`, `--mutations`), external interaction (`--sideeffects`, `--boundary`)
-- Real example: a 200-line "routing function" that turns out to call `sys.exit` six times — invisible from the header, surfaced in under a second
-- `--boundary` answers "is this function pure?" before you parallelize, mock, or extract it — with a PHP-specific `ENVIRONMENT` section for superglobals
-- All seven flags work identically on Python and PHP, and are exposed to agents via the `reveal_nav` MCP tool with no subprocess overhead
-- Honest limitations: structural maps for orientation and scoping, not a substitute for runtime verification
-
-**From session:** pazevaxe-0419
-
----
-
-### [Stop Reading Code. Start Understanding It](/articles/reveal-introduction)
-**Date:** 2025-12-10
-**LinkedIn:** ✅ Posted
-**Topics:** Reveal, progressive disclosure, token efficiency, semantic stack
-**Audience:** Developers, AI practitioners
-
-Introduction to Reveal and the progressive disclosure pattern. Shows how semantic slicing achieves 25-50x token reduction with measured examples. Positions Reveal as Layer 1-3 of SIL's 7-layer semantic OS, integrated with Beth's PageRank knowledge graph system.
-
-**Key points:**
-- Problem: AI agents burn tokens reading everything
-- Solution: Progressive disclosure (structure first, details on demand)
-- Evidence: 25-30x reduction measured across 300+ sessions
-- Integration: Reveal + Beth = virtuous cycle
-- Vision: Proof that semantic infrastructure works
-
-**From session:** emerald-crystal-1210
-
----
-
-### [From Filing Cabinets to Agentic Minds](/articles/information-retrieval-history-and-agentic-future)
-**Date:** 2026-03-22
-**LinkedIn:** ✅ Posted
-**Topics:** Information retrieval, search history, semantic search, RAG, agentic AI, embeddings
-**Audience:** Developers, AI practitioners, technical leaders
-
-The seventy-year arc of how machines learned to find what we know — from Luhn's inverted index in 1957 through TF-IDF, PageRank, Word2Vec, dense retrieval, RAG, and into agentic systems that reason about what they find. Companion piece to the RFQ matching article.
-
-**Key points:**
-- The inverted index and TF-IDF as the foundation of all modern search
-- PageRank as the first social consensus relevance signal
-- The semantic revolution: Word2Vec → BERT → SBERT → DPR
-- RAG: what it solved, where it breaks
-- Agentic retrieval: five capabilities classic RAG can't have
-- The architectural tension: index cost vs. inference cost
-
-**From session:** lingering-ice-0322
-
----
-
-### [Find Every Caller in Your Codebase With One Command](/articles/reveal-call-graphs)
-**Date:** 2026-03-15
+#### [Your Project Has an API Now](/articles/reveal-project-api)
+**Date:** 2026-04-06
 **LinkedIn:** ⬜ Not yet posted
-**Topics:** Reveal, call graphs, impact analysis, refactoring, dead code, architecture
-**Audience:** Developers, AI practitioners
+**Topics:** Reveal, composability, infrastructure, AST, SSL, diff, AI agents, token efficiency
+**Audience:** Developers, engineering teams, AI practitioners
 
-The `calls://` adapter answers three questions that grep can't: who calls this function, what does it call, and which functions are most architecturally coupled. Covers transitive call chains, graph visualization, and practical workflows for refactoring, dead code detection, and understanding unfamiliar codebases.
+The flagship meta-article. 25 adapters, one syntax — code structure, SSL certs, structural diffs, databases, markdown docs, and AI session history all queryable with the same query language. Covers the pipeline composability story (Reveal pipes into itself), token math across domains, and `reveal review` as the composed PR review workflow. Thesis: your project is a database, you just couldn't query it.
 
-**Key points:**
-- Impact analysis before refactoring: find every caller in one command
-- Forward lookup: trace exactly what a function depends on
-- Coupling analysis: identify architectural hotspots
-- How calls:// differs from grep (semantic vs. textual)
-- Transitive callers and call chain visualization
-
-**From session:** atomic-zeppelin-0322
+**From session:** swift-dragon-0406
 
 ---
 
-### [Two Commands That Change How You Work With Code](/articles/reveal-pack-and-review)
-**Date:** 2026-03-15
-**LinkedIn:** ⬜ Not yet posted
-**Topics:** Reveal, pack, review, token budget, PR review, AI agents, context curation
-**Audience:** Developers, AI practitioners, teams using AI for code review
-
-`reveal pack` solves context curation — token-budgeted snapshots that give AI agents the right files, not all the files. `reveal review` automates PR review from a git range. Together they eliminate the assembly step between "I want AI help with this codebase" and actually getting it.
-
-**Key points:**
-- `reveal pack`: priority-ranked file selection within a token or line budget
-- `--focus` flag: boost domain-relevant files to the top of the pack
-- `reveal review`: structured PR review from `git diff` in one command
-- CI gate integration: automated review on every PR
-- Using them together for agent context + review workflows
-
-**From session:** atomic-zeppelin-0322
-
----
-
-### [The Too-Many-Sausages Problem](/articles/rfq-matching-modern-architecture)
-**Date:** 2026-03-23
+#### [The Diff That Shows What Actually Changed](/articles/reveal-diff)
+**Date:** 2026-04-06
 **LinkedIn:** ✅ Posted
-**Topics:** Information retrieval, RFQ matching, semantic search, embeddings, agentic AI, manufacturing, enterprise
-**Audience:** ML engineers, software engineers, technical leaders in manufacturing and distribution
+**Topics:** Reveal, diff, code review, CI/CD, complexity, AST, refactoring
+**Audience:** Developers, engineering teams
 
-Every industrial distributor has a version of this story: 200,000 RFQ line items, 14 million catalog products, two weeks to respond. This article traces the full arc from why exact match and monolithic semantic search both fail, through the category-first pipeline architecture that handles 85-90% of volume, to the agentic retrieval layer that handles what pipelines can't — and the hard-negative training strategy that makes all of it work.
+`git diff` is a line counter. `reveal diff://` is a question answerer. Covers four workflows: pre-commit sanity check, PR review orientation, CI complexity gate (with full bash script), and refactor validation (proving complexity went down). Includes import tracking as a signal alongside functions. Real complexity numbers from production code.
 
-**Key points:**
-- The too-many-sausages problem: semantic search returns the whole neighborhood, but you need the certified interchangeable part
-- Category routing reduces search space 14× and enables per-category accuracy measurement
-- ANCE hard negative mining, LoRA adapters, and GISTEmbedLoss as the training stack
-- ReAct agent with structured Corrective RAG escalation for the low-confidence tail
-- Full failure mode analysis: catalog drift, classifier degradation, score miscalibration
-
-**From sessions:** lingering-ice-0322, mountain-whirlwind-0322, oceanic-sea-0322, expanding-meteorite-0322
+**From session:** swift-dragon-0406
 
 ---
 
-### [Session Archaeology: Excavating Your Claude Code History](/articles/claude-session-archaeology)
+#### [Session Archaeology: Excavating Your Claude Code History](/articles/claude-session-archaeology)
 **Date:** 2026-03-31
 **LinkedIn:** ✅ Posted
 **Topics:** Reveal, Claude Code, session analysis, token cost, workflow observability, cost attribution
@@ -222,19 +147,57 @@ Every industrial distributor has a version of this story: 200,000 RFQ line items
 
 ---
 
-### [Your Project Has an API Now](/articles/reveal-project-api)
-**Date:** 2026-04-06
+#### [Two Commands That Change How You Work With Code](/articles/reveal-pack-and-review)
+**Date:** 2026-03-15
 **LinkedIn:** ⬜ Not yet posted
-**Topics:** Reveal, composability, infrastructure, AST, SSL, diff, AI agents, token efficiency
-**Audience:** Developers, engineering teams, AI practitioners
+**Topics:** Reveal, pack, review, token budget, PR review, AI agents, context curation
+**Audience:** Developers, AI practitioners, teams using AI for code review
 
-The flagship meta-article. 25 adapters, one syntax — code structure, SSL certs, structural diffs, databases, markdown docs, and AI session history all queryable with the same query language. Covers the pipeline composability story (Reveal pipes into itself), token math across domains, and `reveal review` as the composed PR review workflow. Thesis: your project is a database, you just couldn't query it.
+`reveal pack` solves context curation — token-budgeted snapshots that give AI agents the right files, not all the files. `reveal review` automates PR review from a git range. Together they eliminate the assembly step between "I want AI help with this codebase" and actually getting it.
 
-**From session:** swift-dragon-0406
+**Key points:**
+- `reveal pack`: priority-ranked file selection within a token or line budget
+- `--focus` flag: boost domain-relevant files to the top of the pack
+- `reveal review`: structured PR review from `git diff` in one command
+- CI gate integration: automated review on every PR
+- Using them together for agent context + review workflows
+
+**From session:** atomic-zeppelin-0322
 
 ---
 
-### [Stop Scrolling. Start Navigating.](/articles/reveal-nav-flags)
+#### [Configuration as Semantic Contract](/articles/configuration-semantic-contract)
+**Date:** 2025-12-23
+**LinkedIn:** ⬜ Not yet posted
+**Topics:** Configuration, progressive disclosure, semantic infrastructure, architecture validation
+**Audience:** Developers, team leads, architects
+
+**From session:** stormy-gale-1223
+
+---
+
+### Reveal: Progressive Disclosure for Code
+
+#### [Inside the Function: Reveal's Fourth Level of Progressive Disclosure](/articles/reveal-inside-the-function)
+**Date:** 2026-04-19
+**LinkedIn:** ✅ Posted
+**Topics:** Reveal, progressive disclosure, nav flags, function navigation, static analysis, AI agents, MCP, PHP, Python
+**Audience:** Developers, AI practitioners
+
+Levels 1–3 of progressive disclosure (directory, file, function) are enough for most functions — but large, entangled functions (legacy controllers, AST walkers, dispatch tables) break the model even at the function level. Seven new flags add a fourth level: querying a function's control flow, side effects, and variable movement without reading its body.
+
+**Key points:**
+- Three categories of flag: control flow (`--ifmap`, `--catchmap`, `--returns`), data flow (`--varflow`, `--mutations`), external interaction (`--sideeffects`, `--boundary`)
+- Real example: a 200-line "routing function" that turns out to call `sys.exit` six times — invisible from the header, surfaced in under a second
+- `--boundary` answers "is this function pure?" before you parallelize, mock, or extract it — with a PHP-specific `ENVIRONMENT` section for superglobals
+- All seven flags work identically on Python and PHP, and are exposed to agents via the `reveal_nav` MCP tool with no subprocess overhead
+- Honest limitations: structural maps for orientation and scoping, not a substitute for runtime verification
+
+**From session:** pazevaxe-0419
+
+---
+
+#### [Stop Scrolling. Start Navigating.](/articles/reveal-nav-flags)
 **Date:** 2026-04-06
 **LinkedIn:** ✅ Posted
 **Topics:** Reveal, code navigation, AST, token efficiency, debugging, AI agents
@@ -246,28 +209,7 @@ Four nav flags (`--outline`, `--scope`, `--varflow`, `--calls`) as four question
 
 ---
 
-### [The Diff That Shows What Actually Changed](/articles/reveal-diff)
-**Date:** 2026-04-06
-**LinkedIn:** ✅ Posted
-**Topics:** Reveal, diff, code review, CI/CD, complexity, AST, refactoring
-**Audience:** Developers, engineering teams
-
-`git diff` is a line counter. `reveal diff://` is a question answerer. Covers four workflows: pre-commit sanity check, PR review orientation, CI complexity gate (with full bash script), and refactor validation (proving complexity went down). Includes import tracking as a signal alongside functions. Real complexity numbers from production code.
-
-**From session:** swift-dragon-0406
-
----
-
-### [Reveal: The Surprising Recipes](/articles/reveal-surprising-recipes)
-**Date:** 2026-03-27
-**LinkedIn:** ⬜ Not yet posted
-**Topics:** Reveal, recipes, patterns, AST, infrastructure adapters
-
-**From session:** (see frontmatter)
-
----
-
-### [From 15 Files to 500: What Reveal Makes Possible for AI Agents](/articles/reveal-what-it-makes-possible)
+#### [From 15 Files to 500: What Reveal Makes Possible for AI Agents](/articles/reveal-what-it-makes-possible)
 **Date:** 2026-03-27
 **LinkedIn:** ⬜ Not yet posted
 **Topics:** Reveal, AI agents, token efficiency, MCP, scale
@@ -276,7 +218,35 @@ Four nav flags (`--outline`, `--scope`, `--varflow`, `--calls`) as four question
 
 ---
 
-### [Progressive Disclosure for AI Agents](/articles/progressive-disclosure-agents)
+#### [Reveal: The Surprising Recipes](/articles/reveal-surprising-recipes)
+**Date:** 2026-03-27
+**LinkedIn:** ⬜ Not yet posted
+**Topics:** Reveal, recipes, patterns, AST, infrastructure adapters
+
+**From session:** (see frontmatter)
+
+---
+
+#### [Find Every Caller in Your Codebase With One Command](/articles/reveal-call-graphs)
+**Date:** 2026-03-15
+**LinkedIn:** ⬜ Not yet posted
+**Topics:** Reveal, call graphs, impact analysis, refactoring, dead code, architecture
+**Audience:** Developers, AI practitioners
+
+The `calls://` adapter answers three questions that grep can't: who calls this function, what does it call, and which functions are most architecturally coupled. Covers transitive call chains, graph visualization, and practical workflows for refactoring, dead code detection, and understanding unfamiliar codebases.
+
+**Key points:**
+- Impact analysis before refactoring: find every caller in one command
+- Forward lookup: trace exactly what a function depends on
+- Coupling analysis: identify architectural hotspots
+- How calls:// differs from grep (semantic vs. textual)
+- Transitive callers and call chain visualization
+
+**From session:** atomic-zeppelin-0322
+
+---
+
+#### [Progressive Disclosure for AI Agents](/articles/progressive-disclosure-agents)
 **Date:** 2025-12-14
 **LinkedIn:** ⬜ Not yet posted
 **Topics:** Progressive disclosure, Reveal, token efficiency, semantic infrastructure
@@ -286,47 +256,63 @@ Four nav flags (`--outline`, `--scope`, `--varflow`, `--calls`) as four question
 
 ---
 
-### [Configuration as Semantic Contract](/articles/configuration-semantic-contract)
-**Date:** 2025-12-23
-**LinkedIn:** ⬜ Not yet posted
-**Topics:** Configuration, progressive disclosure, semantic infrastructure, architecture validation
-**Audience:** Developers, team leads, architects
+#### [Stop Reading Code. Start Understanding It](/articles/reveal-introduction)
+**Date:** 2025-12-10
+**LinkedIn:** ✅ Posted
+**Topics:** Reveal, progressive disclosure, token efficiency, semantic stack
+**Audience:** Developers, AI practitioners
 
-**From session:** stormy-gale-1223
+Introduction to Reveal and the progressive disclosure pattern. Shows how semantic slicing achieves 25-50x token reduction with measured examples. Positions Reveal as Layer 1-3 of SIL's 7-layer semantic OS, integrated with Beth's PageRank knowledge graph system.
 
----
+**Key points:**
+- Problem: AI agents burn tokens reading everything
+- Solution: Progressive disclosure (structure first, details on demand)
+- Evidence: 25-30x reduction measured across 300+ sessions
+- Integration: Reveal + Beth = virtuous cycle
+- Vision: Proof that semantic infrastructure works
 
-### [I Didn't Learn to Trust AI. I Learned to Engineer Trust.](/articles/engineering-trust)
-**Date:** 2026-08-03
-**LinkedIn:** ⬜ Not yet posted
-**Topics:** Agentic AI, trust, observability, verification, containment, continuity, meta-engineering
-**Audience:** Developers, AI engineers, teams deploying agents in production
-
-A working theory of engineered trust: trust isn't a property of the model, it's an emergent property of the system engineered around it. Five properties a human-agent system needs — observability, verification, containment, continuity, meta-engineering — grounded in real production incidents (Replit's spoofed status report, Amazon Kiro's Cost Explorer deletion) and internal ones (a legacy PHP codebase that broke AST-based tooling, a config-vs-template verification gap, a session-continuity link silently orphaned by `/clear`).
-
-**From session:** tempestuous-ice-0803
+**From session:** emerald-crystal-1210
 
 ---
 
-## Forthcoming Articles
+### Information Retrieval & Semantic Search
 
-**Next article candidates (in priority order):**
-- "Doing the Meta" — the natural sequel to [I Didn't Learn to Trust AI. I Learned to Engineer Trust.](/articles/engineering-trust): a case study walking through five or six concrete iterations (missing docs → YAML metadata, random search → complexity ordering, blind to procedural PHP → Probe, rediscovered work → a ledger, git races → isolation), read as how a human-agent system evolves over time
-- "How AI Agents Should Read Code" — MCP server + `--format json` + schema introspection
-- "Your Infrastructure Has an API Now" — `ssl://`, `nginx://`, `domain://`, `reveal health` category
-- "Reveal as a CI/CD Tool" — `--check`, `diff://`, `review` pipeline gates
+#### [The Too-Many-Sausages Problem](/articles/rfq-matching-modern-architecture)
+**Date:** 2026-03-23
+**LinkedIn:** ✅ Posted
+**Topics:** Information retrieval, RFQ matching, semantic search, embeddings, agentic AI, manufacturing, enterprise
+**Audience:** ML engineers, software engineers, technical leaders in manufacturing and distribution
 
-**LinkedIn queue (not yet posted, ready now):**
-- reveal-project-api ← flagship, post this next
-- reveal-call-graphs
-- reveal-pack-and-review
-- reveal-surprising-recipes
-- reveal-what-it-makes-possible
-- progressive-disclosure-agents
-- configuration-semantic-contract
-- Morphogen deterministic computation: Reproducible AI workflows
+Every industrial distributor has a version of this story: 200,000 RFQ line items, 14 million catalog products, two weeks to respond. This article traces the full arc from why exact match and monolithic semantic search both fail, through the category-first pipeline architecture that handles 85-90% of volume, to the agentic retrieval layer that handles what pipelines can't — and the hard-negative training strategy that makes all of it work.
 
-**Suggest new topics:** If you have ideas for articles, add them to this list or discuss in sessions.
+**Key points:**
+- The too-many-sausages problem: semantic search returns the whole neighborhood, but you need the certified interchangeable part
+- Category routing reduces search space 14× and enables per-category accuracy measurement
+- ANCE hard negative mining, LoRA adapters, and GISTEmbedLoss as the training stack
+- ReAct agent with structured Corrective RAG escalation for the low-confidence tail
+- Full failure mode analysis: catalog drift, classifier degradation, score miscalibration
+
+**From sessions:** lingering-ice-0322, mountain-whirlwind-0322, oceanic-sea-0322, expanding-meteorite-0322
+
+---
+
+#### [From Filing Cabinets to Agentic Minds](/articles/information-retrieval-history-and-agentic-future)
+**Date:** 2026-03-22
+**LinkedIn:** ✅ Posted
+**Topics:** Information retrieval, search history, semantic search, RAG, agentic AI, embeddings
+**Audience:** Developers, AI practitioners, technical leaders
+
+The seventy-year arc of how machines learned to find what we know — from Luhn's inverted index in 1957 through TF-IDF, PageRank, Word2Vec, dense retrieval, RAG, and into agentic systems that reason about what they find. Companion piece to the RFQ matching article.
+
+**Key points:**
+- The inverted index and TF-IDF as the foundation of all modern search
+- PageRank as the first social consensus relevance signal
+- The semantic revolution: Word2Vec → BERT → SBERT → DPR
+- RAG: what it solved, where it breaks
+- Agentic retrieval: five capabilities classic RAG can't have
+- The architectural tension: index cost vs. inference cost
+
+**From session:** lingering-ice-0322
 
 ---
 
