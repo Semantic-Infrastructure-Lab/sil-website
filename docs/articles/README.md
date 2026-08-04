@@ -311,7 +311,7 @@ A working theory of engineered trust: trust isn't a property of the model, it's 
 ## Forthcoming Articles
 
 **Next article candidates (in priority order):**
-- "Doing the Meta" — the natural sequel to [I Didn't Learn to Trust AI. I Learned to Engineer Trust.](engineering-trust.md): a case study walking through five or six concrete iterations (missing docs → YAML metadata, random search → complexity ordering, blind to procedural PHP → Probe, rediscovered work → a ledger, git races → isolation), read as how a human-agent system evolves over time
+- "Doing the Meta" — the natural sequel to [I Didn't Learn to Trust AI. I Learned to Engineer Trust.](/articles/engineering-trust): a case study walking through five or six concrete iterations (missing docs → YAML metadata, random search → complexity ordering, blind to procedural PHP → Probe, rediscovered work → a ledger, git races → isolation), read as how a human-agent system evolves over time
 - "How AI Agents Should Read Code" — MCP server + `--format json` + schema introspection
 - "Your Infrastructure Has an API Now" — `ssl://`, `nginx://`, `domain://`, `reveal health` category
 - "Reveal as a CI/CD Tool" — `--check`, `diff://`, `review` pipeline gates
