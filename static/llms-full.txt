@@ -10069,11 +10069,14 @@ related_docs:
   - ../../LAYER3_SUBLAYER_ARCHITECTURE.md
 status: published
 date: 2025-12-22
+updated: 2026-08-04
 ---
 
 # Configuration as Semantic Contract
 
 **Abstract:** Configuration files traditionally serve as "settings" or "tuning knobs" for software tools. This document argues for a more fundamental role: **configuration as executable documentation of project semantics**. We examine how Reveal's `.reveal.yaml` specification demonstrates this pattern, connecting to SIL's principles of explicit meaning, progressive disclosure, and tool behavior contracts.
+
+> **Correction (2026-08-04):** Sections 2, 3, and 4 originally presented a `semantic://` adapter/`custom_patterns` config and an `ast.entry_points` config as part of Reveal's shipped `.reveal.yaml` specification. Neither was ever implemented, at the document's 2025-12-22 publication or since (checked against v0.113.0). `semantic://` was explicitly evaluated and rejected — reveal's [ROADMAP.md](https://github.com/Semantic-Infrastructure-Lab/reveal/blob/master/ROADMAP.md) lists it under "Explicitly Not Planned" ("requires ML infrastructure; over-engineered"). `entry_points` was never built, though the underlying gap it addresses is real and now tracked as [BACK-952](https://github.com/Semantic-Infrastructure-Lab/reveal). What *is* real and unchanged: `architecture.layers` (with `paths`/`allow_imports`/`deny_imports`, not the `path`/`can_import`/`cannot_import` field names used below) and `~/.reveal/rules/` custom-rule plugins (with the `BaseRule` API, not a `Rule` class). Examples below are corrected inline; §7's "Future Research" framing already correctly marked these as speculative and is left as-is.
 
 ---
 
@@ -10133,7 +10136,7 @@ Instead of:
 ignore_patterns: ["**/tests/**"]  # What does this mean?
 ```
 
-We declare:
+We declare (a **proposed** config shape — not implemented, see BACK-952 — shown here to illustrate the concept; reveal's actual `--uncalled` already recognizes pytest test functions via a hardcoded built-in list, just not a configurable one):
 ```yaml
 ast:
   entry_points:
@@ -10155,21 +10158,21 @@ Configuration becomes **executable documentation** when:
 3. **It's version-controlled** (evolves with codebase)
 4. **It's team-shared** (everyone sees same rules)
 
-**Example from Reveal:**
+**Example from Reveal** (real, working config — field names corrected: `paths`/`deny_imports`, not `path`/`cannot_import`):
 ```yaml
 architecture:
   layers:
     - name: routes
-      path: app/routes/**
+      paths: [app/routes/**]
       description: "HTTP route handlers"
-      cannot_import:
-        - repositories/**      # Routes must go through services
+      deny_imports:
+        - repositories      # Routes must go through services
 
     - name: services
-      path: app/services/**
+      paths: [app/services/**]
       description: "Business logic layer"
-      cannot_import:
-        - routes/**
+      deny_imports:
+        - routes
 ```
 
 This configuration **IS the architecture**. The tool enforces what the team means by "layered architecture."
@@ -10206,14 +10209,15 @@ reveal app.py --check            # Quality checks with sensible rules
 **Level 2: Project Overrides (`.reveal.yaml`)**
 ```yaml
 # .reveal.yaml - Project-specific semantics
-imports:
-  ignore_unused:
-    - "**/tests/fixtures/**"     # Fixtures import without direct usage
-
 architecture:
   layers:
     - name: routes
-      cannot_import: [repositories/**]
+      paths: [app/routes/**]
+      deny_imports: [repositories]
+
+rules:
+  C901:
+    threshold: 15   # cyclomatic complexity
 ```
 
 **Level 3: Custom Extensions (`~/.reveal/rules/`)**
@@ -10224,33 +10228,25 @@ architecture:
 
 **Key insight:** Complexity cost is opt-in. Teams **pay for what they need**.
 
-### 3.2 URI Schemes + Custom Patterns = Composable Semantics
+### 3.2 URI Schemes = Composable Queries (No Named Custom Patterns)
 
-Reveal's URI adapter system (`reveal python://`, `reveal ast://`) combines with configuration to enable **queryable domain knowledge**:
+Reveal's URI adapter system (24 adapters — `ast://`, `calls://`, `imports://`, etc.) enables **queryable domain knowledge** without configuration:
 
-```yaml
-semantic:
-  custom_patterns:
-    - name: uses_stripe_api
-      description: "Functions that call Stripe API"
-      patterns:
-        - "stripe\\..*\\("
-```
-
-**Now queryable:**
 ```bash
-reveal 'semantic://app?uses_stripe_api'
+reveal 'ast://app?complexity>10'
+reveal 'calls://app/?target=charge_card'
+reveal app/ --grep 'stripe\.'
 ```
 
-**Result:** Domain-specific knowledge (e.g., "what code touches our payment provider?") becomes **first-class queryable semantic**—not tribal knowledge or manual grep.
+**Correction:** the `semantic: custom_patterns` config and `semantic://` adapter shown in the original version of this section (for saving a named pattern like `uses_stripe_api` as a queryable identifier) were never built. This was evaluated and explicitly rejected: reveal's ROADMAP.md lists "`semantic://` embedding search" under "Explicitly Not Planned" — "requires ML infrastructure; over-engineered." Domain-specific queries today are ad hoc `--grep`/`ast://` invocations, not named, saved, first-class semantics — "what code touches our payment provider?" still requires knowing (or writing down elsewhere) the right grep pattern, not a config-declared vocabulary. The USIR connection below remains aspirational, not something Reveal's config implements.
 
-**Connection to SIL:** This mirrors how USIR (Universal Semantic IR) enables cross-domain queries. Configuration extends the semantic vocabulary for project-specific domains.
-
-### 3.3 Entry Points as First-Class Concept
+### 3.3 Entry Points and Dead-Code Detection
 
 Modern frameworks use **implicit invocation** (decorators, dependency injection, event handlers). Dead code detection fails because tools don't understand "framework magic."
 
-**Reveal's solution:**
+**What Reveal actually does today:** `calls://?uncalled` recognizes a fixed, built-in set — `property`/`classmethod`/`staticmethod`, pytest fixtures/`test_*`, unittest lifecycle methods, C#/Java test attributes (BACK-446) — but nothing for web/CLI framework routes (Flask/FastAPI/FastHTML `@app.route`, Click `@click.command`, Django views). Those still false-flag as dead code.
+
+**Proposed, not implemented** (would extend the built-in list to be project-configurable — filed as BACK-952):
 ```yaml
 ast:
   entry_points:
@@ -10263,7 +10259,7 @@ ast:
       languages: [python]
 ```
 
-**Benefit:** Teaches tools about framework invocation patterns. What was "magic" becomes **declared semantic contract**.
+**Benefit (if built):** Teaches tools about framework invocation patterns. What was "magic" becomes **declared semantic contract**.
 
 **Generalization:** Any implicit invocation pattern can be declared:
 - Event handlers (`addEventListener`, React hooks)
@@ -10272,7 +10268,10 @@ ast:
 
 ### 3.4 Team-Shareable Architectural Rules
 
+The free-form `architecture.rules[].check: "<expression>"` DSL shown below was never implemented — no arbitrary-expression rule engine exists in `.reveal.yaml`. What's real is per-built-in-rule threshold overrides (keyed by rule code, e.g. `rules: {C901: {threshold: 15}}`) plus the `architecture.layers` import-boundary mechanism from §2.2/§3.1. The example is left as illustrative of the *idea*, not a working config:
+
 ```yaml
+# NOT IMPLEMENTED — illustrative only
 architecture:
   rules:
     - name: no-god-functions
@@ -10320,7 +10319,8 @@ imports:
 architecture:
   layers:
     - name: routes
-      cannot_import: [...]       # Permission boundaries
+      paths: [app/routes/**]
+      deny_imports: [repositories]       # Permission boundaries
 ```
 
 **Key insight:** Configuration is **metadata about tool behavior** in project context.
@@ -10338,9 +10338,9 @@ From [architectural-principles.md](/foundations/architectural-principles):
 architecture:
   layers:
     - name: models
-      path: app/models/**
-      can_import: [typing, pydantic, datetime, enum]
-      cannot_import: ["**/!(typing|pydantic|datetime|enum)"]
+      paths: [app/models/**]
+      allow_imports: [typing, pydantic, datetime, enum]
+      deny_imports: [services, routes, repositories]
 ```
 
 **This declares an invariant:** "Models have no business logic dependencies"
@@ -10358,9 +10358,10 @@ From [MULTI_AGENT_PROTOCOL_PRINCIPLES.md](/research/agent-infrastructure/MULTI_A
 > **Principle 2: All communication must be typed**
 > Input/output schemas prevent silent failures
 
-**How configuration supports this:**
+**How configuration would support this, if the `semantic:` config existed (it doesn't — see §3.2 correction):**
 
 ```yaml
+# NOT IMPLEMENTED — rejected per ROADMAP.md, "Explicitly Not Planned"
 semantic:
   custom_patterns:
     - name: uses_email
@@ -10369,7 +10370,7 @@ semantic:
       patterns: ["send.*email", "EmailMessage"]
 ```
 
-**Result:** Agents can query "what functions send email?" with typed responses. The configuration **types the project's semantic domain**.
+**Result (hypothetical):** Agents could query "what functions send email?" with typed responses. Today, an agent gets the same answer via `reveal app/ --grep 'send.*email|EmailMessage'`, just without a saved name for the pattern.
 
 ---
 
@@ -10471,7 +10472,7 @@ Configuration becomes **machine-readable tool contract**:
 
 ```bash
 reveal --agent-help                    # General usage
-reveal help://architecture             # How to use architecture validation
+reveal architecture src/               # Architectural brief for a directory (entry points, risks, next commands)
 ```
 
 The configuration **documents project-specific semantics** that agents can query.
@@ -10664,9 +10665,9 @@ architecture:
 - [Multi-Agent Protocol Principles](../agent-infrastructure/MULTI_AGENT_PROTOCOL_PRINCIPLES.md) - Typed communication
 
 **External References:**
-- Reveal YAML Config Spec: `/home/scottsen/src/projects/reveal/internal-docs/planning/REVEAL_YAML_CONFIG_SPEC.md`
-- Reveal v0.24.0+: Production implementation of pattern detection system
-- Reveal v0.17.0+: URI adapter registry and progressive discovery
+- Reveal `.reveal.yaml` (real, current example): `/home/scottsen/src/projects/reveal/external-git/.reveal.yaml`
+- Reveal layer-config implementation: `reveal/analyzers/imports/layers.py`
+- Reveal v0.113.0: current version at time of correction (2026-08-04); a `REVEAL_YAML_CONFIG_SPEC.md` referenced in an earlier draft of this document does not exist in the repo
 
 **Related Research:**
 - Configuration as code (infrastructure as code patterns)
@@ -10677,8 +10678,8 @@ architecture:
 ---
 
 **Status:** Published
-**Date:** 2025-12-22
-**Version:** 1.0
+**Date:** 2025-12-22 (corrected 2026-08-04)
+**Version:** 1.1 — fabricated/unimplemented features (`semantic://`, `ast.entry_points`) corrected against actual v0.113.0 codebase; see note at top
 **Author:** Semantic Infrastructure Lab
 **Maintainer:** SIL Research Team
 
@@ -18628,6 +18629,75 @@ Choose a path (even if wrong) and commit fully.
 **Status:** DRAFT - Awaiting founder review
 
 **This is the most important strategic question SIL faces.**
+
+---
+
+
+## Document: ARTICLE_AUTHORING.md
+## Path: /docs/meta/ARTICLE_AUTHORING.md
+
+# Article Authoring Guide
+
+Internal reference for writing and publishing SIL articles. Not public — see `docs/articles/README.md` for the reader-facing index.
+
+---
+
+## Writing Guidelines
+
+**Article structure (recommended):**
+1. **Hook** - Relatable problem, concrete example
+2. **Problem deep-dive** - Why current approaches fail
+3. **Solution** - How this tool/approach works
+4. **Evidence** - Measured data, real-world examples
+5. **How it works** - Technical details (accessible)
+6. **Broader context** - How it fits in SIL vision
+7. **Try it now** - Installation, quick start, links
+
+**Style:**
+- Engaging but substantive (not clickbait, not dry)
+- Concrete examples (real commands, real output)
+- Measured data (token counts, time savings, success rates)
+- Accessible technical depth (explain jargon, don't avoid it)
+
+**Frontmatter requirements:**
+```yaml
+---
+title: "[Full Title]"
+subtitle: "[Tool/Topic description]"
+author: "Scott Senkeresty"
+date: "YYYY-MM-DD"
+type: "article"
+status: "published|draft"
+audience: "[target audience]"
+topics: [topic1, topic2, topic3]
+related_projects: [project-name]
+related_docs:
+  - "RELATED_DOC.md"
+canonical_url: "https://semanticinfrastructurelab.org/articles/slug"
+reading_time: "X minutes"
+beth_topics: [topic-slug-1, topic-slug-2]
+session_provenance: "[session-id if created in session]"
+---
+```
+
+---
+
+## Publication Workflow
+
+**From session → published article:**
+
+1. **Create in session directory** (ephemeral workspace)
+2. **Classify as article** (product intro, tutorial, etc.)
+3. **Add frontmatter** (YAML metadata)
+4. **Copy to `docs/articles/`** (SIL repo, source of truth)
+5. **Update `docs/articles/README.md`** (add to the Published Articles index, grouped by topic)
+6. **Add a `CONTENT_MANIFEST.yaml` entry** (`visibility: public`) so the sync script picks it up
+7. **Commit + push the SIL repo**
+8. **Sync to website**: `cd sil-website && ./scripts/sync-docs.py && ./scripts/generate-llms-full.sh`, commit + push
+9. **Deploy**: `./deploy/deploy-container.sh staging --fresh`, verify, then `production --fresh`
+10. **Announce** (LinkedIn, per Multi-Channel Strategy)
+
+**See also:** `foundation/communications/PUBLICATION_CONTENT_STRATEGY.md` for the complete strategy; `docs/operations/WEBSITE_DEPLOYMENT_GUIDE.md` for full deploy/troubleshooting detail.
 
 ---
 
