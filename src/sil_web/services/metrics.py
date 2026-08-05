@@ -6,7 +6,7 @@ Single source of truth for all production metrics.
 """
 
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, cast
 
 import yaml
 
@@ -48,7 +48,7 @@ class MetricsService:
             }
 
         with open(self.metrics_path) as f:
-            return yaml.safe_load(f)
+            return cast(Dict[str, Any], yaml.safe_load(f))
 
     @property
     def metrics(self) -> Dict[str, Any]:
@@ -70,37 +70,37 @@ class MetricsService:
     @property
     def reveal(self) -> Dict[str, Any]:
         """Get Reveal system metrics."""
-        return self.metrics["systems"]["reveal"]
+        return cast(Dict[str, Any], self.metrics["systems"]["reveal"])
 
     @property
     def morphogen(self) -> Dict[str, Any]:
         """Get Morphogen system metrics."""
-        return self.metrics["systems"]["morphogen"]
+        return cast(Dict[str, Any], self.metrics["systems"]["morphogen"])
 
     @property
     def tiacad(self) -> Dict[str, Any]:
         """Get TiaCAD system metrics."""
-        return self.metrics["systems"]["tiacad"]
+        return cast(Dict[str, Any], self.metrics["systems"]["tiacad"])
 
     @property
     def genesisgraph(self) -> Dict[str, Any]:
         """Get GenesisGraph system metrics."""
-        return self.metrics["systems"]["genesisgraph"]
+        return cast(Dict[str, Any], self.metrics["systems"]["genesisgraph"])
 
     @property
     def sil_website(self) -> Dict[str, Any]:
         """Get SIL website info."""
-        return self.metrics["websites"]["sil"]
+        return cast(Dict[str, Any], self.metrics["websites"]["sil"])
 
     @property
     def sif_website(self) -> Dict[str, Any]:
         """Get SIF website info."""
-        return self.metrics["websites"]["sif"]
+        return cast(Dict[str, Any], self.metrics["websites"]["sif"])
 
     @property
     def lab(self) -> Dict[str, Any]:
         """Get lab metrics (team, sessions, etc)."""
-        return self.metrics["lab"]
+        return cast(Dict[str, Any], self.metrics["lab"])
 
     def get_display_metric(self, system: str, metric: str) -> str:
         """Get display-formatted metric.

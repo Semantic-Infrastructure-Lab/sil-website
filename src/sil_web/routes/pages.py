@@ -246,8 +246,8 @@ def create_routes(
         if full_path == "essays":
             essay_docs = content_service.list_documents(category="essays", include_private=False)
             md_content = "# Essays\n\nTechnical essays on semantic infrastructure.\n\n"
-            for doc in sorted(essay_docs, key=lambda d: d.order):
-                md_content += f"- [{doc.title}](/essays/{doc.slug})\n"
+            for essay in sorted(essay_docs, key=lambda d: d.order):
+                md_content += f"- [{essay.title}](/essays/{essay.slug})\n"
             if not essay_docs:
                 md_content += "*No essays published yet.*\n"
             return Response(md_content, media_type="text/markdown; charset=utf-8")
@@ -267,11 +267,11 @@ def create_routes(
         if resolver is None:
             raise HTTPException(status_code=404, detail=f"Page not found: {full_path}")
 
-        doc_path = resolver(name)
-        if doc_path is None:
+        resolved_path = resolver(name)
+        if resolved_path is None:
             raise HTTPException(status_code=404, detail=f"Document not found: {full_path}")
 
-        return Response(doc_path.read_text(), media_type="text/markdown; charset=utf-8")
+        return Response(resolved_path.read_text(), media_type="text/markdown; charset=utf-8")
 
     # =========================================================================
     # Core Pages

@@ -182,25 +182,27 @@ class ContentService:
         with open(doc_path, encoding="utf-8") as f:
             post = frontmatter.load(f)
 
-        title = post.get("title", slug.replace("-", " ").title())
-        description = post.get("description")
+        title = cast(str, post.get("title", slug.replace("-", " ").title()))
+        description = cast(Optional[str], post.get("description"))
 
         # Get tier and order from frontmatter (REQUIRED)
-        tier = post.get("tier")
-        order = post.get("order")
+        tier_raw = post.get("tier")
+        order_raw = post.get("order")
 
         # Require tier and order in frontmatter - no fallback
-        if tier is None:
+        if tier_raw is None:
             self.log.error("document_missing_tier_frontmatter", slug=slug, category=category, path=str(doc_path))
             return None
-        if order is None:
+        if order_raw is None:
             self.log.error("document_missing_order_frontmatter", slug=slug, category=category, path=str(doc_path))
             return None
+        tier = cast(int, tier_raw)
+        order = cast(int, order_raw)
 
         # Get privacy and metadata fields from frontmatter
-        private = post.get("private", False)
-        beth_topics = post.get("beth_topics", [])
-        tags = post.get("tags", [])
+        private = cast(bool, post.get("private", False))
+        beth_topics = cast("list[str]", post.get("beth_topics", []))
+        tags = cast("list[str]", post.get("tags", []))
 
         doc = Document(
             title=title,
@@ -242,8 +244,8 @@ class ContentService:
             if root_readme.exists():
                 with open(root_readme, encoding="utf-8") as f:
                     post = frontmatter.load(f)
-                title = post.get("title", "Overview")
-                private = post.get("private", False)
+                title = cast(str, post.get("title", "Overview"))
+                private = cast(bool, post.get("private", False))
 
                 # Filter private documents unless explicitly requested
                 if private and not include_private:
@@ -255,12 +257,12 @@ class ContentService:
                     slug=slug,
                     content=post.content,
                     category='root',
-                    description=post.get("description"),
+                    description=cast(Optional[str], post.get("description")),
                     tier=1,  # Top-level overview is tier 1
                     order=0,
                     private=private,
-                    beth_topics=post.get("beth_topics", []),
-                    tags=post.get("tags", []),
+                    beth_topics=cast("list[str]", post.get("beth_topics", [])),
+                    tags=cast("list[str]", post.get("tags", [])),
                 )
 
         # Try each category until we find the slug
