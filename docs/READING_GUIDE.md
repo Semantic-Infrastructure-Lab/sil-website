@@ -18,11 +18,11 @@ SIL has comprehensive documentation across multiple domains. This guide provides
 
 ### Required Reading
 
-1. **[START_HERE](canonical/START_HERE)** (5 min)
+1. **[START_HERE](START_HERE)** (5 min)
    - The single front door to SIL
    - Overview of architecture, tools, and philosophy
 
-2. **[Manifesto](canonical/SIL_MANIFESTO)** (15 min)
+2. **[Manifesto](manifesto/README)** (15 min)
    - The problem: AI without semantic substrate
    - What SIL builds and why it matters
    - **Start here** if you read only one document
@@ -48,17 +48,17 @@ You'll understand SIL's mission, approach, and what makes it different from othe
 
 ### Reading Sequence
 
-1. **[Semantic OS Architecture](canonical/SIL_SEMANTIC_OS_ARCHITECTURE)** (30 min)
+1. **[Semantic OS Architecture](foundations/SIL_SEMANTIC_OS_ARCHITECTURE)** (30 min)
    - The 7-layer architecture (Semantic Memory → Agent Orchestration)
    - How layers compose and interact
    - Design invariants and guarantees
 
-2. **[Technical Charter](canonical/SIL_TECHNICAL_CHARTER)** (45 min)
+2. **[Technical Charter](foundations/SIL_TECHNICAL_CHARTER)** (45 min)
    - Formal specification of invariants
    - Semantic contracts and provenance requirements
    - Verifiability guarantees
 
-3. **[Glossary](canonical/SIL_GLOSSARY)** (Reference)
+3. **[Glossary](foundations/SIL_GLOSSARY)** (Reference)
    - Keep open while reading — 108 canonical terms
    - Precise definitions for all core concepts
 
@@ -98,7 +98,7 @@ You'll understand the technical depth: how SIL achieves explicit meaning, stable
    - The `--agent-help` pattern
    - Examples from production tools
 
-4. **[Progressive Disclosure Guide](canonical/PROGRESSIVE_DISCLOSURE_GUIDE)** (30 min)
+4. **[Progressive Disclosure Guide](research/information-architecture/PROGRESSIVE_DISCLOSURE_GUIDE)** (30 min)
    - Theory behind progressive disclosure
    - Token efficiency analysis
    - Workflow patterns
@@ -120,8 +120,8 @@ You'll have working tools installed and understand how to build agent-friendly i
 ### Reading Sequence
 
 1. **Research Papers** (90 min total)
-   - [Semantic Feedback Loops](canonical/SEMANTIC_FEEDBACK_LOOPS) (30 min)
-   - [Semantic Observability](canonical/SEMANTIC_OBSERVABILITY) (30 min)
+   - [Semantic Feedback Loops](research/information-architecture/SEMANTIC_FEEDBACK_LOOPS) (30 min)
+   - [Semantic Observability](research/agent-infrastructure/SEMANTIC_OBSERVABILITY) (30 min)
    - [RAG as Semantic Manifold Transport](research/RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT) (30 min)
 
 2. **Framework Documents** (60 min total)
@@ -169,7 +169,7 @@ You'll see concrete evidence of SIL's working infrastructure and production impa
 
 ### Reading Sequence
 
-1. **[Founder's Letter](canonical/FOUNDERS_LETTER)** (10 min)
+1. **[Founder's Letter](foundations/FOUNDERS_LETTER)** (10 min)
    - Personal perspective on why SIL exists
    - The gap SIL fills in AI infrastructure
 
@@ -181,7 +181,7 @@ You'll see concrete evidence of SIL's working infrastructure and production impa
    - Intellectual lineage
    - Who and what shaped SIL's approach
 
-4. **[Stewardship Manifesto](canonical/SIL_STEWARDSHIP_MANIFESTO)** (20 min)
+4. **[Stewardship Manifesto](meta/SIL_STEWARDSHIP_MANIFESTO)** (20 min)
    - Values and governance
    - Long-term commitments and accountability
 
@@ -219,7 +219,7 @@ Complete understanding of SIL's mission, architecture, research, tools, and gove
 
 ### 📚 Canonical
 Core foundational documents defining SIL's mission, principles, and architecture.
-→ [View all canonical docs](canonical/README)
+→ [View all foundational docs](foundations/README)
 
 ### 🔬 Research
 Research contributions and theoretical frameworks.
@@ -252,7 +252,7 @@ All 12 SIL projects detailed.
 ### If you want to...
 
 **Understand the vision**
-→ [Manifesto](canonical/SIL_MANIFESTO), [Founder's Letter](canonical/FOUNDERS_LETTER)
+→ [Manifesto](manifesto/README), [Founder's Letter](foundations/FOUNDERS_LETTER)
 
 **See technical depth**
 → [Semantic OS Architecture](foundations/SIL_SEMANTIC_OS_ARCHITECTURE), [Technical Charter](foundations/SIL_TECHNICAL_CHARTER)
@@ -270,13 +270,13 @@ All 12 SIL projects detailed.
 → [Project Index](../projects/PROJECT_INDEX), [Innovation Portfolio](innovations/INNOVATIONS)
 
 **Get questions answered**
-→ [FAQ](meta/FAQ), [Glossary](canonical/SIL_GLOSSARY)
+→ [FAQ](meta/FAQ), [Glossary](foundations/SIL_GLOSSARY)
 
 ---
 
 ## Tips for Reading
 
-1. **Keep the Glossary open** — [SIL_GLOSSARY.md](canonical/SIL_GLOSSARY) defines all 108 terms
+1. **Keep the Glossary open** — [SIL_GLOSSARY.md](foundations/SIL_GLOSSARY) defines all 108 terms
 2. **Follow the breadcrumbs** — Each doc has "Related Reading" sections
 3. **Use progressive disclosure** — Start with summaries, drill into details as needed
 4. **Reference the principles** — The [14 principles](/foundations/design-principles) guide everything
@@ -287,7 +287,7 @@ All 12 SIL projects detailed.
 ## Still Have Questions?
 
 - **[FAQ](meta/FAQ)** — Common questions answered
-- **[START_HERE](canonical/START_HERE)** — Single front door to all content
+- **[START_HERE](START_HERE)** — Single front door to all content
 - **[GitHub](https://github.com/semantic-infrastructure-lab)** — Source code and issues
 
 ---

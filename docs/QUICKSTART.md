@@ -4,7 +4,7 @@
 
 > **Navigation:** This is the hands-on path.
 > - **You are here:** Install tools, try them immediately
-> - [Start Here](canonical/START_HERE) — Prefer concepts first? Start there
+> - [Start Here](START_HERE) — Prefer concepts first? Start there
 > - [Reading Guide](READING_GUIDE) — 7 paths for different audiences
 
 ---
@@ -71,20 +71,20 @@ Now that you've experienced progressive disclosure, understand the principles:
 
 ### The 30-Minute Path
 
-1. **[Manifesto](canonical/SIL_MANIFESTO)** (15 min) — Why semantic infrastructure matters
+1. **[Manifesto](manifesto/README)** (15 min) — Why semantic infrastructure matters
 2. **[Principles](/foundations/design-principles)** (10 min) — The 14 principles that guide all work
-3. **[START_HERE](canonical/START_HERE)** (5 min) — Navigate to deeper topics
+3. **[START_HERE](START_HERE)** (5 min) — Navigate to deeper topics
 
 ### The Hands-On Path
 
 1. **[Reveal Documentation](tools/REVEAL)** — Learn all reveal features
 2. **[Agent Help Standard](research/AGENT_HELP_STANDARD)** — How to make tools agent-friendly
-3. **[Progressive Disclosure Guide](canonical/PROGRESSIVE_DISCLOSURE_GUIDE)** — The theory behind what you just experienced
+3. **[Progressive Disclosure Guide](research/information-architecture/PROGRESSIVE_DISCLOSURE_GUIDE)** — The theory behind what you just experienced
 
 ### The Technical Deep-Dive Path
 
-1. **[Semantic OS Architecture](canonical/SIL_SEMANTIC_OS_ARCHITECTURE)** (30 min) — The 7-layer architecture
-2. **[Technical Charter](canonical/SIL_TECHNICAL_CHARTER)** (45 min) — Formal invariants and guarantees
+1. **[Semantic OS Architecture](foundations/SIL_SEMANTIC_OS_ARCHITECTURE)** (30 min) — The 7-layer architecture
+2. **[Technical Charter](foundations/SIL_TECHNICAL_CHARTER)** (45 min) — Formal invariants and guarantees
 3. **[Unified Architecture Guide](architecture/UNIFIED_ARCHITECTURE_GUIDE)** (60 min) — How all 12 projects fit together
 
 ---
