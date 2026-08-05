@@ -4,7 +4,7 @@
 
 **Audience:** Developers, AI practitioners, tool users, people discovering SIL through specific projects
 
-**Last updated:** 2026-08-03
+**Last updated:** 2026-08-04
 
 ---
 
@@ -27,9 +27,21 @@ Articles are:
 
 ## Published Articles
 
-*18 articles live on the website, grouped by topic. Newest first within each group. LinkedIn status noted per article.*
+*19 articles live on the website, grouped by topic. Newest first within each group. LinkedIn status noted per article.*
 
 ### Agentic AI: Trust & Reliability
+
+#### [The Two Halves of Trust Engineering](/articles/two-halves-of-trust-engineering)
+**Date:** 2026-08-04
+**LinkedIn:** ⬜ Not yet posted
+**Topics:** Agentic AI, trust, calibration, observability, verification, containment, continuity, meta-engineering
+**Audience:** Developers, AI engineers, teams deploying agents in production
+
+The five trust properties aren't five components of one system — each has to be engineered twice: once into the agent's own operating environment, once into the tools it points at the work. Comparing the two implementations exposes a dimension the original five never name: **calibration**, knowing how trustworthy your own perception currently is. Traces the relationship through three stages — mirror, complement, feedback — with dated evidence from a seven-week capability loop, a three-hour taxonomy transfer, and a workaround that became a tool feature and was then retired.
+
+**From session:** govobu-0804, seasonal-steam-0804, destined-herald-0804
+
+---
 
 #### [I Didn't Learn to Trust AI. I Learned to Engineer Trust.](/articles/engineering-trust)
 **Date:** 2026-08-03
