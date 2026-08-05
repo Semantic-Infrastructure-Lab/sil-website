@@ -43,6 +43,7 @@ CATEGORY_ROUTES = {
     "articles": "/articles",
     "essays": "/essays",
     "meta": "/meta",
+    "projects": "/projects",
     # "vision" has public files but no route -- intentionally absent.
 }
 
@@ -62,6 +63,7 @@ SECTION_TITLES = [
     ("research", "Research"),
     ("articles", "Articles"),
     ("essays", "Essays"),
+    ("projects", "Projects"),
 ]
 
 
@@ -153,7 +155,7 @@ def render(sections: dict[str, list[tuple[str, str, str]]]) -> str:
         "",
         "- [Founder's Letter](/founders-letter) - Why SIL exists",
         "- [Start Here](/start) - Getting-started guide",
-        "- [Project Index](https://github.com/semantic-infrastructure-lab) - All projects",
+        "- [Project Index](/projects/project-index) - All projects",
         "",
     ]
 

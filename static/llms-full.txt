@@ -713,7 +713,7 @@ Now that you've experienced progressive disclosure, understand the principles:
 
 ### The Hands-On Path
 
-1. **[Reveal Documentation](tools/REVEAL)** — Learn all reveal features
+1. **[Reveal Documentation](/systems/reveal)** — Learn all reveal features
 2. **[Agent Help Standard](research/AGENT_HELP_STANDARD)** — How to make tools agent-friendly
 3. **[Progressive Disclosure Guide](research/information-architecture/PROGRESSIVE_DISCLOSURE_GUIDE)** — The theory behind what you just experienced
 
@@ -846,7 +846,7 @@ You'll understand the technical depth: how SIL achieves explicit meaning, stable
    - Try progressive disclosure hands-on
    - Experience semantic structure exploration
 
-2. **[Reveal Documentation](tools/REVEAL)** (15 min)
+2. **[Reveal Documentation](/systems/reveal)** (15 min)
    - Complete feature guide
    - Semantic navigation patterns
    - Pipeline composition with git, find, jq
@@ -901,19 +901,19 @@ You'll understand SIL's theoretical foundations and research trajectory.
 
 ### Reading Sequence
 
-1. **[Innovation Overview](innovations/INNOVATIONS)** (10 min)
-   - Summary of all innovations
+1. **[Systems Overview](/systems)** (10 min)
+   - Summary of all systems
    - Impact metrics and adoption
 
 2. **Production Tools** (30 min)
-   - [Reveal](tools/REVEAL) — Progressive disclosure for code
-   - [Morphogen](innovations/MORPHOGEN) — Cross-domain unified primitives
-   - [Pantheon](innovations/PANTHEON) — Universal typed IR
+   - [Reveal](/systems/reveal) — Progressive disclosure for code
+   - [Morphogen](/systems/morphogen) — Cross-domain unified primitives
+   - [Pantheon](/systems/pantheon) — Universal typed IR
 
 3. **Key Techniques** (20 min)
-   - [Progressive Disclosure](innovations/PROGRESSIVE_DISCLOSURE)
-   - [Agent Ether](innovations/AGENT_ETHER)
-   - [GenesisGraph](innovations/GENESISGRAPH) — Cryptographic provenance
+   - [Progressive Disclosure](/research/progressive-disclosure-system)
+   - [Agent Ether](/systems/agent-ether)
+   - [GenesisGraph](/systems/genesisgraph) — Cryptographic provenance
 
 ### Outcome
 
@@ -983,9 +983,9 @@ Core foundational documents defining SIL's mission, principles, and architecture
 Research contributions and theoretical frameworks.
 → [View research directory](research/README)
 
-### 🛠 Tools
+### 🛠 Systems
 Documentation for production tools (Reveal, TIA, Beth).
-→ [View tools directory](tools/README)
+→ [View systems directory](/systems)
 
 ### 🏗 Architecture
 Technical architecture and system design.
@@ -993,7 +993,7 @@ Technical architecture and system design.
 
 ### 💡 Innovations
 Innovation portfolio — techniques and tools built.
-→ [View innovations](innovations/INNOVATIONS)
+→ [View systems overview](/systems)
 
 ### 👤 Meta
 About the founder, influences, FAQ.
@@ -1016,7 +1016,7 @@ All 12 SIL projects detailed.
 → [Semantic OS Architecture](foundations/SIL_SEMANTIC_OS_ARCHITECTURE), [Technical Charter](foundations/SIL_TECHNICAL_CHARTER)
 
 **Try it hands-on**
-→ [Quickstart](QUICKSTART), [Reveal Docs](tools/REVEAL)
+→ [Quickstart](QUICKSTART), [Reveal Docs](/systems/reveal)
 
 **Review research**
 → [Research Directory](research/README)
@@ -1025,7 +1025,7 @@ All 12 SIL projects detailed.
 → [Stewardship Manifesto](meta/SIL_STEWARDSHIP_MANIFESTO)
 
 **See what's built**
-→ [Project Index](../projects/PROJECT_INDEX), [Innovation Portfolio](innovations/INNOVATIONS)
+→ [Project Index](../projects/PROJECT_INDEX), [Systems Overview](/systems)
 
 **Get questions answered**
 → [FAQ](meta/FAQ), [Glossary](foundations/SIL_GLOSSARY)
@@ -31729,6 +31729,1037 @@ We are building infrastructure that will outlive us. **It must be built on princ
 ---
 
 # ========================================
+# CATEGORY: PROJECTS
+# ========================================
+
+## Document: PRISM.md
+## Path: /docs/projects/PRISM.md
+
+---
+title: "Prism - Microkernel Query Engine"
+tier: 3
+order: 999
+private: false
+---
+
+# Prism - Microkernel Query Engine
+
+**Status:** 📋 Specification Complete
+**Domain:** Analytical and Relational Computation
+**Position:** Domain-Specific Frontend to Pantheon
+**Repository:** Private while in development
+
+---
+
+## Overview
+
+**Prism** is a microkernel-based query execution system for analytical and relational computation. It demonstrates how applying operating system microkernel principles to query engine design enables competing optimization strategies to coexist while maintaining a minimal, verifiable core.
+
+**Sister Project:** Like [Morphogen](https://github.com/semantic-infrastructure-lab/morphogen) handles audio synthesis, Prism handles analytical queries—both are domain-specific frontends to [Pantheon](/foundations/technical-charter) (Universal Semantic IR).
+
+---
+
+## The Microkernel Insight
+
+Prism emerged from resolving an architectural question: we had two complete specifications for analytical query execution—**Set Stack** (8-layer architecture) and **SEM** (5-layer mesh topology). Which one should we build?
+
+**The breakthrough:** They don't merge. They **coexist as competing service bundles** running atop the same microkernel.
+
+```
+┌─────────────────────────────────────┐
+│  Set Stack Service Bundle           │
+│  • SetLang Parser                   │
+│  • Cascades Optimizer               │
+│  • MLIR-based Scheduler             │
+│  • Explainable Physical Strategies  │
+└──────────────▲──────────────────────┘
+               │
+        Prism Kernel API
+               │
+┌──────────────┴──────────────────────┐
+│  SEM Service Bundle                 │
+│  • SQL Parser                       │
+│  • Learned Optimizer                │
+│  • Mesh Topology Scheduler          │
+│  • GPU-First Execution              │
+└─────────────────────────────────────┘
+```
+
+**Just like Linux supports multiple filesystems (ext4, btrfs, xfs), Prism supports multiple query execution policies.**
+
+This insight came from applying **Jochen Liedtke's minimality criterion**:
+> "A concept is tolerated inside the microkernel only if moving it outside would prevent the implementation of required functionality."
+
+**Result:** Only operator execution primitives belong in the kernel. Everything else—parsing, optimization, scheduling—lives in userspace services.
+
+---
+
+## Architecture
+
+### The Three Primitives
+
+Prism's kernel provides exactly three primitives (like an OS provides processes, memory, and IPC):
+
+#### 1. **Operators** (Computation Units)
+Like processes in an OS. Stateless functions over batches.
+
+```c
+Handle op_create(OpType type, Config cfg);
+void   op_execute(Handle op, Capability input_cap);
+```
+
+**Examples:** SCAN, FILTER, JOIN, AGGREGATE, MAP
+
+#### 2. **Buffers** (Isolated Memory Regions)
+Like pages in an OS. Device-aware, capability-protected.
+
+```c
+Handle     buf_alloc(size_t bytes, Device dev);
+Capability buf_grant(Handle buf, Rights rights);
+void       buf_revoke(Capability cap);
+```
+
+**Properties:**
+- Device-aware (CPU, GPU0, GPU1)
+- Zero-copy via capability passing
+- Formal isolation guarantees
+
+#### 3. **Channels** (Message Passing)
+Like IPC in an OS. Asynchronous, bounded, ownership-transferring.
+
+```c
+Handle     chan_create(Handle src, Handle dst);
+void       chan_send(Handle ch, Capability data_cap);
+Capability chan_recv(Handle ch);
+```
+
+**Properties:**
+- Async by default (pipeline parallelism)
+- Backpressure-aware (bounded buffers)
+- Race-free (no shared mutable state)
+
+---
+
+### The Kernel Interface
+
+**Complete kernel API: 14 functions, ~200 lines of C header**
+
+```c
+// Operators
+Handle op_create(OpType type, const void *config, size_t config_len);
+void   op_execute(Handle op, Capability input_cap);
+void   op_destroy(Handle op);
+
+// Buffers
+Handle     buf_alloc(size_t bytes, Device dev);
+Capability buf_grant(Handle buf, Rights rights);
+void       buf_revoke(Capability cap);
+void       buf_free(Handle buf);
+
+// Channels
+Handle     chan_create(Handle src_op, Handle dst_op);
+void       chan_send(Handle chan, Capability data_cap);
+Capability chan_recv(Handle chan);
+void       chan_close(Handle chan);
+
+// Introspection
+TraceEvent *introspect(Handle entity, size_t *count);
+```
+
+That's the entire kernel interface. Simple, minimal, verifiable.
+
+---
+
+## Service Bundles
+
+Services are pluggable userspace components that provide policy (parsing, optimization, scheduling).
+
+### Set Stack Service
+
+**Focus:** Explainable analytics with semantic transparency
+
+**Components:**
+- **Parser:** SetLang (pipeline-oriented DSL)
+- **Optimizer:** Cascades cost-based optimizer
+- **Scheduler:** MLIR-based compilation
+- **Features:** Domain operators (TimeOps, UnitOps, HierarchyOps)
+
+**Strengths:**
+- Explainable optimization (PSL justifies decisions)
+- Domain awareness (time-series, units, hierarchies)
+- MLIR-native lowering
+- SIL principle alignment
+
+**Use case:** Analytics workloads requiring explainability and domain operators
+
+---
+
+### SEM Service (Set Execution Mesh)
+
+**Focus:** GPU-optimized performance for heterogeneous hardware
+
+**Components:**
+- **Parser:** SQL (standard)
+- **Optimizer:** Learned (ML-guided)
+- **Scheduler:** Mesh topology (multi-GPU)
+- **Features:** Feedback loops (telemetry → scheduling adaptation)
+
+**Strengths:**
+- Mesh topology captures real dependencies (not forced layers)
+- Multi-device focus (GPU clusters, heterogeneous HW)
+- Performance-first optimization
+- 5D hypergraph formal model
+
+**Use case:** High-performance workloads on GPU clusters
+
+---
+
+### Service Competition
+
+Users choose which service bundle to use based on workload:
+
+```bash
+# Use Set Stack (explainable, domain-aware)
+$ prism --service=setstack query.sql
+
+# Use SEM (GPU-optimized)
+$ prism --service=sem query.sql
+
+# Mix and match components
+$ prism --parser=setlang --optimizer=learned --scheduler=mesh query.sql
+```
+
+Services can evolve independently. Kernel API stays stable.
+
+---
+
+## Integration with Pantheon
+
+Prism is a **domain-specific frontend** to Pantheon, following the same pattern as Morphogen:
+
+```
+User Query (SetLang/SQL)
+    ↓
+Prism IR (logical operators)
+    ↓
+Pantheon IR (universal semantic nodes)
+    ↓
+MLIR (linalg, tensor, gpu dialects)
+    ↓
+LLVM / CUDA / ROCm
+    ↓
+Hardware
+```
+
+**Integration points:**
+- **Prism IR** (logical operators) lowers to **Pantheon IR nodes**
+- **Domain constraints** (TimeOps, UnitOps) map to **Pantheon metadata**
+- **Prism trace** (operational telemetry) extends **Pantheon provenance**
+
+**Position in SIL ecosystem:**
+
+```
+SIL (Semantic Infrastructure Lab)
+ └─ Semantic OS
+     └─ Pantheon (Universal Semantic IR)
+         ├─ Morphogen (Audio) ✅ Production
+         ├─ Prism (Analytics) ← THIS PROJECT
+         ├─ TiaCAD (CAD) ✅ Production
+         └─ [Other domains...]
+```
+
+---
+
+## Key Innovations
+
+### 1. Microkernel Architecture
+**Mechanism, not policy.** Kernel provides primitives (operators, buffers, channels). Services provide optimization strategies.
+
+### 2. Capability-Based Security
+**Unforgeable handles to buffers/devices** with explicit rights (READ, WRITE, EXECUTE). Prevents buffer leaks, enables zero-copy, supports formal verification.
+
+### 3. Pluggable Optimizer Services
+**Multiple optimization strategies:**
+- **Cascades** - Cost-based exhaustive search (traditional SQL workloads)
+- **Learned** - ML-guided optimization (repetitive workloads with patterns)
+- **Greedy** - Heuristic approximation (real-time, low-latency)
+
+### 4. Explainable Physical Strategies
+**Optimizer justifies decisions** with cost models. Users see why a plan was chosen:
+
+```
+Query Plan (cost=145.3):
+  Sort (cost=12.1, rows=50)
+    -> Filter hypot(x,y)<100 (cost=8.2, rows=50)
+      -> Project (cost=6.0, rows=60)
+        -> Index Scan on customers.region (cost=119.0, rows=60)
+
+Optimizations Applied:
+  1. Pattern: sqrt(x²+y²) → hypot(x,y) (algebraic)
+  2. Index: customers.region (selectivity: 30%)
+  3. Pushdown: region='US' AND revenue>1000
+```
+
+### 5. Message-Passing Concurrency
+**Race-free by construction.** Operators communicate via typed messages through channels. No shared mutable state.
+
+### 6. Hardware Introspection
+**Kernel provides hardware profile** (cache sizes, memory bandwidth, disk IOPS). Optimizer uses this for accurate cost estimation.
+
+### 7. Competing Service Bundles
+**Set Stack vs SEM demonstrates flexibility.** Users choose based on benchmarks for their workload. Services compete, kernel stays stable.
+
+---
+
+## Specifications Complete
+
+The following comprehensive specifications are complete (~3,000 lines total):
+
+### Core Architecture
+- **Prism Microkernel Architecture** (500 lines)
+  - Kernel interface, service model, design rationale
+  - The three primitives explained
+  - Integration with Pantheon
+
+### Service Designs
+- **Optimizer Service Design** (747 lines)
+  - Pattern transformations (algebraic, predicate pushdown, index selection)
+  - Cost models and hardware introspection
+  - Optimization strategies (Cascades, learned, greedy)
+  - End-to-end optimization examples
+
+- **SEM Specification v1.0** (complete)
+  - 5-layer mesh topology architecture
+  - Multi-GPU scheduling
+  - Feedback loops and telemetry
+
+### Design Decisions
+- **Set Stack vs SEM Resolution** (436 lines)
+  - The microkernel insight
+  - Why they coexist instead of merge
+  - Service comparison and use cases
+  - Lessons from microkernel OS design
+
+### Implementation Artifacts
+- **Prism Kernel Specification** (C header)
+  - 14 syscalls, complete type definitions
+  - ~200 lines, ready for implementation
+
+- **Set Stack Specification v1.0** (original)
+  - 8-layer architecture (for comparison)
+  - Domain operators catalog
+
+---
+
+## Performance Characteristics
+
+### Fast Path: Operator Execution
+**Target:** 5-10 CPU cycles per row
+
+**Optimizations:**
+- Branchless operator kernels
+- Columnar layout (cache-friendly)
+- SIMD vectorization
+- Zero-copy capability passing
+- Lock-free channel implementation
+
+### Slow Path: Everything Else
+Parsing, optimization, scheduling are **not on the critical path**. They can be 1000x slower and not affect query latency.
+
+**Engineering focus:** Optimize the fast path (execution), keep slow path simple.
+
+---
+
+## Design Principles Alignment
+
+Prism embodies SIL's core principles:
+
+### 1. Semantic Transparency
+**Explicit meaning at every layer:**
+- Set Stack: Explicit at semantic, logical, physical levels
+- SEM: Explicit in strategy justification
+- Prism kernel: Services provide `explain()` API
+
+### 2. Provenance
+**Traceable transformations:**
+- Kernel `introspect()` API provides trace events
+- Services build provenance graphs from traces
+- Integration with Pantheon provenance model
+
+### 3. Explainability
+**Inspectable decisions:**
+- Optimizer explains why plans were chosen
+- Cost models are transparent
+- Observable intermediate states
+
+### 4. MLIR-Native
+**Unified compilation path:**
+- Set Stack: Layer 4 (MLIR lowering)
+- SEM: Layer 4 (device execution)
+- Backend service responsibility
+
+### 5. Structured Extensibility
+**Plugin models with contracts:**
+- Operator registration API
+- Service plugin interface
+- Domain modules (TimeOps, UnitOps)
+
+---
+
+## Current Status & Timeline
+
+### Specifications Complete ✅
+All architectural specifications are complete and comprehensive:
+- Microkernel design finalized
+- Service interfaces defined
+- Optimizer strategies specified
+- Integration with Pantheon designed
+
+### Next Phase: Implementation
+**Timeline:** 6-12 months to working prototype
+
+**Milestones:**
+- **Week 1-3:** Kernel implementation (operators, buffers, channels)
+- **Week 4:** Minimal service (SELECT * FROM t WHERE x > 10)
+- **Week 6-9:** Optimizer service MVP
+- **Week 10-12:** Full Cascades optimizer
+- **Week 13+:** SEM service, benchmarks, Pantheon integration
+
+**Current work:**
+- Implementation planning
+- Service interface prototyping
+- Pantheon IR integration design
+
+---
+
+## Relationship to Other SIL Projects
+
+### Pantheon (Universal Semantic IR)
+**Integration:** Prism IR lowers to Pantheon IR for universal representation
+
+### Morphogen (Audio Synthesis)
+**Sister Project:** Same pattern - domain-specific frontend to Pantheon
+(Morphogen = audio domain, Prism = analytical domain)
+
+### GenesisGraph (Provenance)
+**Integration:** Prism introspection API enables provenance tracking for query lineage
+
+### TiaCAD (CAD)
+**Potential Integration:** Query geometric data, analyze CAD models with Prism analytical operators
+
+---
+
+## Research Themes
+
+### 1. Microkernel Architectures for Domain Engines
+**Question:** What belongs in the kernel vs userspace?
+**Answer:** Apply minimality criterion - only execution primitives in kernel
+
+### 2. Competing Service Bundles
+**Question:** How do different optimization strategies coexist?
+**Answer:** Services compete on benchmarks, users choose per workload
+
+### 3. Cross-Domain Composition
+**Question:** How do analytical queries integrate with other domains?
+**Answer:** Via Pantheon IR - query audio data from Morphogen, geometric data from TiaCAD
+
+### 4. Formal Verification of Query Engines
+**Question:** Can we prove query execution correctness?
+**Answer:** Small kernel TCB enables formal verification (seL4-style)
+
+---
+
+## References
+
+### Microkernel Design
+- Liedtke, J. "On µ-Kernel Construction" (SOSP 1995)
+- Klein, G. et al. "seL4: Formal Verification of an OS Kernel" (SOSP 2009)
+- Zircon Kernel Documentation (Fuchsia OS)
+
+### Query Optimization
+- Graefe, G. "The Cascades Framework for Query Optimization" (1995)
+- Neumann, T. "Efficiently Compiling Efficient Query Plans for Modern Hardware" (VLDB 2011)
+- Kraska et al., "SageDB: A Learned Database System" (2019)
+
+### Capability Systems
+- Miller, M. et al. "Capability Myths Demolished" (2003)
+- Shapiro, J. "EROS: A Capability System" (PhD Thesis, 1999)
+
+---
+
+## Learn More
+
+- **Project Index:** [All SIL Projects](/projects/project-index)
+- **Architecture Guide:** [Unified Architecture Framework](/architecture/unified-architecture-guide)
+- **SIL Principles:** [The 14 Principles](/foundations/design-principles)
+- **Pantheon Integration:** [Technical Charter](/foundations/technical-charter)
+
+---
+
+**Document Version:** 1.0
+**Last Updated:** 2025-12-07
+**Maintainer:** Semantic Infrastructure Lab
+
+
+---
+
+## Document: PROJECT_INDEX.md
+## Path: /docs/projects/PROJECT_INDEX.md
+
+# SIL Project Index
+
+**The Complete Map of Semantic Infrastructure Lab Projects**
+
+**Last Updated:** 2025-12-05
+**Total Projects:** 12
+**Production Ready:** 4
+**Git Initialized:** 12 (all in SIL GitHub org, 7 private)
+
+**See also:** For filesystem locations and git URLs, see `/home/scottsen/src/tia/projects/SIL/SIL_ECOSYSTEM_PROJECT_LAYOUT.md`
+
+---
+
+## 🗺️ Overview
+
+This index maps all SIL projects to the **6-Layer Semantic OS Architecture**. Each project embodies SIL principles (Clarity, Simplicity, Composability, Correctness, Verifiability) and contributes to building the semantic substrate for intelligent systems.
+
+**Architecture Reference:** [Unified Architecture Guide](/architecture/unified-architecture-guide)
+
+### 🔒 Repository Status
+
+All 12 SIL projects are now in the Semantic-Infrastructure-Lab GitHub organization:
+- **7 Public Repos:** SIL, reveal, morphogen, tiacad, genesisgraph, riffstack, philbrick
+- **5 Private Repos:** pantheon, browserbridge, sup, prism, agent-ether (marked with 🔒)
+
+Private repos are in active development and will be made public when ready for broader collaboration.
+
+---
+
+## 📊 Projects by Layer
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  Layer 5: Human Interfaces / SIM                            │
+│  Progressive disclosure, exploration, visualization          │
+│  • reveal (✅ Production v0.16.0)                            │
+│  • browserbridge (🚧 Alpha)                                  │
+└─────────────────────────────────────────────────────────────┘
+                            ▲
+                            │
+┌─────────────────────────────────────────────────────────────┐
+│  Layer 4: Deterministic Engines                             │
+│  MLIR compilation, reproducible execution                   │
+│  • morphogen (✅ Production v0.11)                           │
+│  • riffstack (🚧 MVP)                                        │
+└─────────────────────────────────────────────────────────────┘
+                            ▲
+                            │
+┌─────────────────────────────────────────────────────────────┐
+│  Layer 3: Multi-Agent Orchestration                         │
+│  Agent protocols, coordination                              │
+│  • agent-ether (📋 Specification)                           │
+└─────────────────────────────────────────────────────────────┘
+                            ▲
+                            │
+┌─────────────────────────────────────────────────────────────┐
+│  Layer 2: Domain Modules                                    │
+│  Audio, CAD, UI, musical synthesis                          │
+│  • morphogen (✅ Production - audio/physics)                 │
+│  • tiacad (✅ Production v3.1.1 - CAD)                       │
+│  • riffstack (🚧 MVP - musical MLIR)                         │
+│  • sup (🚧 Alpha - semantic UI)                              │
+└─────────────────────────────────────────────────────────────┘
+                            ▲
+                            │
+┌─────────────────────────────────────────────────────────────┐
+│  Layer 1: USIR (Universal Semantic IR)                      │
+│  Universal semantic representation                          │
+│  • pantheon (🔬 Research)                                    │
+└─────────────────────────────────────────────────────────────┘
+                            ▲
+                            │
+┌─────────────────────────────────────────────────────────────┐
+│  Layer 0: Semantic Memory                                   │
+│  Persistent provenance-complete semantic graph              │
+│  • semantic-memory (📋 Planned)                             │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│  Cross-Cutting Infrastructure                               │
+│  • genesisgraph (✅ Production v0.3.0 - provenance)          │
+│  • prism (📋 Specification - microkernel query)             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🎯 Production Systems (Ready to Use)
+
+### [Morphogen](https://github.com/semantic-infrastructure-lab/morphogen) - Universal Deterministic Computation
+**Status:** ✅ **Production v0.11** | **Tests:** 1,600+ | **Coverage:** 85%
+
+**Layers:** 2 (Domain Module) + 4 (Deterministic Engine)
+
+**What it does:** Universal, deterministic computation platform unifying audio synthesis, physics simulation, circuit design, geometry, and optimization in one type system, scheduler, and language.
+
+**Key innovations:**
+- Cross-domain composition (audio + physics + circuits in same program)
+- Deterministic execution (bitwise-identical results)
+- MLIR-based compilation
+- Multirate scheduling (audio @ 48kHz, physics @ 240Hz)
+
+**Use cases:** Audio synthesis, physical modeling, multi-domain simulation, generative art
+
+**Links:**
+- Repository: `semantic-infrastructure-lab/morphogen`
+- [Morphogen Repository](https://github.com/Semantic-Infrastructure-Lab/morphogen)
+
+---
+
+### [Philbrick](https://github.com/semantic-infrastructure-lab/philbrick) - Analog/Digital Hybrid Computing
+**Status:** 🔬 **Research** | **Maturity:** Design phase | **Repo:** Public
+
+**Layer:** 4 (Deterministic Engine - hardware implementation)
+
+**What it does:** Sister project to Morphogen implementing the same deep architecture in analog/digital hybrid hardware. Four primitive operations (sum, integrate, nonlinearity, events) bridge software and physical computing.
+
+**Key innovations:**
+- Hardware realization of universal computation primitives
+- Analog/digital hybrid architecture
+- Direct correspondence to Morphogen software model
+- Event-driven synchronization between domains
+
+**Use cases:** Physical computing, analog computation, hardware/software co-design, neuromorphic systems
+
+**Relationship:** Demonstrates that Morphogen's architecture isn't software-specific - same primitives work in silicon/analog domain
+
+**Links:**
+- Repository: `Semantic-Infrastructure-Lab/philbrick` (private)
+
+---
+
+### [TiaCAD](https://github.com/semantic-infrastructure-lab/tiacad) - Declarative Parametric CAD
+**Status:** ✅ **Production v3.1.1** | **Tests:** 1027 | **Coverage:** 92%
+
+**Layer:** 2 (Domain Module - CAD/geometric reasoning)
+
+**What it does:** Declarative parametric CAD system using YAML instead of code. Reference-based composition model for explicit, verifiable geometry.
+
+**Key innovations:**
+- YAML-based declarative syntax (no programming required)
+- Reference-based composition (parts as peers, not hierarchy)
+- Auto-generated spatial anchors
+- Comprehensive schema validation
+
+**Use cases:** Parametric 3D modeling, manufacturing, design automation, CAD workflows
+
+**Links:**
+- Repository: `semantic-infrastructure-lab/tiacad`
+- [Tutorial](https://github.com/Semantic-Infrastructure-Lab/tiacad/blob/main/docs/user/TUTORIAL.md)
+- [Examples](https://github.com/Semantic-Infrastructure-Lab/tiacad/tree/main/examples)
+
+---
+
+### [GenesisGraph](https://github.com/semantic-infrastructure-lab/genesisgraph) - Universal Verifiable Provenance
+**Status:** ✅ **Production v0.3.0** | **Tests:** 363 | **Coverage:** 63%
+
+**Layer:** Cross-Cutting (Provenance infrastructure for all layers)
+
+**What it does:** Open standard for cryptographically verifiable process provenance. Three-level selective disclosure (A/B/C) enables proving compliance without revealing trade secrets.
+
+**Key innovations:**
+- Selective disclosure (prove compliance without revealing IP)
+- DID-based identity (did:web, did:ion, did:ethr)
+- Zero-knowledge proof templates
+- Transparency log anchoring
+
+**Use cases:** AI pipeline verification, manufacturing compliance, scientific reproducibility, healthcare audit trails
+
+**Links:**
+- Repository: `semantic-infrastructure-lab/genesisgraph`
+- [GenesisGraph Repository](https://github.com/Semantic-Infrastructure-Lab/genesisgraph)
+- [Use Cases](https://github.com/Semantic-Infrastructure-Lab/genesisgraph)
+
+---
+
+### [reveal](https://github.com/semantic-infrastructure-lab/reveal) - Universal Resource Explorer
+**Status:** ✅ **Production v0.16.0** | **Platform:** PyPI | **Downloads:** 100+/day
+
+**Layer:** 5 (Human Interfaces / SIM - progressive disclosure)
+
+**What it does:** Universal resource explorer with semantic understanding. Progressive disclosure pattern applies to ANY structured resource: code, environment variables, databases (planned), APIs (planned), containers (planned).
+
+**Key innovations:**
+- **Progressive disclosure** - Structure → Elements → Implementation (universal pattern)
+- **Pattern detection** - Code quality checking (bugs, security, complexity)
+- **AI agent-first design** - Built-in `--agent-help` following llms.txt pattern
+- **URI adapters** - Explore env://, postgres:// (planned), docker:// (planned), https:// (planned)
+- **Zero configuration** - Smart defaults, auto-discovery, 18 file types
+- **Perfect composability** - `filename:line` format integrates with vim, git, grep, etc.
+
+**Use cases:** Codebase exploration, AI agent context optimization, code quality checking, infrastructure inspection, token-efficient file reading (10x savings), Unix workflows
+
+**Demonstrates SIL Principles:**
+- ✅ **Structure Before Heuristics** - Shows structure first, then content
+- ✅ **Meaning Must Be Explicit** - Explicit code structure, not statistical inference
+- ✅ **Provenance Everywhere** - `filename:line` format is lightweight provenance
+- ✅ **Composability** - Seamless Unix tool integration (doesn't replace, augments)
+- ✅ **Simplicity** - Zero configuration, smart defaults enabled by semantic types
+
+**Links:**
+- Repository: `semantic-infrastructure-lab/reveal`
+- [PyPI Package](https://pypi.org/project/reveal-cli/)
+- [AI Agent Guide](https://github.com/semantic-infrastructure-lab/reveal#ai-agent-support)
+- [Pattern Detection](https://github.com/semantic-infrastructure-lab/reveal#pattern-detection)
+
+---
+
+### [SIL](https://github.com/semantic-infrastructure-lab/sil) - The Lab Itself
+**Status:** ✅ **Complete v1.0** | **Canonical Docs:** 5
+
+**Layer:** Meta (Lab manifesto, architecture, principles)
+
+**What it is:** The Semantic Infrastructure Lab itself - vision, principles, research agenda, and unified architecture for the entire ecosystem.
+
+**Key documents:**
+- [Manifesto](/manifesto) - Why SIL exists
+- [Technical Charter](/foundations/technical-charter) - System specification
+- [Principles](/foundations/design-principles) - The 14 principles
+- [Unified Architecture Guide](/architecture/unified-architecture-guide) - The framework
+- [Research Agenda Year 1](/research) - Current focus
+
+---
+
+## 🚧 Active Development (2-4 Weeks to Production)
+
+### Pantheon - Universal Semantic IR
+**Status:** 🔬 **Research** | **Maturity:** Prototype | **Repo:** 🔒 Private (not yet public)
+
+**Layer:** 1 (USIR - Universal Semantic Intermediate Representation)
+
+**What it does:** Universal semantic IR enabling cross-domain composition. Adapters translate domain languages (audio, CAD, UI) into common semantic graph for interoperability.
+
+**Key innovations:**
+- Universal graph representation
+- Domain adapters (audio, CAD, UI, geometry)
+- Semantic type system
+- Cross-domain operators
+
+**Needs before production:**
+- README polish
+- Adapter examples
+- API documentation
+- Integration tutorials
+
+**Use cases:** Cross-domain composition, semantic transformation, universal representation layer
+
+---
+
+### [RiffStack](https://github.com/semantic-infrastructure-lab/riffstack) - Musical MLIR
+**Status:** 🚧 **MVP** | **Maturity:** Alpha
+
+**Layers:** 2 (Domain Module - musical synthesis) + 4 (MLIR engine)
+
+**What it does:** Stack-based live looping and audio synthesis with YAML-driven patch configuration. Real-time performance environment for musical expression.
+
+**Key innovations:**
+- Stack-based composition
+- Live looping
+- MLIR compilation for performance
+- YAML patch description
+
+**Needs before production:**
+- Architecture documentation
+- Performance benchmarks
+- Example patches library
+- Stability improvements
+
+**Use cases:** Live musical performance, audio patching, real-time synthesis
+
+---
+
+### SUP (private) - Semantic UI Platform
+**Status:** 🚧 **Alpha** | **Maturity:** Early development | **Repo:** 🔒 Private
+
+**Layer:** 2 (Domain Module - UI/interaction)
+
+**What it does:** Semantic UI platform translating intent into reactive UI components. Declarative UI description with multiple backend targets (React, Vue, native).
+
+**Key innovations:**
+- Intent → UI compilation
+- Backend-agnostic (React, Vue, native)
+- Semantic layout constraints
+- Accessibility-first
+
+**Needs before production:**
+- API stabilization
+- Component library
+- Backend implementations
+- Documentation
+
+**Use cases:** Declarative UI construction, multi-platform UI, accessibility automation
+
+---
+
+### BrowserBridge (private) - Browser Automation
+**Status:** 🚧 **Alpha** | **Maturity:** Early development
+
+**Layer:** 5 (Human Interfaces - browser state extraction)
+
+**What it does:** Event-driven browser automation for human-AI collaboration. Standards-based (CloudEvents, AsyncAPI, WebSocket), protocol-agnostic.
+
+**Key innovations:**
+- Event-driven architecture
+- Standards-based protocols
+- Semantic DOM extraction
+- Human-AI collaboration primitives
+
+**Needs before production:**
+- API documentation
+- Integration examples
+- Protocol specification
+- Stability testing
+
+**Use cases:** Browser automation, web scraping, UI testing, human-AI collaboration
+
+---
+
+### TIA Browser Reveal (private) - Browser Extension
+**Status:** ✅ **Production-Ready** | **Maturity:** v0.1.0 | **Repo:** 🔒 Private
+
+**Layer:** 5 (Human Interfaces - browser integration)
+
+**What it does:** Browser extension for extracting semantic content from web pages. Native messaging integration with TIA command-line tools. Validates BrowserBridge architectural concepts in production.
+
+**Key innovations:**
+- Native messaging architecture (browser ↔ command line)
+- Site-specific extraction presets (ChatGPT, generic pages)
+- DOM query capabilities
+- Full automation and testing (8/8 tests passing)
+
+**Relationship to BrowserBridge:** Proof-of-concept that validates browser extension + command-line integration works in practice. Foundation for BrowserBridge extension package.
+
+**Use cases:** Web content extraction, ChatGPT conversation capture, page structure analysis, browser-CLI integration
+
+**Links:**
+- Repository: `Semantic-Infrastructure-Lab/tia-browser-reveal` (private)
+
+---
+
+## 📋 Planned / Specification Phase
+
+### Prism (private) - Microkernel Query Engine
+**Status:** 📋 **Specification Complete** | **Maturity:** Architecture design complete, implementation pending | **Repo:** 🌍 Public
+
+**Layer:** Cross-Cutting (Microkernel research) + Layer 1 Frontend (Analytical/Relational domain)
+
+**Domain:** Analytical and relational computation (queries, data processing, set operations)
+
+**Position in SIL:** Domain-specific frontend to Pantheon, sister project to Morphogen (audio domain)
+
+**What it is:** Microkernel-based query execution system for analytical computation. Minimal kernel (3 primitives) with competing service bundles that demonstrate policy flexibility.
+
+**Architecture:**
+- **Prism Kernel** - 3 primitives (operators, buffers, channels), 14 syscalls, ~200 line C interface
+- **Set Stack Service** - Explainable analytics with Cascades optimizer, MLIR scheduler, domain operators (TimeOps, UnitOps)
+- **SEM Service** - GPU-optimized mesh topology scheduler, learned optimizer, heterogeneous hardware focus
+- Services compete on benchmarks; users choose based on workload
+
+**Key architectural insight:**
+Resolved "Set Stack vs SEM" question by recognizing they're not competing architectures to merge, but competing service bundles (policy) running atop the same microkernel (mechanism). Direct application of Jochen Liedtke's minimality criterion.
+
+**Key innovations:**
+- Microkernel architecture (mechanism, not policy) - kernel provides primitives, services provide optimization
+- Capability-based buffer isolation (prevents leaks, enables zero-copy, formal verification)
+- Pluggable optimizer services (Cascades cost-based, learned ML-guided, greedy heuristic)
+- Explainable physical strategies (optimizer justifies decisions with cost models)
+- Message-passing concurrency (race-free by construction, async channels)
+- Hardware introspection for accurate cost estimation
+- Competing service bundles prove microkernel flexibility
+
+**Integration with Pantheon:**
+```
+SetLang/SQL → Prism IR (logical operators) → Pantheon IR → MLIR → Hardware
+```
+Domain constraints (TimeOps, UnitOps) map to Pantheon metadata. Prism trace extends Pantheon provenance model.
+
+**Specifications complete:**
+- Microkernel architecture (500 lines) - kernel interface, service model, design rationale
+- Optimizer service design (747 lines) - pattern transformations, cost models, strategies
+- Set Stack vs SEM resolution (436 lines) - architectural decision, microkernel insight
+- SEM specification (complete 5-layer mesh topology alternative)
+- Kernel interface (C header with 14 syscalls)
+- Original Set Stack 8-layer design (for comparison)
+
+**Current work:**
+- Implementation planning
+- Service interface prototyping
+- Integration design with Pantheon IR
+
+**Timeline:** 6-12 months to working prototype (kernel + one service)
+
+---
+
+### Agent Ether (private) - Agent Protocols
+**Status:** 📋 **Specification** | **Maturity:** Planning | **Repo:** 🔒 Private
+
+**Layer:** 3 (Multi-Agent Orchestration)
+
+**What it does:** Deterministic protocols for multi-agent coordination. Message passing, state synchronization, and coordination primitives for intelligent agent systems.
+
+**Key innovations:**
+- Deterministic coordination
+- Message-passing primitives
+- State synchronization
+- Provenance-complete interactions
+
+**Current work:**
+- Protocol specification
+- Reference implementation design
+- Integration patterns with Layer 1-2
+
+**Timeline:** 3-6 months to specification v1.0
+
+---
+
+### Semantic Memory (planned) - Persistent Semantic Graph
+**Status:** 📋 **Planned** | **Maturity:** Concept
+
+**Layer:** 0 (Foundation - persistent semantic substrate)
+
+**What it does:** Durable, queryable knowledge graphs with versioning. Persistent semantic continuity across tasks and time.
+
+**Key innovations:**
+- Versioned semantic graphs
+- Provenance-complete transformations
+- Efficient incremental updates
+- Cross-session continuity
+
+**Current work:**
+- Architecture design
+- Storage strategy
+- Query language design
+
+**Timeline:** 12-18 months to prototype
+
+---
+
+## 📈 Maturity Levels
+
+| Symbol | Status | Description | Criteria |
+|--------|--------|-------------|----------|
+| ✅ | **Production** | Ready for use, stable API | 300+ tests, documentation complete, >80% coverage |
+| 🔬 | **Research** | Working prototype, evolving | Core functionality present, API may change |
+| 🚧 | **Alpha/MVP** | Early development, unstable | Basic features work, needs polish |
+| 📋 | **Specification** | Design phase | Documentation only, no code yet |
+| 💭 | **Planned** | Future project | Concept stage |
+
+---
+
+## 🎯 Research Themes
+
+SIL projects cluster around four core research themes:
+
+### 1. Universal Semantic Representations
+**How do we create IRs that work across domains?**
+
+**Projects:**
+- **Pantheon** - Universal Semantic IR
+- **Morphogen** - Cross-domain composition (audio + physics + circuits)
+
+**Open questions:**
+- What are the universal primitives?
+- How do domains compose semantically?
+- Can we prove correctness across domain boundaries?
+
+---
+
+### 2. Domain-Specific Compilers
+**How do we compile semantic intent to execution?**
+
+**Projects:**
+- **Morphogen** - Audio/simulation DSL → MLIR
+- **RiffStack** - Musical intent → WebAudio/GPU
+- **SUP** - UI intent → React/Vue/native
+- **TiaCAD** - Geometric intent → CadQuery/STEP
+
+**Open questions:**
+- What's the right compilation strategy per domain?
+- How do we preserve semantics during lowering?
+- Can we verify compiled output matches intent?
+
+---
+
+### 3. Microkernel Architectures
+**How do we build formally verified systems?**
+
+**Projects:**
+- **Prism** - Microkernel query engine
+
+**Open questions:**
+- What belongs in the kernel vs userspace?
+- How do we verify correctness formally?
+- What are the minimal primitives?
+
+---
+
+### 4. Provenance & Verification
+**How do we prove computational correctness?**
+
+**Projects:**
+- **GenesisGraph** - Verifiable process provenance
+
+**Open questions:**
+- How do we balance disclosure vs secrecy?
+- What's the right granularity for provenance?
+- Can we verify AI pipeline correctness?
+
+---
+
+
+## 📊 Statistics
+
+**Total Projects:** 12
+**Production Ready:** 4 (morphogen, tiacad, genesisgraph, reveal)
+**Active Development:** 5 (pantheon, philbrick, riffstack, sup, browserbridge)
+**Specification Phase:** 2 (prism, agent-ether)
+**Planned:** 1 (semantic-memory)
+
+**Total Test Coverage:** 3,100+ tests across all projects
+**Lines of Code:** ~45,000 (production projects)
+**Documentation:** ~15,000 lines (canonical + guides)
+
+---
+
+## 🤝 Contributing
+
+Each project has its own contribution guidelines. General SIL contribution principles:
+
+1. **Clarity** - Code is clear, not clever
+2. **Simplicity** - Minimal essential complexity
+3. **Composability** - Components combine cleanly
+4. **Correctness** - Invariants preserved, tested
+5. **Verifiability** - Reasoning is provable
+
+See individual project repositories for specific contribution guides.
+
+---
+
+## 📬 Contact
+
+- **GitHub Organization:** https://github.com/semantic-infrastructure-lab
+- **Lab Website:** https://sil-lab.org (coming soon)
+
+---
+
+**Last Updated:** 2025-12-05
+**Document Version:** 1.1
+**Maintainer:** Semantic Infrastructure Lab
+
+
+---
+
+# ========================================
 # END OF DOCUMENTATION
 # ========================================
 
@@ -31737,4 +32768,4 @@ For the latest version of this documentation, visit:
 - Staging: https://sil-staging.mytia.net
 - GitHub: https://github.com/semantic-infrastructure-lab
 
-Generated: 2026-08-05 04:00:36 UTC
+Generated: 2026-08-05 05:53:58 UTC

@@ -11,7 +11,7 @@ Start here to understand what we're building:
 
 - [Founder's Letter](/founders-letter) - Why SIL exists
 - [Start Here](/start) - Getting-started guide
-- [Project Index](https://github.com/semantic-infrastructure-lab) - All projects
+- [Project Index](/projects/project-index) - All projects
 
 ## Foundations
 
@@ -92,6 +92,11 @@ Start here to understand what we're building:
 ## Essays
 
 - [Progressive Disclosure for AI Agents](/essays/progressive-disclosure-for-ai-agents): Essay on progressive disclosure for AI agents
+
+## Projects
+
+- [Prism - Microkernel Query Engine](/projects/prism): PRISM project detail page
+- [SIL Project Index](/projects/project-index): Full project directory, public and private repos
 
 ## Links
 
