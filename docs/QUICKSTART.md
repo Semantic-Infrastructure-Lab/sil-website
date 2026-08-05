@@ -102,10 +102,9 @@ Now that you've experienced progressive disclosure, understand the principles:
 
 Choose your path based on your interest:
 
-- **Researchers:** [Research Agenda Year 1](canonical/SIL_RESEARCH_AGENDA_YEAR1)
 - **Developers:** [Project Index](../projects/PROJECT_INDEX) — See all 12 projects
 - **Collaborators:** [FAQ](meta/FAQ) — Common questions answered
-- **Founders/Stewards:** [Stewardship Manifesto](canonical/SIL_STEWARDSHIP_MANIFESTO)
+- **Founders/Stewards:** [Stewardship Manifesto](meta/SIL_STEWARDSHIP_MANIFESTO)
 
 ---
 

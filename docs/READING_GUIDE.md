@@ -125,11 +125,10 @@ You'll have working tools installed and understand how to build agent-friendly i
    - [RAG as Semantic Manifold Transport](research/RAG_AS_SEMANTIC_MANIFOLD_TRANSPORT) (30 min)
 
 2. **Framework Documents** (60 min total)
-   - [Hierarchical Agency Framework](canonical/HIERARCHICAL_AGENCY_FRAMEWORK) (30 min)
-   - [Multi-Agent Protocol Principles](canonical/MULTI_AGENT_PROTOCOL_PRINCIPLES) (30 min)
+   - [Hierarchical Agency Framework](research/agent-infrastructure/HIERARCHICAL_AGENCY_FRAMEWORK) (30 min)
+   - [Multi-Agent Protocol Principles](research/agent-infrastructure/MULTI_AGENT_PROTOCOL_PRINCIPLES) (30 min)
 
-3. **Research Agenda** (20 min)
-   - [Research Agenda Year 1](canonical/SIL_RESEARCH_AGENDA_YEAR1)
+3. **Research Agenda** (20 min, internal)
    - Open problems and directions
 
 ### Outcome
@@ -208,7 +207,6 @@ Follow paths in order:
 
 ### Additional Reading
 - [FAQ](meta/FAQ) — Common questions
-- [Safety Thresholds](canonical/SIL_SAFETY_THRESHOLDS) — Risk management
 - [Project Index](../projects/PROJECT_INDEX) — All 12 projects detailed
 
 ### Outcome
@@ -257,16 +255,16 @@ All 12 SIL projects detailed.
 → [Manifesto](canonical/SIL_MANIFESTO), [Founder's Letter](canonical/FOUNDERS_LETTER)
 
 **See technical depth**
-→ [Semantic OS Architecture](canonical/SIL_SEMANTIC_OS_ARCHITECTURE), [Technical Charter](canonical/SIL_TECHNICAL_CHARTER)
+→ [Semantic OS Architecture](foundations/SIL_SEMANTIC_OS_ARCHITECTURE), [Technical Charter](foundations/SIL_TECHNICAL_CHARTER)
 
 **Try it hands-on**
 → [Quickstart](QUICKSTART), [Reveal Docs](tools/REVEAL)
 
 **Review research**
-→ [Research Directory](research/README), [Research Agenda](canonical/SIL_RESEARCH_AGENDA_YEAR1)
+→ [Research Directory](research/README)
 
 **Understand governance**
-→ [Stewardship Manifesto](canonical/SIL_STEWARDSHIP_MANIFESTO), [Safety Thresholds](canonical/SIL_SAFETY_THRESHOLDS)
+→ [Stewardship Manifesto](meta/SIL_STEWARDSHIP_MANIFESTO)
 
 **See what's built**
 → [Project Index](../projects/PROJECT_INDEX), [Innovation Portfolio](innovations/INNOVATIONS)
