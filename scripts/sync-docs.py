@@ -7,6 +7,13 @@ PHILOSOPHY:
   Glass-box transparency: Only sync files explicitly marked category: public
   in CONTENT_MANIFEST.yaml. Default-deny approach - must opt-in to publication.
 
+  Every normal sync (and --validate, as a dry preview) also prunes .md files
+  present in the website repo with no corresponding manifest entry - catches
+  stale copies left behind by a SIL-side rename/reorg that the manifest was
+  updated for but the old website file never was. EXEMPT_PRUNE_DIRS in this
+  script (currently: docs/pages/) is hand-maintained website content that
+  never comes from SIL and must never be auto-pruned - see SIL-10.
+
 CHANGES FROM BASH VERSION:
   - Pure Python implementation (cleaner, more maintainable)
   - Native YAML parsing
@@ -36,6 +43,12 @@ except ImportError:
     sys.exit(1)
 
 
+# Top-level docs/ directories that are hand-maintained directly in the website
+# repo and never sync from SIL at all. Pruning must never touch these, no matter
+# what the manifest does or doesn't say about them.
+EXEMPT_PRUNE_DIRS = {"pages"}
+
+
 class Colors:
     """ANSI color codes for terminal output"""
     RED = '\033[0;31m'
@@ -54,6 +67,7 @@ class SyncStats:
         self.missing_files = 0
         self.internal_violations = 0
         self.violations_list: List[str] = []
+        self.pruned_files = 0
 
     def summary(self) -> str:
         """Generate summary report"""
@@ -65,6 +79,8 @@ class SyncStats:
             lines.append(f"Missing: {self.missing_files} files (not found in source)")
         if self.internal_violations > 0:
             lines.append(f"Violations: {self.internal_violations} internal files in website")
+        if self.pruned_files > 0:
+            lines.append(f"Pruned: {self.pruned_files} orphaned files (no manifest entry)")
         return "\n".join(lines)
 
 
@@ -311,6 +327,68 @@ class DocSync:
 
         print()
 
+    def compute_expected_relpaths(self) -> set:
+        """Compute the set of website-relative .md paths the manifest says should exist.
+
+        Mirrors sync_public_content's own source-side enumeration (file entries as-is,
+        dir entries expanded by scanning the SIL source dir), so this stays correct
+        without duplicating the manifest's file list by hand.
+        """
+        expected = set()
+        for item in self.manifest.public_files:
+            if item["type"] == "dir":
+                clean_path = item["path"].replace("docs/", "")
+                source_dir = self.sil_repo / "docs" / clean_path
+                if source_dir.exists():
+                    for source_file in source_dir.rglob(item.get("pattern", "*.md")):
+                        if source_file.is_file():
+                            rel = Path(clean_path) / source_file.relative_to(source_dir)
+                            expected.add(str(rel))
+            else:
+                expected.add(item["path"].replace("docs/", ""))
+        return expected
+
+    def prune_orphaned_files(self):
+        """Remove .md files in the website repo with no corresponding manifest entry.
+
+        Catches the class of drift that flagged_for_removal/internal tracking can't:
+        a file renamed or moved in the SIL source (manifest updated to point at the
+        new location) leaves its old copy behind on the website with nothing marking
+        it internal. EXEMPT_PRUNE_DIRS is checked first and skips those trees entirely.
+        """
+        print("=" * 50)
+        print("Pruning Orphaned Files")
+        print("=" * 50)
+        print()
+
+        expected = self.compute_expected_relpaths()
+        would_only = self.args.validate or self.args.dry_run
+
+        orphans = []
+        for md_file in sorted(self.website_docs.rglob("*.md")):
+            rel = md_file.relative_to(self.website_docs)
+            if rel.parts and rel.parts[0] in EXEMPT_PRUNE_DIRS:
+                continue
+            if str(rel) in expected:
+                continue
+            orphans.append(rel)
+
+        if not orphans:
+            print(f"{Colors.GREEN}✓{Colors.NC} No orphaned files found")
+            print()
+            return
+
+        label = "[would remove]" if would_only else "Removing"
+        for rel in orphans:
+            print(f"  {Colors.YELLOW}{label}{Colors.NC} {rel}")
+            if not would_only:
+                (self.website_docs / rel).unlink()
+
+        if not would_only:
+            self.stats.pruned_files = len(orphans)
+
+        print()
+
     def clean_internal_files(self):
         """Remove internal files from website repo"""
         print("=" * 50)
@@ -421,6 +499,7 @@ class DocSync:
             self.sync_public_content()
 
         self.validate_no_internal_files()
+        self.prune_orphaned_files()
 
         if not self.args.validate:
             self.show_file_counts()

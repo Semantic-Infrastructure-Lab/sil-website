@@ -77,7 +77,7 @@ Now that you've experienced progressive disclosure, understand the principles:
 
 ### The Hands-On Path
 
-1. **[Reveal Documentation](tools/REVEAL)** — Learn all reveal features
+1. **[Reveal Documentation](/systems/reveal)** — Learn all reveal features
 2. **[Agent Help Standard](research/AGENT_HELP_STANDARD)** — How to make tools agent-friendly
 3. **[Progressive Disclosure Guide](research/information-architecture/PROGRESSIVE_DISCLOSURE_GUIDE)** — The theory behind what you just experienced
 

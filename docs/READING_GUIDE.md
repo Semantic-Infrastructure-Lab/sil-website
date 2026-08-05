@@ -88,7 +88,7 @@ You'll understand the technical depth: how SIL achieves explicit meaning, stable
    - Try progressive disclosure hands-on
    - Experience semantic structure exploration
 
-2. **[Reveal Documentation](tools/REVEAL)** (15 min)
+2. **[Reveal Documentation](/systems/reveal)** (15 min)
    - Complete feature guide
    - Semantic navigation patterns
    - Pipeline composition with git, find, jq
@@ -143,19 +143,19 @@ You'll understand SIL's theoretical foundations and research trajectory.
 
 ### Reading Sequence
 
-1. **[Innovation Overview](innovations/INNOVATIONS)** (10 min)
-   - Summary of all innovations
+1. **[Systems Overview](/systems)** (10 min)
+   - Summary of all systems
    - Impact metrics and adoption
 
 2. **Production Tools** (30 min)
-   - [Reveal](tools/REVEAL) — Progressive disclosure for code
-   - [Morphogen](innovations/MORPHOGEN) — Cross-domain unified primitives
-   - [Pantheon](innovations/PANTHEON) — Universal typed IR
+   - [Reveal](/systems/reveal) — Progressive disclosure for code
+   - [Morphogen](/systems/morphogen) — Cross-domain unified primitives
+   - [Pantheon](/systems/pantheon) — Universal typed IR
 
 3. **Key Techniques** (20 min)
-   - [Progressive Disclosure](innovations/PROGRESSIVE_DISCLOSURE)
-   - [Agent Ether](innovations/AGENT_ETHER)
-   - [GenesisGraph](innovations/GENESISGRAPH) — Cryptographic provenance
+   - [Progressive Disclosure](/research/progressive-disclosure-system)
+   - [Agent Ether](/systems/agent-ether)
+   - [GenesisGraph](/systems/genesisgraph) — Cryptographic provenance
 
 ### Outcome
 
@@ -225,9 +225,9 @@ Core foundational documents defining SIL's mission, principles, and architecture
 Research contributions and theoretical frameworks.
 → [View research directory](research/README)
 
-### 🛠 Tools
+### 🛠 Systems
 Documentation for production tools (Reveal, TIA, Beth).
-→ [View tools directory](tools/README)
+→ [View systems directory](/systems)
 
 ### 🏗 Architecture
 Technical architecture and system design.
@@ -235,7 +235,7 @@ Technical architecture and system design.
 
 ### 💡 Innovations
 Innovation portfolio — techniques and tools built.
-→ [View innovations](innovations/INNOVATIONS)
+→ [View systems overview](/systems)
 
 ### 👤 Meta
 About the founder, influences, FAQ.
@@ -258,7 +258,7 @@ All 12 SIL projects detailed.
 → [Semantic OS Architecture](foundations/SIL_SEMANTIC_OS_ARCHITECTURE), [Technical Charter](foundations/SIL_TECHNICAL_CHARTER)
 
 **Try it hands-on**
-→ [Quickstart](QUICKSTART), [Reveal Docs](tools/REVEAL)
+→ [Quickstart](QUICKSTART), [Reveal Docs](/systems/reveal)
 
 **Review research**
 → [Research Directory](research/README)
@@ -267,7 +267,7 @@ All 12 SIL projects detailed.
 → [Stewardship Manifesto](meta/SIL_STEWARDSHIP_MANIFESTO)
 
 **See what's built**
-→ [Project Index](../projects/PROJECT_INDEX), [Innovation Portfolio](innovations/INNOVATIONS)
+→ [Project Index](../projects/PROJECT_INDEX), [Systems Overview](/systems)
 
 **Get questions answered**
 → [FAQ](meta/FAQ), [Glossary](foundations/SIL_GLOSSARY)
