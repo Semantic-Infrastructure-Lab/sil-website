@@ -107,7 +107,7 @@ reveal 'claude://sessions/?search=auth'        # History: past work on auth
 
 Same operators (`=`, `~=`, `>`, `!`, `..`, `*`). Same output format. Same piping model. Whether you're querying code, certificates, databases, or documentation — the mental model doesn't change.
 
-New capabilities don't require new syntax. They drop in as new adapters. There are 22 today. The interface stays stable.
+New capabilities don't require new syntax. They drop in as new adapters — see `reveal help://adapters` for the current count and list. The interface stays stable.
 
 ---
 
@@ -160,7 +160,7 @@ pip install reveal-cli
 reveal-mcp    # starts the MCP server
 ```
 
-Five tools for any MCP-compatible agent (Claude Code, Cursor, Windsurf): `reveal_structure`, `reveal_element`, `reveal_query`, `reveal_pack`, `reveal_check`. Agents get progressive disclosure and call-graph analysis without subprocess overhead. One install — works everywhere.
+A growing set of tools for any MCP-compatible agent (Claude Code, Cursor, Windsurf) — `reveal_structure`, `reveal_element`, `reveal_query`, `reveal_pack`, `reveal_check`, and more added since. Agents get progressive disclosure and call-graph analysis without subprocess overhead. One install — works everywhere.
 
 ---
 
@@ -175,7 +175,7 @@ Before you read a single file. `reveal overview` replaces the multi-command orie
 
 ---
 
-### 69 Quality Rules, No Config Required
+### Quality Rules, No Config Required
 
 ```bash
 reveal check src/              # All rules
@@ -183,7 +183,7 @@ reveal check src/ --select B,S # Bugs + security only
 reveal review main..HEAD        # Full PR review: diff + quality + hotspots
 ```
 
-14 categories: bugs, complexity, duplicates, error handling, frontmatter, imports, links, maintainability, nginx, refactoring, security, types, URLs, validation. Every changed function in `reveal review` carries `complexity_before`, `complexity_after`, and `complexity_delta` — making "did this PR make anything harder to maintain?" a scriptable CI gate.
+14 categories: bugs, complexity, duplicates, error handling, frontmatter, imports, links, maintainability, nginx, refactoring, security, types, URLs, validation (`reveal check --rules` lists the current rule count within each). Every changed function in `reveal review` carries `complexity_before`, `complexity_after`, and `complexity_delta` — making "did this PR make anything harder to maintain?" a scriptable CI gate.
 
 ---
 

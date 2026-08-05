@@ -432,7 +432,7 @@ environments:
 
 ---
 
-## Try It: Reveal v0.113+
+## Try It: Reveal (`reveal --version` to check yours)
 
 Progressive configuration is live in Reveal. Here's how to try it:
 
@@ -548,7 +548,7 @@ SIL is building the semantic substrate for intelligent systems—infrastructure 
 
 ---
 
-**Current Version:** Reveal v0.113.0. `architecture: layers:` config and `.reveal/rules/` custom-rule plugins are real and working; `semantic://` and `entry_points` config, described in earlier versions of this article, are not (see correction note above).
+**Current Version:** `pip install reveal-cli` for the latest (`reveal --version` to check what you have). `architecture: layers:` config and `.reveal/rules/` custom-rule plugins are real and working as of v0.113.0; `semantic://` and `entry_points` config, described in earlier versions of this article, are not (see correction note above).
 **License:** MIT
 **Maintained by:** Scott Senkeresty, Semantic Infrastructure Lab
 
