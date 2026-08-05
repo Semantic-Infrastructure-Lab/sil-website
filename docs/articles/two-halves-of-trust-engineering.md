@@ -10,6 +10,7 @@ topics: [agentic-ai, trust, reveal, tia, calibration, progressive-disclosure, ob
 related_projects: [reveal, SIL]
 related_docs:
   - "docs/articles/engineering-trust.md"
+  - "docs/articles/two-speeds-of-meta-engineering.md"
   - "docs/articles/grounding-not-reasoning.md"
   - "docs/articles/trained-to-please-empowered-to-act.md"
   - "docs/articles/configuration-semantic-contract.md"
@@ -18,7 +19,7 @@ related_docs:
   - "docs/articles/reveal-introduction.md"
   - "docs/articles/reveal-inside-the-function.md"
 canonical_url: "https://semanticinfrastructurelab.org/articles/two-halves-of-trust-engineering"
-reading_time: "24 minutes"
+reading_time: "21 minutes"
 beth_topics: [agentic-ai, trust, calibration, reveal, tia, progressive-disclosure, observability, verification, containment, continuity, meta-engineering, grounding, session-archaeology, tt-tasks]
 session_provenance: "govobu-0804, seasonal-steam-0804, destined-herald-0804"
 linkedin_posted: false
@@ -70,11 +71,9 @@ Both halves converge on one rule: **the agent should be able to see the shape of
 
 ### And the part that breaks
 
-Observability tools carry an assumption, and the assumption can stop holding without any error being raised. The original article's sharpest example: a legacy PHP system where the most important file runs past 11,000 lines and defines no functions at all. An AST-based structure tool built to index functions and classes reports almost nothing — not because it is broken, but because the abstraction it indexes on stopped matching reality.
+Observability tools carry an assumption, and the assumption can stop holding without any error being raised. [The first article's sharpest example](/articles/engineering-trust) was the legacy PHP file that runs past 11,000 lines and defines no functions at all: a function-shaped index reports almost nothing, not because it is broken but because the abstraction it indexes on stopped matching reality. The fix was a second lens on a different abstraction — *what behavior exists here* rather than *what functions exist here*.
 
-The fix was not to reason harder over an empty outline. It was to build a second lens on a different abstraction — one that asks *what behavior exists here* rather than *what functions exist here*: loops, SQL statements, session locks, HTTP handles, include edges, superglobal reads. None of those are functions. That tool exists and is in production use.
-
-The transferable lesson is sharper than "have good tools," and it is a correction to how progressive disclosure is usually described:
+Told once, that is a story about one bad file. Told beside the other half, it is a correction to how progressive disclosure is usually described:
 
 > **Chunk size is downstream of chunk unit.** "Read the right amount" presumes you are chunking on a boundary the artifact actually has. When the unit is wrong, the size is irrelevant — and the failure is silent, because a function-shaped index over a function-free file returns a clean, confident, empty answer.
 
@@ -134,7 +133,7 @@ Every step was individually correct. The tool answered accurately, the measureme
 
 **Agent implementation.** "Never trust a status report when you can verify reality directly" has teeth here. Marking work complete requires a commit hash validated against the actual repository; nothing is inferred, and "merged" is not treated as "released" until an ancestry check confirms it. The verification methods themselves get verified too: one standing rule exists only because a common way of confirming a committed fix silently no-ops on already-committed files and then manufactures a phantom conflict — a technique that returned a false result once and was replaced with one that cannot.
 
-**Tool implementation.** `reveal check` and `reveal review` return real exit codes rather than a narrated summary, which makes them valid CI gates with no configuration — the published [CI gate recipe](/articles/reveal-pack-and-review) is a few lines of YAML wired straight to those codes. Structural diffs carry `complexity_before`, `complexity_after`, and `complexity_delta` as data, so "did this change make anything harder to maintain" becomes a query instead of an impression. And the [subagent output contract](/articles/reveal-subagents) — Finding / Evidence / Mechanism / Confidence / Unverified — enforces verification at the schema level: an agent using it cannot produce a confident claim with no traceable command behind it, because there is no field to put one in.
+**Tool implementation.** `reveal check` and `reveal review` return real exit codes rather than a narrated summary, which makes them valid CI gates with no configuration — the published [CI gate recipe](/articles/reveal-pack-and-review) is a few lines of YAML wired straight to those codes. Structural diffs carry `complexity_before`, `complexity_after`, and `complexity_delta` as data, so "did this change make anything harder to maintain" becomes a query instead of an impression. And the [subagent output contract](/articles/reveal-subagents) — Finding / Evidence / Mechanism / Confidence / Unverified — pushes verification into the shape of the answer: a finding has nowhere to live unless a command produced it. Being exact about the mechanism, since it is easy to oversell: this is a required output *template*, not a validated schema. Nothing rejects a malformed answer. What it does is make the omission conspicuous — a missing `Evidence:` line is visible in a way that a merely unsupported sentence is not, to the reader and to the agent writing it.
 
 Note the last field. `Unverified:` is a calibration primitive living inside a verification contract — a declared boundary of what was *not* established, which is what makes the positive findings worth anything.
 
@@ -148,11 +147,11 @@ Note the last field. `Unverified:` is a calibration primitive living inside a ve
 
 *Mirror — and the last one that does.*
 
-**Agent implementation.** The hard rules are pure containment: never push without an explicit instruction, stop and ask before any production or remote-write action, verify ephemeral compute is torn down before a task counts as done. This is the [permissions-versus-contracts](/articles/trained-to-please-empowered-to-act) distinction made operational — *a permission says you can do this; a contract says what you should do, what to ask about first, and what you are never allowed to do even when you technically can.*
+**Agent implementation.** The hard rules are pure containment: never push without an explicit instruction, stop and ask before any production or remote-write action, verify ephemeral compute is torn down before a task counts as done. That is the [permissions-versus-contracts](/articles/trained-to-please-empowered-to-act) distinction made operational: not a list of what the agent *may* do, but of what it should do and what it must ask about first.
 
 And the second direction, which is consistently underrated: concurrent interference. A standing rule forbids blanket staging in shared repositories, because two agent sessions each believing they are making an isolated change is how one quietly sweeps the other's unfinished work into a commit under the wrong message. That is not a reasoning failure. It is a race condition, and agentic systems inherit every problem distributed systems have had for decades.
 
-**Tool implementation.** Tool restriction is containment applied to agent design itself. The analysis subagents ship with read-only tool sets — no edit, no write — which is not a suggestion in a system prompt but an architectural fact the agent cannot violate. The same discipline runs one level down: Reveal's navigation flags are read-only by construction, with no `--fix`. Observation and mutation do not share a code path, let alone a tool call. And before an edit happens, call-graph and import queries give a blast-radius estimate for free.
+**Tool implementation.** Tool restriction is containment applied to agent design itself. The analysis subagents ship with read-only tool sets — the edit and write tools are simply absent from their definitions, which is a stronger guarantee than an instruction not to use them. Worth being precise about how strong, though, because this is exactly where a blast-radius estimate gets flattering: they retain a shell, and a shell can write. The removal is a real, structural narrowing — it deletes the convenient path and makes mutation something the agent would have to construct deliberately — but it is not an inviolable boundary, and describing it as one would be the same overclaim this article keeps warning about. The same discipline runs one level down: Reveal's navigation flags are read-only by construction, with no `--fix`. Observation and mutation do not share a code path, let alone a tool call. And before an edit happens, call-graph and import queries give a blast-radius estimate for free.
 
 The same instinct extends past agents into ordinary code. Declaring an architectural boundary in [an enforced config file](/articles/configuration-semantic-contract) — routes may not import repositories, checked on every commit — converts a promise into a contract that fails CI the moment it is crossed. A design document says what should be true. A contract makes it true whether or not anyone remembers to check.
 
@@ -189,85 +188,19 @@ Build only the first and the same gap gets rediscovered for free, forever.
 
 *Feedback.*
 
-The name undersells it. Failures are the obvious input, but the real activity is broader: continuously improving the environment the agent works in. Here the halves *feed* each other — rules produce tools, tools produce new routing problems, routing produces new rules. Three distinct modes, and only the first is what "learn from failure" usually means:
+The name undersells it. Failures are the obvious input, but the real activity is broader: continuously improving the environment the agent works in. Here the halves *feed* each other — rules produce tools, tools produce new routing problems, routing produces new rules.
 
-| Mode | Trigger | What gets built |
-|---|---|---|
-| **Incident → rule** | Something broke | A standing rule that prevents it recurring |
-| **Friction → tool** | Nothing broke, but the same cost got paid repeatedly | A capability that removes it — Reveal itself is this mode, no single incident produced it |
-| **Capability → routing** | The tool already did the thing; the agent never reached for it | Not code — teaching |
+Three modes drive that, and only the first is what "learn from failure" usually means. An **incident** produces a standing rule. Repeated **friction** that never actually broke anything produces a tool — Reveal itself is this mode, no single incident produced it. And a **capability the agent never reached for** produces teaching rather than code. The third is the least discussed and, in our own commit history, by far the most common; a representative month of commits to the agent's repository reads *"teach agents the Beth audit golden path," "document graph explore for related-doc lookup," "add the grep/help-discoverability reflex."* None of those built anything.
 
-**The agent implementation** is an operating manual and a memory system accumulating rules traceable to specific incidents — a verification technique replaced after it returned a false result, a staging rule written after two concurrent sessions collided. But most of its churn is mode three, the least discussed of the three and by far the most common here. A representative month of commit messages: *"teach agents the Beth audit golden path," "document graph explore for related-doc lookup," "add the grep/help-discoverability reflex."* None of those built anything. Each closed a gap between a capability that already existed and an agent that never reached for it.
+**The agent implementation** is an operating manual and a memory system accumulating rules traceable to specific incidents — a verification technique replaced after it returned a false result, a staging rule written after two concurrent sessions collided.
 
 **The tool implementation** is the rule engine (`reveal check --rules`, `--explain <CODE>`) and — more interestingly — an anti-patterns guide: a blunt list of ways the tool gets used wrong, including reading files too early and ignoring the breadcrumbs the tool prints to say what to run next.
 
-### One lesson, eight artifacts
+What makes this the *Feedback* stage rather than a third mirror is that artifacts move **between** the halves. The clearest case ran in three moves. The tool's own reference had grown to 40,000 tokens, so the operating manual gained a hand-written warning never to open it cold — a workaround, living in a file that downstream projects copy and none of them re-measure. The tool half then named that hand-maintained manual, in its own planning document, as **"Exhibit A for why orientation must be emitted by the tool, not templated,"** and set a goal of shrinking the copied block to one line pointing back at the tool. Tiered help shipped seventeen days later; two days after that, the hand-written warning was retired.
 
-Here is the loop running end to end — the clearest instance we can trace, seven weeks from friction to permanent capability, crossing both halves:
+Workaround in the agent half, feature in the tool half, workaround retired. The loop is not "we wrote down a lesson" — it is that **a hand-maintained copy of the truth got recognized as a defect *in the tool***, and the fix moved that truth to the only place it cannot drift from: the tool's own output.
 
-1. **May 18** — using the tool for real work on an unrelated project, a `--search` flag silently conflated text search with structural name matching. Zero results, no hint.
-2. A feedback note, filed under the project the work was on, separated **two problems by cost to fix**: misleading empty output (cheap — a calibration defect) and no native text search (a capability gap). It proposed both fixes by name.
-3. Both became tracked backlog items.
-4. **May 19** — a design document worked through the naming collision itself, one day after the incident.
-5. **`--grep` shipped** — cross-file text search, results grouped by enclosing function — and `--search` was renamed `--name`, retiring the ambiguous word rather than documenting around it. The changelog entry cites the feedback note by filename as its *"Original report."*
-6. The anti-patterns guide gained an entry: *shelling out to grep for cross-file text search*.
-7. **July 6** — the agent's operating manual gained a grep-and-help-discoverability reflex, and a persistent memory recorded the same reflex for future sessions.
-
-Drawn as a loop, the shape outlives this particular incident:
-
-```mermaid
-flowchart TD
-    A([Friction hit during real work]) --> B["Feedback note<br/>filed under the project, not the feature"]
-    B --> C{Split by cost to fix}
-    C -->|output was misleading| D["Calibration fix — cheap<br/>(tool half)"]
-    C -->|capability was missing| E["New capability — expensive<br/>(tool half)"]
-    D --> F["Tool ships"]
-    E --> F
-    F --> G{"Does the agent<br/>reach for it?"}
-    G -->|yes| Z([Loop closed])
-    G -->|no| H["Anti-pattern entry<br/>(tool half)"]
-    H --> I["Operating manual + memory<br/>(agent half)"]
-    I --> Z
-
-    style A fill:#f1f5f9,stroke:#94a3b8
-    style B fill:#f1f5f9,stroke:#94a3b8
-    style D fill:#e0f2fe,stroke:#0284c7
-    style E fill:#e0f2fe,stroke:#0284c7
-    style F fill:#e0f2fe,stroke:#0284c7
-    style H fill:#e0f2fe,stroke:#0284c7
-    style I fill:#fef9c3,stroke:#ca8a04
-    style Z fill:#dcfce7,stroke:#16a34a
-```
-
-Two nodes carry the argument. The **split by cost to fix** is worth copying on its own: pricing *the output was misleading* separately from *the capability was missing* keeps a cheap calibration fix from being buried under an expensive feature request.
-
-And then the branch. Shipping the capability does not close the loop — the agent has to reach for it, and in this case it did not. Three further artifacts were needed, and the last one crosses into the other half. **A tool that documents an anti-pattern does not make an agent follow it; an agent memory does not make the tool's documentation correct.** Neither encoding substitutes for the other, which is why the lesson had to be written on both.
-
-### The same loop, in three hours
-
-Seven weeks is not the only speed. On an afternoon in April, the behavior lens shipped a side-effect classifier for procedural PHP: a taxonomy sorting calls into database, HTTP, cache, log, file, sleep, and hard-stop. **Three hours and nineteen minutes later, the structural lens shipped `--sideeffects` carrying the same seven categories in the same order**, with the commit noting it now worked on PHP *and* Python. Fifteen minutes after that, a `--boundary` command composed it with dependency and mutation queries into a single pre-edit report.
-
-Name that precisely: it is not convergence. Nobody rediscovered anything. A taxonomy was proven against one hostile artifact in the afternoon and generalized to every language the structural lens supports by evening, by the same hand.
-
-The two speeds are the useful part, and what sets them is not the size of the idea — it is **whether the lesson has to travel through a person who is not currently thinking about it.** A classifier its author had just finished building transfers in an afternoon. A discoverability reflex has to reach an agent that will not exist until some future session, which is why it took a flag, a rename, an anti-pattern entry, a manual revision, and a memory. Capability generalizes fast. Attention does not generalize at all — it has to be rebuilt in every artifact that will be read later.
-
-### The pressure moves
-
-Something visible only in aggregate: as the tool matured, the work relocated.
-
-| | Apr | May | Jun | Jul |
-|---|---|---|---|---|
-| Tool releases | 41 | 11 | 8 | 11 |
-| Lines of tool guidance in the agent's manual | 29 | 42 | 32 | 55 |
-| Persistent memories written | 0 | 1 | 9 | 26 |
-
-Release cadence collapsed four-fold after April, and exactly as tool churn fell, teaching rose. In the peak month, **38.7% of all commits to the agent's own repository changed the environment the agent works in** rather than doing any work with it, against a baseline of 5–10%. Meta-engineering is not a steady background tax. It arrives in waves.
-
-That also explains why routing dominates: **every tool that relieves pressure creates new pressure one level up.** Reading files burned context, so a structural tool relieved it. Choosing among twenty-five adapters became its own cost, so a routing subagent appeared and the manual gained a cost-annotated decision table. Each relief generates a discoverability problem for the layer above it.
-
-The clearest case ran through both halves in three moves. The tool's own reference had grown to 40,000 tokens, and the agent half absorbed that first: in early July the operating manual gained a hand-written warning never to open it cold, token cost typed in by hand — a workaround, living in a file that downstream projects copy and none of them re-measure. The tool half then named that hand-maintained manual, in its own planning document, as **"Exhibit A for why orientation must be emitted by the tool, not templated,"** and set a goal of shrinking the copied block to one line pointing back at the tool. Tiered help shipped seventeen days later; two days after that, the hand-written cost table was corrected to match, citing the release that had obsoleted it.
-
-Workaround in the agent half, feature in the tool half, workaround retired. The loop is not "we wrote down a lesson" — it is that a hand-maintained copy of the truth got recognized as a defect *in the tool*, and the fix moved that truth to the only place it cannot drift from: the tool's own output.
+The mechanics of that loop — why it sometimes runs in three hours and sometimes takes seven weeks, and what the two speeds have to do with each other — are the subject of [The Two Speeds of Meta-Engineering](/articles/two-speeds-of-meta-engineering).
 
 **Meta-engineering is not a resolution to be more careful.** It is a standing artifact — a rule, a scanner, a tool, a paragraph in an operating manual — that outlives the session where the friction was felt.
 
@@ -279,7 +212,7 @@ Workaround in the agent half, feature in the tool half, workaround retired. The 
 
 If this decomposition only described Reveal, it would not be worth much. So here is the reason to think the tool implementation has a definite shape rather than reflecting one tool's preferences.
 
-Reveal is a general-purpose structural query layer — twenty-five adapters, hundreds of languages, 143 releases. The behavior lens is a single-purpose tool built for one legacy PHP codebase whose structure defeated AST analysis. Different abstractions, different artifacts, no shared code. Where a capability did cross over deliberately, §5 names it as such. The seven moves below are not that — nobody ported them, and they turned up in both anyway:
+Reveal is a general-purpose structural query layer — twenty-five adapters, hundreds of languages, 143 releases. The behavior lens is a single-purpose tool built for one legacy PHP codebase whose structure defeated AST analysis. Different abstractions, different artifacts, no shared code. Capabilities *have* crossed between them deliberately — [one taxonomy made the trip in a single afternoon](/articles/two-speeds-of-meta-engineering) — but the seven moves below are not that. Nobody ported them, and they turned up in both anyway:
 
 | Design move | Structural lens | Behavior lens |
 |---|---|---|
@@ -307,7 +240,7 @@ Four caveats, stated before the build list rather than after it, because they ch
 
 **The behavior lens is a domain tool, not a product.** It was purpose-built for one codebase's real shape, and it works *because* it was fitted rather than generalized. The transferable part is that a second lens was built at all, on a deliberately different abstraction.
 
-**The convergence evidence is weaker than it looks.** Both tools come from this lab. They target different artifacts on different abstractions with no shared code, which is what makes the agreement interesting — but they do not have independent authors, and shared instincts are a live alternative explanation. And at least once, as §5 records, it was not convergence at all: the side-effect taxonomy crossed from one tool to the other in an afternoon, deliberately. That instance is evidence of a *transferable* design, not an independently discovered one, and the two should not be counted as the same kind of support.
+**The convergence evidence is weaker than it looks.** Both tools come from this lab. They target different artifacts on different abstractions with no shared code, which is what makes the agreement interesting — but they do not have independent authors, and shared instincts are a live alternative explanation. And at least once it was not convergence at all: [a side-effect taxonomy crossed from one tool to the other in an afternoon](/articles/two-speeds-of-meta-engineering), deliberately, by the same hand. That instance is evidence of a *transferable* design, not an independently discovered one, and the two should not be counted as the same kind of support.
 
 So treat the seven moves as a hypothesis, and here is what would falsify it: examine a mature agent platform built by people with no connection to this lab, and look for the same split — properties implemented once in the operating environment and again in the tooling, with a calibration gap in both. **If the split is not there, or if one half turns out to subsume the other, this framework is describing our house style rather than a property of the problem.** Run that check before adopting any of this wholesale.
 
@@ -377,8 +310,11 @@ The model never becomes perfect. What it can perceive, what it knows it *cannot*
 
 ---
 
+**Where this goes next.** One of the five behaves unlike the others: meta-engineering is the only property where the two halves start improving *each other*. Watching that loop with dates attached — why it sometimes closes in an afternoon and sometimes takes seven weeks — is [The Two Speeds of Meta-Engineering](/articles/two-speeds-of-meta-engineering).
+
 *Part of SIL's ongoing series on agentic reliability. See also:*
 - *[I Didn't Learn to Trust AI. I Learned to Engineer Trust.](/articles/engineering-trust) — the five properties, and the incidents they came from*
+- *[The Two Speeds of Meta-Engineering](/articles/two-speeds-of-meta-engineering) — how a lesson becomes a permanent capability, in three hours or seven weeks*
 - *[The Hard Part of Agentic AI Isn't Reasoning — It's Grounding](/articles/grounding-not-reasoning) — getting the right information in, and the ledger design process*
 - *[Trained to Please, Empowered to Act](/articles/trained-to-please-empowered-to-act) — five public incidents behind permissions versus contracts*
 - *[Agents That Don't Read Everything](/articles/reveal-subagents) — escalation ladders and evidence-bearing output contracts*

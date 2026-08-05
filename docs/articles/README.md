@@ -27,9 +27,23 @@ Articles are:
 
 ## Published Articles
 
-*19 articles live on the website, grouped by topic. Newest first within each group. LinkedIn status noted per article.*
+*20 articles live on the website, grouped by topic. Newest first within each group. LinkedIn status noted per article.*
 
 ### Agentic AI: Trust & Reliability
+
+*Three-part arc, in reading order: [Engineering Trust](/articles/engineering-trust) (the framework) → [The Two Halves](/articles/two-halves-of-trust-engineering) (the architecture) → [The Two Speeds](/articles/two-speeds-of-meta-engineering) (the dynamics).*
+
+#### [The Two Speeds of Meta-Engineering](/articles/two-speeds-of-meta-engineering)
+**Date:** 2026-08-04
+**LinkedIn:** ⬜ Not yet posted
+**Topics:** Agentic AI, meta-engineering, tooling, discoverability, routing, calibration
+**Audience:** Developers, AI engineers, teams building agent tooling
+
+A lesson can become a permanent capability in three hours or in seven weeks — and what sets the speed isn't the size of the idea, it's whether the lesson has to travel through someone who isn't currently thinking about it. Traces one loop end to end with dates (a misleading flag → a feedback note → `--grep` → an anti-pattern entry → a manual revision → a memory), and a second that crossed between two tools in an afternoon. Includes the three modes of meta-engineering, of which "capability the agent never reached for" is by far the most common.
+
+**From session:** destined-herald-0804
+
+---
 
 #### [The Two Halves of Trust Engineering](/articles/two-halves-of-trust-engineering)
 **Date:** 2026-08-04

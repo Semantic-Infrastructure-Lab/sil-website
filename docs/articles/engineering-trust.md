@@ -22,13 +22,15 @@ beth_topics:
   - sil
 related_projects: [reveal, SIL]
 related_docs:
+  - docs/articles/two-halves-of-trust-engineering.md
+  - docs/articles/two-speeds-of-meta-engineering.md
   - docs/articles/grounding-not-reasoning.md
   - docs/articles/trained-to-please-empowered-to-act.md
   - docs/articles/reveal-subagents.md
   - docs/articles/claude-session-archaeology.md
   - docs/articles/reveal-diff.md
   - docs/articles/configuration-semantic-contract.md
-session_provenance: "tempestuous-ice-0803"
+session_provenance: "tempestuous-ice-0803, destined-herald-0804"
 linkedin_posted: false
 ---
 
@@ -94,7 +96,7 @@ There's a third version of this, and it's about what "verify" even means. A stag
 
 That's a different and deeper lesson than "reports can be wrong." **Verification can lie if you verify the wrong abstraction.** You can check reality perfectly and still be checking the wrong reality. That's the exact same failure shape as the PHP example above, wearing different clothes — the tool wasn't wrong, the boundary it was checking against was.
 
-This is also why I've come to like output contracts that force the evidence itself into the artifact, not just the conclusion. A structural-code-analysis subagent we run in production must return every finding as Finding / Evidence / Mechanism / Confidence / Unverified, so a confident claim with no traceable basis is structurally impossible to produce. It paid for itself in one ordinary week: the same contract closed one monitoring alarm as a false positive and independently confirmed a real, previously-unknown bug elsewhere in the same investigation — just as capable of saying *nothing's wrong here* as *something's wrong here*, which is the only way either verdict is worth trusting.
+This is also why I've come to like output contracts that force the evidence itself into the artifact, not just the conclusion. A structural-code-analysis subagent we run in production must return every finding as Finding / Evidence / Mechanism / Confidence / Unverified, which leaves a confident claim with no traceable basis nowhere to hide — not because anything rejects a malformed answer (it's a required template, not a validated schema) but because a missing `Evidence:` line is conspicuous in a way that a merely unsupported sentence never is. It paid for itself in one ordinary week: the same contract closed one monitoring alarm as a false positive and independently confirmed a real, previously-unknown bug elsewhere in the same investigation — just as capable of saying *nothing's wrong here* as *something's wrong here*, which is the only way either verdict is worth trusting.
 
 The same discipline applies to code: comparing structural complexity before and after a refactor, instead of trusting a description of what changed, is the identical "diff instead of narrate" instinct built into [one command](/articles/reveal-diff).
 
@@ -134,6 +136,8 @@ That's what meta-engineering looks like when it's actually built rather than asp
 
 The same instinct scales down to a single session. A session's own tool-call history — which commands failed, which repeated, where the token budget went — is queryable rather than reconstructed from memory (the same [`?errors`/`/workflow` introspection](/articles/claude-session-archaeology) that also matters for Verification), which turns "did we learn from that mistake" from a feeling into something you can check. An agent that can read its own error log has what it needs to stop repeating it — the missing piece usually isn't the data, it's the habit of looking.
 
+That last sentence has since aged into a to-do list. The habit is now a standing procedure rather than a good intention, and the audit it runs keeps surfacing the same finding: the standing rules are all *written down* and nothing *watches* whether they were followed. Both halves of that turn out to be enumerable — the rules are a queryable list, and so is every command a session actually ran — which makes compliance checkable rather than merely aspirational. That check is now tracked work, which is the only reason I trust it more than the last five times I resolved to be more careful.
+
 ## The Industry Was Doing the Meta Too
 
 I wasn't the only one running this loop. As the ecosystem matured, a long list of individual engineering workarounds — planning, sub-agents, persistent memory, tool orchestration, context management — independently evolved into standard platform capabilities. That convergence wasn't a coincidence. It was the industry rediscovering, team by team, versions of the same five properties a trustworthy human-agent system needs. Trust didn't increase because of one breakthrough model. It increased because the engineering around the model, in a lot of places at once, kept converging on the same shape.
@@ -162,7 +166,11 @@ Every failure became an opportunity to improve the system. Every improvement mad
 
 ---
 
+**Where this goes next.** These five properties describe *what* a trustworthy system needs. They say nothing about where any of it gets built — and that turns out to have a structural answer. [The Two Halves of Trust Engineering](/articles/two-halves-of-trust-engineering) takes these same five and asks where each one actually lives.
+
 *Part of SIL's ongoing series on agentic reliability. See also:*
+- *[The Two Halves of Trust Engineering](/articles/two-halves-of-trust-engineering) — where these five properties actually live: each one engineered twice, and the calibration dimension that comparison exposes*
+- *[The Two Speeds of Meta-Engineering](/articles/two-speeds-of-meta-engineering) — how a lesson becomes a permanent capability, in three hours or seven weeks*
 - *[The Hard Part of Agentic AI Isn't Reasoning — It's Grounding](/articles/grounding-not-reasoning) — getting the right information in, before any of this matters*
 - *[Trained to Please, Empowered to Act](/articles/trained-to-please-empowered-to-act) — five public incidents behind the permissions-vs-contracts distinction*
 - *[Agents That Don't Read Everything](/articles/reveal-subagents) — evidence-bearing output contracts in production*
