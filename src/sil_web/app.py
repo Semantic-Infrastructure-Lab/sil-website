@@ -15,6 +15,7 @@ from sil_web.routes.health import router as health_router
 from sil_web.routes.llms import router as llms_router
 from sil_web.routes.pages import create_routes
 from sil_web.routes.robots import router as robots_router
+from sil_web.routes.sitemap import router as sitemap_router
 from sil_web.services.content import ContentService
 from sil_web.services.markdown import MarkdownRenderer
 from sil_web.services.metrics import MetricsService
@@ -93,6 +94,9 @@ def create_app() -> FastAPI:
 
     # Mount robots.txt (no dependencies)
     app.include_router(robots_router)
+
+    # Mount sitemap.xml (no dependencies)
+    app.include_router(sitemap_router)
 
     # Mount llms.txt endpoints (no dependencies)
     app.include_router(llms_router)
