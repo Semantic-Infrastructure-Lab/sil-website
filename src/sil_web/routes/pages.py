@@ -2,6 +2,8 @@
 Page routes for SIL website - technical documentation and research.
 """
 
+from __future__ import annotations
+
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -20,6 +22,123 @@ router = APIRouter()
 
 # Templates
 templates = Jinja2Templates(directory="templates")
+
+
+# =============================================================================
+# Per-category filename resolvers
+#
+# Each mirrors the exact pattern order its HTML route has always used, so
+# extracting them here changes nothing about what the HTML routes serve.
+# Shared by the HTML routes below AND the raw-markdown (`/{path}.md`) route,
+# so both always agree on which file a URL maps to.
+# =============================================================================
+
+
+def _resolve_manifesto(name: str) -> Path | None:
+    candidate = Path("docs/manifesto") / f"{name.upper()}.md"
+    return candidate if candidate.exists() else None
+
+
+def _resolve_foundations(name: str) -> Path | None:
+    for candidate in (
+        Path("docs/foundations") / f"{name}.md",
+        Path("docs/foundations") / f"SIL_{name.upper().replace('-', '_')}.md",
+        Path("docs/foundations") / f"{name.upper().replace('-', '_')}.md",
+    ):
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _resolve_systems(name: str) -> Path | None:
+    for pattern in (name, name.lower().replace("_", "-"), name.upper(), name.lower()):
+        candidate = Path("docs/systems") / f"{pattern}.md"
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _resolve_articles(slug: str) -> Path | None:
+    for candidate in (
+        Path("docs/articles") / f"{slug}.md",
+        Path("docs/articles") / f"{slug.upper().replace('-', '_')}.md",
+    ):
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _resolve_research(name: str) -> Path | None:
+    filename = f"{name.upper().replace('-', '_')}.md"
+    root_candidate = Path("docs/research") / filename
+    if root_candidate.exists():
+        return root_candidate
+    research_dir = Path("docs/research")
+    for subdir in research_dir.iterdir():
+        if subdir.is_dir():
+            candidate = subdir / filename
+            if candidate.exists():
+                return candidate
+    return None
+
+
+def _resolve_architecture(name: str) -> Path | None:
+    for candidate in (
+        Path("docs/architecture") / f"{name.upper().replace('-', '_')}.md",
+        Path("docs/architecture") / f"{name}.md",
+    ):
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _resolve_projects(name: str) -> Path | None:
+    for candidate in (
+        Path("docs/projects") / f"{name.upper().replace('-', '_')}.md",
+        Path("docs/projects") / f"{name}.md",
+    ):
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _resolve_meta(name: str) -> Path | None:
+    candidate = Path("docs/meta") / f"{name.upper().replace('-', '_')}.md"
+    return candidate if candidate.exists() else None
+
+
+# category -> resolver, for the /{category}/{name}.md dispatch below.
+# "essays" is handled separately (goes through ContentService for privacy filtering).
+CATEGORY_RESOLVERS = {
+    "manifesto": _resolve_manifesto,
+    "foundations": _resolve_foundations,
+    "systems": _resolve_systems,
+    "articles": _resolve_articles,
+    "research": _resolve_research,
+    "architecture": _resolve_architecture,
+    "projects": _resolve_projects,
+    "meta": _resolve_meta,
+}
+
+# category -> index doc, for /{category}.md
+CATEGORY_INDEX_DOCS = {
+    "manifesto": Path("docs/manifesto/README.md"),
+    "foundations": Path("docs/foundations/README.md"),
+    "systems": Path("docs/systems/README.md"),
+    "articles": Path("docs/articles/README.md"),
+    "research": Path("docs/research/README.md"),
+    "architecture": Path("docs/architecture/README.md"),
+    "projects": Path("docs/projects/README.md"),
+}
+
+# top-level slug -> doc, for root-level /{slug}.md
+ROOT_PAGE_DOCS = {
+    "": Path("docs/pages/index.md"),
+    "about": Path("docs/pages/about.md"),
+    "contact": Path("docs/pages/contact.md"),
+    "start": Path("docs/START_HERE.md"),
+    "founders-letter": Path("docs/foundations/FOUNDERS_LETTER.md"),
+}
 
 
 def create_routes(
@@ -78,6 +197,63 @@ def create_routes(
         return templates.TemplateResponse("page.html", context)
 
     # =========================================================================
+    # Raw Markdown Source (per-page llms.txt convention: /{page}.md)
+    #
+    # Registered before every {name}-style route below on purpose: Starlette's
+    # default path converter matches dots, so "/systems/{name}" would otherwise
+    # swallow "/systems/reveal.md" (name="reveal.md") before this route ever
+    # got a chance. Route matching is first-match-wins in registration order.
+    # =========================================================================
+
+    @router.get("/{full_path:path}.md", include_in_schema=False)
+    async def raw_markdown(request: Request, full_path: str) -> Response:
+        """Serve a page's raw markdown source, matching the llms-full.txt convention
+        of unrendered content (frontmatter included, as written)."""
+        full_path = full_path.strip("/")
+
+        if full_path in ROOT_PAGE_DOCS:
+            doc_path = ROOT_PAGE_DOCS[full_path]
+            if doc_path.exists():
+                return Response(doc_path.read_text(), media_type="text/markdown; charset=utf-8")
+            raise HTTPException(status_code=404, detail=f"Page not found: {full_path}")
+
+        if full_path in CATEGORY_INDEX_DOCS:
+            doc_path = CATEGORY_INDEX_DOCS[full_path]
+            if doc_path.exists():
+                return Response(doc_path.read_text(), media_type="text/markdown; charset=utf-8")
+            raise HTTPException(status_code=404, detail=f"Page not found: {full_path}")
+
+        if full_path == "essays":
+            essay_docs = content_service.list_documents(category="essays", include_private=False)
+            md_content = "# Essays\n\nTechnical essays on semantic infrastructure.\n\n"
+            for doc in sorted(essay_docs, key=lambda d: d.order):
+                md_content += f"- [{doc.title}](/essays/{doc.slug})\n"
+            if not essay_docs:
+                md_content += "*No essays published yet.*\n"
+            return Response(md_content, media_type="text/markdown; charset=utf-8")
+
+        if "/" not in full_path:
+            raise HTTPException(status_code=404, detail=f"Page not found: {full_path}")
+
+        category, name = full_path.split("/", 1)
+
+        if category == "essays":
+            doc = content_service.load_document("essays", name, include_private=False)
+            if not doc or doc.private:
+                raise HTTPException(status_code=404, detail=f"Essay not found: {name}")
+            return Response(doc.content, media_type="text/markdown; charset=utf-8")
+
+        resolver = CATEGORY_RESOLVERS.get(category)
+        if resolver is None:
+            raise HTTPException(status_code=404, detail=f"Page not found: {full_path}")
+
+        doc_path = resolver(name)
+        if doc_path is None:
+            raise HTTPException(status_code=404, detail=f"Document not found: {full_path}")
+
+        return Response(doc_path.read_text(), media_type="text/markdown; charset=utf-8")
+
+    # =========================================================================
     # Core Pages
     # =========================================================================
 
@@ -128,10 +304,9 @@ def create_routes(
     @router.get("/manifesto/{name}", response_class=HTMLResponse)
     async def manifesto_doc(request: Request, name: str) -> Response:
         """Individual manifesto document."""
-        filename = name.upper() + ".md"
-        doc_path = Path("docs/manifesto") / filename
+        doc_path = _resolve_manifesto(name)
 
-        if not doc_path.exists():
+        if doc_path is None:
             raise HTTPException(status_code=404, detail=f"Manifesto document not found: {name}")
 
         content = doc_path.read_text()
@@ -170,21 +345,9 @@ def create_routes(
     @router.get("/foundations/{name}", response_class=HTMLResponse)
     async def foundations_doc(request: Request, name: str) -> Response:
         """Individual foundations document."""
-        # Try lowercase with hyphens first
-        filename = name + ".md"
-        doc_path = Path("docs/foundations") / filename
+        doc_path = _resolve_foundations(name)
 
-        # Try with SIL_ prefix and underscores
-        if not doc_path.exists():
-            filename = "SIL_" + name.upper().replace("-", "_") + ".md"
-            doc_path = Path("docs/foundations") / filename
-
-        # Try uppercase with underscores (no SIL_ prefix)
-        if not doc_path.exists():
-            filename = name.upper().replace("-", "_") + ".md"
-            doc_path = Path("docs/foundations") / filename
-
-        if not doc_path.exists():
+        if doc_path is None:
             raise HTTPException(status_code=404, detail=f"Foundations document not found: {name}")
 
         content = doc_path.read_text()
@@ -223,22 +386,9 @@ def create_routes(
     @router.get("/systems/{name}", response_class=HTMLResponse)
     async def system_page(request: Request, name: str) -> Response:
         """Individual system documentation."""
-        # Try multiple naming patterns for robustness
-        patterns = [
-            name,  # As provided (agent-ether, reveal, etc.)
-            name.lower().replace("_", "-"),  # AGENT_ETHER → agent-ether
-            name.upper(),  # reveal → REVEAL
-            name.lower(),  # REVEAL → reveal
-        ]
+        system_path = _resolve_systems(name)
 
-        system_path = None
-        for pattern in patterns:
-            candidate = Path("docs/systems") / f"{pattern}.md"
-            if candidate.exists():
-                system_path = candidate
-                break
-
-        if not system_path:
+        if system_path is None:
             raise HTTPException(status_code=404, detail=f"System not found: {name}")
 
         content = system_path.read_text()
@@ -277,18 +427,9 @@ def create_routes(
     @router.get("/articles/{slug}", response_class=HTMLResponse)
     async def article(request: Request, slug: str) -> Response:
         """Serve articles by slug."""
-        articles_dir = Path("docs/articles")
+        article_path = _resolve_articles(slug)
 
-        # Map slug to filename (reveal-introduction -> reveal-introduction.md)
-        filename = slug + ".md"
-        article_path = articles_dir / filename
-
-        # Try uppercase with underscores if not found
-        if not article_path.exists():
-            filename = slug.upper().replace("-", "_") + ".md"
-            article_path = articles_dir / filename
-
-        if not article_path.exists():
+        if article_path is None:
             raise HTTPException(status_code=404, detail=f"Article not found: {slug}")
 
         content = article_path.read_text()
@@ -389,23 +530,9 @@ def create_routes(
     @router.get("/research/{name}", response_class=HTMLResponse)
     async def research_paper(request: Request, name: str) -> Response:
         """Individual research paper - handles both flat and subdirectory structure."""
-        # Map URL name to filename
-        filename = name.upper().replace("-", "_") + ".md"
+        paper_path = _resolve_research(name)
 
-        # Try root level first
-        paper_path = Path("docs/research") / filename
-
-        # If not found, search in subdirectories
-        if not paper_path.exists():
-            research_dir = Path("docs/research")
-            for subdir in research_dir.iterdir():
-                if subdir.is_dir():
-                    candidate = subdir / filename
-                    if candidate.exists():
-                        paper_path = candidate
-                        break
-
-        if not paper_path.exists():
+        if paper_path is None:
             raise HTTPException(status_code=404, detail=f"Research paper not found: {name}")
 
         content = paper_path.read_text()
@@ -447,16 +574,9 @@ def create_routes(
     @router.get("/architecture/{name}", response_class=HTMLResponse)
     async def architecture_doc(request: Request, name: str) -> Response:
         """Individual architecture document."""
-        # Try uppercase with underscores first (UNIFIED_ARCHITECTURE_GUIDE.md)
-        filename = name.upper().replace("-", "_") + ".md"
-        doc_path = Path("docs/architecture") / filename
+        doc_path = _resolve_architecture(name)
 
-        # Try lowercase with hyphens
-        if not doc_path.exists():
-            filename = name + ".md"
-            doc_path = Path("docs/architecture") / filename
-
-        if not doc_path.exists():
+        if doc_path is None:
             raise HTTPException(status_code=404, detail=f"Architecture document not found: {name}")
 
         content = doc_path.read_text()
@@ -495,16 +615,9 @@ def create_routes(
     @router.get("/projects/{name}", response_class=HTMLResponse)
     async def project_doc(request: Request, name: str) -> Response:
         """Individual project document."""
-        # Try uppercase with underscores first (PROJECT_INDEX.md)
-        filename = name.upper().replace("-", "_") + ".md"
-        doc_path = Path("docs/projects") / filename
+        doc_path = _resolve_projects(name)
 
-        # Try lowercase with hyphens
-        if not doc_path.exists():
-            filename = name + ".md"
-            doc_path = Path("docs/projects") / filename
-
-        if not doc_path.exists():
+        if doc_path is None:
             raise HTTPException(status_code=404, detail=f"Project document not found: {name}")
 
         content = doc_path.read_text()
@@ -608,11 +721,9 @@ def create_routes(
     @router.get("/meta/{name}", response_class=HTMLResponse)
     async def meta_page(request: Request, name: str) -> Response:
         """Meta pages - FAQ, founder background, influences."""
-        # Map URL name to filename
-        filename = name.upper().replace("-", "_") + ".md"
-        doc_path = Path("docs/meta") / filename
+        doc_path = _resolve_meta(name)
 
-        if not doc_path.exists():
+        if doc_path is None:
             raise HTTPException(status_code=404, detail=f"Page not found: {name}")
 
         content = doc_path.read_text()

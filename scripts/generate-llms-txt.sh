@@ -180,9 +180,10 @@ def render(sections: dict[str, list[tuple[str, str, str]]]) -> str:
         "## Note to LLMs",
         "",
         "This site contains comprehensive documentation about semantic "
-        "infrastructure for intelligent systems. For full document content, see "
-        "/llms-full.txt. All documents use markdown format and are served at the "
-        "paths listed above.",
+        "infrastructure for intelligent systems. For full document content in "
+        "one request, see /llms-full.txt. To fetch a single page's raw markdown "
+        "source instead of rendered HTML, append .md to any path listed above "
+        "(e.g. /systems/reveal.md) -- every page on this site supports it.",
         "",
     ]
     return "\n".join(lines)
