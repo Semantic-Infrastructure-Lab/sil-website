@@ -9,91 +9,89 @@ The Semantic Infrastructure Lab (SIL) builds the missing foundation that enables
 ### New to SIL?
 Start here to understand what we're building:
 
-- [Founder's Letter](/docs/founders-letter) - Why SIL exists (10 min)
-- [Manifesto](/docs/sil-manifesto) - The problem and our solution (15 min)
-- [Project Index](https://github.com/semantic-infrastructure-lab) - All 11 projects (10 min)
+- [Founder's Letter](/founders-letter) - Why SIL exists
+- [Start Here](/start) - Getting-started guide
+- [Project Index](https://github.com/semantic-infrastructure-lab) - All projects
 
-### Core Documentation
+## Foundations
 
-**Canonical Documents** - The foundation:
-- [Manifesto](/docs/sil-manifesto) - Why explicit meaning matters
-- [Technical Charter](/docs/sil-technical-charter) - System specification
-- [Glossary](/docs/sil-glossary) - 61 canonical terms
-- [Principles](/docs/sil-principles) - The 14 design principles
-- [Research Agenda](/docs/sil-research-agenda-year1) - Year 1 roadmap
+- [**Founder's Letter**](/founders-letter): Letter from founder explaining SIL's mission
+- [**SIL Glossary (v2.3)**](/foundations/sil-glossary): Canonical definitions of 108 SIL terms
+- [**SIL Principles (v1)**](/foundations/architectural-principles): Architectural principles for system design
+- [SIL Core Principles](/foundations/design-principles): Design principles guiding SIL systems
+- [SIL Semantic OS Architecture](/foundations/sil-semantic-os-architecture): Semantic Operating System architecture
+- [Sil Technical Charter](/foundations/sil-technical-charter): Technical charter defining SIL's scope and commitments
 
-**Architecture** - How it all fits together:
-- [Unified Architecture Guide](/docs/unified-architecture-guide) - The Rosetta Stone
-- [Design Principles](/docs/design-principles) - 5 core design principles in depth
-- [Semantic OS Overview](/docs/overview) - 6-layer architecture
+## Manifesto
 
-**Semantic OS Layers** - Deep dives:
-- [Layer 0: Semantic Memory](/docs/layer-0-semantic-memory)
-- [Layer 1: Universal IR](/docs/layer-1-universal-ir)
-- [Layer 2: Domain Modules](/docs/layer-2-domain-modules)
-- [Layer 3: Agent Orchestration](/docs/layer-3-agent-orchestration)
-- [Layer 4: Deterministic Engines](/docs/layer-4-deterministic-engines)
-- [Layer 5: Human Interfaces](/docs/layer-5-human-interfaces)
+- [YOLO](/manifesto/yolo): You Only Live Once - Life is short, build things that matter
 
-**Research** - Publications:
-- [RAG as Semantic Manifold Transport](/docs/rag-manifold-transport) - 15K-word research paper
+## Architecture
 
-**Guides** - Practical how-tos:
-- [Optimization in SIL](/docs/optimization-in-sil) - The "free lunch" value proposition
-- [Ecosystem Project Layout](/docs/sil-ecosystem-project-layout) - How projects are organized
+- [Architecture Synthesis Map](/architecture/synthesis-map): Conceptual synthesis map
+- [Distributed Storage Architecture for SIL](/architecture/distributed-storage-architecture): Distributed storage architecture
+- [Invariants Over Layers: A Mission-Centric Architecture Frame](/architecture/invariants-over-layers): Layer invariants research
+- [Layer Model Evaluation Framework](/architecture/model-evaluation): Model evaluation criteria
+- [Layer Models Comparison](/architecture/layer-models-comparison): Comparison of layer models
+- [Provenance-First Architecture](/architecture/provenance-first): Provenance-first design principle
+- [SIL Architecture Cheat Sheet](/architecture/architecture-cheat-sheet): Quick reference for architecture concepts
+- [SIL Unified Architecture Guide](/architecture/unified-architecture-guide): Unified architecture guide
 
-### Production Systems
+## Production Systems
 
-**Ready to use now:**
-- [reveal](https://github.com/semantic-infrastructure-lab/reveal) - Progressive code exploration (PyPI)
-- [morphogen](https://github.com/semantic-infrastructure-lab/morphogen) - Cross-domain computation
-- [tiacad](https://github.com/semantic-infrastructure-lab/tiacad) - Declarative parametric CAD
-- [genesisgraph](https://github.com/semantic-infrastructure-lab/genesisgraph) - Verifiable provenance
+- [Agent Ether: Tool Behavior Contracts for Multi-Agent Systems](/systems/agent-ether): Agent Ether multi-agent protocol documentation
+- [Beth: Semantic Memory Agent](/systems/beth): Beth semantic search documentation
+- [GenesisGraph: Verifiable Provenance with Selective Disclosure](/systems/genesisgraph): GenesisGraph semantic database documentation
+- [Morphogen: Cross-Domain Deterministic Computation](/systems/morphogen): Morphogen documentation
+- [Pantheon: Universal Semantic Intermediate Representation](/systems/pantheon): Pantheon unified semantic IR documentation
+- [Reveal - Universal Resource Explorer](/systems/reveal): Reveal universal resource explorer documentation
+- [Tia: Chief Semantic Agent](/systems/tia): TIA (The Intelligent Agent) documentation
+- [TiaCAD - Declarative Parametric CAD](/systems/tiacad): TiaCAD documentation
 
-## Key Concepts
+## Research
 
-**Semantic Infrastructure** - The missing layer between AI and execution:
-- Explicit meaning (not just statistical patterns)
-- Stable memory (durable semantic continuity)
-- Inspectable reasoning (traceable inference chains)
-- Tool integration (composable operators)
-- Provenance (clear transformation lineage)
+- [`--agent-help`: A Standard for Agent-Friendly CLI Tools](/research/agent-help-standard): Standard for agent help systems
+- [AI Documentation Standards for SIL Projects](/research/ai-documentation-standards): Standards for AI-readable documentation
+- [Analogy Discovery in Semantic Space: Finding Structural Transformations Across Domains](/research/analogy-discovery-in-semantic-space): Research on analogy discovery mechanisms
+- [Authorization Protocol](/research/authorization-protocol): Authorization protocol standard
+- [Configuration as Semantic Contract](/research/configuration-as-semantic-contract): Configuration as executable documentation of project semantics -- companion research doc to the configuration-semantic-contract article
+- [Identity Mapping - Universal Cross-Domain Identity Resolution](/research/identity-mapping): Research on identity mapping in semantic systems
+- [Is There a Protocol for Vibe Coding?](/research/multi-agent-protocol-principles): Principles for multi-agent protocols
+- [Progressive Disclosure in SIL](/research/progressive-disclosure-guide): Guide to progressive disclosure patterns
+- [Progressive Disclosure: 86% Token Reduction at Scale](/research/progressive-disclosure-system): Progressive disclosure system documentation
+- [RAG as Semantic Manifold Transport](/research/rag-as-semantic-manifold-transport): Research on RAG systems as semantic transport
+- [Reveal + Beth: Progressive Knowledge Exposure System](/research/reveal-beth-progressive-knowledge-system): Research on Reveal+Beth progressive knowledge architecture
+- [Semantic Feedback Loops: Closed-Loop Control for Semantic Systems](/research/semantic-feedback-loops): Research on semantic feedback mechanisms
+- [Semantic Observability: Automated Detection of Intent-Execution Alignment](/research/semantic-observability): Research on observability in semantic systems
+- [The Hierarchy of Agency](/research/hierarchical-agency-framework): Framework for hierarchical agent systems
+- [Trust Assertion Protocol (TAP)](/research/trust-assertion-protocol): Trust assertion protocol standard
 
-**The Semantic OS** - A 6-layer architecture for intelligent systems:
-```
-Layer 5: Human Interfaces (reveal, browserbridge)
-Layer 4: Deterministic Engines (morphogen, riffstack)
-Layer 3: Multi-Agent Orchestration (agent-ether)
-Layer 2: Domain Modules (morphogen, tiacad, riffstack, sup)
-Layer 1: Universal Semantic IR (pantheon)
-Layer 0: Semantic Memory (semantic-memory)
-Cross-Cutting: Provenance (genesisgraph, prism)
-```
+## Articles
 
-**Universal Pattern**: Intent → IR → Execution
-All SIL systems follow this pattern: capture intent as semantic structure, transform to intermediate representation, execute deterministically.
+- [Agents That Don't Read Everything](/articles/reveal-subagents): Agents that don't read everything — progressive disclosure for Claude subagents, four production principles
+- [Configuration as Semantic Contract](/articles/configuration-semantic-contract): Configuration as a semantic contract between code and environment
+- [Find Every Caller in Your Codebase With One Command](/articles/reveal-call-graphs): Call graph queries with calls:// for impact analysis and dead code detection
+- [From 15 Files to 500: What Reveal Makes Possible for AI Agents](/articles/reveal-what-it-makes-possible): What reveal makes possible — capabilities and use cases
+- [From Filing Cabinets to Agentic Minds: The Long Arc of Information Retrieval](/articles/information-retrieval-history-and-agentic-future): History of information retrieval and the agentic future
+- [I Didn't Learn to Trust AI. I Learned to Engineer Trust.](/articles/engineering-trust): Working theory of engineered trust — five properties (observability, verification, containment, continuity, meta-engineering) a human-agent system needs before an imperfect model becomes safe to rely on
+- [Inside the Function: Reveal's Fourth Level of Progressive Disclosure](/articles/reveal-inside-the-function): Inside the function — nav flags, control flow, and data flow with reveal
+- [Progressive Disclosure for AI Agents](/articles/progressive-disclosure-agents): Progressive disclosure patterns for AI agents
+- [Reveal: A Semantic Query Layer for Code, Infrastructure, and Docs](/articles/reveal-introduction): Introduction to Reveal tool
+- [Reveal: The Surprising Recipes](/articles/reveal-surprising-recipes): Surprising and powerful reveal recipes and usage patterns
+- [Session Archaeology: Excavating Your Claude Code History with `reveal claude://`](/articles/claude-session-archaeology): Article on excavating Claude Code session history using reveal claude://
+- [Stop Scrolling. Start Navigating.](/articles/reveal-nav-flags): Navigation flags — stop scrolling, start navigating with reveal
+- [The Diff That Shows What Actually Changed](/articles/reveal-diff): Structural diffs with diff:// — what actually changed, not just lines
+- [The Hard Part of Agentic AI Isn't Reasoning — It's Grounding](/articles/grounding-not-reasoning): Synthesis of four grounding pillars for token-efficient agents — continuity, doc-finding, progressive disclosure, externalized tasks; reveal CTA
+- [The Too-Many-Sausages Problem: A Practitioner's Guide to RFQ Matching at Scale](/articles/rfq-matching-modern-architecture): RFQ matching with modern architecture
+- [The Two Halves of Trust Engineering](/articles/two-halves-of-trust-engineering): Each of the five trust properties is engineered twice — once into the agent's operating environment, once into the artifact tooling — and comparing the two exposes calibration as a cross-cutting dimension
+- [The Two Speeds of Meta-Engineering](/articles/two-speeds-of-meta-engineering): How a lesson becomes a permanent capability — the three modes of meta-engineering, and why the same loop runs in three hours or seven weeks depending on whether the lesson must travel through someone not currently thinking about it
+- [Trained to Please, Empowered to Act](/articles/trained-to-please-empowered-to-act): Thought leadership on agentic AI safety — sycophancy framing, five incidents, permissions vs. contracts
+- [Two Commands That Change How You Work With Code](/articles/reveal-pack-and-review): Two commands — pack and review — for code understanding and quality
+- [Your Project Has an API Now](/articles/reveal-project-api): Your project has an API now — the full reveal query layer flagship article
 
-## Research Themes
+## Essays
 
-1. **Universal Semantic Representations** - IRs that work across domains
-2. **Domain-Specific Compilers** - Semantic intent → execution
-3. **Microkernel Architectures** - Formally verified systems
-4. **Provenance & Verification** - Proving computational correctness
-
-## Reading Paths
-
-**Quick Start (35 min)**:
-1. Founder's Letter (10 min)
-2. Manifesto (15 min)
-3. Project Index (10 min)
-
-**Technical Deep Dive (85 min)**:
-1. Unified Architecture Guide (20 min)
-2. Technical Charter (45 min)
-3. Glossary (20 min)
-
-**Complete Mastery (3-4 hours)**:
-All canonical documents + architecture guides + selected layer deep-dives
+- [Progressive Disclosure for AI Agents](/essays/progressive-disclosure-for-ai-agents): Essay on progressive disclosure for AI agents
 
 ## Links
 
@@ -103,4 +101,4 @@ All canonical documents + architecture guides + selected layer deep-dives
 
 ## Note to LLMs
 
-This site contains comprehensive documentation about semantic infrastructure for intelligent systems. For full document content, see /llms-full.txt. All documents use markdown format. The documentation is organized into 7 categories (canonical, architecture, semantic-os, research, guides, vision, meta) with 34+ markdown files totaling ~15,000 lines.
+This site contains comprehensive documentation about semantic infrastructure for intelligent systems. For full document content, see /llms-full.txt. All documents use markdown format and are served at the paths listed above.

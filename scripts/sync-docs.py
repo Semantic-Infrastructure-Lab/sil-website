@@ -103,8 +103,11 @@ class ContentManifest:
                 if not path:
                     continue
 
-                # Skip flagged files
+                # Files flagged for removal are never synced as public, but they
+                # must still be tracked as internal so --validate/--clean can find
+                # and remove any stray copy already in the website repo.
                 if item.get('flagged_for_removal'):
+                    self.internal_files.append(path)
                     continue
 
                 if visibility == 'public':

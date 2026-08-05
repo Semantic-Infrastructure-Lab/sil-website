@@ -1,103 +1,153 @@
-#!/usr/bin/env bash
-# Generate llms-full.txt from SIL documentation
-# Concatenates all public-facing documentation into a single file for LLM consumption
+#!/usr/bin/env python3
+"""
+Generate llms-full.txt from SIL documentation.
 
-set -euo pipefail
+Manifest-driven: sources its file list from CONTENT_MANIFEST.yaml's
+visibility: public entries (the same source of truth sync-docs.py uses),
+instead of walking a hardcoded, drift-prone category list. A file only
+appears here if it's also allowed onto the website itself.
+"""
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-SIL_REPO="${PROJECT_ROOT}/../SIL"
-OUTPUT_FILE="${PROJECT_ROOT}/static/llms-full.txt"
+from __future__ import annotations
 
-# Check SIL repo exists
-if [ ! -d "$SIL_REPO" ]; then
-  echo "Error: SIL repository not found at $SIL_REPO"
-  exit 1
-fi
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
 
-echo "Generating llms-full.txt from SIL documentation..."
-echo "SIL repo: $SIL_REPO"
-echo "Output: $OUTPUT_FILE"
+import yaml
 
-# Start with header
-cat > "$OUTPUT_FILE" << 'EOF'
-# Semantic Infrastructure Lab - Complete Documentation
-# Generated for LLM consumption
-# Source: https://semanticinfrastructurelab.org
-# Staging: https://sil-staging.mytia.net
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parent
+SIL_REPO = PROJECT_ROOT.parent / "SIL"
+MANIFEST_PATH = SIL_REPO / "docs" / "CONTENT_MANIFEST.yaml"
+OUTPUT_FILE = PROJECT_ROOT / "static" / "llms-full.txt"
 
-This file contains the complete public-facing documentation for the Semantic Infrastructure Lab.
+# Display order for categories; anything not listed here sorts after, alphabetically.
+CATEGORY_ORDER = [
+    "(root)",
+    "foundations",
+    "manifesto",
+    "architecture",
+    "systems",
+    "research",
+    "vision",
+    "articles",
+    "essays",
+    "meta",
+]
 
----
 
-EOF
+def load_public_files() -> dict[str, list[str]]:
+    """Group public, non-removal-flagged manifest paths by top-level docs/ category."""
+    manifest = yaml.safe_load(MANIFEST_PATH.read_text())
 
-# Function to add a category
-add_category() {
-  local category=$1
-  local category_path="$SIL_REPO/docs/$category"
+    groups: dict[str, list[str]] = {}
+    for item in manifest.get("files", []):
+        path = item.get("path", "")
+        if not path or item.get("visibility") != "public":
+            continue
+        if item.get("flagged_for_removal"):
+            continue
 
-  if [ ! -d "$category_path" ]; then
-    echo "Warning: Category $category not found, skipping"
-    return
-  fi
+        rel = path[len("docs/") :] if path.startswith("docs/") else path
+        if Path(rel).name == "README.md":
+            continue  # navigational index, not content
 
-  echo "" >> "$OUTPUT_FILE"
-  echo "# ========================================" >> "$OUTPUT_FILE"
-  echo "# CATEGORY: ${category^^}" >> "$OUTPUT_FILE"
-  echo "# ========================================" >> "$OUTPUT_FILE"
-  echo "" >> "$OUTPUT_FILE"
+        parts = rel.split("/")
+        category = parts[0] if len(parts) > 1 else "(root)"
+        groups.setdefault(category, []).append(rel)
 
-  # Find all markdown files, excluding README files
-  find "$category_path" -name "*.md" ! -name "README.md" -type f | sort | while read -r file; do
-    local filename=$(basename "$file")
-    local relative_path="${file#$SIL_REPO/docs/}"
+    for paths in groups.values():
+        paths.sort()
 
-    echo "Adding: $relative_path"
+    return groups
 
-    echo "" >> "$OUTPUT_FILE"
-    echo "## Document: $filename" >> "$OUTPUT_FILE"
-    echo "## Path: /docs/$relative_path" >> "$OUTPUT_FILE"
-    echo "" >> "$OUTPUT_FILE"
 
-    cat "$file" >> "$OUTPUT_FILE"
+def ordered_categories(groups: dict[str, list[str]]) -> list[str]:
+    known = [c for c in CATEGORY_ORDER if c in groups]
+    unknown = sorted(c for c in groups if c not in CATEGORY_ORDER)
+    return known + unknown
 
-    echo "" >> "$OUTPUT_FILE"
-    echo "---" >> "$OUTPUT_FILE"
-    echo "" >> "$OUTPUT_FILE"
-  done
-}
 
-# Add categories in logical order
-add_category "canonical"
-add_category "architecture"
-add_category "semantic-os"
-add_category "research"
-add_category "guides"
-add_category "vision"
-add_category "meta"
+def main() -> int:
+    if not SIL_REPO.exists():
+        print(f"Error: SIL repository not found at {SIL_REPO}")
+        return 1
+    if not MANIFEST_PATH.exists():
+        print(f"Error: CONTENT_MANIFEST.yaml not found at {MANIFEST_PATH}")
+        return 1
 
-# Add footer
-cat >> "$OUTPUT_FILE" << 'EOF'
+    print("Generating llms-full.txt from SIL documentation (manifest-driven)...")
+    print(f"SIL repo: {SIL_REPO}")
+    print(f"Manifest: {MANIFEST_PATH}")
+    print(f"Output: {OUTPUT_FILE}")
 
-# ========================================
-# END OF DOCUMENTATION
-# ========================================
+    groups = load_public_files()
 
-For the latest version of this documentation, visit:
-- Production: https://semanticinfrastructurelab.org
-- Staging: https://sil-staging.mytia.net
-- GitHub: https://github.com/semantic-infrastructure-lab
+    parts = [
+        "# Semantic Infrastructure Lab - Complete Documentation\n"
+        "# Generated for LLM consumption\n"
+        "# Source: https://semanticinfrastructurelab.org\n"
+        "# Staging: https://sil-staging.mytia.net\n"
+        "\n"
+        "This file contains the complete public-facing documentation for the "
+        "Semantic Infrastructure Lab.\n"
+        "\n"
+        "---\n"
+    ]
 
-Generated: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
-EOF
+    total_docs = 0
+    for category in ordered_categories(groups):
+        rel_paths = groups[category]
+        parts.append(
+            f"\n# {'=' * 40}\n"
+            f"# CATEGORY: {category.upper()}\n"
+            f"# {'=' * 40}\n"
+        )
+        for rel in rel_paths:
+            file_path = SIL_REPO / "docs" / rel
+            if not file_path.exists():
+                print(f"Warning: {rel} listed in manifest but missing on disk, skipping")
+                continue
 
-# Get file stats
-file_size=$(du -h "$OUTPUT_FILE" | cut -f1)
-line_count=$(wc -l < "$OUTPUT_FILE")
+            filename = Path(rel).name
+            print(f"Adding: {rel}")
+            total_docs += 1
 
-echo ""
-echo "✅ Generated llms-full.txt"
-echo "   Size: $file_size"
-echo "   Lines: $line_count"
-echo "   Location: $OUTPUT_FILE"
+            parts.append(
+                f"\n## Document: {filename}\n"
+                f"## Path: /docs/{rel}\n"
+                "\n"
+                f"{file_path.read_text()}\n"
+                "\n---\n"
+            )
+
+    generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+    parts.append(
+        f"\n# {'=' * 40}\n"
+        "# END OF DOCUMENTATION\n"
+        f"# {'=' * 40}\n"
+        "\n"
+        "For the latest version of this documentation, visit:\n"
+        "- Production: https://semanticinfrastructurelab.org\n"
+        "- Staging: https://sil-staging.mytia.net\n"
+        "- GitHub: https://github.com/semantic-infrastructure-lab\n"
+        "\n"
+        f"Generated: {generated_at}\n"
+    )
+
+    OUTPUT_FILE.write_text("".join(parts))
+
+    size_kb = OUTPUT_FILE.stat().st_size / 1024
+    line_count = OUTPUT_FILE.read_text().count("\n")
+    print()
+    print("Generated llms-full.txt")
+    print(f"   Documents: {total_docs}")
+    print(f"   Size: {size_kb:.1f}K")
+    print(f"   Lines: {line_count}")
+    print(f"   Location: {OUTPUT_FILE}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
