@@ -43,6 +43,30 @@ except ImportError:
     sys.exit(1)
 
 
+def read_frontmatter_status(path: Path) -> str | None:
+    """Best-effort read of the `status:` field from a doc's YAML frontmatter.
+
+    Deliberately hand-rolled (not python-frontmatter) since this script's only
+    other dependency is PyYAML -- we just need one field, not full parsing.
+    """
+    try:
+        text = path.read_text()
+    except OSError:
+        return None
+    if not text.startswith("---"):
+        return None
+    end = text.find("\n---", 3)
+    if end == -1:
+        return None
+    try:
+        meta = yaml.safe_load(text[3:end])
+    except yaml.YAMLError:
+        return None
+    if not isinstance(meta, dict) or meta.get("status") is None:
+        return None
+    return str(meta["status"]).lower()
+
+
 # Top-level docs/ directories that are hand-maintained directly in the website
 # repo and never sync from SIL at all. Pruning must never touch these, no matter
 # what the manifest does or doesn't say about them.
@@ -414,6 +438,39 @@ class DocSync:
             print(f"{Colors.GREEN}✓{Colors.NC} Removed {removed} internal files")
         print()
 
+    def report_article_publish_status(self):
+        """Report which synced articles are actually live vs. held back as drafts.
+
+        This script mirrors by CONTENT_MANIFEST.yaml visibility (repo-eligibility),
+        not by article status -- a draft article still syncs here so the real
+        publish gate (status: draft, enforced in routes/pages.py, sitemap.py, and
+        the llms.txt/llms-full.txt generators, SIL-16) has a copy to check against.
+        Purely informational: confirms at sync time which articles will and won't
+        go live once deployed.
+        """
+        articles_dir = self.website_docs / "articles"
+        if not articles_dir.exists():
+            return
+
+        print("=" * 50)
+        print("Article Publish Status")
+        print("=" * 50)
+        print()
+
+        published, drafts = [], []
+        for md_file in sorted(articles_dir.glob("*.md")):
+            if md_file.name == "README.md":
+                continue
+            status = read_frontmatter_status(md_file)
+            (drafts if status == "draft" else published).append(md_file.name)
+
+        print(f"{Colors.GREEN}✓{Colors.NC} Published: {len(published)} article(s)")
+        if drafts:
+            print(f"{Colors.YELLOW}⏸{Colors.NC}  Draft (synced but not served live): {len(drafts)} article(s)")
+            for name in drafts:
+                print(f"    - docs/articles/{name}")
+        print()
+
     def show_file_counts(self):
         """Show file counts by directory"""
         if self.args.validate or self.args.dry_run:
@@ -500,6 +557,7 @@ class DocSync:
 
         self.validate_no_internal_files()
         self.prune_orphaned_files()
+        self.report_article_publish_status()
 
         if not self.args.validate:
             self.show_file_counts()

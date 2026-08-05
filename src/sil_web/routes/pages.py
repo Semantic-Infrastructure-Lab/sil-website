@@ -7,6 +7,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+import frontmatter
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -58,12 +59,31 @@ def _resolve_systems(name: str) -> Path | None:
     return None
 
 
+def is_draft_article(path: Path) -> bool:
+    """True if an article's frontmatter reads status: draft (SIL-16).
+
+    Draft articles are allowed to sit in docs/articles/ (and even carry a
+    CONTENT_MANIFEST.yaml visibility: public entry, so sync-docs.py can bring
+    them into the website repo ahead of time) -- this is the actual publish
+    gate that keeps them off every public surface until flipped to
+    "published". Checked here (shared by the HTML and raw-markdown article
+    routes) and independently in routes/sitemap.py and the llms.txt/
+    llms-full.txt generators in scripts/, since none of those share this
+    module.
+    """
+    try:
+        post = frontmatter.load(path)
+    except (OSError, ValueError):
+        return False
+    return str(post.metadata.get("status", "")).lower() == "draft"
+
+
 def _resolve_articles(slug: str) -> Path | None:
     for candidate in (
         Path("docs/articles") / f"{slug}.md",
         Path("docs/articles") / f"{slug.upper().replace('-', '_')}.md",
     ):
-        if candidate.exists():
+        if candidate.exists() and not is_draft_article(candidate):
             return candidate
     return None
 

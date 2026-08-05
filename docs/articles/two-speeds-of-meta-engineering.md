@@ -4,7 +4,7 @@ subtitle: "A lesson can become a permanent capability in three hours or in seven
 author: "Scott Senkeresty"
 date: "2026-08-04"
 type: "article"
-status: "draft"
+status: "published"
 audience: "developers, AI engineers, teams building agent tooling"
 topics: [agentic-ai, meta-engineering, tooling, developer-experience, calibration, discoverability, trust]
 related_projects: [reveal, SIL]

@@ -19,6 +19,8 @@ from pathlib import Path
 from fastapi import APIRouter
 from fastapi.responses import Response
 
+from sil_web.routes.pages import is_draft_article
+
 router = APIRouter()
 
 SITE_URL = "https://semanticinfrastructurelab.org"
@@ -67,6 +69,8 @@ def _collect_urls() -> list[str]:
             continue
         for md_file in sorted(category_dir.rglob("*.md")):
             if md_file.name == "README.md":
+                continue
+            if category == "articles" and is_draft_article(md_file):
                 continue
             urls.append(f"{prefix}/{_slugify(md_file.stem)}")
 

@@ -29545,7 +29545,7 @@ subtitle: "A lesson can become a permanent capability in three hours or in seven
 author: "Scott Senkeresty"
 date: "2026-08-04"
 type: "article"
-status: "draft"
+status: "published"
 audience: "developers, AI engineers, teams building agent tooling"
 topics: [agentic-ai, meta-engineering, tooling, developer-experience, calibration, discoverability, trust]
 related_projects: [reveal, SIL]
@@ -32768,4 +32768,4 @@ For the latest version of this documentation, visit:
 - Staging: https://sil-staging.mytia.net
 - GitHub: https://github.com/semantic-infrastructure-lab
 
-Generated: 2026-08-05 05:53:58 UTC
+Generated: 2026-08-05 06:58:23 UTC

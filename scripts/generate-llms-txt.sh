@@ -23,6 +23,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+import frontmatter
 import yaml
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -87,6 +88,19 @@ def load_manifest_entries() -> list[dict]:
     return entries
 
 
+def is_draft_article(rel: str) -> bool:
+    """Mirrors is_draft_article() in src/sil_web/routes/pages.py (SIL-16) --
+    this script runs standalone, outside the app, so it can't import that
+    module and re-checks the same status: draft frontmatter field itself."""
+    if not rel.startswith("articles/"):
+        return False
+    try:
+        post = frontmatter.load(SIL_REPO / "docs" / rel)
+    except (OSError, ValueError):
+        return False
+    return str(post.metadata.get("status", "")).lower() == "draft"
+
+
 def resolve_url(rel: str) -> str | None:
     if rel in SPECIAL_ROUTES:
         return SPECIAL_ROUTES[rel]
@@ -116,13 +130,21 @@ def extract_title(rel: str) -> str:
     return Path(rel).stem.replace("_", " ").replace("-", " ").title()
 
 
-def build_sections(entries: list[dict]) -> tuple[dict[str, list[tuple[str, str, str]]], list[str]]:
-    """Group resolved (title, url, purpose) tuples by category; collect unreachable paths."""
+def build_sections(
+    entries: list[dict],
+) -> tuple[dict[str, list[tuple[str, str, str]]], list[str], list[str]]:
+    """Group resolved (title, url, purpose) tuples by category; collect unreachable
+    and draft (status: draft, SIL-16) paths separately so callers can report each."""
     sections: dict[str, list[tuple[str, str, str]]] = {}
     unreachable: list[str] = []
+    drafts: list[str] = []
 
     for entry in entries:
         rel = entry["rel"]
+        if is_draft_article(rel):
+            drafts.append(rel)
+            continue
+
         url = resolve_url(rel)
         if url is None:
             unreachable.append(rel)
@@ -135,7 +157,7 @@ def build_sections(entries: list[dict]) -> tuple[dict[str, list[tuple[str, str, 
     for items in sections.values():
         items.sort(key=lambda t: t[0].lower())
 
-    return sections, unreachable
+    return sections, unreachable, drafts
 
 
 def render(sections: dict[str, list[tuple[str, str, str]]]) -> str:
@@ -195,13 +217,26 @@ def main() -> int:
         return 1
 
     entries = load_manifest_entries()
-    sections, unreachable = build_sections(entries)
+    sections, unreachable, drafts = build_sections(entries)
 
     OUTPUT_FILE.write_text(render(sections))
 
     total_links = sum(len(v) for v in sections.values())
     print(f"Generated llms.txt: {total_links} links across {len(sections)} sections")
     print(f"Location: {OUTPUT_FILE}")
+
+    articles_published = sections.get("articles", [])
+    if articles_published:
+        print()
+        print(f"Published {len(articles_published)} article(s):")
+        for label, _url, _purpose in articles_published:
+            print(f"  - {label}")
+
+    if drafts:
+        print()
+        print(f"Skipped {len(drafts)} draft article(s) (status: draft, not yet published):")
+        for rel in drafts:
+            print(f"  - docs/{rel}")
 
     if unreachable:
         print()

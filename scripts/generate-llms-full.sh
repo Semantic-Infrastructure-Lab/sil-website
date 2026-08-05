@@ -14,6 +14,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+import frontmatter
 import yaml
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -35,6 +36,19 @@ CATEGORY_ORDER = [
     "essays",
     "meta",
 ]
+
+
+def is_draft_article(rel: str) -> bool:
+    """Mirrors is_draft_article() in src/sil_web/routes/pages.py (SIL-16) --
+    this script runs standalone, outside the app, so it can't import that
+    module and re-checks the same status: draft frontmatter field itself."""
+    if not rel.startswith("articles/"):
+        return False
+    try:
+        post = frontmatter.load(SIL_REPO / "docs" / rel)
+    except (OSError, ValueError):
+        return False
+    return str(post.metadata.get("status", "")).lower() == "draft"
 
 
 def load_public_files() -> dict[str, list[str]]:
@@ -108,6 +122,10 @@ def main() -> int:
             file_path = SIL_REPO / "docs" / rel
             if not file_path.exists():
                 print(f"Warning: {rel} listed in manifest but missing on disk, skipping")
+                continue
+
+            if is_draft_article(rel):
+                print(f"Skipping (draft, not yet published): {rel}")
                 continue
 
             filename = Path(rel).name
