@@ -39,6 +39,20 @@ The foundational "steel infrastructure" metaphor. Why SIL exists and what we're 
 
 ---
 
+### [Agent Bootstrap Manual](/foundations/agent-bootstrap-manual)
+Reference architecture for standing up a grounded agent system — theory,
+specification, operational discipline, and a day-one runbook:
+
+1. Representation, grounding, and retrieval policy (theory)
+2. The invariants, the discovery ladder, the calibration envelope
+3. Scopes, ledgers, boot emission, document organization (specification)
+4. Starter artifacts, a self-audit, and a contract-refactor procedure
+
+*The install path is a few hundred lines; the remainder is reference. Enter from
+the diagnostic index, not the top.*
+
+---
+
 ## Architecture
 
 ### [Semantic OS Architecture](/foundations/SIL_SEMANTIC_OS_ARCHITECTURE)

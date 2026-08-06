@@ -103,9 +103,17 @@ You'll understand the technical depth: how SIL achieves explicit meaning, stable
    - Token efficiency analysis
    - Workflow patterns
 
+5. **[Agent Bootstrap Manual](foundations/agent-bootstrap-manual)** (install path ~20 min)
+   - Standing up a grounded agent system end-to-end
+   - The six invariants, the calibration envelope, ledger and boot contracts
+   - Copyable starter artifacts plus an executable self-audit
+   - Read the install path only; the remainder is reference entered by section
+
 ### Outcome
 
-You'll have working tools installed and understand how to build agent-friendly infrastructure.
+You'll have working tools installed, and a specification for the agent
+infrastructure around them — retrieval policy, continuity, and calibration —
+that survives any particular tool.
 
 ---
 

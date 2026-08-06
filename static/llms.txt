@@ -18,6 +18,7 @@ Start here to understand what we're building:
 - [**Founder's Letter**](/founders-letter): Letter from founder explaining SIL's mission
 - [**SIL Glossary (v2.3)**](/foundations/sil-glossary): Canonical definitions of 108 SIL terms
 - [**SIL Principles (v1)**](/foundations/architectural-principles): Architectural principles for system design
+- [Agent Bootstrap Manual](/foundations/agent-bootstrap-manual): Installer-style guide for standing up a grounded agentic framework — grounding, calibration, continuity, retrieval strategy
 - [SIL Core Principles](/foundations/design-principles): Design principles guiding SIL systems
 - [SIL Semantic OS Architecture](/foundations/sil-semantic-os-architecture): Semantic Operating System architecture
 - [Sil Technical Charter](/foundations/sil-technical-charter): Technical charter defining SIL's scope and commitments
